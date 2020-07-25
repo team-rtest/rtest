@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  mongo:
+    container_name: rtest_db
+    networks:
+      - backend
+    image: mongo:latest
+
+  server:
+    container_name: rtest-backend
+    networks:
+      - backend
+      - frontend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+  client:
+    container_name: rtest-frontend
+    networks:
+      - frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    environment:
+      - "CI=true"
+    ports:
+      - "3000:3000"
+
+networks:
+  frontend:
+  backend:
