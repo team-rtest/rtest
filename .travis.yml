@@ -1,0 +1,14 @@
+language: generic
+
+services:
+  - docker
+
+before_script:
+  - docker-compose build
+
+script:
+  - docker-compose up -d
+  - sleep 3
+
+after_script:
+  - docker-compose kill
