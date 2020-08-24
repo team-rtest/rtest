@@ -1,14 +1,35 @@
-language: generic
 
+# before_script:
+#   - docker-compose build
+
+# script:
+#   - docker-compose up -d
+#   - sleep 1
+
+# after_script:
+#   - docker-compose kill
+os: linux
+dist: focal
+language: node_js
 services:
   - docker
 
-before_script:
-  - docker-compose build
+jobs:
+  include:
+    - name: "Backend unit tests"
+      node_js:
+        - lts/*
 
-script:
-  - docker-compose up -d
-  - sleep 3
+      before_install:
+        - cd backend
 
-after_script:
-  - docker-compose kill
+    - name: "Docker"
+      before_script:
+        - docker-compose build
+    
+      script:
+        - docker-compose up -d
+        - sleep 1
+
+      after_script:
+        - docker-compose kill
