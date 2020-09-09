@@ -128,3 +128,4 @@ yarn-error.log*
 
 # JetBrains
 .idea/
+**/.vscode/
