@@ -1,8 +1,8 @@
-var { graphqlHTTP } = require('express-graphql');
-var { buildSchema, graphql } = require('graphql');
+var { graphqlHTTP } = require("express-graphql");
+var { buildSchema, graphql } = require("graphql");
 const { readFileSync } = require("fs");
 const { resolve } = require("path");
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 // Construct a schema, using GraphQL schema language
@@ -13,11 +13,11 @@ var schema = buildSchema(typeDefs);
 // The root provides a resolver function for each API endpoint
 var root = {
   hello: () => {
-    return 'Hello world!';
+    return "Hello world!";
   },
 };
 
-router.use('/', graphqlHTTP({
+router.use("/", graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true,
