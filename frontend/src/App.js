@@ -27,7 +27,7 @@ class App extends Component{
           <div className="col-md-12">
               <form method="post" action="#" id="#">
                     <div className="form-group files">
-                      <label>Upload Your File </label>
+                      <label>Upload Your File</label>
                       <input type="file" name="file" className="form-control" multiple="" onChange = {this.onChangeHandler}/>
                     </div>
                </form>
