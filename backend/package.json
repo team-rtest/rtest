@@ -16,10 +16,10 @@
     "graphql": "^15.3.0",
     "http-errors": "~1.8.0",
     "jest": "^26.4.2",
-    "mongoose": "^5.10.5",
+    "mongoose": "^5.10.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
     "morgan": "~1.10.0"
   }
 }
