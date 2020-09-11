@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,5 +16,8 @@
     "http-errors": "~1.6.3",
     "jest": "^26.4.2",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
