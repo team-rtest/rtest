@@ -1,8 +1,13 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
 
 type Student {
-  _id: ID!
+  id: ID!
   userName: String!
   firstName: String!
+  email: String!
   lastName: String!
   classes: [Class]!
   createdAt: Timestamp!
@@ -12,13 +17,15 @@ input StudentInput {
   userName: String!
   firstName: String!
   lastName: String!
+  email: String!
 }
 
 type Instructor {
-  _id: ID!
+  id: ID!
   username: String!
   firstName: String!
   lastName: String!
+  email: String!
   classes: [Class]!
   createdAt: Timestamp!
 }
@@ -27,10 +34,11 @@ input InstructorInput {
   username: String!
   firstName: String!
   lastName: String!
+  email: String!
 }
 
 type Class {
-  _id: ID!
+  id: ID!
   classCode: String!
   subject: String!
   classNumber: String!
@@ -41,14 +49,37 @@ type Class {
   assignments: [Assignment]
 }
 
+input ClassInput {
+  # Classcode can be subject+classNumber by default
+  classCode: String
+  subject: String!
+  classNumber: String!
+  year: Int!
+  semester: String!
+  instructorIds: [ID!]!
+  studentIds: [ID!]
+}
+
 type Assignment {
-  _id: ID!
+  id: ID!
   tags: [AssignmentTag]
-  assignmentType: Assignment
   name: String!
   body: String
+  class: Class!
+  pointsPossible: Int!
+  dateCreated: Timestamp!
   datePosted: Timestamp!
   dateDue: Timestamp!
+}
+
+input AssignmentInput {
+  name: String!
+  body: String
+  classId: ID!
+  pointsPossible: Int
+  datePosted: Timestamp!
+  dateDue: Timestamp!
+  tags: [AssignmentTag]
 }
 
 enum AssignmentTag {
@@ -56,22 +87,58 @@ enum AssignmentTag {
   CODING
 }
 
+type Grade {
+  id: ID!
+  studentId: ID!
+  assignmentId: ID!
+  grade: Int!
+}
+
+input GradeInput {
+  student_id: ID!
+  assignmentId: ID!
+  grade: Float!
+}
+
+# Uploaded file
+type File {
+  # The original name of the uploaded file
+  original_name: String!
+  # The file's encoding
+  encoding: String!
+  # The file's mimetype
+  mimetype: String!
+  # The path to the file in S3
+  path: String!
+  # The size of the file in bytes
+  size: Int!
+  # The formatted size of the file in human-readable units
+  size_formatted: String!
+}
+
 scalar Timestamp
 
 # ----------------------------------
 
 type Query {
+  # Retrieve user through a user ID or through the token passed to
+  # Query. Leave id empty if you'd like to view the currently logged in
+  # user.
+  student(id: ID): Student
+  instructor(id: ID): Instructor
+  assignment(id: ID): Assignment
+  grade(id: ID): Grade
+
   students: [Student!]
   instructors:[Instructor!]
   assignments:[Assignment!]
+  grades:[Grade!]
 }
 
 type Mutation {
   createStudent(student:StudentInput): Student
-  createInstructor (instructor:InstructorInput): Instructor
-}
-
-schema {
-  query: Query
-  mutation: Mutation
+  createInstructor(instructor:InstructorInput): Instructor
+  createAssignment(assignment:AssignmentInput): Assignment
+  createClass(class:ClassInput): Class
+  createGrade(class:GradeInput): Grade
 }
