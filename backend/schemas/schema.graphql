@@ -1,0 +1,65 @@
+
+type Student {
+  _id: ID!
+  userName: String!
+  firstName: String!
+  lastName: String!
+  classes: [Class]!
+  createdAt: Timestamp!
+}
+
+type Instructor {
+  _id: ID!
+  username: String!
+  firstName: String!
+  lastName: String!
+  classes: [Class]!
+  createdAt: Timestamp!
+}
+
+type Class {
+  _id: ID!
+  classCode: String!
+  subject: String!
+  classNumber: String!
+  year: Int!
+  semester: String!
+  students: [Student]!
+  instructors: [Instructor!]!
+  assignments: [Assignment]
+}
+
+type Assignment {
+  _id: ID!
+  tags: [AssignmentTag]
+  assignmentType: Assignment
+  name: String!
+  body: String
+  datePosted: Timestamp!
+  dateDue: Timestamp!
+}
+
+enum AssignmentTag {
+  PEERGRADED
+  CODING
+}
+
+scalar Timestamp
+
+# ----------------------------------
+
+type Query {
+  users:[User!]
+  instructors:[Instructor!]
+  assignments:[Assignment!]
+}
+
+type Mutation {
+  createUser (user:User): User
+  createInstructor (instructor:Instructor): Instructor
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

@@ -1,14 +1,12 @@
 var { graphqlHTTP } = require('express-graphql');
-var { buildSchema } = require('graphql');
+var { buildSchema, graphql } = require('graphql');
 var express = require('express');
 var router = express.Router();
 
 // Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+
+// TODO Feed schema.graphql to this
+var schema = buildSchema();
 
 // The root provides a resolver function for each API endpoint
 var root = {
