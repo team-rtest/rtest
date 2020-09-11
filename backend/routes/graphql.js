@@ -8,7 +8,6 @@ var router = express.Router();
 // Construct a schema, using GraphQL schema language
 
 const typeDefs = readFileSync(resolve(__dirname, "../schemas/schema.graphql"), "utf8");
-// TODO Feed schema.graphql to this
 var schema = buildSchema(typeDefs);
  
 // The root provides a resolver function for each API endpoint
