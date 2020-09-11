@@ -8,6 +8,12 @@ type Student {
   createdAt: Timestamp!
 }
 
+input StudentInput {
+  userName: String!
+  firstName: String!
+  lastName: String!
+}
+
 type Instructor {
   _id: ID!
   username: String!
@@ -15,6 +21,12 @@ type Instructor {
   lastName: String!
   classes: [Class]!
   createdAt: Timestamp!
+}
+
+input InstructorInput {
+  username: String!
+  firstName: String!
+  lastName: String!
 }
 
 type Class {
@@ -49,14 +61,14 @@ scalar Timestamp
 # ----------------------------------
 
 type Query {
-  users:[User!]
+  students: [Student!]
   instructors:[Instructor!]
   assignments:[Assignment!]
 }
 
 type Mutation {
-  createUser (user:User): User
-  createInstructor (instructor:Instructor): Instructor
+  createStudent(student:StudentInput): Student
+  createInstructor (instructor:InstructorInput): Instructor
 }
 
 schema {
