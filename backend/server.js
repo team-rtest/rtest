@@ -4,6 +4,14 @@ import app, { set } from "./app";
 var debug = require("debug")("backend:server");
 import { createServer } from "http";
 
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
+
+const server = createServer(app);
+server.listen(port);
+server.on("error", onError);
+server.on("listening", onListening);
+
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -56,11 +64,3 @@ function onListening() {
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
 }
-
-const port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
-
-const server = createServer(app);
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
