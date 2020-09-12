@@ -34,6 +34,19 @@ const submissionSchema = new mongoose.Schema({
     type: Double,
     required: true,
   },
+  peerGrades: [
+    {
+      peer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+      },
+      peerGrade: {
+          type: Double,
+          required: true,
+      }
+    }
+  ]
 });
 
 const submission = mongoose.model("submission", submissionSchema);
