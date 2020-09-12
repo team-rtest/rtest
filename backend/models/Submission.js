@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const submissionSchema = new mongoose.Schema({
   _id: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     unique: true,
   },
@@ -12,7 +12,7 @@ const submissionSchema = new mongoose.Schema({
     required: true,
   },
   assignment: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "assignment",
     required: true,
   },

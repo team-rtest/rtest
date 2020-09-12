@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
-  _id: { type: ObjectId, required: true },
+  _id: { type: mongoose.Schema.Types.ObjectId, required: true },
 
   courseCode: {
     type: String,
@@ -25,13 +25,13 @@ const courseSchema = new mongoose.Schema({
   },
   members: [
     {
-      type: ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
   ],
   assignments: [
     {
-      type: ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "assignment",
     },
   ],
