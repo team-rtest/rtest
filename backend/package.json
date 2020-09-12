@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "babel-node ./bin/www",
-    "dev-babel": "nodemon ./bin/www --exec babel-node",
+    "start": "babel-node server.js",
+    "dev-babel": "nodemon server.js --exec babel-node",
     "test": "jest --passWithNoTests",
-    "dev": "nodemon ./bin/www --exec babel-node"
+    "dev": "nodemon server.js --exec babel-node"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~4.1.1",
     "express": "~4.17.1",
