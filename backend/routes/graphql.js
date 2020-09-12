@@ -3,12 +3,12 @@ import { buildSchema, graphql } from "graphql";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { Router } from "express";
-var router = Router();
+const router = Router();
 
 // Construct a schema, using GraphQL schema language
 
 const typeDefs = readFileSync(resolve(__dirname, "../schemas/schema.graphql"), "utf8");
-var schema = buildSchema(typeDefs);
+const schema = buildSchema(typeDefs);
  
 // The root provides a resolver function for each API endpoint
 var root = {
@@ -23,5 +23,4 @@ router.use("/", graphqlHTTP({
     graphiql: true,
   }));
 
-// export default router;
-module.exports = router;
+export default router;
