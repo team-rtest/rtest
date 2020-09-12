@@ -27,16 +27,16 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  createdAt: { type: Date, default: Date.now },
   classes: [
     {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "class",
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "class",
+    },
   ],
-  
 });
 
-userSchema.pre("save", function() {
+userSchema.pre("save", function () {
   const hashedPassword = bcrypt.hashSync(this.password, 12);
   this.password = hashedPassword;
 });
