@@ -16,7 +16,7 @@ const courseSchema = new mongoose.Schema({
     required: true,
   },
   year: {
-    type: Int,
+    type: Number,
     required: true,
   },
   semester: {
