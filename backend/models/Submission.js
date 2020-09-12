@@ -22,7 +22,7 @@ const submissionSchema = new mongoose.Schema({
       encoding: String,
       mimetype: String,
       path: String,
-      size: Int,
+      size: Number,
       sizeFormatted: String,
     },
   ],
@@ -31,18 +31,18 @@ const submissionSchema = new mongoose.Schema({
     required: true,
   },
   grade: {
-    type: Double,
+    type: Number,
     required: true,
   },
   peerGrades: [
     {
       peer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref: "user",
         required: true
       },
       peerGrade: {
-          type: Double,
+          type: Number,
           required: true,
       },
       timeGraded: {
