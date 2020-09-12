@@ -8,7 +8,7 @@ type Student {
   firstName: String!
   email: String!
   lastName: String!
-  classes: [Class]!
+  Courses: [Course]!
   createdAt: Timestamp!
 }
 
@@ -24,7 +24,7 @@ type Instructor {
   firstName: String!
   lastName: String!
   email: String!
-  classes: [Class]!
+  Courses: [Course]!
   createdAt: Timestamp!
 }
 
@@ -35,11 +35,11 @@ input InstructorInput {
   email: String!
 }
 
-type Class {
+type Course {
   id: ID!
-  classCode: String!
+  courseCode: String!
   subject: String!
-  classNumber: String!
+  courseNumber: String!
   year: Int!
   semester: String!
   students: [Student]!
@@ -47,11 +47,11 @@ type Class {
   assignments: [Assignment]
 }
 
-input ClassInput {
-  # Classcode can be subject+classNumber by default
-  classCode: String
+input CourseInput {
+  # Coursecode can be subject+CourseNumber by default
+  courseCode: String
   subject: String!
-  classNumber: String!
+  courseNumber: String!
   year: Int!
   semester: String!
   instructorIds: [ID!]!
@@ -63,7 +63,7 @@ type Assignment {
   tags: [AssignmentTag]
   name: String!
   body: String
-  class: Class!
+  course: Course!
   pointsPossible: Int!
   dateCreated: Timestamp!
   datePosted: Timestamp!
@@ -73,7 +73,7 @@ type Assignment {
 input AssignmentInput {
   name: String!
   body: String
-  classId: ID!
+  courseId: ID!
   pointsPossible: Int
   datePosted: Timestamp!
   dateDue: Timestamp!
@@ -161,6 +161,6 @@ type Mutation {
   createStudent(student:StudentInput): Student
   createInstructor(instructor:InstructorInput): Instructor
   createAssignment(assignment:AssignmentInput): Assignment
-  createClass(class:ClassInput): Class
-  createGrade(class:GradeInput): Grade
+  createCourse(Course:CourseInput): Course
+  createGrade(Course:GradeInput): Grade
 }
