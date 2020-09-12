@@ -16,7 +16,16 @@ const submissionSchema = new mongoose.Schema({
     ref: "assignment",
     required: true,
   },
-  files: {},
+  files: [
+    {
+      original_name: String,
+      encoding: String,
+      mimetype: String,
+      path: String,
+      size: Int,
+      size_formatted: String,
+    },
+  ],
   submittedAt: {
     type: Date,
     required: true,
