@@ -6,7 +6,8 @@ const assignmentSchema = new mongoose.Schema({
         required: true,
     },
     tags:{
-
+        type: String,
+        enum: ['PEERGRADED','CODING'],
     },
     body: {
         type: String,
