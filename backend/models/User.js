@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  id: {
+  username: {
     type: String,
     required: true,
     unique: true,
@@ -11,12 +11,29 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  posts: [
+  email: {
+    type: String,
+    required: true,
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  instructor: {
+    type: Boolean,
+    required: true,
+  },
+  classes: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "post",
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "class",
+    }
   ],
+  
 });
 
 userSchema.pre("save", function() {

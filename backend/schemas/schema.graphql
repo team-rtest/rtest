@@ -4,7 +4,6 @@ schema {
 }
 
 type Student {
-  id: ID!
   userName: String!
   firstName: String!
   email: String!
@@ -21,7 +20,6 @@ input StudentInput {
 }
 
 type Instructor {
-  id: ID!
   username: String!
   firstName: String!
   lastName: String!
@@ -87,15 +85,29 @@ enum AssignmentTag {
   CODING
 }
 
+type Submission {
+  id: ID!
+  student: String!
+  assignment: ID!
+  files: [File!]!
+  dateSubmitted: Timestamp!
+  attemptNumber: Int!
+}
+
+input SubmissionInput {
+  student: String!
+  assignment: ID!
+  files: [FileInput!]!
+}
+
 type Grade {
   id: ID!
-  studentId: ID!
-  assignmentId: ID!
-  grade: Int!
+  submissionId: ID!
+  grade: Float!
 }
 
 input GradeInput {
-  student_id: ID!
+  student: String!
   assignmentId: ID!
   grade: Float!
 }
@@ -114,6 +126,16 @@ type File {
   size: Int!
   # The formatted size of the file in human-readable units
   size_formatted: String!
+}
+
+input FileInput {
+  original_name: String!
+  # The file's encoding
+  encoding: String!
+  # The file's mimetype
+  mimetype: String!
+  # The path to the file in S3
+  path: String!
 }
 
 scalar Timestamp
