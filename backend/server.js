@@ -4,7 +4,7 @@ import app, { set } from "./app";
 var debug = require("debug")("backend:server");
 import { createServer } from "http";
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "4000");
 app.set("port", port);
 
 const server = createServer(app);
