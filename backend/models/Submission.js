@@ -18,12 +18,12 @@ const submissionSchema = new mongoose.Schema({
   },
   files: [
     {
-      original_name: String,
+      originalName: String,
       encoding: String,
       mimetype: String,
       path: String,
       size: Int,
-      size_formatted: String,
+      sizeFormatted: String,
     },
   ],
   submittedAt: {

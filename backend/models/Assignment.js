@@ -7,7 +7,7 @@ const assignmentSchema = new mongoose.Schema({
     },
     tags:{
         type: String,
-        enum: ['PEERGRADED','CODING'],
+        enum: ["PEERGRADED","CODING"],
     },
     body: {
         type: String,
@@ -24,7 +24,7 @@ const assignmentSchema = new mongoose.Schema({
     datePosted: {type: Date},
     dateDue: {type: Date, required: true}
 
-})
+});
 
 const assignment = mongoose.model("assignment", assignmentSchema);
 
