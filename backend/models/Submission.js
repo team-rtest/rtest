@@ -44,6 +44,10 @@ const submissionSchema = new mongoose.Schema({
       peerGrade: {
           type: Double,
           required: true,
+      },
+      timeGraded: {
+        type: Date,
+        default: Date.now
       }
     }
   ]
