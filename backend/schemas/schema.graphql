@@ -4,7 +4,7 @@ schema {
 }
 
 type Student {
-  userName: String!
+  username: String!
   firstName: String!
   email: String!
   lastName: String!
@@ -13,7 +13,7 @@ type Student {
 }
 
 input StudentInput {
-  userName: String!
+  username: String!
   firstName: String!
   lastName: String!
   email: String!
