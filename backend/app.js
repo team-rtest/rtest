@@ -16,6 +16,7 @@ const SESSION_SECRET = "bad secret";
 
 passport.use(
   new GraphQLLocalStrategy((email, password, done) => {
+    // Replace with UserResolvers when done with mongo integration
     const users = User.getUsers();
     const matchingUser = users.find(
       (user) => email === user.email && password === user.password

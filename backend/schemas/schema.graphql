@@ -118,6 +118,10 @@ type File {
 
 scalar Timestamp
 
+type AuthPayload {
+  user: User
+}
+
 # ----------------------------------
 
 type Query {
@@ -130,15 +134,16 @@ type Query {
   grade(id: ID): Grade
 
   students: [Student!]
-  instructors:[Instructor!]
-  assignments:[Assignment!]
-  grades:[Grade!]
+  instructors: [Instructor!]
+  assignments: [Assignment!]
+  grades: [Grade!]
 }
 
 type Mutation {
-  createStudent(student:StudentInput): Student
-  createInstructor(instructor:InstructorInput): Instructor
-  createAssignment(assignment:AssignmentInput): Assignment
-  createClass(class:ClassInput): Class
-  createGrade(class:GradeInput): Grade
+  createStudent(student: StudentInput): Student
+  createInstructor(instructor: InstructorInput): Instructor
+  createAssignment(assignment: AssignmentInput): Assignment
+  createClass(class: ClassInput): Class
+  createGrade(class: GradeInput): Grade
+  login(email: String!, password: String!): AuthPayload
 }

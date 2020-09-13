@@ -1,5 +1,6 @@
 import { graphqlHTTP } from "express-graphql";
 import { buildSchema, graphql } from "graphql";
+import { buildContext } from 'graphql-passport';
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { Router } from "express";
@@ -21,6 +22,9 @@ router.use("/", graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true,
+    // TODO not sure that works with express, the example I'm following uses apollo 
+    // https://jkettmann.com/password-based-authentication-with-graphql-and-passport/
+    context: ({ req, res }) => buildContext({ req, res }),
   }));
 
 export default router;
