@@ -4,4 +4,5 @@
 [![Build Status](https://travis-ci.com/team-rtest/rtest.svg?branch=master)](https://travis-ci.com/team-rtest/rtest)
 
 Before you run this in production:
-- Change the Minio Access and Secret keys from the default values in the `rtest.env`
+
+-   Change the Minio Access and Secret keys from the default values in the `rtest.env`
