@@ -38,10 +38,10 @@ function Upload() {
 
 const Form = styled.form`
   width: 50%;
-`
+`;
 
 const FileInput = styled.div`
   margin-bottom: 1rem;
-`
+`;
 
 export default Upload
