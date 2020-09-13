@@ -1,1 +1,1 @@
-Run `npm start` to start
+Run `yarn start` to start
