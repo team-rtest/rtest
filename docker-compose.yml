@@ -35,11 +35,10 @@ services:
       - frontend
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
     environment:
       - "CI=true"
     ports:
-      - "3000:3000"
+      - "5000:5000"
 
 networks:
   frontend:

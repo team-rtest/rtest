@@ -2,12 +2,12 @@ FROM node:lts-alpine
 
 WORKDIR /client
 
-COPY package*.json ./
+COPY . .
 
-RUN npm install
+RUN yarn
+RUN yarn build
+RUN yarn global add serve
 
-COPY . ./
+EXPOSE 5000
 
-EXPOSE 3000
-
-CMD [ "npm", "run", "build" ]
+CMD [ "serve", "-s", "build" ]
