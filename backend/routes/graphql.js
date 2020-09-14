@@ -18,7 +18,7 @@ var root = {
 };
 
 router.use("/", graphqlHTTP({
-    schema: schema,
+    schema,
     rootValue: root,
     graphiql: true,
   }));
