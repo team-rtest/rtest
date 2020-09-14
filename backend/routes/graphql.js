@@ -19,7 +19,7 @@ var root = {
 };
 
 router.use("/", graphqlHTTP({
-    schema: schema,
+    schema,
     rootValue: root,
     graphiql: true,
     // TODO not sure that works with express, the example I'm following uses apollo 
