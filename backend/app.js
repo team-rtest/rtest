@@ -6,15 +6,13 @@ import logger from "morgan";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }, (err) => {
-  if (err)
-    console.log(err.message)
-  else
-    console.log('MongoDB Successfully Connected ...');
+  if (err) console.log(err.message);
+  else console.log("MongoDB Successfully Connected ...");
 });
 
 const app = express();
@@ -34,13 +32,13 @@ app.post("/signup", (req, res) => {
       if (err) {
         res.statusCode = 500;
         res.setHeader("Content-Type", "application/json");
-        res.json({ err: err });
+        res.json({ err });
       } else {
         passport.authenticate("local")(req, res, () => {
           const token = authenticate.generateToken({ _id: req.user._id });
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
-          res.json({ token: token, status: "Successfully Logged In" });
+          res.json({ token, status: "Successfully Logged In" });
         });
       }
     }

@@ -12,7 +12,12 @@ export default {
     },
   },
   Mutation: {
-    createUser: async (parent, { name, password }, { models: { userModel } }, info) => {
+    createUser: async (
+      parent,
+      { name, password },
+      { models: { userModel } },
+      info
+    ) => {
       const user = await userModel.create({ name, password });
       return user;
     },

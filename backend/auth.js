@@ -1,5 +1,5 @@
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
+// import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JwtStrategy } from "passport-jwt";
 import { ExtractJwt } from "passport-jwt";
 import { sign } from "jsonwebtoken";
@@ -11,12 +11,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 export function generateToken(user) {
-  return sign(user, SECRET_KEY, { expiresIn: 86400 });
+  return sign(user, process.env.SECRET_KEY, { expiresIn: 86400 });
 }
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: SECRET_KEY,
+  secretOrKey: process.env.SECRET_KEY,
 };
 
 export const jwtStrategy = use(
