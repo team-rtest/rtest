@@ -1,5 +1,5 @@
-import bcrypt from "bcrypt";
 import mongoose from "mongoose";
+import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -36,9 +36,8 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-userSchema.pre("save", function () {
-  const hashedPassword = bcrypt.hashSync(this.password, 12);
-  this.password = hashedPassword;
+userSchema.plugin(passportLocalMongoose, {
+  usernameField: 'username'
 });
 
 const user = mongoose.model("user", userSchema);

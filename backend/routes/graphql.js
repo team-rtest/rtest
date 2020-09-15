@@ -4,6 +4,7 @@ import { buildContext } from 'graphql-passport';
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { Router } from "express";
+import { verifyUser } from "../auth";
 const router = new Router();
 
 // Construct a schema, using GraphQL schema language
@@ -18,7 +19,7 @@ var root = {
   },
 };
 
-router.use("/", graphqlHTTP({
+router.use("/", verifyUser, graphqlHTTP({
     schema,
     rootValue: root,
     graphiql: true,
