@@ -3,7 +3,7 @@ import { buildSchema, graphql } from "graphql";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { Router } from "express";
-import { verifyUser } from "../auth";
+import { verifyUser } from "../auth.js";
 const router = new Router();
 
 // Construct a schema, using GraphQL schema language

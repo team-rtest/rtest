@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import app, { set } from "./app";
+import app from "./app.js";
 var debug = require("debug")("backend:server");
 import { createServer } from "http";
 

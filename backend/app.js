@@ -3,6 +3,8 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 // import graphqlRouter from "./routes/graphql";
+import User from "./models/User.js";
+import auth from "./auth.js";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
@@ -11,8 +13,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }, (err) => {
-  if (err) console.log(err.message);
-  else console.log("MongoDB Successfully Connected ...");
+  if (err) {
+    console.log(err.message);
+  } else {
+    console.log("MongoDB Successfully Connected ...");
+  }
 });
 
 const app = express();
@@ -35,7 +40,7 @@ app.post("/signup", (req, res) => {
         res.json({ err });
       } else {
         passport.authenticate("local")(req, res, () => {
-          const token = authenticate.generateToken({ _id: req.user._id });
+          const token = auth.generateToken({ _id: req.user._id });
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
           res.json({ token, status: "Successfully Logged In" });
@@ -46,10 +51,10 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", passport.authenticate("local"), (req, res) => {
-  const token = authenticate.generateToken({ _id: req.user._id });
+  const token = auth.generateToken({ _id: req.user._id });
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.json({ token: token, status: "Successfully Logged In" });
+  res.json({ token, status: "Successfully Logged In" });
 });
 
 // app.use("/graphql", graphqlRouter);

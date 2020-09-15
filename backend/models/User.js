@@ -28,9 +28,11 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-userSchema.plugin(passportLocalMongoose, {
-  usernameField: 'username'
-});
+userSchema.plugin(passportLocalMongoose
+//   , {
+//   usernameField: 'username'
+// }
+);
 
 const user = mongoose.model("user", userSchema);
 
