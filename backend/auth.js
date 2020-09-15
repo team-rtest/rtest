@@ -1,21 +1,14 @@
-import { use, serializeUser, deserializeUser, authenticate } from "passport";
+import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JwtStrategy } from "passport-jwt";
 import { ExtractJwt } from "passport-jwt";
 import { sign } from "jsonwebtoken";
-import {
-  authenticate as _authenticate,
-  serializeUser as _serializeUser,
-  deserializeUser as _deserializeUser,
-} from "./models/user";
-import { SECRET_KEY } from "./config/keys"; // TODO change to dotenv
+import { User } from "./models/User";
 
-export const local = use(
-  new LocalStrategy({ usernameField: "username" }, _authenticate())
-);
+passport.use(User.createStrategy());
 
-serializeUser(_serializeUser());
-deserializeUser(_deserializeUser()); // JWT strategy
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 export function generateToken(user) {
   return sign(user, SECRET_KEY, { expiresIn: 86400 });
@@ -34,4 +27,4 @@ export const jwtStrategy = use(
   })
 );
 
-export const verifyUser = authenticate("jwt", { session: false });
+export const verifyUser = User.authenticate("jwt", { session: false });

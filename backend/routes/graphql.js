@@ -1,6 +1,5 @@
 import { graphqlHTTP } from "express-graphql";
 import { buildSchema, graphql } from "graphql";
-import { buildContext } from 'graphql-passport';
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { Router } from "express";

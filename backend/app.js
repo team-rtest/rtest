@@ -2,22 +2,15 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import graphqlRouter from "./routes/graphql";
+// import graphqlRouter from "./routes/graphql";
 import compression from "compression";
 import passport from "passport";
-import "mongoose";
+import mongoose from "mongoose";
+import dotenv from 'dotenv';
 
-passport.serializeUser((user, done) => {
-  done(null, user.username);
-});
+dotenv.config()
 
-passport.deserializeUser((username, done) => {
-  const users = User.getUsers();
-  const matchingUser = users.find((user) => user.username === username);
-  done(null, matchingUser);
-});
-
-mongoose.connect(MONGO_URI, { useNewUrlParser: true }, (err) => {
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }, (err) => {
   if (err)
     console.log(err.message)
   else
@@ -35,7 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/signup", (req, res) => {
   User.register(
-    new User({ email: req.body.email }),
+    new User({ username: req.body.username }),
     req.body.password,
     (err, user) => {
       if (err) {
@@ -61,6 +54,6 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
   res.json({ token: token, status: "Successfully Logged In" });
 });
 
-app.use("/graphql", graphqlRouter);
+// app.use("/graphql", graphqlRouter);
 
 export default app;
