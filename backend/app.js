@@ -1,8 +1,7 @@
 import express from "express";
-import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-// import graphqlRouter from "./routes/graphql";
+import graphqlRouter from "./routes/graphql.js";
 import User from "./models/User.js";
 import auth from "./auth.js";
 import compression from "compression";
@@ -12,7 +11,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }, (err) => {
+mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true }, (err) => {
   if (err) {
     console.log(err.message);
   } else {
@@ -27,7 +26,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/signup", (req, res) => {
   User.register(
@@ -57,6 +55,6 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
   res.json({ token, status: "Successfully Logged In" });
 });
 
-// app.use("/graphql", graphqlRouter);
+app.use("/graphql", graphqlRouter);
 
 export default app;
