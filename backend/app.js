@@ -7,8 +7,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import graphqlRouter from "./routes/graphql.js";
 import User from "./models/User.js";
-import auth from "./auth.js";
-import { generateToken } from "./auth.js"
+import { generateToken } from "./auth.js";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
