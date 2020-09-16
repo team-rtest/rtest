@@ -5,6 +5,8 @@ services:
     container_name: rtest_db
     networks:
       - backend
+    ports:
+      - "27017:27017"
     image: mongo:latest
 
   object_storage:

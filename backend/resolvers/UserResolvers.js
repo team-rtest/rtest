@@ -10,26 +10,14 @@ export default {
       const user = await userModel.findById({ _id: id }).exec();
       return user;
     },
-    login: async (parent, { name, password }, { models: { userModel } }, info) => {
-      const user = await userModel.findOne({ name }).exec();
-
-      if (!user) {
-        throw new Error("Invalid credentials");
-      }
-
-      const matchPasswords = bcrypt.compareSync(password, user.password);
-
-      if (!matchPasswords) {
-        throw new Error("Invalid credentials");
-      }
-
-      const token = jwt.sign({ id: user.id }, "riddlemethis", { expiresIn: 24 * 10 * 50 });
-
-      return token;
-    },
   },
   Mutation: {
-    createUser: async (parent, { name, password }, { models: { userModel } }, info) => {
+    createUser: async (
+      parent,
+      { name, password },
+      { models: userModel },
+      info
+    ) => {
       const user = await userModel.create({ name, password });
       return user;
     },

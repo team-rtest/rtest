@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
-import app, { set } from "./app";
+import app from "./app.js";
 var debug = require("debug")("backend:server");
+// import d from "debug";
+// var debug = d("backend:server");
 import { createServer } from "http";
 
 const port = normalizePort(process.env.PORT || "4000");
