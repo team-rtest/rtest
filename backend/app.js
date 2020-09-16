@@ -1,7 +1,3 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
@@ -34,7 +30,13 @@ app.use(cookieParser());
 
 app.post("/signup", (req, res) => {
   User.register(
-    new User({ username: req.body.username }),
+    new User({
+      username: req.body.username,
+      email: req.body.email,
+      instructor: req.body.instructor,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    }),
     req.body.password,
     (err, user) => {
       if (err) {
@@ -63,21 +65,15 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
 if (process.env.GOOGLE_CLIENT_ID) {
   app.get(
     "/auth/google",
-    passport.authenticate("google", {
-      scope: [
-        "https://www.googleapis.com/auth/plus.login",
-        ,
-        "https://www.googleapis.com/auth/plus.profile.emails.read",
-      ],
-    })
+    passport.authenticate("google", { scope: ["profile"] })
   );
 
   app.get(
     "/auth/google/callback",
-    passport.authenticate("google", {
-      successRedirect: "/auth/google/success",
-      failureRedirect: "/auth/google/failure",
-    })
+    passport.authenticate("google", { failureRedirect: "/login" }),
+    function (req, res) {
+      res.redirect("/");
+    }
   );
 }
 
