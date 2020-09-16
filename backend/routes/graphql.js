@@ -22,7 +22,6 @@ var root = {
 
 router.use(
   "/",
-  verifyUser,
   graphqlHTTP({
     schema,
     rootValue: root,
