@@ -140,10 +140,6 @@ input FileInput {
 
 scalar Timestamp
 
-type AuthPayload {
-  user: User
-}
-
 # ----------------------------------
 
 type Query {
@@ -165,7 +161,6 @@ type Mutation {
   createStudent(student: StudentInput): Student
   createInstructor(instructor: InstructorInput): Instructor
   createAssignment(assignment: AssignmentInput): Assignment
-  createClass(class: ClassInput): Class
-  createGrade(class: GradeInput): Grade
-  login(email: String!, password: String!): AuthPayload
+  createCourse(course: CourseInput): Course
+  createGrade(grade: GradeInput): Grade
 }
