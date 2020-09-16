@@ -1,6 +1,6 @@
 
-# os: linux
-# dist: focal
+os: linux
+dist: focal
 language: node_js
 # services:
 #   - docker

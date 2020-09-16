@@ -14,12 +14,6 @@
       "/node_modules/"
     ]
   },
-  "jest": {
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ]
-  },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "compression": "^1.7.4",
@@ -33,6 +27,7 @@
     "http-errors": "~1.8.0",
     "mongoose": "^5.10.5",
     "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",

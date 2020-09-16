@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   instructor: {
-    type: Boolean,
+    type: String,
     required: true,
   },
   createdAt: { type: Date, default: Date.now },
@@ -28,11 +28,7 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-userSchema.plugin(passportLocalMongoose
-//   , {
-//   usernameField: 'username'
-// }
-);
+userSchema.plugin(passportLocalMongoose);
 
 const user = mongoose.model("user", userSchema);
 
