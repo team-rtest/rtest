@@ -3,22 +3,22 @@ import passportLocalMongoose from "passport-local-mongoose";
 
 // Username, passport, hash, etc. are plugged in by passport-local-mongoose
 const userSchema = new mongoose.Schema({
-  // email: {
-  //   type: String,
-  //   required: true,
-  // },
-  // firstName: {
-  //   type: String,
-  //   required: true,
-  // },
-  // lastName: {
-  //   type: String,
-  //   required: true,
-  // },
-  // instructor: {
-  //   type: Boolean,
-  //   required: true,
-  // },
+  email: {
+    type: String,
+    required: true,
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  instructor: {
+    type: Boolean,
+    required: true,
+  },
   createdAt: { type: Date, default: Date.now },
   classes: [
     {
