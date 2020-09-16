@@ -1,16 +1,13 @@
-import { graphqlHTTP } from 'express-graphql';
-import { buildSchema, graphql } from 'graphql';
+import { graphqlHTTP } from "express-graphql";
+import { buildSchema, graphql } from "graphql";
 import { readFileSync } from "fs";
-import { Router } from 'express';
+import { Router } from "express";
 import { verifyUser } from "../auth.js";
 
 const router = new Router();
 
 // Construct a schema, using GraphQL schema language
-const typeDefs = readFileSync(
-  "./schemas/schema.graphql",
-  "utf8"
-);
+const typeDefs = readFileSync("./schemas/schema.graphql", "utf8");
 const schema = buildSchema(typeDefs);
 
 // The root provides a resolver function for each API endpoint

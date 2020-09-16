@@ -12,13 +12,17 @@ import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
 
-mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true }, (err) => {
-  if (err) {
-    console.log(err.message);
-  } else {
-    console.log("MongoDB Successfully Connected ...");
+mongoose.connect(
+  process.env.MONGO_URI,
+  { useUnifiedTopology: true, useNewUrlParser: true },
+  (err) => {
+    if (err) {
+      console.log(err.message);
+    } else {
+      console.log("MongoDB Successfully Connected ...");
+    }
   }
-});
+);
 
 const app = express();
 app.use(passport.initialize());
