@@ -152,15 +152,15 @@ type Query {
   grade(id: ID): Grade
 
   students: [Student!]
-  instructors:[Instructor!]
-  assignments:[Assignment!]
-  grades:[Grade!]
+  instructors: [Instructor!]
+  assignments: [Assignment!]
+  grades: [Grade!]
 }
 
 type Mutation {
-  createStudent(student:StudentInput): Student
-  createInstructor(instructor:InstructorInput): Instructor
-  createAssignment(assignment:AssignmentInput): Assignment
-  createCourse(Course:CourseInput): Course
-  createGrade(Course:GradeInput): Grade
+  createStudent(student: StudentInput): Student
+  createInstructor(instructor: InstructorInput): Instructor
+  createAssignment(assignment: AssignmentInput): Assignment
+  createCourse(course: CourseInput): Course
+  createGrade(grade: GradeInput): Grade
 }
