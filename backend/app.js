@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
@@ -7,9 +11,6 @@ import auth from "./auth.js";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true }, (err) => {
   if (err) {
