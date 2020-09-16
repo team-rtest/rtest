@@ -1,9 +1,6 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 import { sign } from "jsonwebtoken";
 import User from "./models/User.js";
@@ -16,7 +13,7 @@ if (process.env.GOOGLE_CLIENT_ID) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://yourdormain:3000/auth/google/callback",
+        callbackURL: "http://yourdormain:4000/auth/google/callback",
         passReqToCallback: true,
       },
 
