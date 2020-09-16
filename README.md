@@ -5,4 +5,5 @@
 
 Before you run this in production:
 
--   Change the Minio Access and Secret keys from the default values in the `rtest.env`
+-   Change the Minio Access in the `rtest.env`, or pass it to the container directly
+-   Pass environment variable `SECRET_KEY` to the backend container
