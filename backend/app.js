@@ -8,6 +8,7 @@ import logger from "morgan";
 import graphqlRouter from "./routes/graphql.js";
 import User from "./models/User.js";
 import auth from "./auth.js";
+import { generateToken } from "./auth.js"
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
@@ -43,7 +44,7 @@ app.post("/signup", (req, res) => {
         res.json({ err });
       } else {
         passport.authenticate("local")(req, res, () => {
-          const token = auth.generateToken({ _id: req.user._id });
+          const token = generateToken({ username: req.user.username });
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
           res.json({ token, status: "Successfully Logged In" });
@@ -54,7 +55,7 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", passport.authenticate("local"), (req, res) => {
-  const token = auth.generateToken({ _id: req.user._id });
+  const token = generateToken({ username: req.user.username });
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json({ token, status: "Successfully Logged In" });
