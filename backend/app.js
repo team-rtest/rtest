@@ -60,6 +60,27 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
   res.json({ token, status: "Successfully Logged In" });
 });
 
+if (process.env.GOOGLE_CLIENT_ID) {
+  app.get(
+    "/auth/google",
+    passport.authenticate("google", {
+      scope: [
+        "https://www.googleapis.com/auth/plus.login",
+        ,
+        "https://www.googleapis.com/auth/plus.profile.emails.read",
+      ],
+    })
+  );
+
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google", {
+      successRedirect: "/auth/google/success",
+      failureRedirect: "/auth/google/failure",
+    })
+  );
+}
+
 app.use("/graphql", graphqlRouter);
 
 export default app;
