@@ -22,9 +22,13 @@ const opts = {
 
 export const jwtStrategy = passport.use(
   new JwtStrategy(opts, (jwt_payload, done) => {
-    if (err) return done(err, false);
-    else if (user) return done(null, user);
-    else return done(null, false);
+    if (err) {
+      return done(err, false);
+    } else if (user) {
+      return done(null, user);
+    } else {
+      return done(null, false);
+    }
   })
 );
 
