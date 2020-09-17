@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { Link } from 'react-router-dom';
 import { Card, Form } from 'components';
 
 const AuthCard = styled(Card)`
@@ -19,7 +20,7 @@ const Heading = styled.h2`
   color: #6173db;
 `;
 
-const Link = styled.span`
+const AuthLink = styled(Link)`
   cursor: pointer;
   margin: auto;
   color: grey;
@@ -29,7 +30,8 @@ const Link = styled.span`
   &:hover {
     color: #6173db;
     border-color: #6173db;
+    text-decoration: none;
   }
 `;
 
-export { AuthCard, AuthForm, Heading, Link }
+export { AuthCard, AuthForm, Heading, AuthLink }

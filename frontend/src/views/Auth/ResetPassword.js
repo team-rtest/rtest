@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Form, Input, Card } from 'components'
-import { AuthCard, AuthForm, Heading, Link } from './styles'
+import { AuthCard, AuthForm, Heading } from './styles'
 
 function ResetPassword() {
   const [inputs, setInputs] = useState({ new_password: '', confirm_password: '' });
@@ -61,7 +61,7 @@ function ResetPassword() {
             error={errors.confirm_password}
             onChange={handleChange}
           />
-        <button className="btn btn-primary btn-upload" onClick={handleSubmit}> Confirm Reset </button>
+          <button className="btn btn-primary btn-upload" onClick={handleSubmit}> Confirm Reset </button>
         </AuthForm>
       </AuthCard>
   );

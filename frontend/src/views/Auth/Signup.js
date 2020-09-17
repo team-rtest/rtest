@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Form, Input, Card } from 'components'
-import { AuthCard, AuthForm, Heading, Link } from './styles'
+import { Form, Input, Card, Textarea } from 'components'
+import { AuthCard, AuthForm, Heading, AuthLink } from './styles'
 
 function Signup() {
   const [inputs, setInputs] = useState({ email: '', password: '' });
@@ -65,7 +65,7 @@ function Signup() {
           />
           <button className="btn btn-primary btn-upload" onClick={handleSubmit}> Sign up </button>
         </AuthForm>
-        <Link> Have an account? </Link>
+        <AuthLink to="login"> Have an account? </AuthLink>
       </AuthCard>
   );
 }

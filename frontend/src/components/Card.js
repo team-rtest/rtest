@@ -13,4 +13,5 @@ const StyledCard = styled.div`
   background: #f8f9fa;
 `;
 
+
 export default Card;

@@ -31,7 +31,7 @@ function Upload() {
           onChange={handleChange}
         />
       </FileInput>
-      <button className="btn btn-primary btn-upload" onClick={handleClick}> Upload </button>
+      <button className="btn btn-primary btn-upload" onClick={handleClick}> Submit </button>
     </Form>
   );
 }
@@ -41,7 +41,7 @@ const Form = styled.form`
 `;
 
 const FileInput = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
 `;
 
 export default Upload

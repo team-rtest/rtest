@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Form, Input, Card } from 'components'
-import { AuthCard, AuthForm, Heading, Link } from './styles'
+import { AuthCard, AuthForm, Heading, AuthLink } from './styles'
 
 function Login() {
   const [inputs, setInputs] = useState({ email: '', password: '' });
@@ -65,7 +65,7 @@ function Login() {
           />
         <button className="btn btn-primary btn-upload" onClick={handleSubmit}> Login </button>
         </AuthForm>
-        <Link> Forgot Password? </Link>
+        <AuthLink to="forgot-password"> Forgot Password? </AuthLink>
       </AuthCard>
   );
 }
