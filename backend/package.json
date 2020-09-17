@@ -5,7 +5,7 @@
   "scripts": {
     "start": "babel-node -r dotenv/config server.js",
     "dev-babel": "nodemon -r dotenv/config server.js --exec babel-node",
-    "build": "babel . --copy-files --ignore node_modules,tests -d build",
+    "build": "babel . --copy-files --include-dotfiles --ignore node_modules,tests,.vscode,Dockerfile,README.md -d build",
     "test": "jest",
     "dev": "nodemon -r dotenv/config server.js --exec babel-node"
   },
