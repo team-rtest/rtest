@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Form, Input, Card } from 'components'
 import { AuthCard, AuthForm, Heading, AuthLink } from './styles'
 
+import { auth } from 'api';
+
 function Login() {
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({ email: null, password: null });
@@ -31,10 +33,10 @@ function Login() {
     if(value.length < 8) return 'Password must have at least 8 characters';
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setErrors({
       email: validateEmail(inputs.email),
-      password: validateEmail(inputs.password),
+      password: validatePassword(inputs.password),
     });
 
     const noneEmpty = inputs.email && inputs.password;
@@ -42,6 +44,8 @@ function Login() {
 
     if(noneEmpty && noneError) {
       alert('form submitted successfully!');
+      const res = await auth.login(inputs.email, inputs.password);
+      alert(`${res}`);
     }
   }
 
