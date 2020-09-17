@@ -1,0 +1,105 @@
+{
+  "courses": [
+    {
+      "id": "CS470-001",
+      "name": "Data Mining",
+      "professor": "Davide Fossati",
+      "assignments": [
+        {
+          "name": "Quizzes",
+          "list": [
+            {
+              "id": 0,
+              "name": "Supervised Learning",
+              "due": "September 1st 2020",
+              "description": "",
+              "max": 50
+            },
+            {
+              "id": 1,
+              "name": "Unsupervised Learning",
+              "due": "September 30th 2020",
+              "description": "",
+              "max": 50
+            },
+            {
+              "id": 2,
+              "name": "Reinforcement Learning",
+              "due": "October 31st 2020",
+              "description": "",
+              "max": 50
+            },
+            {
+              "id": 3,
+              "name": "Deep Learning",
+              "due": "November 18th 2020",
+              "description": "",
+              "max": 50
+            }
+          ]
+        },
+        {
+          "name": "Labs",
+          "list": [
+            {
+              "id": 0,
+              "name": "K Nearest Neighbors",
+              "due": "August 29th 2020",
+              "description": "",
+              "max": 100
+            },
+            {
+              "id": 1,
+              "name": "Decision Tree",
+              "due": "September 2nd 2020",
+              "description": "",
+              "max": 100
+            },
+            {
+              "id": 2,
+              "name": "Apriori Algorithm",
+              "due": "September 13th 2020",
+              "description": "",
+              "max": 100
+            },
+            {
+              "id": 3,
+              "name": "Naive Bayes",
+              "due": "September 21st 2020",
+              "description": "",
+              "max": 100
+            },
+            {
+              "id": 4,
+              "name": "Perceptron",
+              "due": "September 30th 2020",
+              "description": "",
+              "max": 100
+            },
+            {
+              "id": 5,
+              "name": "Random Forests",
+              "due": "October 3rd 2020",
+              "description": "",
+              "max": 100
+            },
+            {
+              "id": 6,
+              "name": "Neural Networks",
+              "due": "October 15th 2020",
+              "description": "",
+              "max": 100
+            },
+            {
+              "id": 7,
+              "name": "Convolutional Neural Networks",
+              "due": "October 26th 2020",
+              "description": "",
+              "max": 100
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

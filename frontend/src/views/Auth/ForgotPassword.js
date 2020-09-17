@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Form, Input, Card } from 'components'
-import { AuthCard, AuthForm, Heading, Link } from './styles'
+import { Form, Input, Card } from 'components';
+import { AuthCard, AuthForm, Heading, AuthLink } from './styles';
 
 function ForgotPassword() {
   const [inputs, setInputs] = useState({ email: '' });
@@ -39,7 +39,7 @@ function ForgotPassword() {
           />
         <button className="btn btn-primary btn-upload" onClick={handleSubmit}> Send Password Reset Email </button>
         </AuthForm>
-        <Link> Return to login </Link>
+        <AuthLink to="login"> Return to login </AuthLink>
       </AuthCard>
   );
 }

@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders upload button', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Upload Your File/i);
+  const linkElement = getByText(/Your Courses/i);
   expect(linkElement).toBeInTheDocument();
 });

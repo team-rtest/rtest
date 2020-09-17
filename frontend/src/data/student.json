@@ -1,0 +1,88 @@
+{
+  "name": "Yohan Jhaveri",
+  "email": "yohan.jhaveri@emory.edu",
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "courses": [
+    {
+      "id": "CS470-001",
+      "pinned": true,
+      "assignments": [
+        {
+          "name": "Quizzes",
+          "list": [
+            {
+              "id": 0,
+              "submitted": "August 31st 2020",
+              "score": 48
+            },
+            {
+              "id": 1,
+              "submitted": "September 30th 2020",
+              "score": 44
+            },
+            {
+              "id": 2,
+              "submitted": "October 31st 2020",
+              "score": 39
+            },
+            {
+              "id": 3,
+              "submitted": "November 16th 2020",
+              "score": 47
+            },
+            {
+              "id": 4,
+              "submitted": "November 29th 2020",
+              "score": 45
+            }
+          ]
+        },
+        {
+          "name": "Labs",
+          "list": [
+            {
+              "id": 0,
+              "submitted": "August 28th 2020",
+              "score": 88
+            },
+            {
+              "id": 1,
+              "submitted": "September 4th 2020",
+              "score": 72
+            },
+            {
+              "id": 2,
+              "submitted": "September 13th 2020",
+              "score": 54
+            },
+            {
+              "id": 3,
+              "submitted": "September 25th 2020",
+              "score": 84
+            },
+            {
+              "id": 4,
+              "submitted": "September 29th 2020",
+              "score": 90
+            },
+            {
+              "id": 5,
+              "submitted": "October 1st 2020",
+              "score": 66
+            },
+            {
+              "id": 6,
+              "submitted": "October 16th 2020",
+              "score": 92
+            },
+            {
+              "id": 7,
+              "submitted": "October 26th 2020",
+              "score": 99
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
