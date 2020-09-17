@@ -5,7 +5,7 @@
   "scripts": {
     "start": "babel-node -r dotenv/config server.js",
     "dev-babel": "nodemon -r dotenv/config server.js --exec babel-node",
-    "build": "babel . --ignore node_modules,tests -d build --copy-files",
+    "build": "babel . --copy-files --ignore node_modules,tests -d build",
     "test": "jest",
     "dev": "nodemon -r dotenv/config server.js --exec babel-node"
   },
@@ -27,6 +27,7 @@
     "graphql": "^15.3.0",
     "http-errors": "~1.8.0",
     "mongoose": "^5.10.5",
+    "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
@@ -40,7 +41,6 @@
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
     "jest": "^26.4.2",
-    "morgan": "~1.10.0",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
