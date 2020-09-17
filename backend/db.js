@@ -1,6 +1,6 @@
-import defaultExport from 'resolvers/UserResolvers';
-import defaultExport from 'models/UserModel';
+import defaultExport from 'resolvers/UserResolvers.js';
+import user from 'models/UserModel.js';
 
-const db = UserModel();
+const db = user();
 
 export default db;
