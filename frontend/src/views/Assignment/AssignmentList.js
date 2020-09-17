@@ -113,5 +113,4 @@ const Date = styled.div`
   font-weight: 500;
   margin-bottom: 10px;
 `;
-
 export default AssignmentList;

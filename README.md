@@ -5,4 +5,5 @@
 
 Before you run this in production:
 
--   Change the Minio Access and Secret keys from the default values in the `rtest.env`
+-   Change the Minio Access keys
+-   Change `MONGO_URI` and `JWT_SECRET` for the backend container.

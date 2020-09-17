@@ -4,29 +4,27 @@ schema {
 }
 
 type Student {
-  id: ID!
-  userName: String!
+  username: String!
   firstName: String!
   email: String!
   lastName: String!
-  classes: [Class]!
+  Courses: [Course]!
   createdAt: Timestamp!
 }
 
 input StudentInput {
-  userName: String!
+  username: String!
   firstName: String!
   lastName: String!
   email: String!
 }
 
 type Instructor {
-  id: ID!
   username: String!
   firstName: String!
   lastName: String!
   email: String!
-  classes: [Class]!
+  Courses: [Course]!
   createdAt: Timestamp!
 }
 
@@ -37,11 +35,11 @@ input InstructorInput {
   email: String!
 }
 
-type Class {
+type Course {
   id: ID!
-  classCode: String!
+  courseCode: String!
   subject: String!
-  classNumber: String!
+  courseNumber: String!
   year: Int!
   semester: String!
   students: [Student]!
@@ -49,11 +47,11 @@ type Class {
   assignments: [Assignment]
 }
 
-input ClassInput {
-  # Classcode can be subject+classNumber by default
-  classCode: String
+input CourseInput {
+  # Coursecode can be subject+CourseNumber by default
+  courseCode: String
   subject: String!
-  classNumber: String!
+  courseNumber: String!
   year: Int!
   semester: String!
   instructorIds: [ID!]!
@@ -65,7 +63,7 @@ type Assignment {
   tags: [AssignmentTag]
   name: String!
   body: String
-  class: Class!
+  course: Course!
   pointsPossible: Int!
   dateCreated: Timestamp!
   datePosted: Timestamp!
@@ -75,7 +73,7 @@ type Assignment {
 input AssignmentInput {
   name: String!
   body: String
-  classId: ID!
+  courseId: ID!
   pointsPossible: Int
   datePosted: Timestamp!
   dateDue: Timestamp!
@@ -87,15 +85,29 @@ enum AssignmentTag {
   CODING
 }
 
+type Submission {
+  id: ID!
+  student: String!
+  assignment: ID!
+  files: [File!]!
+  dateSubmitted: Timestamp!
+  attemptNumber: Int!
+}
+
+input SubmissionInput {
+  student: String!
+  assignment: ID!
+  files: [FileInput!]!
+}
+
 type Grade {
   id: ID!
-  studentId: ID!
-  assignmentId: ID!
-  grade: Int!
+  submissionId: ID!
+  grade: Float!
 }
 
 input GradeInput {
-  student_id: ID!
+  student: String!
   assignmentId: ID!
   grade: Float!
 }
@@ -116,6 +128,16 @@ type File {
   size_formatted: String!
 }
 
+input FileInput {
+  original_name: String!
+  # The file's encoding
+  encoding: String!
+  # The file's mimetype
+  mimetype: String!
+  # The path to the file in S3
+  path: String!
+}
+
 scalar Timestamp
 
 # ----------------------------------
@@ -130,15 +152,15 @@ type Query {
   grade(id: ID): Grade
 
   students: [Student!]
-  instructors:[Instructor!]
-  assignments:[Assignment!]
-  grades:[Grade!]
+  instructors: [Instructor!]
+  assignments: [Assignment!]
+  grades: [Grade!]
 }
 
 type Mutation {
-  createStudent(student:StudentInput): Student
-  createInstructor(instructor:InstructorInput): Instructor
-  createAssignment(assignment:AssignmentInput): Assignment
-  createClass(class:ClassInput): Class
-  createGrade(class:GradeInput): Grade
+  createStudent(student: StudentInput): Student
+  createInstructor(instructor: InstructorInput): Instructor
+  createAssignment(assignment: AssignmentInput): Assignment
+  createCourse(course: CourseInput): Course
+  createGrade(grade: GradeInput): Grade
 }

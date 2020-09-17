@@ -26,6 +26,7 @@ function App() {
   );
 }
 
+
 const Screen = styled.div`
   display: flex;
   justify-content: center;

@@ -1,11 +1,19 @@
+FROM node:lts-alpine AS build
+
+WORKDIR /server
+
+COPY . .
+RUN yarn && yarn build
+
 FROM node:lts-alpine
 
 WORKDIR /server
 
-COPY package.json .
+# USER node
+EXPOSE 4000
 
-RUN npm install
+ENV NODE_ENV=production
+COPY --from=build /server/build .
+RUN yarn --production
 
-COPY . .
-
-CMD [ "npm", "start" ]
+CMD [ "node", "-r", "dotenv/config",  "server.js"]

@@ -1,18 +1,22 @@
-version: '3.7'
+version: "3.7"
 
 services:
   mongo:
-    container_name: rtest_db
+    container_name: db
     networks:
       - backend
-    image: mongo:latest
+    ports:
+      - "27017:27017"
+    image: mongo:4.4.1
 
   object_storage:
     container_name: minio
     ports:
-    - "9000:9000"
+      - "9000:9000"
     image: minio/minio
-    env_file: 'rtest.env'
+    environment:
+      - MINIO_ACCESS_KEY=changethisaccesskey
+      - MINIO_SECRET_KEY=changethissecretkey
     command: server /data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
@@ -21,25 +25,33 @@ services:
       retries: 3
 
   server:
-    container_name: rtest-backend
+    container_name: server
+    depends_on:
+      - mongo
+      - object_storage
     networks:
       - backend
       - frontend
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/rtest
+      # TODO change the JWT secret to a docker secret instead?
+      - JWT_SECRET=aeufaskfhasuekfhasefukasehukf
+    ports:
+      - "4000:4000"
     build:
       context: ./backend
       dockerfile: Dockerfile
 
   client:
-    container_name: rtest-frontend
+    container_name: client
     networks:
       - frontend
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
     environment:
       - "CI=true"
     ports:
-      - "3000:3000"
+      - "5000:5000"
 
 networks:
   frontend:
