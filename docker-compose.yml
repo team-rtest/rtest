@@ -28,6 +28,7 @@ services:
     container_name: server
     depends_on:
       - mongo
+      - object_storage
     networks:
       - backend
       - frontend
