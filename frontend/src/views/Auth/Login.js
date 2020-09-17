@@ -17,7 +17,7 @@ function Login() {
 
   const validate = (name, value) => {
     switch(name) {
-      case 'email':     return validateEmail(value);
+      // case 'email':     return validateEmail(value);
       case 'password':  return validatePassword(value);
       default:          return !value;
     }
@@ -35,16 +35,17 @@ function Login() {
 
   const handleSubmit = async () => {
     setErrors({
-      email: validateEmail(inputs.email),
+      // email: validateEmail(inputs.email),
       password: validatePassword(inputs.password),
     });
 
     const noneEmpty = inputs.email && inputs.password;
-    const noneError = !errors.email && !errors.password;
+    const noneError = !errors.password;
 
     if(noneEmpty && noneError) {
       alert('form submitted successfully!');
       const res = await auth.login(inputs.email, inputs.password);
+      // TODO handle failure
       alert(`${res}`);
     }
   }
