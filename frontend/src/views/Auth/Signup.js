@@ -72,7 +72,7 @@ function Signup() {
           />
           <button className="btn btn-primary btn-upload" onClick={handleSubmit}> Sign up </button>
         </AuthForm>
-        <Link> Have an account? </Link>
+        {/* <Link> Have an account? </Link> */}
       </AuthCard>
   );
 }
