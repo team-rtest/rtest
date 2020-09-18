@@ -1,8 +1,4 @@
 
-os: linux
-dist: focal
-language: node_js
-
 jobs:
   include:
     - stage: "Tests"
