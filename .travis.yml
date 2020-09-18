@@ -1,33 +1,43 @@
-
-os: linux
-dist: focal
 language: node_js
-# services:
-#   - docker
+services:
+  - docker
 
 jobs:
   include:
-    - name: "Backend unit tests"
+    - stage: Test
+      name: "Backend unit tests"
       node_js:
         - lts/*
 
       before_install:
         - cd backend
-    
+
     - name: "Frontend unit tests"
       node_js:
         - lts/*
-      
+
       before_install:
         - cd frontend
 
-#     - name: "Docker"
-#       before_script:
-#         - docker-compose build
-    
-#       script:
-#         - docker-compose up -d
-#         - sleep 1
+    - stage: Deploy
+      name: "Docker push backend"
+      before_script:
+        - docker login -u "$dockerusername" --password "$dockertoken"
+      script:
+        - docker build -t teamrtest/rtest backend
+      after_script:
+        - docker push teamrtest/rtest
 
-#       after_script:
-#         - docker-compose kill
+    - name: "Docker push frontend"
+      before_script:
+        - docker login -u "$dockerusername" --password "$dockertoken"
+      script:
+        - docker build -t teamrtest/rtest-ui frontend
+      after_script:
+        - docker push teamrtest/rtest-ui
+
+stages:
+  - name: Test
+    if: branch = master
+  - name: Deploy
+    if: (branch = master) AND (NOT(type IN (push, pull_request)))
