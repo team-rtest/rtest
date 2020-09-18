@@ -1,26 +1,26 @@
+language: node_js
+services:
+  - docker
 
 jobs:
   include:
     - stage: Test
-      language: node_js
-    - name: "Backend unit tests"
+      name: "Backend unit tests"
       node_js:
         - lts/*
 
       before_install:
         - cd backend
-    
+
     - name: "Frontend unit tests"
       node_js:
         - lts/*
-      
+
       before_install:
         - cd frontend
 
     - stage: Deploy
-      services:
-      - docker
-    - name: "Docker push backend"
+      name: "Docker push backend"
       before_script:
         - docker login -u "$dockerusername" --password "$dockertoken"
       script:
@@ -37,6 +37,6 @@ jobs:
         - docker push teamrtest/rtest-ui
 
 stages:
-  - name: Test
+  - Test
   - name: Deploy
     if: branch = master
