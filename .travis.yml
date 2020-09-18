@@ -39,4 +39,4 @@ jobs:
 stages:
   - Test
   - name: Deploy
-    if: branch = master
+    if: (branch = develop) AND (NOT(type IN (push, pull_request)))
