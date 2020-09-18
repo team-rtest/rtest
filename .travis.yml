@@ -37,6 +37,7 @@ jobs:
         - docker push teamrtest/rtest-ui
 
 stages:
-  - Test
+  - name: Test
+    if: branch = master
   - name: Deploy
-    if: (branch = develop) AND (NOT(type IN (push, pull_request)))
+    if: (branch = master) AND (NOT(type IN (push, pull_request)))
