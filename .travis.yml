@@ -2,8 +2,8 @@
 os: linux
 dist: focal
 language: node_js
-# services:
-#   - docker
+services:
+  - docker
 
 jobs:
   include:
@@ -21,13 +21,26 @@ jobs:
       before_install:
         - cd frontend
 
-#     - name: "Docker"
-#       before_script:
-#         - docker-compose build
-    
-#       script:
-#         - docker-compose up -d
-#         - sleep 1
+    - name: "Docker push backend"
+      if: branch = master
 
-#       after_script:
-#         - docker-compose kill
+      before_script:
+        - docker login -u "$dockerusername" --password "$dockertoken"
+    
+      script:
+        - docker build -t teamrtest/rtest backend
+      
+      after_script:
+        - docker push teamrtest/rtest
+
+    - name: "Docker push frontend"
+      if: branch = master
+
+      before_script:
+        - docker login -u "$dockerusername" --password "$dockertoken"
+
+      script:
+        - docker build -t teamrtest/rtest-ui frontend
+      
+      after_script:
+        - docker push teamrtest/rtest-ui
