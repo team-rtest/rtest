@@ -3,8 +3,8 @@ import { stringify } from "qs";
 
 const login = (username, password) => {
   const data = stringify({
-    username: username,
-    password: password,
+    username,
+    password,
   });
 
   axios({
@@ -25,8 +25,8 @@ const login = (username, password) => {
 
 const signup = (username, password) => {
   const data = stringify({
-    username: username,
-    password: password,
+    username,
+    password,
     // TODO change these later
     instructor: "Fosaucy",
     lastName: "Doe",

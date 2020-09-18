@@ -44,9 +44,9 @@ function Login() {
 
     if(noneEmpty && noneError) {
       alert('form submitted successfully!');
-      const res = await auth.login(inputs.email, inputs.password);
+      const res = auth.login(inputs.email, inputs.password);
       // TODO handle failure
-      alert(`${res}`);
+      console.log(res);
     }
   }
 
