@@ -2,12 +2,11 @@
 os: linux
 dist: focal
 language: node_js
-services:
-  - docker
 
 jobs:
   include:
     - stage: "Tests"
+      language: node_js
     - name: "Backend unit tests"
       node_js:
         - lts/*
@@ -23,8 +22,10 @@ jobs:
         - cd frontend
 
     - stage: "Deploy"
-      if: branch = master
+      services:
+      - docker
     - name: "Docker push backend"
+      if: branch = master
       before_script:
         - docker login -u "$dockerusername" --password "$dockertoken"
       script:
@@ -33,6 +34,7 @@ jobs:
         - docker push teamrtest/rtest
 
     - name: "Docker push frontend"
+      if: branch = master
       before_script:
         - docker login -u "$dockerusername" --password "$dockertoken"
       script:
