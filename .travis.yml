@@ -7,6 +7,7 @@ services:
 
 jobs:
   include:
+    - stage: "Tests"
     - name: "Backend unit tests"
       node_js:
         - lts/*
@@ -21,8 +22,8 @@ jobs:
       before_install:
         - cd frontend
 
+    - stage: "Deploy"
       if: branch = master
-      stage: "Deploy"
     - name: "Docker push backend"
       before_script:
         - docker login -u "$dockerusername" --password "$dockertoken"
