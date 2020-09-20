@@ -50,6 +50,7 @@ services:
       context: ./frontend
     environment:
       - "CI=true"
+      - "REACT_APP_API=server:4000"
     ports:
       - "5000:5000"
 
