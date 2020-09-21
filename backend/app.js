@@ -36,6 +36,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("API is available");
+});
+
 app.post("/signup", (req, res) => {
   User.register(
     new User({
