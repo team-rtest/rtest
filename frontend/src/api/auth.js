@@ -11,7 +11,7 @@ const login = (username, password) => {
 
   axios({
     method: "post",
-    url: `${API}/login`,
+    url: `http://${API}/login`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
