@@ -1,6 +1,8 @@
 import axios from "axios";
 import { stringify } from "qs";
 
+const API = process.env.REACT_APP_API;
+
 const login = (username, password) => {
   const data = stringify({
     username,
@@ -9,7 +11,7 @@ const login = (username, password) => {
 
   axios({
     method: "post",
-    url: "localhost:4000/login",
+    url: `${API}/login`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -36,7 +38,7 @@ const signup = (username, password) => {
 
   axios({
     method: "post",
-    url: "http://localhost:4000/signup",
+    url: `http://${API}/signup`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
