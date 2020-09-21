@@ -7,6 +7,7 @@ import { generateToken } from "./auth.js";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
+import cors from "cors";
 
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
@@ -23,18 +24,13 @@ if (!process.env.JEST_WORKER_ID) {
 }
 
 const app = express();
+app.use(cors());
 app.use(passport.initialize());
 app.use(compression());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 app.get("/", (req, res) => {
   res.send("API is available");
