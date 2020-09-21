@@ -6,6 +6,8 @@ import Header from 'views/Header';
 import Error404 from 'views/Error404';
 import Assignment from 'views/Assignment/Assignment';
 
+import CreateAssignment from 'views/CreateAssignment/CreateAssignment';
+
 import Login from 'views/Auth/Login';
 import Signup from 'views/Auth/Signup';
 import ResetPassword from 'views/Auth/ResetPassword';
@@ -33,6 +35,7 @@ function App() {
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/assignments" component={Assignment} />
+            <Route path="/create-assignment" component={CreateAssignment}/>
             <Route path="*" component={Error404} />
           </Switch>
         </Screen>
