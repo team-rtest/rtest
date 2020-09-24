@@ -59,14 +59,14 @@ const signup = (username, password) => {
 
 const logout = () => {
   cookies.remove("token");
-}
+};
 
 const setToken = (token) => {
   // TODO: I want to store this as httpOnly, but when I try to do so I get
   //
-  // Cookie “token” has been rejected 
+  // Cookie “token” has been rejected
   // because there is already an HTTP-Only cookie but script tried to store a new one.
   cookies.set("token", token, { path: "/", secure: true, sameSite: "strict" });
-}
+};
 
 export default { login, signup };
