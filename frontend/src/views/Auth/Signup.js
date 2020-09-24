@@ -7,8 +7,8 @@ import { AuthCard, AuthForm, Heading, AuthLink } from "./styles";
 import { auth } from "api";
 
 function Signup() {
-  const [inputs, setInputs] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({ email: null, password: null });
+  const [inputs, setInputs] = useState({ username: "", password: "" });
+  const [errors, setErrors] = useState({ username: null, password: null });
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
@@ -17,7 +17,6 @@ function Signup() {
 
   const validate = (name, value) => {
     switch (name) {
-      // case 'email':     return validateEmail(value);
       case "password":
         return validatePassword(value);
       default:
@@ -37,16 +36,15 @@ function Signup() {
 
   const handleSubmit = () => {
     setErrors({
-      // email: validateEmail(inputs.email),
       password: validatePassword(inputs.password),
     });
 
-    const noneEmpty = inputs.email && inputs.password;
-    const noneError = !errors.email && !errors.password;
+    const noneEmpty = inputs.username && inputs.password;
+    const noneError = !errors.username && !errors.password;
 
     if (noneEmpty && noneError) {
       alert("form submitted successfully!");
-      const res = auth.signup(inputs.email, inputs.password);
+      const res = auth.signup(inputs.username, inputs.password);
       // TODO handle failure
       console.log(res);
     }
@@ -57,10 +55,10 @@ function Signup() {
       <Heading> Create account </Heading>
       <AuthForm handleSubmit={handleSubmit}>
         <Input
-          name="email"
-          type="email"
-          value={inputs.email}
-          error={errors.email}
+          name="username"
+          type="username"
+          value={inputs.username}
+          error={errors.username}
           onChange={handleChange}
         />
         <Input
