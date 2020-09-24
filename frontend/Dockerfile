@@ -6,7 +6,7 @@ WORKDIR /client
 
 COPY . .
 
-RUN yarn
+RUN yarn --frozen-lockfile --production
 RUN yarn build
 RUN yarn global add serve
 
