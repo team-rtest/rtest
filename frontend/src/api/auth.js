@@ -33,11 +33,6 @@ const signup = (username, password) => {
   const data = stringify({
     username,
     password,
-    // TODO change these later
-    instructor: "Fosaucy",
-    lastName: "Doe",
-    firstName: "John",
-    email: "john.doe@gmail.com",
   });
 
   axios({
