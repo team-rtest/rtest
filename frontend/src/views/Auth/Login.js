@@ -43,9 +43,7 @@ function Login() {
 
     if(noneEmpty && noneError) {
       alert('form submitted successfully!');
-      const res = auth.login(inputs.username, inputs.password);
-      // TODO handle failure
-      console.log(res);
+      auth.login(inputs.username, inputs.password);
     }
   }
 

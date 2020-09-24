@@ -44,9 +44,7 @@ function Signup() {
 
     if (noneEmpty && noneError) {
       alert("form submitted successfully!");
-      const res = auth.signup(inputs.username, inputs.password);
-      // TODO handle failure
-      console.log(res);
+      auth.signup(inputs.username, inputs.password);
     }
   };
 
