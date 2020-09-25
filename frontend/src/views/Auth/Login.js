@@ -20,7 +20,6 @@ function Login() {
 
   const handleSubmit = async () => {
     setErrors({
-      // email: validateEmail(inputs.email),
       password: validatePassword(inputs.password),
     });
 
