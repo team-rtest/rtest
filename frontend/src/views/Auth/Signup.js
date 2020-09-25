@@ -3,8 +3,11 @@ import styled from "styled-components";
 
 import { Form, Input, Card, Textarea } from "components";
 import { AuthCard, AuthForm, Heading, AuthLink } from "./styles";
+import { GoogleLogin } from "react-google-login";
 
 import { auth } from "api";
+
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function Signup() {
   const [inputs, setInputs] = useState({ username: "", password: "" });
@@ -48,6 +51,10 @@ function Signup() {
     }
   };
 
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
+
   return (
     <AuthCard>
       <Heading> Create account </Heading>
@@ -70,6 +77,13 @@ function Signup() {
           {" "}
           Sign up{" "}
         </button>
+        <GoogleLogin
+          clientId={GOOGLE_CLIENT_ID}
+          buttonText="Login With Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
       </AuthForm>
       <AuthLink to="login"> Have an account? </AuthLink>
     </AuthCard>
