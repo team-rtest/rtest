@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
-import { Form, Input, Card, Textarea } from "components";
+import { Input } from "components";
 import { AuthCard, AuthForm, Heading, AuthLink } from "./styles";
 import { GoogleLogin } from "react-google-login";
+import { validate, validatePassword } from "./AuthHelper";
 
 import { auth } from "api";
 
@@ -16,25 +16,6 @@ function Signup() {
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
     setErrors({ ...errors, [name]: validate(name, value) });
-  };
-
-  const validate = (name, value) => {
-    switch (name) {
-      case "password":
-        return validatePassword(value);
-      default:
-        return !value;
-    }
-  };
-
-  const validateEmail = (value) => {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const emailValid = emailRegex.test(value.toLowerCase());
-    if (!emailValid) return "Email is invalid";
-  };
-
-  const validatePassword = (value) => {
-    if (value.length < 8) return "Password must have at least 8 characters";
   };
 
   const handleSubmit = () => {
