@@ -56,7 +56,8 @@ app.post("/signup", (req, res) => {
           const token = generateToken({ username: req.user.username });
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
-          res.json({ token, status: "Successfully Logged In" });
+          res.cookie('token', token, { path: "/", secure: true, httpOnly: true});
+          res.json({ status: "Successfully Logged In" });
         });
       }
     }
