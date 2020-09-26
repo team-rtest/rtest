@@ -1,5 +1,3 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import submission from '../models/Submission';
 
 export default{

@@ -1,5 +1,3 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import assignment from '../models/Assignment';
 
 export default{
