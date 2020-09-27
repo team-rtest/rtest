@@ -48,9 +48,10 @@ services:
       - frontend
     build:
       context: ./frontend
+      args: 
+        - REACT_APP_API=https://api.rtest.emory.ml
     environment:
       - "CI=true"
-      - "REACT_APP_API=server:4000"
     ports:
       - "5000:5000"
 
