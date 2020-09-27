@@ -9,15 +9,15 @@ function ClassCard({ id, name, bgcolor}) {
   const DOTS = <Dots className = {'fa fa-ellipsis-h'}/>;
   const ID = id.split('-')[0];
   const PATH = `/classcard/${id.toLowerCase()}`;
-
   return (
-    <Box style = {{backgroundColor: bgcolor}}>
+    <Box style = {{borderColor: bgcolor}}>
       {DOTS}
       <Name>{ name }</Name>
     </Box>
   );
 }
 const Dots = styled.div`
+  borderWidth: 5;
   cursor: pointer;
   font-size: 1.2rem;
   position: absolute;
@@ -33,6 +33,7 @@ const Box = styled(Card)`
   padding: 20px;
   align-items: center;
   height: 10rem;
+  border-width: 2px;
   width: 20rem;
 `;
 
