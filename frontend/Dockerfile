@@ -1,10 +1,12 @@
 FROM node:lts-alpine
 
+ARG REACT_APP_API
+ENV REACT_APP_API=${REACT_APP_API}
 WORKDIR /client
 
 COPY . .
 
-RUN yarn
+RUN yarn --frozen-lockfile --production
 RUN yarn build
 RUN yarn global add serve
 
