@@ -4,6 +4,7 @@ import Assignment from 'views/Assignment/Assignment';
 import Courses from 'views/Courses/Courses';
 
 import CourseCreate from 'views/Create-Course/CourseCreate';
+import CourseCreateForm from 'views/Create-Course/CourseCreateForm';
 
 import Login from 'views/Auth/Login';
 import Signup from 'views/Auth/Signup';
@@ -18,6 +19,10 @@ const routes = [
   {
     path: '/course-create',
     page: <CourseCreate />
+  },
+  {
+    path: '/course-create/form',
+    page: <CourseCreateForm />
   },
   {
     path: '/signup',
