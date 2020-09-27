@@ -1,29 +1,17 @@
 import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
-  _id: { type: mongoose.Schema.Types.ObjectId, required: true },
-
-  courseCode: {
-    type: String,
-    required: true,
-  },
-  subject: {
-    type: String,
-    required: true,
-  },
-  courseNumber: {
-    type: String,
-    required: true,
-  },
-  year: {
-    type: Number,
-    required: true,
-  },
-  semester: {
-    type: String,
-    required: true,
-  },
-  members: [
+  subject: String,
+  courseNumber: String,
+  year: Number,
+  semester: String,
+  files: [  // Syllabus etc
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "file",
+    },
+  ],
+  sections: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
