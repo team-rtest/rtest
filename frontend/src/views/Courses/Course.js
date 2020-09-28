@@ -13,7 +13,7 @@ function Course({ id, name, grade, professor, numAssignments, numLate, pinned })
 
   const STAR = <Star className={`fa${pinned ? 's' : 'r'} fa-star`} />;
   const ID = id.split('-')[0];
-  const PATH = `/courses/${id.toLowerCase()}`;
+  const PATH = `/assignments/${id.toLowerCase()}`;
 
   return (
     <Box>
