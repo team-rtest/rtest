@@ -3,15 +3,14 @@ export default {
     shuffle(questions);
     shuffle(students);
     var len = questions.length;
+    var array = new Array ();
     for (var i = 0; i < students.length; i++) {
       for (var j = 0; j < len; j++) {
-        addPeer(questions[(j + i) % len], students[i]);
+        array[i] = new array ();
+        array.push(questions[(j +numTask*(1+i))%len]);
       }
     }
-  },
-
-  addPeer: (question, student) => {
-    return;
+    return array;
   },
 
   shuffle: (a) => {

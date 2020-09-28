@@ -17,4 +17,12 @@ describe("Shuffle", () => {
 
 describe("matchPeer", () => {
     // TODO
+  it("should return arrays with same length", async () =>{
+    const a = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const b = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const c = peermatching.matchpeer(a,b);
+    for (let i = a.length - 2; i > 0; i--) {
+      expect(c[i].length).toEqual(c[i+2].length);
+    } 
+  })
 });
