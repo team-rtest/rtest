@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 function AssignmentType({ type, selected, setSelected }) {
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
 
   return (
     <TypeList>
