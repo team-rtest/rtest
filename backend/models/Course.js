@@ -5,6 +5,14 @@ const courseSchema = new mongoose.Schema({
   courseNumber: String,
   year: Number,
   semester: String,
+
+  files: [  // Syllabus etc
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "file",
+    },
+  ],
+  
   sections: [
     {
       section: Number,
