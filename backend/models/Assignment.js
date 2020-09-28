@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const assignmentSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -20,21 +16,17 @@ const assignmentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  class: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "class",
-  },
-  submissions: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "submission",
-  },
+  submissions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "submission",
+    },
+  ],
   dateCreated: {
     type: Date,
     default: Date.now,
   },
-  datePosted: {
-    type: Date,
-  },
+  datePosted: Date,
   dateDue: {
     type: Date,
     required: true,

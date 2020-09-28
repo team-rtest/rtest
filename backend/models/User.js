@@ -13,12 +13,6 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   createdAt: { type: Date, default: Date.now },
-  classes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "class",
-    },
-  ],
 });
 
 userSchema.plugin(passportLocalMongoose);
