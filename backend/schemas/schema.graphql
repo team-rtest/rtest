@@ -48,14 +48,10 @@ type Course {
 }
 
 input CourseInput {
-  # Coursecode can be subject+CourseNumber by default
-  courseCode: String
   subject: String!
   courseNumber: String!
-  year: Int!
-  semester: String!
-  instructorIds: [ID!]!
-  studentIds: [ID!]
+  year: Int
+  semester: String
 }
 
 type Assignment {
