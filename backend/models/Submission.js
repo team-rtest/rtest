@@ -1,39 +1,22 @@
 import mongoose from "mongoose";
 
 const submissionSchema = new mongoose.Schema({
-  _id: {
+  student: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    unique: true,
-  },
-  username: {
-    type: String,
     ref: "user",
-    required: true,
-  },
-  assignment: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "assignment",
-    required: true,
+    required: true
   },
   files: [
     {
-      originalName: String,
-      encoding: String,
-      mimetype: String,
-      path: String,
-      size: Number,
-      sizeFormatted: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "file",
     },
   ],
   submittedAt: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
-  grade: {
-    type: Number,
-    required: true,
-  },
+  grade: Number,
   peerGrades: [
     {
       peer: {
@@ -41,11 +24,9 @@ const submissionSchema = new mongoose.Schema({
         ref: "user",
         required: true
       },
-      peerGrade: {
-          type: Number,
-          required: true,
-      },
-      timeGraded: {
+      body: String,
+      peerGrade: Number,
+      timePeerGraded: {
         type: Date,
         default: Date.now
       }
