@@ -6,26 +6,32 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
+
   firstName: {
     type: String,
     required: true,
   },
+
   lastName: {
     type: String,
     required: true,
   },
-  instructor: {
-    type: String,
-    required: true,
-  },
-  createdAt: { type: Date, default: Date.now },
-  classes: [
-    {
+
+  courses: [{
+
+    course: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "class",
     },
-  ],
+
+    role: {
+      type: String,
+      enum: ["Instructor", "Assistant", "Student"],
+    },
+    
+  }],
 });
 
 userSchema.plugin(passportLocalMongoose);

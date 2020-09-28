@@ -1,0 +1,437 @@
+{
+  "teachers": [
+    {
+      "username": "davide",
+      "email": "davide.fossati@emory.edu",
+      "firstName": "Davide",
+      "lastName": "Fossati",
+      "courses": ["2334"]
+    },
+    {
+      "username": "steven",
+      "email": "steven.la.fleur@emory.edu",
+      "firstName": "Steven",
+      "lastName": "La Fleur",
+      "courses": ["3987"]
+    },
+    {
+      "username": "joyce",
+      "email": "joyce.ho@emory.edu",
+      "firstName": "Joyce",
+      "lastName": "Ho",
+      "courses": ["4024"]
+    }
+  ],
+
+  "students": [
+    {
+      "username": "yohan",
+      "email": "yohan.jhaveri@emory.edu",
+      "firstName": "Yohan",
+      "lastName": "Jhaveri",
+      "courses": [
+        {
+          "id": "4024",
+          "pinned": true,
+          "groups": [
+            {
+              "id": "78c19e88-a42e-437e-9a86-c1f6f2332032",
+              "assignments": [
+                {
+                  "id": "13d07e53-90b4-43f7-beec-f0ff068de8d0",
+                  "submitted": "August 31st 2020",
+                  "score": 48
+                },
+                {
+                  "id": "676321b8-846d-417a-b977-89474c0916e0",
+                  "submitted": "September 20th 2020"
+                },
+                {
+                  "id": "df782cbb-1686-4911-828b-10171b965fa5"
+                },
+                {
+                  "id": "edbba620-f713-41aa-b8d1-e0f5cd0983a7"
+                }
+              ]
+            },
+            {
+              "id": "e08c7482-1573-46a0-b225-6de5c6478494",
+              "assignments": [
+                {
+                  "id": "774496ef-37d4-4e5b-8ae8-4def3c2c5ba6",
+                  "submitted": "August 28th 2020",
+                  "score": 88
+                },
+                {
+                  "id": "b35a87a4-5ff3-47d1-89ed-26b395192796",
+                  "submitted": "September 4th 2020",
+                  "score": 72
+                },
+                {
+                  "id": "6a62d0a7-c868-42bc-bfaa-677d19db0d8f",
+                  "submitted": "September 13th 2020"
+                },
+                {
+                  "id": "5359af26-cab4-4bf2-a427-b4a5c72849ed7"
+                },
+                {
+                  "id": "a72563ab-8f23-46d5-b314-916c5c4bcf07"
+                },
+                {
+                  "id": "29d33f4a-12fc-4c2d-99a6-730e8f274c7e"
+                },
+                {
+                  "id": "47e5935d-a473-41aa-9767-e502709ea9c4"
+                },
+                {
+                  "id": "ac021346-9662-4ac0-8f57-d57720f1f3db"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "courses": [
+    {
+      "id": "2334",
+      "number": "CS470",
+      "name": "Data Mining",
+      "professor": "Davide Fossati",
+      "students": ["yohan"],
+      "groups": [
+        {
+          "id": "d87a658c-9293-4f0c-86ef-7317a349e8ed",
+          "name": "Quizzes",
+          "type": "test",
+          "grading": {
+            "weight": 40,
+            "policy": "normal"
+          },
+          "assignments": [
+            {
+              "id": "969c895e-dc56-4e5b-bb78-caa6800f4590",
+              "name": "Supervised Learning",
+              "due": "September 1st 2020",
+              "instructions": "",
+              "max": 50,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "8be310c6-fbf4-11ea-adc1-0242ac120002",
+              "name": "Unsupervised Learning",
+              "due": "September 30th 2020",
+              "instructions": "",
+              "max": 50,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "dae7230b-9945-4f05-8d9a-a8dd544e6261",
+              "name": "Reinforcement Learning",
+              "due": "October 31st 2020",
+              "instructions": "",
+              "max": 50,
+              "optional": false,
+              "locked": false
+            }
+          ]
+        },
+        {
+          "id": "d072af57-594c-45ad-882c-7a9021345bcd",
+          "name": "Labs",
+          "type": "hw",
+          "grading": {
+            "weight": 60,
+            "policy": "normal"
+          },
+          "assignments": [
+            {
+              "id": "719388b4-6221-4cd9-81e1-3bceda5c976b",
+              "name": "Apriori Algorithm",
+              "due": "September 13th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "3edcd14e-e88c-41be-ab41-eaf910b8d007",
+              "name": "Naive Bayes",
+              "due": "September 21st 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "5b44bcf8-122f-407d-91f0-753cd6717374",
+              "name": "Perceptron",
+              "due": "September 30th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3987",
+      "number": "CS325",
+      "name": "Artificial Intelligence",
+      "professor": "Steven La Fleur",
+      "students": ["yohan"],
+      "groups": [
+        {
+          "id": "2f143ace-e5c0-4b53-941c-1ceb9b096cd7",
+          "name": "Projects",
+          "type": "hw",
+          "grading": {
+            "weight": 50,
+            "policy": "best3"
+          },
+          "assignments": [
+            {
+              "id": "ed58b546-40da-41b4-95c1-c734461f268c",
+              "name": "Pacman 1",
+              "due": "September 1st 2020",
+              "instructions": "",
+              "max": 20,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "946a4328-544d-4be6-b38f-f5950b8e7a3d",
+              "name": "Pacman 2",
+              "due": "September 30th 2020",
+              "instructions": "",
+              "max": 20,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "a2e5e057-2631-41dc-b7a7-09897ae90f49",
+              "name": "Pacman 3",
+              "due": "October 31st 2020",
+              "instructions": "",
+              "max": 20,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "407287ed-abe6-4a8a-a3c6-f557cd79b5a3",
+              "name": "Pacman 4",
+              "due": "November 12th 2020",
+              "instructions": "",
+              "max": 20,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "054519cf-0261-41ec-9f76-d3257ece3343",
+              "name": "Pacman 5",
+              "due": "November 27th 2020",
+              "instructions": "",
+              "max": 20,
+              "optional": false,
+              "locked": false
+            }
+          ]
+        },
+        {
+          "id": "4602696f-8548-4177-8043-9bb4e77bbc48",
+          "name": "Midterms",
+          "type": "test",
+          "grading": {
+            "weight": 25,
+            "policy": "normal"
+          },
+          "assignments": [
+            {
+              "id": "268ec5f2-3fbb-4bcb-a6ed-b30d437bbc6d",
+              "name": "Midterm 1",
+              "due": "September 13th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "b11ed2be-be56-4add-ac08-98e66aa234e6",
+              "name": "Midterm 2",
+              "due": "September 21st 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            }
+          ]
+        },
+        {
+          "id": "74164225-6e80-43c9-bfb8-49e722cf5836",
+          "name": "Final",
+          "type": "test",
+          "grading": {
+            "weight": 25,
+            "policy": "normal"
+          },
+          "assignments": [
+            {
+              "id": "94e4732f-6270-4eb5-9781-9e7869313f18",
+              "name": "Final Exam",
+              "due": "September 13th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4024",
+      "number": "CS334",
+      "name": "Machine Learning",
+      "professor": "Joyce Ho",
+      "students": ["yohan"],
+      "groups": [
+        {
+          "id": "78c19e88-a42e-437e-9a86-c1f6f2332032",
+          "name": "Tests",
+          "type": "test",
+          "grading": {
+            "weight": 30,
+            "policy": "best3"
+          },
+          "assignments": [
+            {
+              "id": "13d07e53-90b4-43f7-beec-f0ff068de8d0",
+              "name": "Supervised Learning",
+              "due": "September 1st 2020",
+              "instructions": "",
+              "max": 50,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "676321b8-846d-417a-b977-89474c0916e0",
+              "name": "Unsupervised Learning",
+              "due": "September 30th 2020",
+              "instructions": "",
+              "max": 50,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "df782cbb-1686-4911-828b-10171b965fa5",
+              "name": "Reinforcement Learning",
+              "due": "October 31st 2020",
+              "instructions": "",
+              "max": 50,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "edbba620-f713-41aa-b8d1-e0f5cd0983a7",
+              "name": "Deep Learning",
+              "due": "November 18th 2020",
+              "instructions": "",
+              "max": 50,
+              "optional": false,
+              "locked": false
+            }
+          ]
+        },
+        {
+          "id": "e08c7482-1573-46a0-b225-6de5c6478494",
+          "name": "Homeworks",
+          "type": "hw",
+          "grading": {
+            "weight": 70,
+            "policy": "best7"
+          },
+          "assignments": [
+            {
+              "id": "774496ef-37d4-4e5b-8ae8-4def3c2c5ba6",
+              "name": "K Nearest Neighbors",
+              "due": "August 29th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "b35a87a4-5ff3-47d1-89ed-26b395192796",
+              "name": "Decision Tree",
+              "due": "September 2nd 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "6a62d0a7-c868-42bc-bfaa-677d19db0d8f",
+              "name": "Apriori Algorithm",
+              "due": "September 13th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "5359af26-cab4-4bf2-a427-b4a5c72849ed",
+              "name": "Naive Bayes",
+              "due": "September 21st 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "a72563ab-8f23-46d5-b314-916c5c4bcf07",
+              "name": "Perceptron",
+              "due": "September 30th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "29d33f4a-12fc-4c2d-99a6-730e8f274c7e",
+              "name": "Random Forests",
+              "due": "October 3rd 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "47e5935d-a473-41aa-9767-e502709ea9c4",
+              "name": "Neural Networks",
+              "due": "October 15th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            },
+            {
+              "id": "ac021346-9662-4ac0-8f57-d57720f1f3db",
+              "name": "Convolutional Neural Networks",
+              "due": "October 26th 2020",
+              "instructions": "",
+              "max": 100,
+              "optional": false,
+              "locked": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
