@@ -36,14 +36,12 @@ input InstructorInput {
 }
 
 type Course {
-  id: ID!
-  courseCode: String!
   subject: String!
   courseNumber: String!
-  year: Int!
-  semester: String!
-  students: [Student]!
-  instructors: [Instructor!]!
+  year: Int
+  semester: String
+  students: [Student]
+  instructors: [Instructor]
   assignments: [Assignment]
 }
 
@@ -142,6 +140,7 @@ type Query {
   # Retrieve user through a user ID or through the token passed to
   # Query. Leave id empty if you'd like to view the currently logged in
   # user.
+  hello: String!
   student(id: ID): Student
   instructor(id: ID): Instructor
   assignment(id: ID): Assignment
@@ -151,12 +150,14 @@ type Query {
   instructors: [Instructor!]
   assignments: [Assignment!]
   grades: [Grade!]
+  courses: [Course]
+  course(id: ID): Course
 }
 
 type Mutation {
   createStudent(student: StudentInput): Student
   createInstructor(instructor: InstructorInput): Instructor
   createAssignment(assignment: AssignmentInput): Assignment
-  createCourse(course: CourseInput): Course
+  createCourse(courseInput: CourseInput): Course
   createGrade(grade: GradeInput): Grade
 }
