@@ -1,17 +1,17 @@
-import assignment from "../models/Course";
-export default {
+import Course from "../models/Course";
+
+export const resolvers =  {
   Query: {
+    hello: () => "hi",
     course: async (parent, { id }, { models: { Course }, me }, info) => {
       const course = await Course.findbyId({ _id: id }).exec();
       return course;
     },
+    courses: async () => Course.find(),
   },
-  Mutator: {
+  Mutation: {
     createCourse: async (
-      parent,
       courseInput,
-      { models: { Course }, me },
-      info
     ) => {
       const course = new Course(courseInput);
       await course.save();

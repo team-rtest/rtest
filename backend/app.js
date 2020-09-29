@@ -8,6 +8,7 @@ import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
+import graphqlServer from "./routes/graphql";
 
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
@@ -31,6 +32,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+graphqlServer.applyMiddleware({ app });
 
 app.get("/", (req, res) => {
   res.send("API is available");
@@ -87,6 +89,5 @@ if (process.env.GOOGLE_CLIENT_ID) {
   );
 }
 
-app.use("/graphql", graphqlRouter);
 
 export default app;
