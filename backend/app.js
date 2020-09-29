@@ -24,7 +24,7 @@ if (!process.env.JEST_WORKER_ID) {
   );
 }
 
-const csrfProtection = csrf({ cookie: true });
+const csrfProtection = csrf({ cookie: true, secure: true });
 
 const app = express();
 app.use(cors());
