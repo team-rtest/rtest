@@ -9,6 +9,7 @@ import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
 import graphqlServer from "./routes/graphql";
+import csrf from "csurf";
 
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
@@ -24,6 +25,8 @@ if (!process.env.JEST_WORKER_ID) {
   );
 }
 
+const csrfProtection = csrf({ cookie: true, secure: true });
+
 const app = express();
 app.use(cors());
 app.use(passport.initialize());
@@ -34,7 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 graphqlServer.applyMiddleware({ app });
 
-app.get("/", (req, res) => {
+app.get("/", csrfProtection, (req, res) => {
   res.send("API is available");
 });
 
@@ -58,7 +61,11 @@ app.post("/signup", (req, res) => {
           const token = generateToken({ username: req.user.username });
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
-          res.cookie('token', token, { path: "/", secure: true, httpOnly: true});
+          res.cookie("token", token, {
+            path: "/",
+            secure: true,
+            httpOnly: true,
+          });
           res.json({ status: "Successfully Logged In" });
         });
       }
@@ -70,7 +77,11 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
   const token = generateToken({ username: req.user.username });
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.cookie('token', token, { path: "/", secure: true, httpOnly: true});
+  res.cookie("token", token, {
+    path: "/",
+    secure: true,
+    httpOnly: true,
+  });
   res.json({ status: "Successfully Logged In" });
 });
 
