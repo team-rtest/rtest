@@ -31,7 +31,6 @@ const Screen = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 100vw;
   min-height: calc(100vh - 80px);
 `;
 
