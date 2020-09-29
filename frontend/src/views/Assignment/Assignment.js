@@ -5,7 +5,7 @@ import AssignmentList from './AssignmentList';
 import AssignmentPage from './AssignmentPage';
 
 function Assignment({ ...rest }) {
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState({ id: 0, status: 'graded', late: false, name: 'HW0: K Nearest Neighbors', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco' });
 
   const assignments = [
     {
