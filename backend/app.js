@@ -1,7 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import graphqlRouter from "./routes/graphql.js";
 import User from "./models/User.js";
 import { generateToken } from "./auth.js";
 import compression from "compression";
