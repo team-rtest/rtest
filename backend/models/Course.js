@@ -1,22 +1,30 @@
 import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
-  subject: String,
-  courseNumber: String,
-  year: Number,
-  semester: String,
-
+  subject: String,  // Computer Science
+  number: String,   // CS470
+  semester: String, // Fall 2020
+  name: String,     // Data Mining
   files: [  // Syllabus etc
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "file",
     },
   ],
-  
   sections: [
     {
-      section: Number,
-      members: [
+      number: Number,
+      professor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+      assistants: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "user",
+        },
+      ],
+      students: [
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: "user",
@@ -24,11 +32,10 @@ const courseSchema = new mongoose.Schema({
       ],
     },
   ],
-
-  assignments: [
+  assignmentGroups: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "assignment",
+      ref: "assignmentGroup",
     },
   ],
 });

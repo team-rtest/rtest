@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema({
   lastName: {
     type: String,
   },
-  createdAt: { type: Date, default: Date.now },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
 });
 
 userSchema.plugin(passportLocalMongoose);
