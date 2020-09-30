@@ -1,6 +1,6 @@
 import { buildSchema, graphql } from "graphql";
 import { readFileSync } from "fs";
-import { resolvers } from "../resolvers/CourseResolvers";
+import { resolvers } from "../resolvers/resolvers";
 import { ApolloServer } from "apollo-server-express";
 
 // Construct a schema, using GraphQL schema language
