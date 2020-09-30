@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Decision Tree",
+    "tags": "CODING",
+    "body": "For this problem, you will implement the decision tree algorithm. The algorithm should work on both of the datasets from the homework 1 (q3 and q4). The template code is found in dt.py. You are not allowed to use any scikit-learn modules in this problem. You can either execute the file from the command line by running the following command python dt.py <max depth> <min leaf    samples> or use another python file to call the DecisionTree class methods",
+    "pointsPossible": "100",
+    "submissions": [
+      {
+        "student": {
+            "firstName": "Jack",
+            "lastName": "Frumkes"
+        },
+        "files": [],
+        "submittedAt": 1601484990,
+        "grade": 87,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Luis",
+            "lastName": "Flores"
+        },
+        "files": [],
+        "submittedAt": 1601484981,
+        "grade": 91,
+        "peerGrades": []
+      }
+    ],
+    "dateCreated": 1601484701,
+    "datePosted": 1601484800,
+    "dateDue": 1601485000
+  },
+  {
+    "name": "Apriori Algorithm",
+    "tags": "CODING",
+    "body": "Implement the Apriori algorithm for frequent itemsets mining, either in Java or Python. The algorithm’s pseudocode and related procedures are in the textbook. You are encouraged to use existing or your own optimization techniques to speed up the algorithm. Explain and discuss the techniques you used, and provide the appropriate references. Your program should be executable with 3 parameters: the name of the input dataset file, the threshold of minimum support count, and the name of the output file (in that order). The minimum support count is an integer. An itemset is frequent if its support count is greater than or equal to this threshold. You can assume all items are represented by integers. Your program should output a file that contains all the frequent itemsets together with their support counts. The output file should have the following format: each line contains a single frequent itemset as a list of items separated by a single space. Its support count is included between a pair of parentheses",
+    "pointsPossible" : "100",
+    "submissions":[
+        
+    ],
+    "dateCreated": 1598943600,
+    "datePosted": 1599123600,
+    "dateDue":1600369200
+  }
+]
