@@ -36,6 +36,7 @@ input InstructorInput {
 }
 
 type Course {
+  _id: ID!
   subject: String!
   courseNumber: String!
   year: Int
@@ -145,6 +146,7 @@ type Query {
   instructor(id: ID): Instructor
   assignment(id: ID): Assignment
   grade(id: ID): Grade
+  submission(id: ID): Submission
 
   students: [Student!]
   instructors: [Instructor!]
@@ -158,6 +160,6 @@ type Mutation {
   createStudent(student: StudentInput): Student
   createInstructor(instructor: InstructorInput): Instructor
   createAssignment(assignment: AssignmentInput): Assignment
-  createCourse(courseInput: CourseInput): Course
+  createCourse(course: CourseInput): Course
   createGrade(grade: GradeInput): Grade
 }
