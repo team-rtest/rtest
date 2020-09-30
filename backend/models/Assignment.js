@@ -21,7 +21,7 @@ const assignmentSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  instructions: {
+  files: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "file",
   },
