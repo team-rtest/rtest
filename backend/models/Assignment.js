@@ -5,16 +5,25 @@ const assignmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tags: {
-    type: String,
-    enum: ["PEERGRADED", "CODING"],
-  },
-  body: {
-    type: String,
-  },
-  pointsPossible: {
+  maxGrade: {
     type: Number,
     required: true,
+  },
+  dueDate: {
+    type: Date,
+    required: true,
+  },
+  optional: {
+    type: Boolean,
+    default: false,
+  },
+  locked: {
+    type: Boolean,
+    default: true,
+  },
+  instructions: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "file",
   },
   submissions: [
     {
@@ -22,14 +31,9 @@ const assignmentSchema = new mongoose.Schema({
       ref: "submission",
     },
   ],
-  dateCreated: {
+  createdAt: {
     type: Date,
     default: Date.now,
-  },
-  datePosted: Date,
-  dateDue: {
-    type: Date,
-    required: true,
   },
 });
 
