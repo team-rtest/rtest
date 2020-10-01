@@ -1,4 +1,5 @@
 import Course from "../models/Course";
+import "regenerator-runtime/runtime";
 // import Assignment from "../models/Assignment";
 // import Submission from "../models/Submission";
 
