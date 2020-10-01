@@ -2,13 +2,14 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import User from "./models/User.js";
-import { generateToken } from "./auth.js";
+import { generateToken, verifyGoogleToken } from "./auth.js";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
 import graphqlServer from "./routes/graphql";
 import csrf from "csurf";
+import bearerToken from "express-bearer-token";
 
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
@@ -84,20 +85,12 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
   res.json({ status: "Successfully Logged In" });
 });
 
-if (process.env.GOOGLE_CLIENT_ID) {
-  app.get(
-    "/auth/google",
-    passport.authenticate("google", { scope: ["profile"] })
-  );
-
-  app.get(
-    "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login" }),
-    function (req, res) {
-      res.redirect("/");
-    }
-  );
-}
-
+app.get("/auth/google", csrfProtection, bearerToken(), (req, res) => {
+  verifyGoogleToken(req.token)
+    .then((payload) => res.send(payload)) // TODO do some other stuff here, create a user etc
+    .catch(() =>
+      res.json({ status: "Could not verify your OAuth ID with Google" })
+    );
+});
 
 export default app;
