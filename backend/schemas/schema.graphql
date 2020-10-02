@@ -3,32 +3,15 @@ schema {
   mutation: Mutation
 }
 
-type Student {
+type User {
   username: String!
   firstName: String!
   email: String!
   lastName: String!
-  Courses: [Course]!
   createdAt: Timestamp!
 }
 
-input StudentInput {
-  username: String!
-  firstName: String!
-  lastName: String!
-  email: String!
-}
-
-type Instructor {
-  username: String!
-  firstName: String!
-  lastName: String!
-  email: String!
-  Courses: [Course]!
-  createdAt: Timestamp!
-}
-
-input InstructorInput {
+input UserInput {
   username: String!
   firstName: String!
   lastName: String!
@@ -41,8 +24,8 @@ type Course {
   courseNumber: String!
   year: Int
   semester: String
-  students: [Student]
-  instructors: [Instructor]
+  students: [User]
+  instructors: [User]
   assignments: [Assignment]
 }
 
@@ -82,7 +65,7 @@ enum AssignmentTag {
 
 type Submission {
   id: ID!
-  student: String!
+  student: User!
   assignment: ID!
   files: [File!]!
   dateSubmitted: Timestamp!
@@ -142,24 +125,20 @@ type Query {
   # Query. Leave id empty if you'd like to view the currently logged in
   # user.
   hello: String!
-  student(id: ID): Student
-  instructor(id: ID): Instructor
+  user(id: ID): User
   assignment(id: ID): Assignment
-  grade(id: ID): Grade
   submission(id: ID): Submission
-
-  students: [Student!]
-  instructors: [Instructor!]
-  assignments: [Assignment!]
-  grades: [Grade!]
-  courses: [Course]
   course(id: ID): Course
+
+  users: [User]
+  assignments: [Assignment]
+  submissions: [Submission]
+  courses: [Course]
 }
 
 type Mutation {
-  createStudent(student: StudentInput): Student
-  createInstructor(instructor: InstructorInput): Instructor
+  createUser(user: UserInput): User
   createAssignment(assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
-  createGrade(grade: GradeInput): Grade
+  createSubmission(submission: SubmissionInput): Submission
 }
