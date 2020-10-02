@@ -37,15 +37,13 @@ input CourseInput {
 }
 
 type Assignment {
-  id: ID!
   tags: [AssignmentTag]
   name: String!
   body: String
-  course: Course!
-  pointsPossible: Int!
+  pointsPossible: Int
   dateCreated: Timestamp!
-  datePosted: Timestamp!
-  dateDue: Timestamp!
+  datePosted: Timestamp
+  dateDue: Timestamp
 }
 
 input AssignmentInput {
@@ -53,8 +51,7 @@ input AssignmentInput {
   body: String
   courseId: ID!
   pointsPossible: Int
-  datePosted: Timestamp!
-  dateDue: Timestamp!
+  dateDue: Timestamp
   tags: [AssignmentTag]
 }
 
