@@ -6,6 +6,8 @@ import Courses from 'views/Courses/Courses';
 import CourseCreate from 'views/Create-Course/CourseCreate';
 import CourseCreateForm from 'views/Create-Course/CourseCreateForm';
 
+import AssignmentReview from 'views/Review/AssignmentReview';
+
 import Login from 'views/Auth/Login';
 import Signup from 'views/Auth/Signup';
 import ResetPassword from 'views/Auth/ResetPassword';
@@ -15,6 +17,10 @@ const routes = [
   {
     path: '/',
     page: <Courses />
+  },
+  {
+    path: '/assignment-review',
+    page: <AssignmentReview />
   },
   {
     path: '/course-create',
