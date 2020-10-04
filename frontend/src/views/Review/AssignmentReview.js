@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import assignment from "data/assignment.json";
-import { getGradeList, getMedian } from "./AssignmentReviewHelper";
+import { getGradeList, getMedian, getMax, getMin } from "./AssignmentReviewHelper";
 
 function AssignmentReview() {
   return (
@@ -19,7 +19,9 @@ function AssignmentReview() {
           return (
             <tr>
               <td data-label="Name">{d.name}</td>
-              <td data-label="Median Grade">{d.submissions}</td>
+              <td data-label="Median Grade">{getMedian(getGradeList(d.submissions))}</td>
+              <td data-label="Max Grade">{getMax(getGradeList(d.submissions))}</td>
+              <td data-label="Min Grade">{getMin(getGradeList(d.submissions))}</td>
             </tr>
           );
         })}
