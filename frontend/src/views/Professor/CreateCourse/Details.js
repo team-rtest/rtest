@@ -7,35 +7,35 @@ function Details({ inputs, errors, handleChange }) {
   return (
     <Inputs>
       <Input
-        name = "subject"
+        name="subject"
         placeholder="Computer Science"
         value={inputs.subject}
         error={errors.subject}
         onChange={handleChange}
       />
       <Input
-        name = "number"
+        name="number"
         placeholder="CS470"
         value={inputs.number}
         error={errors.number}
         onChange={handleChange}
       />
       <Input
-        name = "name"
+        name="name"
         placeholder="Data Mining"
         value={inputs.name}
         error={errors.name}
         onChange={handleChange}
       />
       <Input
-        name = "semester"
+        name="semester"
         placeholder="Fall 2020"
         value={inputs.semester}
         error={errors.semester}
         onChange={handleChange}
       />
     <FileInput
-        name = "syllabus"
+        name="syllabus"
         placeholder="Fall 2020"
         value={inputs.syllabus}
         error={errors.syllabus}

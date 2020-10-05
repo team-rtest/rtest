@@ -6,23 +6,28 @@ import { Link } from "react-router-dom";
 function Error404({ ...rest }) {
   return (
     <ErrorPage>
-      <Heading> Page not found <br /> <Indigo> 404 Error </Indigo> </Heading>
+      <Indigo> 404 ERROR </Indigo>
+      <Heading> Page not found </Heading>
       <NavLink> Return Home </NavLink>
     </ErrorPage>
   );
 }
 
 const ErrorPage = styled.div`
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 `;
 
 const Heading = styled.h1`
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
-const Indigo = styled.span`
+const Indigo = styled.h4`
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #6173db;
 `;
 

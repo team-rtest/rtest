@@ -23,7 +23,7 @@ function External() {
 
 
 const Screen = styled.div`
-  min-height: calc(100vh - 80px);
+  
 `;
 
 export default External;

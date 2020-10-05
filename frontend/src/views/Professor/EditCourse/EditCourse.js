@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Card } from 'components';
 
+import CreateAssignmentModal from './../CreateAssignment/CreateAssignment'
+import CreateAssignmentGroupModal from './../CreateAssignmentGroup/CreateAssignmentGroup'
+
 function EditCourse() {
+  const [createAssignmentModal, setCreateAssignmentModal] = useState(false);
+  const [createAssignmentGroupModal, setCreateAssignmentGroupModal] = useState(false);
+
+  const openCreateAssignmentModal = () => {
+    setCreateAssignmentModal(true);
+  }
+
+  const openCreateAssignmentGroupModal = () => {
+    setCreateAssignmentGroupModal(true);
+  }
+
   return (
     <Box>
+      { createAssignmentModal && <CreateAssignmentModal closeModal={() => setCreateAssignmentModal(false)} /> }
+      { createAssignmentGroupModal && <CreateAssignmentGroupModal closeModal={() => setCreateAssignmentGroupModal(false)} /> }
       <Scroll>
         <Group>
           <GroupHeading> Labs <Edit><i className="fa fa-edit"></i></Edit> </GroupHeading>
@@ -16,22 +32,11 @@ function EditCourse() {
             <Assignment><i className="fa fa-file-alt"></i> Apriori Algorithm </Assignment>
             <Assignment><i className="fa fa-file-alt"></i> Naive Bayes </Assignment>
             <Assignment><i className="fa fa-file-alt"></i> Random Forests </Assignment>
-            <CreateAssignment><i className="fa fa-plus-circle"></i> Create Assignment </CreateAssignment>
+            <CreateAssignment onClick={openCreateAssignmentModal}><i className="fa fa-plus-circle"></i> Create Assignment </CreateAssignment>
           </Assignments>
         </Group>
         <Group>
-          <GroupHeading> Quizzes <Edit><i className="fa fa-edit"></i></Edit> </GroupHeading>
-          <hr />
-          <Assignments>
-            <Assignment> <i className="fa fa-file-alt"></i> Supervised Learning </Assignment>
-            <Assignment> <i className="fa fa-file-alt"></i> Unsupervised Learning </Assignment>
-            <Assignment> <i className="fa fa-file-alt"></i> Reinforcement Learning </Assignment>
-            <Assignment> <i className="fa fa-file-alt"></i> Deep Learning </Assignment>
-            <CreateAssignment><i className="fa fa-plus-circle"></i> Create Assignment </CreateAssignment>
-          </Assignments>
-        </Group>
-        <Group>
-          <GroupHeading> Tests <Edit><i className="fa fa-edit"></i></Edit> </GroupHeading>
+          <GroupHeading> Exams <Edit><i className="fa fa-edit"></i></Edit> </GroupHeading>
           <hr />
           <Assignments>
             <Assignment> <i className="fa fa-file-alt"></i> Exam 1 </Assignment>
@@ -40,10 +45,12 @@ function EditCourse() {
             <CreateAssignment><i className="fa fa-plus-circle"></i> Create Assignment </CreateAssignment>
           </Assignments>
         </Group>
-        <CreateGroup>
-          <CreateCourseGroupGroupHeading>
-            <i className="fa fa-plus-circle"></i> Assignment Group
-          </CreateCourseGroupGroupHeading>
+        <CreateGroup onClick={openCreateAssignmentGroupModal}>
+          <Group>
+            <CreateCourseGroupGroupHeading>
+              <i className="fa fa-plus-circle"></i> Assignment Group
+            </CreateCourseGroupGroupHeading>
+          </Group>
         </CreateGroup>
       </Scroll>
     </Box>
@@ -51,7 +58,7 @@ function EditCourse() {
 }
 
 const Box = styled.div`
-  width: 100vw;
+  width: calc(100vw - 250px);
 `;
 
 const Scroll = styled.div`
@@ -59,7 +66,7 @@ const Scroll = styled.div`
   display: flex;
   grid-gap: 20px;
   align-items: flex-start;
-  overflow-y: scroll;
+  overflow-x: scroll;
 `;
 
 const Group = styled(Card)`
@@ -159,23 +166,23 @@ const CreateAssignment = styled.button`
 `;
 
 const CreateGroup = styled.button`
-  min-width: 280px;
-  width: 280px;
-  color: rgb(0, 0, 0, 0.5);
-  background: rgb(0, 0, 0, 0.05);
-  // border: 1px solid rgb(0, 0, 0, 0.1);
-  border: none;
-  border-radius: 0.25rem;
-  padding: 20px;
+  all: unset;
+  // min-width: 280px;
+  // width: 280px;
+  // background: rgb(0, 0, 0, 0.05);
+  // border: none;
+  // border-radius: 0.25rem;
+  // padding: 20px;
 `;
 
 const CreateCourseGroupGroupHeading = styled.h5`
-  margin-bottom: 0;
+  margin: 10px;
   font-weight: 600;
   display: flex;
   grid-gap: 10px;
   justify-content: center;
   align-items: center;
+  color: rgb(0, 0, 0, 0.5);
 `;
 
 export default EditCourse;

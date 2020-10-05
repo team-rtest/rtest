@@ -18,9 +18,8 @@ function Header({ ...rest }) {
 }
 
 const Navigation = styled.nav`
-  position: fixed;
   height: 100vh;
-  width: 250px;
+  min-width: 250px;
   background: #6173db;
 `;
 
@@ -59,7 +58,6 @@ const NavLink = styled(Link)`
   color: ${props => props.selected && 'white'};
   background: ${props => props.selected && '#5163cb'};
   font-weight: ${props => props.selected && '500'};
-  border-radius: 0.25rem;
   cursor: pointer;
 
   &:hover {

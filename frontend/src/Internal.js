@@ -10,23 +10,33 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function Internal() {
   return (
-    <>
+    <Box>
       <Sidebar />
-      <Screen>
+      <Right>
         <Topbar />
-        <Switch>
-          { routes.map(route => <Route exact path={route.path}>{ route.page }</Route>) }
-          <Route path="*" component={Error404} />
-        </Switch>
-      </Screen>
-    </>
+        <Content>
+          <Switch>
+            { routes.map(route => <Route exact path={route.path}>{ route.page }</Route>) }
+            <Route path="*" component={Error404} />
+          </Switch>
+        </Content>
+      </Right>
+    </Box>
   );
 }
 
 
-const Screen = styled.div`
-  min-width: calc(100vw - 250px);
-  margin-left: 250px;
+const Box = styled.div`
+  display: flex;
+`;
+
+const Right = styled.div`
+  height: 100vh;
+  width: 100%;
+`;
+
+const Content = styled.div`
+  height: calc(100vh - 69px);
 `;
 
 export default Internal;

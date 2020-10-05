@@ -18,6 +18,7 @@ const Box = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
 const Breadcrumb = styled.div`

@@ -18,13 +18,20 @@ function App() {
 
   return (
     <Router>
-      {
-        isLoggedIn
-        ? <Internal />
-        : <External />
-      }
+      <Screen>
+        {
+          isLoggedIn
+          ? <Internal />
+          : <External />
+        }
+      </Screen>
     </Router>
   );
 }
+
+const Screen = styled.div`
+  height: 100vh;
+  width: 100vw;
+`;
 
 export default App;

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { useHistory } from 'react-router-dom';
+
 import { Card } from 'components';
 
 import Details from './Details';
 import Members from './Members';
 
 function CreateCourse() {
+  const history = useHistory();
   const [index, setIndex] = useState(0);
-  const [inputs, setInputs] = useState({ subject: '', name: '', number: '', semester: '', syllabus: '' });
-  const [errors, setErrors] = useState({ subject: null, name: null, number: null, semester: null, syllabus: null });
+  const [inputs, setInputs] = useState({ subject: '', name: '', number: '', semester: '', syllabus: '', professor: 'Davide Fossati', assistants: '', students: '' });
+  const [errors, setErrors] = useState({ subject: null, name: null, number: null, semester: null, syllabus: null, professor: null, assistants: null, students: null });
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
@@ -31,6 +34,10 @@ function CreateCourse() {
     }
   }
 
+  const handleSubmit = () => {
+    history.push('/professor/edit-course');
+  }
+
   return(
     <Box>
       <CourseCard>
@@ -40,7 +47,7 @@ function CreateCourse() {
             <Buttons>
               {index !== 0 && <Button onClick={handleBack} className="btn btn-secondary">Back</Button>}
               {index !== n && <Button onClick={handleNext} className="btn btn-upload text-white">Next</Button>}
-              {index === n && <Button onClick={handleNext} className="btn btn-upload text-white">Submit</Button>}
+              {index === n && <Button onClick={handleSubmit} className="btn btn-upload text-white">Submit</Button>}
             </Buttons>
           </Header>
           { current[index] === 'Details'   && <Details  inputs={inputs} errors={errors} handleChange={handleChange} /> }

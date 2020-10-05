@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Card, Input, FileInput } from 'components';
 import Upload from 'views/Upload'
 
-function CreateAssignment() {
+function CreateAssignment({ closeModal }) {
   const [inputs, setInputs] = useState({ assignment_name: '', assignment_group: '', max_grade: '', due_date: '', assignment_instructions: '' });
   const [errors, setErrors] = useState({ assignment_name: null, assignment_group: null, max_grade: null, due_date: null, assignment_instructions: null });
 
@@ -57,8 +57,8 @@ function CreateAssignment() {
           </Inputs>
         </Body>
         <Foot>
-          <Button className="btn text-white btn-secondary">Close</Button>
-          <Button className="btn text-white btn-upload">Create</Button>
+          <Button className="btn text-white btn-secondary" onClick={closeModal}>Close</Button>
+          <Button className="btn text-white btn-upload" onClick={closeModal}>Create</Button>
         </Foot>
       </CreateAssignmentCard>
     </Overlay>
