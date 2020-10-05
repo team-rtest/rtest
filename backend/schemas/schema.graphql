@@ -48,7 +48,7 @@ type Assignment {
 
 type AssignmentGroup{
   name: String!
-  type: String!
+  Tag: String!
   grading: Int!
   policy: String!
   assignments: [Assignment]
@@ -123,7 +123,7 @@ input FileInput {
 }
 input AssignmentGroupInput{
   name: String!
-  type: String!
+  Tag: String!
   policy: String!
 
 }
