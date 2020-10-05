@@ -5,11 +5,11 @@ import StudentCourses from "views/Student/Courses/Courses";
 
 import ProfessorCourses from "views/Professor/Courses/Courses";
 
+import AssignmentReview from 'views/Review/AssignmentReview';
 import CreateCourse from "views/Professor/CreateCourse/CreateCourse";
 import EditCourse from "views/Professor/EditCourse/EditCourse";
 import CreateAssignment from "views/Professor/CreateAssignment/CreateAssignment";
 import CreateAssignmentGroup from "views/Professor/CreateAssignmentGroup/CreateAssignmentGroup";
-
 import Login from "views/Auth/Login";
 import Signup from "views/Auth/Signup";
 import ResetPassword from "views/Auth/ResetPassword";
@@ -31,6 +31,10 @@ const routes = [
   {
     path: "/professor/courses",
     page: <ProfessorCourses />,
+  },
+  {
+    path: '/assignment-review',
+    page: <AssignmentReview />
   },
   {
     path: "/professor/create-course",
