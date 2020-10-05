@@ -22,6 +22,10 @@ export const resolvers = {
       const a = await Assignment.findbyId({ _id: id }).exec();
       return a;
     },
+    assignmentGroup: async (_, { id }) => {
+      const a = await AssignmentGroup.findbyId({ _id: id }).exec();
+      return a;
+    },
     submission: async (_, { id }) => {
       const su = await Submission.findbyId({ _id: id }).exec();
       return su;
@@ -30,6 +34,7 @@ export const resolvers = {
     courses: async () => Course.find().exec(),
     users: async () => User.find().exec(),
     assignments: async () => Assignment.find().exec(),
+    assignments: async () => AssignmentGroup.find().exec(),
     submissions: async () => Submission.find().exec(),
   },
   Mutation: {
