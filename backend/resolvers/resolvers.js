@@ -6,6 +6,7 @@ import Assignment from "../models/Assignment";
 import Submission from "../models/Submission";
 import User from "../models/User";
 import AssignmentGroup from "../models/AssignmentGroup";
+import fileHandler from "../routes/fileHandler";
 
 export const resolvers = {
   Query: {
@@ -36,6 +37,10 @@ export const resolvers = {
     assignments: async () => Assignment.find().exec(),
     assignmentGroups: async () => AssignmentGroup.find().exec(),
     submissions: async () => Submission.find().exec(),
+
+    getPresignedUpload: async (_, { bucket, key }) => {
+      return fileHandler.getPresignedUpload(bucket, key);
+    },
   },
   Mutation: {
     createCourse: async (_, { course }) => {
@@ -87,9 +92,9 @@ export const resolvers = {
 
     updateGrade: async (_, { gradeInput }) => {
       Submission.updateOne(
-        {_id: gradeInput.assignmentId},
-        {$set: {grade: gradeInput.grade}}
-      )
+        { _id: gradeInput.assignmentId },
+        { $set: { grade: gradeInput.grade } }
+      );
       return gradeInput.grade;
     },
 
@@ -100,4 +105,3 @@ export const resolvers = {
     //}
   },
 };
-
