@@ -14,8 +14,11 @@ function Upload({ label, ...rest }) {
 
   const handleClick = () => {
     const data = new FormData();
+    var url = ""
     data.append('file', state.file); //our selected file data
-    axios.post("http://localhost:3000/upload", data,{}) //Send Post with endpoint URL and our form data with our file in it
+    // url = getPresignedUpload() //change to make api call from backend to getPresigned URL
+    console.log(url)
+    axios.post(url, data,{}) //Send Post with endpoint URL and our form data with our file in it
       .then(res => console.log(res.statusText));//then we print the response status
   }
 
