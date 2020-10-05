@@ -123,6 +123,7 @@ input FileInput {
 }
 input AssignmentGroupInput{
   name: String!
+  courseId: ID!
   tag: String!
   policy: String!
 
