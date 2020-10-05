@@ -155,6 +155,8 @@ type Query {
   instructors: [Instructor!]
   assignments: [Assignment!]
   grades: [Grade!]
+
+  getPresignedUpload(bucket: String, key: String): String
 }
 
 type Mutation {
