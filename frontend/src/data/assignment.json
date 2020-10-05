@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Decision Tree",
+    "maxGrade": 100,
+    "dueDate": 1601485000,
+    "optional": false,
+    "locked": false,
+    "files": {
+      "originalName":"decisionTree.pdf",
+      "encoding": "utf8",
+      "mimetype": "application/pdf",
+      "path": "#",
+      "size": 245000,
+      "sizeFormatted": "245KB"
+    },
+    "submissions": [
+      {
+        "student": {
+            "firstName": "Jack",
+            "lastName": "Frumkes"
+        },
+        "files": [],
+        "submittedAt": 1601484990,
+        "grade": 87,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Simon",
+            "lastName": "Marty"
+        },
+        "files": [],
+        "submittedAt": 1601484990,
+        "grade": 100,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Luis",
+            "lastName": "Flores"
+        },
+        "files": [],
+        "submittedAt": 1601484981,
+        "grade": 91,
+        "peerGrades": []
+      }
+    ],
+    "dateCreated": 1601484701
+  },
+  {
+    "name": "Apriori Algorithm",
+    "maxGrade": 100,
+    "dueDate": 1602324000,
+    "optional": false,
+    "locked": false,
+    "files": {
+      "originalName":"aprioriAlg.pdf",
+      "encoding": "utf8",
+      "mimetype": "application/pdf",
+      "path": "#",
+      "size": 240000,
+      "sizeFormatted": "240KB"
+    },
+    "submissions": [
+      {
+        "student": {
+            "firstName": "Jack",
+            "lastName": "Frumkes"
+        },
+        "files": [],
+        "submittedAt": 1602262800,
+        "grade": 53,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Simon",
+            "lastName": "Marty"
+        },
+        "files": [],
+        "submittedAt": 1602183600,
+        "grade": 100,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Luis",
+            "lastName": "Flores"
+        },
+        "files": [],
+        "submittedAt": 1602262891,
+        "grade": 82,
+        "peerGrades": []
+      }
+    ],
+    "dateCreated": 1601543045
+  },
+  {
+    "name": "Linear Regression",
+    "maxGrade": 100,
+    "dueDate": 1600182000,
+    "optional": false,
+    "locked": false,
+    "files": {
+      "originalName":"linearReg.pdf",
+      "encoding": "utf8",
+      "mimetype": "application/pdf",
+      "path": "#",
+      "size": 150000,
+      "sizeFormatted": "150KB"
+    },
+    "submissions": [
+      {
+        "student": {
+            "firstName": "Jack",
+            "lastName": "Frumkes"
+        },
+        "files": [],
+        "submittedAt": 1600077600,
+        "grade": 90,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Simon",
+            "lastName": "Marty"
+        },
+        "files": [],
+        "submittedAt": 1599695940,
+        "grade": 79,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Luis",
+            "lastName": "Flores"
+        },
+        "files": [],
+        "submittedAt": 1599523200,
+        "grade": 98,
+        "peerGrades": []
+      }
+    ],
+    "dateCreated": 1601543045
+  }
+]
