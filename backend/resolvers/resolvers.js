@@ -34,7 +34,7 @@ export const resolvers = {
     courses: async () => Course.find().exec(),
     users: async () => User.find().exec(),
     assignments: async () => Assignment.find().exec(),
-    assignments: async () => AssignmentGroup.find().exec(),
+    assignmentGroups: async () => AssignmentGroup.find().exec(),
     submissions: async () => Submission.find().exec(),
   },
   Mutation: {
