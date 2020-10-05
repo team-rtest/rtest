@@ -15,6 +15,7 @@
     ]
   },
   "dependencies": {
+    "aws-sdk": "^2.767.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.6.5",
