@@ -3,32 +3,15 @@ schema {
   mutation: Mutation
 }
 
-type Student {
+type User {
   username: String!
   firstName: String!
   email: String!
   lastName: String!
-  Courses: [Course]!
   createdAt: Timestamp!
 }
 
-input StudentInput {
-  username: String!
-  firstName: String!
-  lastName: String!
-  email: String!
-}
-
-type Instructor {
-  username: String!
-  firstName: String!
-  lastName: String!
-  email: String!
-  Courses: [Course]!
-  createdAt: Timestamp!
-}
-
-input InstructorInput {
+input UserInput {
   username: String!
   firstName: String!
   lastName: String!
@@ -36,38 +19,39 @@ input InstructorInput {
 }
 
 type Course {
-  id: ID!
-  courseCode: String!
+  _id: ID!
   subject: String!
   courseNumber: String!
-  year: Int!
-  semester: String!
-  students: [Student]!
-  instructors: [Instructor!]!
+  year: Int
+  semester: String
+  students: [User]
+  instructors: [User]
   assignments: [Assignment]
 }
 
 input CourseInput {
-  # Coursecode can be subject+CourseNumber by default
-  courseCode: String
   subject: String!
   courseNumber: String!
-  year: Int!
-  semester: String!
-  instructorIds: [ID!]!
-  studentIds: [ID!]
+  year: Int
+  semester: String
 }
 
 type Assignment {
-  id: ID!
   tags: [AssignmentTag]
   name: String!
   body: String
-  course: Course!
-  pointsPossible: Int!
+  pointsPossible: Int
   dateCreated: Timestamp!
-  datePosted: Timestamp!
-  dateDue: Timestamp!
+  datePosted: Timestamp
+  dateDue: Timestamp
+}
+
+type AssignmentGroup{
+  name: String!
+  type: String!
+  grading: Int!
+  policy: String!
+  assignments: [Assignment]
 }
 
 input AssignmentInput {
@@ -75,8 +59,7 @@ input AssignmentInput {
   body: String
   courseId: ID!
   pointsPossible: Int
-  datePosted: Timestamp!
-  dateDue: Timestamp!
+  dateDue: Timestamp
   tags: [AssignmentTag]
 }
 
@@ -87,7 +70,7 @@ enum AssignmentTag {
 
 type Submission {
   id: ID!
-  student: String!
+  student: User!
   assignment: ID!
   files: [File!]!
   dateSubmitted: Timestamp!
@@ -111,6 +94,7 @@ input GradeInput {
   assignmentId: ID!
   grade: Float!
 }
+
 
 # Uploaded file
 type File {
@@ -137,6 +121,12 @@ input FileInput {
   # The path to the file in S3
   path: String!
 }
+input AssignmentGroupInput{
+  name: String!
+  type: String!
+  policy: String!
+
+}
 
 scalar Timestamp
 
@@ -146,21 +136,24 @@ type Query {
   # Retrieve user through a user ID or through the token passed to
   # Query. Leave id empty if you'd like to view the currently logged in
   # user.
-  student(id: ID): Student
-  instructor(id: ID): Instructor
+  hello: String!
+  user(id: ID): User
   assignment(id: ID): Assignment
-  grade(id: ID): Grade
+  submission(id: ID): Submission
+  course(id: ID): Course
 
-  students: [Student!]
-  instructors: [Instructor!]
-  assignments: [Assignment!]
-  grades: [Grade!]
+  users: [User]
+  assignments: [Assignment]
+  submissions: [Submission]
+  courses: [Course]
 }
 
 type Mutation {
-  createStudent(student: StudentInput): Student
-  createInstructor(instructor: InstructorInput): Instructor
+  createUser(user: UserInput): User
   createAssignment(assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
-  createGrade(grade: GradeInput): Grade
+  createSubmission(submission: SubmissionInput): Submission
+  createAssignmentGroup(assimentGroup: AssignmentGroupInput): AssignmentGroup
+  updateGrade(grade: GradeInput): Float
+
 }

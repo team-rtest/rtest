@@ -2,7 +2,6 @@ version: "3.7"
 
 services:
   mongo:
-    container_name: db
     networks:
       - backend
     ports:
@@ -10,7 +9,6 @@ services:
     image: mongo:4.4.1
 
   object_storage:
-    container_name: minio
     ports:
       - "9000:9000"
     image: minio/minio
@@ -25,7 +23,6 @@ services:
       retries: 3
 
   server:
-    container_name: server
     depends_on:
       - mongo
       - object_storage
@@ -43,7 +40,6 @@ services:
       dockerfile: Dockerfile
 
   client:
-    container_name: client
     networks:
       - frontend
     build:
