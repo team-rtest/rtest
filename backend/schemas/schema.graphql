@@ -57,7 +57,7 @@ type AssignmentGroup{
 input AssignmentInput {
   name: String!
   body: String
-  courseId: ID!
+  assignmentGroupId: ID!
   pointsPossible: Int
   dateDue: Timestamp
   tags: [AssignmentTag]
