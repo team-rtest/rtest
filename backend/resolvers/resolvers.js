@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Course from "../models/Course";
 import "regenerator-runtime/runtime";
 import { UserExistsError } from "passport-local-mongoose/lib/errors";
@@ -11,23 +12,23 @@ export const resolvers = {
   Query: {
     hello: () => "hi",
     course: async (_, { id }) => {
-      const course = await Course.findbyId({ _id: id }).exec();
+      const course = await (Course.findOne({ _id: id })).populate("assignmentGroups");
       return course;
     },
     user: async (_, { id }) => {
-      const s = await User.findbyId({ _id: id }).exec();
+      const s = await User.findOne({ _id: id }).exec();
       return s;
     },
     assignment: async (_, { id }) => {
-      const a = await Assignment.findbyId({ _id: id }).exec();
+      const a = await Assignment.findOne({ _id: id }).exec();
       return a;
     },
     assignmentGroup: async (_, { id }) => {
-      const a = await AssignmentGroup.findbyId({ _id: id }).exec();
+      const a = await AssignmentGroup.findOne({ _id: id }).exec();
       return a;
     },
     submission: async (_, { id }) => {
-      const su = await Submission.findbyId({ _id: id }).exec();
+      const su = await Submission.findOne({ _id: id }).exec();
       return su;
     },
 
@@ -59,9 +60,16 @@ export const resolvers = {
       await ag.save();
       // TODO I'm not sure this is correct, read up on how updateOne works and if it needs
       // to be waited on with async, or if it needs exec()
-      await Course.updateOne(
-        { id: assignmentGroup.courseId },
-        { $push: { assignmentGroups: ag._id } }
+      Course.updateOne(
+        { _id: mongoose.Types.ObjectId(assignmentGroup.courseId) },
+        { $push: { assignmentGroups: ag._id } }, (err, docs) => {
+          if(err) {
+            console.log(err);
+          }
+          else {
+            console.log("Triggered updating course subroutine");
+          }
+        }
       );
       return ag;
     },
@@ -69,8 +77,8 @@ export const resolvers = {
     createAssignment: async (_, { assignment }) => {
       const a = new Assignment(assignment);
       await a.save();
-      await AssignmentGroup.updateOne(
-        { _id: assignment.assignmentGroupId },
+      AssignmentGroup.updateOne(
+        { _id: mongoose.Types.ObjectId(assignment.assignmentGroupId) },
         { $push: { assignments: a._id } }
       );
       return a;
@@ -79,15 +87,15 @@ export const resolvers = {
     createSubmission: async (_, { submission }) => {
       const s = new Submission(submission);
       await s.save();
-      await Assignment.updateOne(
-        { _id: submission.assignmentId },
+      Assignment.updateOne(
+        { _id: mongoose.Types.ObjectId(submission.assignmentId) },
         { $push: { submissions: s._id } }
       );
     },
 
     updateGrade: async (_, { gradeInput }) => {
       Submission.updateOne(
-        {_id: gradeInput.assignmentId},
+        {_id: mongoose.Types.ObjectId(gradeInput.submission) },
         {$set: {grade: gradeInput.grade}}
       )
       return gradeInput.grade;
