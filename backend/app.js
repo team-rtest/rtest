@@ -1,13 +1,13 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import graphqlRouter from "./routes/graphql.js";
 import User from "./models/User.js";
 import { generateToken, verifyGoogleToken } from "./auth.js";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
+import graphqlServer from "./routes/graphql";
 import csrf from "csurf";
 import bearerToken from "express-bearer-token";
 
@@ -35,6 +35,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+graphqlServer.applyMiddleware({ app });
 
 app.get("/", csrfProtection, (req, res) => {
   res.send("API is available");
@@ -91,7 +92,5 @@ app.get("/auth/google", csrfProtection, bearerToken(), (req, res) => {
       res.json({ status: "Could not verify your OAuth ID with Google" })
     );
 });
-
-app.use("/graphql", csrfProtection, graphqlRouter);
 
 export default app;

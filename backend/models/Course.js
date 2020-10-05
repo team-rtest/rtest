@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
   subject: String,  // Computer Science
-  number: String,   // CS470
+  courseNumber: String,   // CS470
   semester: String, // Fall 2020
   name: String,     // Data Mining
   files: [  // Syllabus etc
