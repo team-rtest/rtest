@@ -44,7 +44,7 @@ function Assignment({ ...rest }) {
 const Box = styled.div`
   display: flex;
   align-items: stretch;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 69px);
 `;
 
 export default Assignment;

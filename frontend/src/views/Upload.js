@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-function Upload() {
+function Upload({ label, ...rest }) {
   const [state, setState] = useState();
 
   const handleChange = event => {
@@ -21,9 +21,9 @@ function Upload() {
 
   return (
     //Code modified from https://bootsnipp.com/snippets/DOXy4
-    <Form>
+    <div {...rest}>
       <FileInput className="files">
-        <label> Upload Your File </label>
+        <Label>{ label }</Label>
         <input
           type="file"
           name="file"
@@ -31,13 +31,15 @@ function Upload() {
           onChange={handleChange}
         />
       </FileInput>
-      <button className="btn btn-primary btn-upload" onClick={handleClick}> Submit </button>
-    </Form>
+    </div>
   );
 }
 
-const Form = styled.form`
-  width: 50%;
+const Label = styled.label`
+  text-transform: capitalize;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: grey;
 `;
 
 const FileInput = styled.div`

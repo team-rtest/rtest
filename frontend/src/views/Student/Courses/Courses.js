@@ -21,9 +21,9 @@ function Courses({ selected, setSelected, assignments }) {
 }
 
 const Dashboard = styled.div`
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 69px);
   width: 100%;
-  padding: 50px;
+  padding: 30px;
 `;
 
 const Heading = styled.h1`
@@ -33,8 +33,8 @@ const Heading = styled.h1`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 400px 400px;
-  grid-gap: 30px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
 `
 
 export default Courses;

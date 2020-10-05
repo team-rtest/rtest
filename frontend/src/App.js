@@ -1,37 +1,31 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import Header from 'views/Header';
-import Error404 from 'views/Error404';
+import External from "./External";
+import Internal from "./Internal";
+import Error404 from "views/Error404";
 
-import { routes } from 'routes';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { routes } from "routes";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [data, setData] = useState({
     student: {},
-    courses: {}
+    courses: {},
   });
+
+  const [isLoggedIn, setLoggedIn] = useState(true);
 
   return (
     <Router>
-      <Header />
-      <Screen>
-        <Switch>
-          { routes.map(route => <Route exact path={route.path}>{ route.page }</Route>) }
-          <Route path="*" component={Error404} />
-        </Switch>
-      </Screen>
+      <Screen>{isLoggedIn ? <Internal /> : <External />}</Screen>
     </Router>
   );
 }
 
-
 const Screen = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px);
+  height: 100vh;
+  width: 100vw;
 `;
 
 export default App;
