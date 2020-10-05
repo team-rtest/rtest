@@ -37,9 +37,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 graphqlServer.applyMiddleware({ app });
 
-app.get("/", csrfProtection, (req, res) => {
-  res.send("API is available");
+app.get("/status", csrfProtection, (req, res) => {
+  res.json({"status": "available"});
 });
+
+app.use("/csrf-test", csrfProtection, (req, res) => {
+  res.json({"status": "Your CSRF token was validated correctly"});
+})  
 
 app.post("/signup", (req, res) => {
   User.register(
