@@ -5,7 +5,7 @@ const assignmentGroupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Tag: {
+  tag: {
     type: String,
     required: true,
     enum: ["HW", "TEST", "PEER"],
