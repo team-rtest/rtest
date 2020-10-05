@@ -81,13 +81,18 @@ export const resolvers = {
     },
 
     updateGrade: async (_, { gradeInput }) => {
-      return gradeInput; // TODO
+      Submission.updateOne(
+        {_id: gradeInput.assignmentId},
+        {$set: {grade: gradeInput.grade}}
+      )
+      return gradeInput.grade;
     },
 
-    peerGradeSubmission: async (_, { peerGradeInput }) => {
-      // creates a new peer grade if the grader hasn't graded the assignment yet
-      // otherwise updates the student's grade
-      return peerGradeInput; // TODO
-    },
+    // peerGradeSubmission: async (_, { peerGradeInput }) => {
+    //   creates a new peer grade if the grader hasn't graded the assignment yet
+    //   otherwise updates the student's grade
+    //   return peerGradeInput; // TODO
+    //}
   },
 };
+
