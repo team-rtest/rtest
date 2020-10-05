@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import { Input } from "components";
-import { AuthCard, AuthForm, Heading, AuthLink } from "./styles";
+import { AuthBox, AuthCard, AuthForm, Heading, AuthLink } from "./styles";
 import { GoogleLogin } from "react-google-login";
-import { validate, validatePassword } from "./AuthHelper";
+import { validate, validatePassword } from "./functions";
 
 import { auth } from "api";
 
@@ -37,37 +37,39 @@ function Signup() {
   };
 
   return (
-    <AuthCard>
-      <Heading> Create account </Heading>
-      <AuthForm handleSubmit={handleSubmit}>
-        <Input
-          name="username"
-          type="username"
-          value={inputs.username}
-          error={errors.username}
-          onChange={handleChange}
-        />
-        <Input
-          name="password"
-          type="password"
-          value={inputs.password}
-          error={errors.password}
-          onChange={handleChange}
-        />
-        <button className="btn btn-primary btn-upload" onClick={handleSubmit}>
-          {" "}
-          Sign up{" "}
-        </button>
-        <GoogleLogin
-          clientId={GOOGLE_CLIENT_ID}
-          buttonText="Login With Google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
-      </AuthForm>
-      <AuthLink to="login"> Have an account? </AuthLink>
-    </AuthCard>
+    <AuthBox>
+      <AuthCard>
+        <Heading> Create account </Heading>
+        <AuthForm handleSubmit={handleSubmit}>
+          <Input
+            name="username"
+            type="username"
+            value={inputs.username}
+            error={errors.username}
+            onChange={handleChange}
+          />
+          <Input
+            name="password"
+            type="password"
+            value={inputs.password}
+            error={errors.password}
+            onChange={handleChange}
+          />
+          <button className="btn btn-primary btn-upload" onClick={handleSubmit}>
+            {" "}
+            Sign up{" "}
+          </button>
+          <GoogleLogin
+            clientId={GOOGLE_CLIENT_ID}
+            buttonText="Login With Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
+        </AuthForm>
+        <AuthLink to="login"> Have an account? </AuthLink>
+      </AuthCard>
+    </AuthBox>
   );
 }
 

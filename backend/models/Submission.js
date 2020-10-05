@@ -12,26 +12,26 @@ const submissionSchema = new mongoose.Schema({
       ref: "file",
     },
   ],
-  submittedAt: {
-    type: Date,
-    default: Date.now,
-  },
   grade: Number,
   peerGrades: [
     {
-      peer: {
+      grader: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
         required: true
       },
-      body: String,
-      peerGrade: Number,
-      timePeerGraded: {
+      grade: Number,
+      comment: String,
+      gradedAt: {
         type: Date,
         default: Date.now
       }
     }
-  ]
+  ],
+  submittedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const submission = mongoose.model("submission", submissionSchema);

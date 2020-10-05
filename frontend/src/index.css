@@ -1,27 +1,39 @@
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.form-control.is-valid, .was-validated .form-control:valid {
+.form-control.is-valid,
+.was-validated .form-control:valid {
   background-image: none;
 }
 
-.form-control.is-invalid, .was-validated .form-control:invalid {
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
   background-image: none;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /*Code modified from https://bootsnipp.com/snippets/DOXy4*/
@@ -33,12 +45,18 @@ code {
   margin: 0;
   width: 100% !important;
 }
-.files input:focus{     outline: 2px dashed #7e8ddf;  outline-offset: -10px;
-  transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #7e8ddf;
+.files input:focus {
+  outline: 2px dashed #7e8ddf;
+  outline-offset: -10px;
+  transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
+  border: 1px solid #7e8ddf;
 }
-.files{ position:relative}
+.files {
+  position: relative;
+}
 
-.files:after {  pointer-events: none;
+.files:after {
+  pointer-events: none;
   position: absolute;
   top: 60px;
   left: 0;
@@ -52,11 +70,14 @@ code {
   background-size: 100%;
   background-repeat: no-repeat;
 }
-.color input{ background-color:#f1f1f1;}
+.color input {
+  background-color: #f1f1f1;
+}
 .files:before {
   position: absolute;
   bottom: 2px;
-  left: 0;  pointer-events: none;
+  left: 0;
+  pointer-events: none;
   width: 100%;
   right: 0;
   height: 57px;
@@ -68,13 +89,18 @@ code {
   text-transform: capitalize;
   text-align: center;
 }
-.btn-upload{
+.btn-upload {
   width: 100%;
 
   background-color: #6173db;
   border-color: #4e5eb8;
 }
-.btn-upload:hover,.btn-upload:active:focus, .btn-upload:focus, .btn-upload:active, .btn-upload.active, .open>.dropdown-toggle.btn-upload {
+.btn-upload:hover,
+.btn-upload:active:focus,
+.btn-upload:focus,
+.btn-upload:active,
+.btn-upload.active,
+.open > .dropdown-toggle.btn-upload {
   color: #fff;
   background-color: #7e8ddf !important;
   border-color: #6876c0 !important;

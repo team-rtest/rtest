@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-function Upload() {
+function Upload({ label, ...rest }) {
   const [state, setState] = useState();
 
   const handleChange = event => {
@@ -14,16 +14,19 @@ function Upload() {
 
   const handleClick = () => {
     const data = new FormData();
+    var url = ""
     data.append('file', state.file); //our selected file data
-    axios.post("http://localhost:3000/upload", data,{}) //Send Post with endpoint URL and our form data with our file in it
+    // url = getPresignedUpload() //change to make api call from backend to getPresigned URL
+    console.log(url)
+    axios.post(url, data,{}) //Send Post with endpoint URL and our form data with our file in it
       .then(res => console.log(res.statusText));//then we print the response status
   }
 
   return (
     //Code modified from https://bootsnipp.com/snippets/DOXy4
-    <Form>
+    <div {...rest}>
       <FileInput className="files">
-        <label> Upload Your File </label>
+        <Label>{ label }</Label>
         <input
           type="file"
           name="file"
@@ -31,13 +34,15 @@ function Upload() {
           onChange={handleChange}
         />
       </FileInput>
-      <button className="btn btn-primary btn-upload" onClick={handleClick}> Submit </button>
-    </Form>
+    </div>
   );
 }
 
-const Form = styled.form`
-  width: 50%;
+const Label = styled.label`
+  text-transform: capitalize;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: grey;
 `;
 
 const FileInput = styled.div`
