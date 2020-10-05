@@ -17,6 +17,10 @@ import ForgotPassword from 'views/Auth/ForgotPassword';
 
 const routes = [
   {
+    path: '/',
+    page: <ProfessorCourses />
+  },
+  {
     path: '/student/courses',
     page: <StudentCourses />
   },

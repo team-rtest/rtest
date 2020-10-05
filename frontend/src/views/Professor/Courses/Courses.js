@@ -20,7 +20,7 @@ function Courses({ selected, setSelected, assignments }) {
       <Heading>Your Courses</Heading>
       <Grid>
         { courses.map(course => <Course {...course} />) }
-        <AddClass to="create-course">
+        <AddClass to="/professor/create-course">
           <h4>{PLUS} Add Class</h4>
         </AddClass>
       </Grid>

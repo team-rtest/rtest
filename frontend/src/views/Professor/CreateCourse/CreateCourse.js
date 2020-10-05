@@ -11,7 +11,7 @@ import Members from './Members';
 function CreateCourse() {
   const history = useHistory();
   const [index, setIndex] = useState(0);
-  const [inputs, setInputs] = useState({ subject: '', name: '', number: '', semester: '', syllabus: '', professor: 'Davide Fossati', assistants: '', students: '' });
+  const [inputs, setInputs] = useState({ subject: 'Computer Science', name: 'Data Mining', number: 'CS470', semester: 'Fall 2020', syllabus: '', professor: 'Davide Fossati', assistants: '', students: '' });
   const [errors, setErrors] = useState({ subject: null, name: null, number: null, semester: null, syllabus: null, professor: null, assistants: null, students: null });
 
   const handleChange = (name, value) => {
