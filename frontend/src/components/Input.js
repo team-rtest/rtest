@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function Input({ name, type, value, error, onChange, className, ...rest }) {
+function Input({ name, type, value, tip, error, onChange, className, ...rest }) {
   const [focus, setFocus] = useState(false);
   const label = name.split('_').join(' ');
 
+
   return (
     <div>
-      <Label>{ label }</Label>
-      <input
+      <Above>
+        <Label>{ label }</Label>
+        {
+          tip && (
+            <Tip>
+              <Icon className="fa fa-question-circle" />
+              <Message>{ tip }</Message>
+            </Tip>
+          )
+        }
+      </Above>
+      <StyledInput
         type={type}
         id={name}
         value={value}
@@ -26,7 +37,43 @@ function Input({ name, type, value, error, onChange, className, ...rest }) {
 }
 
 const StyledInput = styled.input`
+  ::placeholder {
+    color: darkgrey;
+  }
+`;
 
+const Above = styled.div`
+  display: flex;
+  align-items: center;
+  grid-gap: 5px;
+`;
+
+const Tip = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const Message = styled.div`
+  position: absolute;
+  top: -5px;
+  left: 15px;
+  display: none;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: white;
+  background: grey;
+  padding: 2px 4px;
+  border-radius: 4px;
+`;
+
+const Icon = styled.div`
+  &:hover + ${Message} {
+    display: block;
+  }
+
+  color: grey;
+  font-size: 0.75rem;
 `;
 
 const Label = styled.label`

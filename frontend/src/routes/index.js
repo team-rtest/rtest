@@ -1,53 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Assignment from 'views/Assignment/Assignment';
-import Courses from 'views/Courses/Courses';
+import Assignment from "views/Student/Assignment/Assignment";
+import StudentCourses from "views/Student/Courses/Courses";
 
-import CourseCreate from 'views/Create-Course/CourseCreate';
-import CourseCreateForm from 'views/Create-Course/CourseCreateForm';
+import ProfessorCourses from "views/Professor/Courses/Courses";
 
-import Login from 'views/Auth/Login';
-import Signup from 'views/Auth/Signup';
-import ResetPassword from 'views/Auth/ResetPassword';
-import ForgotPassword from 'views/Auth/ForgotPassword';
+import AssignmentReview from 'views/Review/AssignmentReview';
+import CreateCourse from "views/Professor/CreateCourse/CreateCourse";
+import EditCourse from "views/Professor/EditCourse/EditCourse";
+import CreateAssignment from "views/Professor/CreateAssignment/CreateAssignment";
+import CreateAssignmentGroup from "views/Professor/CreateAssignmentGroup/CreateAssignmentGroup";
+import Login from "views/Auth/Login";
+import Signup from "views/Auth/Signup";
+import ResetPassword from "views/Auth/ResetPassword";
+import ForgotPassword from "views/Auth/ForgotPassword";
 
 const routes = [
   {
-    path: '/',
-    page: <Courses />
+    path: "/",
+    page: <ProfessorCourses />,
   },
   {
-    path: '/course-create',
-    page: <CourseCreate />
+    path: "/student/courses",
+    page: <StudentCourses />,
   },
   {
-    path: '/course-create/form',
-    page: <CourseCreateForm />
+    path: "/student/course/:id",
+    page: <Assignment />,
   },
   {
-    path: '/signup',
-    page: <Signup />
+    path: "/professor/courses",
+    page: <ProfessorCourses />,
   },
   {
-    path: '/login',
-    page: <Login />
+    path: '/assignment-review',
+    page: <AssignmentReview />
   },
   {
-    path: '/reset-password',
-    page: <ResetPassword />
+    path: "/professor/create-course",
+    page: <CreateCourse />,
   },
   {
-    path: '/forgot-password',
-    page: <ForgotPassword />
+    path: "/professor/edit-course",
+    page: <EditCourse />,
   },
   {
-    path: '/assignments/:id',
-    page: <Assignment />
+    path: "/professor/create-assignment",
+    page: <CreateAssignment />,
   },
   {
-    path: '/courses/:id',
-    page: <Courses />
-  }
+    path: "/professor/create-assignment-group",
+    page: <CreateAssignmentGroup />,
+  },
+  {
+    path: "/signup",
+    page: <Signup />,
+  },
+  {
+    path: "/login",
+    page: <Login />,
+  },
+  {
+    path: "/reset-password",
+    page: <ResetPassword />,
+  },
+  {
+    path: "/forgot-password",
+    page: <ForgotPassword />,
+  },
 ];
 
-export { routes }
+export { routes };
