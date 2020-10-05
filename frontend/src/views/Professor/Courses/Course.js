@@ -4,16 +4,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Card } from 'components';
 
-function ClassCard({ id, name, color}) {
-  const STAR_HOLLOW = <StarHollow className = {'far fa-star'}/>;
-  const STAR_FILLED = <StarFilled className = {'fas fa-star'}/>;
+function Course({ id, name, color, pinned }) {
+  const STAR = <Star filled={pinned} className = {'fas fa-star'}/>;
   const ID = id.split('-')[0];
   const PATH = `/classcard/${id.toLowerCase()}`;
   return (
     <Box color={color}>
       <Head>
         <Name>{ name }</Name>
-        {STAR_FILLED}
+        { STAR }
       </Head>
       <Students>
         65 Students
@@ -29,7 +28,14 @@ const Box = styled(Card)`
   align-items: center;
   height: 10rem;
   border-width: 2px;
-  width: 20rem;
+`;
+
+const Top = styled.div`
+  display: flex;
+  grid-gap: 5px;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.3rem;
 `;
 
 const Head = styled.div`
@@ -38,16 +44,10 @@ const Head = styled.div`
   align-items: center;
 `;
 
-const StarHollow = styled.div`
+const Star = styled.div`
   cursor: pointer;
-  font-size: 1.2rem;
-  color: rgba(0, 0, 0, 0.5);
-`;
-
-const StarFilled = styled.div`
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: gold;
+  color: ${props => props.filled ? 'gold' : 'rgba(0, 0, 0, 0.2)'};
+  font-size: 1.25rem;
 `;
 
 const Name = styled.h4`
@@ -68,4 +68,4 @@ const Label = styled.div`
   margin-top: 15px;
 `;
 
-export default ClassCard;
+export default Course;

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 
-import Assignment from 'views/Assignment/Assignment';
-import Courses from 'views/Courses/Courses';
+import Assignment from 'views/Student/Assignment/Assignment';
+import StudentCourses from 'views/Student/Courses/Courses';
 
-import CourseCreate from 'views/CreateCourse/CourseCreate';
-import CourseCreateForm from 'views/CreateCourse/CourseCreateForm';
+import ProfessorCourses from 'views/Professor/Courses/Courses';
+
+import CreateCourse from 'views/Professor/CreateCourse/CreateCourse';
+import EditCourse from 'views/Professor/EditCourse/EditCourse';
+import CreateAssignment from 'views/Professor/CreateAssignment/CreateAssignment';
+import CreateAssignmentGroup from 'views/Professor/CreateAssignmentGroup/CreateAssignmentGroup';
 
 import Login from 'views/Auth/Login';
 import Signup from 'views/Auth/Signup';
@@ -13,16 +17,32 @@ import ForgotPassword from 'views/Auth/ForgotPassword';
 
 const routes = [
   {
-    path: '/',
-    page: <Courses />
+    path: '/student/courses',
+    page: <StudentCourses />
   },
   {
-    path: '/course-create',
-    page: <CourseCreate />
+    path: '/student/course/:id',
+    page: <Assignment />
   },
   {
-    path: '/course-create/form',
-    page: <CourseCreateForm />
+    path: '/professor/courses',
+    page: <ProfessorCourses />
+  },
+  {
+    path: '/professor/create-course',
+    page: <CreateCourse />
+  },
+  {
+    path: '/professor/edit-course',
+    page: <EditCourse />
+  },
+  {
+    path: '/professor/create-assignment',
+    page: <CreateAssignment />
+  },
+  {
+    path: '/professor/create-assignment-group',
+    page: <CreateAssignmentGroup />
   },
   {
     path: '/signup',
@@ -40,14 +60,6 @@ const routes = [
     path: '/forgot-password',
     page: <ForgotPassword />
   },
-  {
-    path: '/assignments/:id',
-    page: <Assignment />
-  },
-  {
-    path: '/courses/:id',
-    page: <Courses />
-  }
 ];
 
 export { routes }

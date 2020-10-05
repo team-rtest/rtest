@@ -2,50 +2,30 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 function Input({ name, type, value, tip, error, onChange, className, ...rest }) {
-  const [focus, setFocus] = useState(false);
   const label = name.split('_').join(' ');
-
 
   return (
     <div>
-      <Above>
-        <Label>{ label }</Label>
-        {
-          tip && (
-            <Tip>
-              <Icon className="fa fa-question-circle" />
-              <Message>{ tip }</Message>
-            </Tip>
-          )
-        }
-      </Above>
+      <Label>{ label }</Label>
       <StyledInput
-        type={type}
+        type="file"
         id={name}
         value={value}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
         onChange={event => onChange(name, event.target.value)}
-        className={`form-control ${className} ${!focus && error !== null && (error ? "is-invalid" : "is-valid") }`}
+        className={`form-control ${className} ${error !== null && (error ? "is-invalid" : "is-valid") }`}
         {...rest}
       />
       <div className="invalid-feedback">
-        { !focus && error }
+        { error }
       </div>
     </div>
   );
 }
 
 const StyledInput = styled.input`
-  ::placeholder {
-    color: darkgrey;
-  }
-`;
-
-const Above = styled.div`
-  display: flex;
-  align-items: center;
-  grid-gap: 5px;
+  // all: unset;
+  display: block;
+  padding: 3px;
 `;
 
 const Tip = styled.div`
@@ -78,7 +58,7 @@ const Icon = styled.div`
 
 const Label = styled.label`
   text-transform: capitalize;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   font-size: 0.9rem;
   color: grey;
 `;

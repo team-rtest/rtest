@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Header from 'views/Header';
+import External from './External';
+import Internal from './Internal';
 import Error404 from 'views/Error404';
 
 import { routes } from 'routes';
@@ -13,25 +14,17 @@ function App() {
     courses: {}
   });
 
+  const [isLoggedIn, setLoggedIn] = useState(true);
+
   return (
     <Router>
-      <Header />
-      <Screen>
-        <Switch>
-          { routes.map(route => <Route exact path={route.path}>{ route.page }</Route>) }
-          <Route path="*" component={Error404} />
-        </Switch>
-      </Screen>
+      {
+        isLoggedIn
+        ? <Internal />
+        : <External />
+      }
     </Router>
   );
 }
-
-
-const Screen = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px);
-`;
 
 export default App;

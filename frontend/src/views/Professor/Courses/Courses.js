@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import ClassCard from './ClassCard';
+import Course from './Course';
 import { Card } from 'components';
 
-function CourseCreate({ selected, setSelected, assignments }) {
+function Courses({ selected, setSelected, assignments }) {
   const PLUS = <Plus className = {'fa fa-plus-circle'}/>;
 
   const courses = [
-    { id: 'CS470-001', name: 'Data Mining', color:'#ff695e' },
+    { id: 'CS470-001', name: 'Data Mining', color:'#ff695e', pinned: true },
     { id: 'CS325-002', name: 'Artificial Intelligence', color:'#ff851b' },
     { id: 'CS334-001', name: 'Machine Learning', color:'#2ecc40' },
     { id: 'CS377-001', name: 'Database Systems', color:'#54c8ff' },
@@ -19,21 +19,19 @@ function CourseCreate({ selected, setSelected, assignments }) {
     <Dashboard>
       <Heading>Your Courses</Heading>
       <Grid>
-        { courses.map(course => <ClassCard {...course} />) }
-        <Link to ='course-create/form' >
-          <AddClass>
-            <h4>{PLUS} Add Class</h4>
-          </AddClass>
-        </Link>
+        { courses.map(course => <Course {...course} />) }
+        <AddClass to="create-course">
+          <h4>{PLUS} Add Class</h4>
+        </AddClass>
       </Grid>
     </Dashboard>
   );
 }
 
 const Dashboard = styled.div`
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 69px);
   width: 100%;
-  padding: 50px;
+  padding: 30px;
 `;
 
 const Heading = styled.h1`
@@ -41,17 +39,23 @@ const Heading = styled.h1`
   margin-bottom: 25px;
 `;
 
-const AddClass = styled.button`
+const AddClass = styled(Link)`
   background-color: #f8f9fa;
   color: rgba(0,0,0,0.75);
   font-weight: 600;
   margin-bottom: 0;
   padding: 20px;
-  align-items: center;
   height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 4px;
   border: 2px solid rgb(217,218,219);
-  width: 20rem;
+
+  &:hover {
+    text-decoration: none;
+    color: rgba(0,0,0,0.75);
+  }
 `;
 
 const Plus = styled.span`
@@ -60,10 +64,10 @@ const Plus = styled.span`
 `;
 
 const Grid = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
   flex-wrap: wrap;
-  grid-template-columns: 325px 325px 325px;
-  grid-gap: 30px;
 `
 
-export default CourseCreate;
+export default Courses;

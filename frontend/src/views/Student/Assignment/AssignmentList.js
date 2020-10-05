@@ -38,11 +38,11 @@ const TypeName = styled.div`
 `;
 
 const Arrow = styled.span`
-  
+
 `;
 
 const TypeList = styled.div`
-  width: 350px;
+  min-width: 350px;
   height: 100%;
   overflow-y: auto;
 `;
