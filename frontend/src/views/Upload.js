@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {getPresignedUpload} from 'views/presignedurl';
 
 function Upload({ label, ...rest }) {
   const [state, setState] = useState();
@@ -17,7 +16,7 @@ function Upload({ label, ...rest }) {
     const data = new FormData();
     var url = ""
     data.append('file', state.file); //our selected file data
-    url = getPresignedUpload() //change to make api call from backend to getPresigned URL
+    // url = getPresignedUpload() //change to make api call from backend to getPresigned URL
     console.log(url)
     axios.post(url, data,{}) //Send Post with endpoint URL and our form data with our file in it
       .then(res => console.log(res.statusText));//then we print the response status
