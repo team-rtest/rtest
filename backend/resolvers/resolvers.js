@@ -6,7 +6,7 @@ import Assignment from "../models/Assignment";
 import Submission from "../models/Submission";
 import User from "../models/User";
 import AssignmentGroup from "../models/AssignmentGroup";
-import fileHandler from "../routes/fileHandler";
+import { getPresignedUpload, getPresignedDownload } from "../routes/fileHandler";
 
 export const resolvers = {
   Query: {
@@ -39,7 +39,10 @@ export const resolvers = {
     submissions: async () => Submission.find().exec(),
 
     getPresignedUpload: async (_, { bucket, key }) => {
-      return fileHandler.getPresignedUpload(bucket, key);
+      return await getPresignedUpload(bucket, key);
+    },
+    getPresignedDownload: async (_, { bucket, key }) => {
+      return await getPresignedDownload(bucket, key);
     },
   },
   Mutation: {

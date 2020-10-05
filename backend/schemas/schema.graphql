@@ -148,8 +148,10 @@ type Query {
   course(id: ID): Course
   assignmentGroup(id: ID): AssignmentGroup
 
-  getPresignedUpload(bucket: String, key: String): String
-
+  # TODO make these dependent on assignment instead of bucket
+  getPresignedUpload(bucket: String, key: String): String!
+  getPresignedDownload(bucket: String, key: String): String!
+  
   users: [User]
   assignments: [Assignment]
   submissions: [Submission]
