@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Card, Form } from 'components';
 
+const AuthBox = styled.div`
+  height: calc(100vh - 80px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const AuthCard = styled(Card)`
   display: grid;
   grid-gap: 15px;
@@ -34,4 +42,4 @@ const AuthLink = styled(Link)`
   }
 `;
 
-export { AuthCard, AuthForm, Heading, AuthLink }
+export { AuthBox, AuthCard, AuthForm, Heading, AuthLink }

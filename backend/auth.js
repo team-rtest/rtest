@@ -3,31 +3,13 @@ dotenv.config();
 
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 import { sign } from "jsonwebtoken";
 import User from "./models/User.js";
+const { OAuth2Client } = require("google-auth-library");
 
 passport.use(User.createStrategy());
 
-if (process.env.GOOGLE_CLIENT_ID) {
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://yourdormain:4000/auth/google/callback",
-        passReqToCallback: true,
-      },
-
-      function (request, accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ googleId: profile.id }, function (err, user) {
-          return done(err, user);
-        });
-      }
-    )
-  );
-}
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -51,5 +33,16 @@ export const jwtStrategy = passport.use(
     }
   })
 );
+
+export async function verifyGoogleToken(token) {
+  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience: process.env.CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  const userid = payload["sub"];
+  return payload;
+}
 
 export const verifyUser = User.authenticate("jwt", { session: false });
