@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Card } from 'components';
 
-function Course({ id, name, grade, professor, numAssignments, numLate, pinned }) {
+function Course({ id, number, name, grade, professor, numAssignments, numLate, pinned }) {
 
   // getNumAssignments
   // getNumAssignmentsLate
@@ -12,26 +12,17 @@ function Course({ id, name, grade, professor, numAssignments, numLate, pinned })
   // getNextAssignment
 
   const STAR = <Star className={`fa${pinned ? 's' : 'r'} fa-star`} />;
-  const ID = id.split('-')[0];
-  const PATH = `/assignments/${id.toLowerCase()}`;
+  const PATH = `/course/${id.toLowerCase()}/summary`;
 
   return (
     <Box>
       <Head>
-        <Info>{ STAR } { ID }</Info>
+        <Info>{ STAR } { id.split('-')[0] }</Info>
         <Score>{ grade }%</Score>
       </Head>
       <Name>{ name }</Name>
       <Professor>{ professor }</Professor>
-      <Tags>
-        <Tag type="primary"> {numAssignments} Assignments </Tag>
-        {!numLate || <Tag type="danger"> {numLate} Late Assignments </Tag>}
-      </Tags>
-      <Next>
-        <Label>Next Assignment</Label> Lab 2: Apriori Algorithm
-        <Label>Due Date</Label> September 18th 2020
-      </Next>
-      <Link to={PATH} className="btn btn-upload text-white"> Explore </Link>
+      <Button className="btn btn-upload text-white" to="/student/course/cs470"> Explore </Button>
     </Box>
   );
 }
@@ -109,15 +100,45 @@ const Tag = styled.div`
 `;
 
 const Next = styled.div`
-  color: grey;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
+  background: rgb(218, 223, 244);
+  // border: 1px solid rgba(0,0,0,.2);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 0.25rem;
 `;
 
 const Label = styled.div`
+  color: grey;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+`;
+
+const Value = styled.h5`
   color: black;
   font-weight: 600;
-  margin-top: 15px;
+  margin-bottom: 4px;
 `;
+
+const Date = styled.div`
+  color: #6173DB;
+  font-size: 0.8rem;
+  font-weight: 500;
+`;
+
+const Button = styled(Link)`
+  margin-top: 20px;
+`;
+
+// <Next>
+//   <Value>Lab 2: Apriori Algorithm</Value>
+//   <Date>September 18th 2020</Date>
+// </Next>
+
+// <Tags>
+//   <Tag type="primary"> {numAssignments} Assignments Due </Tag>
+//   {!numLate || <Tag type="danger"> {numLate} Assignments Late </Tag>}
+// </Tags>
+
 
 export default Course;
