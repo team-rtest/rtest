@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import Sidebar from 'views/Sidebar';
-import Topbar from 'views/Topbar';
-import Error404 from 'views/Error404';
+import Sidebar from "views/Sidebar";
+import Topbar from "views/Topbar";
+import Error404 from "views/Error404";
 
-import { routes } from 'routes';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { routes } from "routes";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function Internal() {
   return (
@@ -16,7 +16,11 @@ function Internal() {
         <Topbar />
         <Content>
           <Switch>
-            { routes.map(route => <Route exact path={route.path}>{ route.page }</Route>) }
+            {routes.map((route) => (
+              <Route exact path={route.path}>
+                {route.page}
+              </Route>
+            ))}
             <Route path="*" component={Error404} />
           </Switch>
         </Content>
@@ -24,7 +28,6 @@ function Internal() {
     </Box>
   );
 }
-
 
 const Box = styled.div`
   display: flex;

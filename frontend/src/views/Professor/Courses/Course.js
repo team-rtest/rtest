@@ -1,29 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
-import { Card } from 'components';
+import { Link } from "react-router-dom";
+import { Card } from "components";
 
 function Course({ id, name, color, pinned }) {
-  const STAR = <Star filled={pinned} className = {'fas fa-star'}/>;
-  const ID = id.split('-')[0];
+  const STAR = <Star filled={pinned} className={"fas fa-star"} />;
+  const ID = id.split("-")[0];
   const PATH = `/classcard/${id.toLowerCase()}`;
   return (
     <Box color={color}>
       <Head>
-        <Name>{ name }</Name>
-        { STAR }
+        <Name>{name}</Name>
+        {STAR}
       </Head>
-      <Students>
-        65 Students
-      </Students>
+      <Students>65 Students</Students>
     </Box>
   );
 }
 
 const Box = styled(Card)`
   display: block;
-  background: ${props => props.color};
+  background: ${(props) => props.color};
   padding: 20px;
   align-items: center;
   height: 10rem;
@@ -46,7 +44,7 @@ const Head = styled.div`
 
 const Star = styled.div`
   cursor: pointer;
-  color: ${props => props.filled ? 'gold' : 'rgba(0, 0, 0, 0.2)'};
+  color: ${(props) => (props.filled ? "gold" : "rgba(0, 0, 0, 0.2)")};
   font-size: 1.25rem;
 `;
 
