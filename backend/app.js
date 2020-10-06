@@ -38,12 +38,12 @@ app.use(cookieParser());
 graphqlServer.applyMiddleware({ app });
 
 app.get("/status", csrfProtection, (req, res) => {
-  res.json({"status": "available"});
+  res.json({ status: "available" });
 });
 
 app.use("/csrf-test", csrfProtection, (req, res) => {
-  res.json({"status": "Your CSRF token was validated correctly"});
-})  
+  res.json({ status: "Your CSRF token was validated correctly" });
+});
 
 app.post("/signup", (req, res) => {
   User.register(
