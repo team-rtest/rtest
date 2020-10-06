@@ -5,11 +5,12 @@ const assignmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  body: String,
   maxGrade: {
     type: Number,
     required: true,
   },
-  dueDate: {
+  dateDue: {
     type: Date,
     required: true,
   },
