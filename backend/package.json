@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.767.0",
-    "apollo-server-express": "^2.18.1",
+    "apollo-server-express": "^2.18.2",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.6.5",
@@ -42,7 +42,7 @@
     "@babel/core": "^7.11.6",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
-    "jest": "^26.4.2",
+    "jest": "^26.5.0",
     "nodemon": "^2.0.4",
     "supertest": "^5.0.0"
   }

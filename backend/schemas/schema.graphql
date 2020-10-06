@@ -26,7 +26,7 @@ type Course {
   semester: String
   students: [User]
   instructors: [User]
-  assignments: [Assignment]
+  assignmentGroups: [AssignmentGroup]
 }
 
 input CourseInput {
@@ -37,16 +37,18 @@ input CourseInput {
 }
 
 type Assignment {
+  _id: ID!
   tags: [AssignmentTag]
   name: String!
   body: String
-  pointsPossible: Int
+  maxGrade: Int
   dateCreated: Timestamp!
   datePosted: Timestamp
   dateDue: Timestamp
 }
 
 type AssignmentGroup {
+  _id: ID!
   name: String!
   tag: String!
   grading: Int!
@@ -58,7 +60,7 @@ input AssignmentInput {
   name: String!
   body: String
   assignmentGroupId: ID!
-  pointsPossible: Int
+  maxGrade: Int
   dateDue: Timestamp
   tags: [AssignmentTag]
 }
@@ -69,18 +71,17 @@ enum AssignmentTag {
 }
 
 type Submission {
-  id: ID!
+  _id: ID!
   student: User!
-  assignment: ID!
   files: [File!]!
   dateSubmitted: Timestamp!
   attemptNumber: Int!
 }
 
 input SubmissionInput {
-  student: String!
-  assignment: ID!
-  files: [FileInput!]!
+  student: ID!
+  assignmentId: ID!
+  files: [FileInput]
 }
 
 type Grade {
