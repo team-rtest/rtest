@@ -1,14 +1,15 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import User from "./models/User";
-import { generateToken, verifyGoogleToken } from "./auth/auth";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
-import graphqlServer from "./routes/graphql.js";
 import bearerToken from "express-bearer-token";
+
+import User from "./models/User.js";
+import { generateToken, verifyGoogleToken } from "./auth/auth.js";
+import graphqlServer from "./routes/graphql.js";
 
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
