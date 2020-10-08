@@ -5,7 +5,7 @@ import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 
 import { sign } from "jsonwebtoken";
-import User from "./models/User.js";
+import User from "../backend/models/User";
 const { OAuth2Client } = require("google-auth-library");
 
 passport.use(User.createStrategy());
