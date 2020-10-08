@@ -15,7 +15,7 @@
     ]
   },
   "dependencies": {
-    "aws-sdk": "^2.768.0",
+    "aws-sdk": "^2.769.0",
     "apollo-server-express": "^2.18.2",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
