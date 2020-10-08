@@ -12,14 +12,11 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    //req.headers.authorization
     const token = req.token || "";
     const user = "noauth";
     if (token) {
       user = getUsernameFromToken(token);
     }
-    
-    // TODO deseralize token to username
     return { user };
   },
 });
