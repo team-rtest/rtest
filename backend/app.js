@@ -28,6 +28,8 @@ if (!process.env.JEST_WORKER_ID) {
 const csrfProtection = csrf({ cookie: true, secure: true });
 
 const app = express();
+app.set("trust proxy", true);
+app.set("trust proxy", "loopback");
 app.use(cors());
 app.use(passport.initialize());
 app.use(compression());
