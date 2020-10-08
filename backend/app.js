@@ -1,8 +1,8 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import User from "./models/User.js";
-import { generateToken, verifyGoogleToken } from "./auth.js";
+import User from "./models/User";
+import { generateToken, verifyGoogleToken } from "./auth/auth";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
