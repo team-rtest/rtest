@@ -39,7 +39,7 @@ app.use(bearerToken());
 graphqlServer.applyMiddleware({ app });
 
 app.get("/", (_, res) => {
-  res.redirect("/");
+  res.redirect("/status");
 });
 
 app.get("/status", (_, res) => {
