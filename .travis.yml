@@ -8,14 +8,8 @@ jobs:
       name: "Backend unit tests"
       node_js:
         - 14
-
       before_install:
         - cd backend
-        - yarn --frozen-lockfile
-        - node --experimental-vm-modules node_modules/jest/bin/jest.js
-
-      script:
-        - yarn test
 
     - name: "Frontend unit tests"
       node_js:
