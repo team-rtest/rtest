@@ -48,3 +48,6 @@ export async function verifyGoogleToken(token) {
 }
 
 export const verifyUser = User.authenticate("jwt", { session: false });
+
+export const getUsernameFromToken = (token) =>
+  jwt.verify(token, process.env.SECRET_KEY)["username"];
