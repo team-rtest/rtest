@@ -2,11 +2,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import passport from "passport";
-import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import pkg from "passport-jwt";
+const { Strategy: JwtStrategy, ExtractJwt } = pkg;
 
-import { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import User from "./models/User.js";
-const { OAuth2Client } = require("google-auth-library");
+import googleAuth from "google-auth-library";
+const { OAuth2Client } = googleAuth;
 
 passport.use(User.createStrategy());
 
@@ -14,7 +16,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 export function generateToken(user) {
-  return sign(user, process.env.SECRET_KEY, { expiresIn: 86400 });
+  return jwt.sign(user, process.env.SECRET_KEY, { expiresIn: 86400 });
 }
 
 const opts = {

@@ -2,21 +2,21 @@
   "name": "backend",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "babel-node -r dotenv/config server.js",
-    "build": "babel . --copy-files --include-dotfiles --ignore node_modules,tests,.vscode,Dockerfile,README.md -d build",
-    "test": "jest",
-    "dev": "nodemon -r dotenv/config server.js --exec babel-node"
+    "start": "node -r dotenv/config src/server.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "dev": "nodemon -r dotenv/config src/server.js"
   },
   "jest": {
-    "testEnvironment": "node",
+    "testEnvironment": "jest-environment-node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
   },
   "dependencies": {
-    "aws-sdk": "^2.769.0",
     "apollo-server-express": "^2.18.2",
+    "aws-sdk": "^2.769.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.6.5",
@@ -38,10 +38,6 @@
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.11.5",
     "jest": "^26.5.2",
     "nodemon": "^2.0.4",
     "supertest": "^5.0.0"

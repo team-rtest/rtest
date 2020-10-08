@@ -7,7 +7,7 @@ import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
-import graphqlServer from "./routes/graphql";
+import graphqlServer from "./routes/graphql.js";
 import csrf from "csurf";
 import bearerToken from "express-bearer-token";
 
