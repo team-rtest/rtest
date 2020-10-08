@@ -11,8 +11,11 @@ jobs:
 
       before_install:
         - cd backend
-        - yarn
+        - yarn --frozen-lockfile
         - node --experimental-vm-modules node_modules/jest/bin/jest.js
+
+      script:
+        - yarn test
 
     - name: "Frontend unit tests"
       node_js:
@@ -21,25 +24,6 @@ jobs:
       before_install:
         - cd frontend
 
-#     - stage: Deploy
-#       name: "Docker push backend"
-#       before_script:
-#         - docker login -u "$dockerusername" --password "$dockertoken"
-#       script:
-#         - docker build -t teamrtest/rtest backend
-#       after_script:
-#         - docker push teamrtest/rtest
-
-#     - name: "Docker push frontend"
-#       before_script:
-#         - docker login -u "$dockerusername" --password "$dockertoken"
-#       script:
-#         - docker build -t teamrtest/rtest-ui frontend
-#       after_script:
-#         - docker push teamrtest/rtest-ui
-
 stages:
   - name: Test
     if: branch = master
-#   - name: Deploy
-#     if: (branch = master) AND (NOT(type IN (push, pull_request)))
