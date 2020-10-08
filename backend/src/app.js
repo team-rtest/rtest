@@ -37,6 +37,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 graphqlServer.applyMiddleware({ app });
 
+app.get("/", (_, res) => {
+  res.redirect("/");
+});
+
 app.get("/status", (_, res) => {
   res.json({ status: "available" });
 });
