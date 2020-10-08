@@ -1,17 +1,19 @@
+import express from "express";
+
 export default {
   isInClass: (username) => {
-    return true;
+    next();
   },
   ownsSubmission: (username) => {
-    return true;
+    next();
   },
   isClassInstructor: (username) => {
-    return true;
+    next();
   },
   canGradeAssignment: (username) => {
-    return true;
+    next();
   },
   canPeerReviewAssignment: (username) => {
-    return true;
+    next();
   },
 };
