@@ -7,10 +7,12 @@ jobs:
     - stage: Test
       name: "Backend unit tests"
       node_js:
-        - lts/*
+        - 14
 
       before_install:
         - cd backend
+        - yarn
+        - node --experimental-vm-modules node_modules/jest/bin/jest.js
 
     - name: "Frontend unit tests"
       node_js:

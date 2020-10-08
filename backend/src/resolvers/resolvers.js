@@ -1,19 +1,21 @@
 import mongoose from "mongoose";
-import Course from "../models/Course";
-import "regenerator-runtime/runtime";
-import { UserExistsError } from "passport-local-mongoose/lib/errors";
-import { async } from "regenerator-runtime/runtime";
-import Assignment from "../models/Assignment";
-import Submission from "../models/Submission";
-import User from "../models/User";
-import AssignmentGroup from "../models/AssignmentGroup";
-import { getPresignedUpload, getPresignedDownload } from "../routes/fileHandler";
+import Course from "../models/Course.js";
+import Assignment from "../models/Assignment.js";
+import Submission from "../models/Submission.js";
+import User from "../models/User.js";
+import AssignmentGroup from "../models/AssignmentGroup.js";
+import {
+  getPresignedUpload,
+  getPresignedDownload,
+} from "../routes/fileHandler.js";
 
 export const resolvers = {
   Query: {
     hello: () => "hi",
     course: async (_, { id }) => {
-      const course = await (Course.findOne({ _id: id })).populate("assignmentGroups");
+      const course = await Course.findOne({ _id: id }).populate(
+        "assignmentGroups"
+      );
       return course;
     },
     user: async (_, { id }) => {
@@ -70,11 +72,11 @@ export const resolvers = {
       // to be waited on with async, or if it needs exec()
       Course.updateOne(
         { _id: mongoose.Types.ObjectId(assignmentGroup.courseId) },
-        { $push: { assignmentGroups: ag._id } }, (err, docs) => {
-          if(err) {
+        { $push: { assignmentGroups: ag._id } },
+        (err, docs) => {
+          if (err) {
             console.log(err);
-          }
-          else {
+          } else {
             console.log("Triggered updating course subroutine");
           }
         }
@@ -103,8 +105,8 @@ export const resolvers = {
 
     updateGrade: async (_, { gradeInput }) => {
       Submission.updateOne(
-        {_id: mongoose.Types.ObjectId(gradeInput.submission) },
-        {$set: {grade: gradeInput.grade}}
+        { _id: mongoose.Types.ObjectId(gradeInput.submission) },
+        { $set: { grade: gradeInput.grade } }
       );
       return gradeInput.grade;
     },

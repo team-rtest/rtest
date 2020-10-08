@@ -1,4 +1,4 @@
-import { matchpeer, shuffle, matchpeer2 } from "../util/peermatching.js";
+import { matchpeer, shuffle, matchpeer2 } from "../src/util/peermatching.js";
 import "regenerator-runtime/runtime";
 
 describe("Shuffle", () => {

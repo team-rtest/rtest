@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import app from "./app.js";
-var debug = require("debug")("backend:server");
+// var debug = require("debug")("backend:server");
+import debugeng from "debug";
+const debug = debugeng("backend:server");
 // import d from "debug";
 // var debug = d("backend:server");
 import { createServer } from "http";
