@@ -8,7 +8,6 @@ import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
 import graphqlServer from "./routes/graphql";
-import csrf from "csurf";
 import bearerToken from "express-bearer-token";
 
 if (!process.env.JEST_WORKER_ID) {
@@ -25,8 +24,6 @@ if (!process.env.JEST_WORKER_ID) {
   );
 }
 
-const csrfProtection = csrf({ cookie: true, secure: true });
-
 const app = express();
 app.set("trust proxy", true);
 app.set("trust proxy", "loopback");
@@ -39,12 +36,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 graphqlServer.applyMiddleware({ app });
 
-app.get("/status", csrfProtection, (req, res) => {
+app.get("/status", (_, res) => {
   res.json({ status: "available" });
-});
-
-app.use("/csrf-test", csrfProtection, (req, res) => {
-  res.json({ status: "Your CSRF token was validated correctly" });
 });
 
 app.post("/signup", (req, res) => {
@@ -71,6 +64,7 @@ app.post("/signup", (req, res) => {
             path: "/",
             secure: true,
             httpOnly: true,
+            sameSite: "strict",
           });
           res.json({ status: "Successfully Logged In" });
         });
@@ -87,11 +81,12 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
     path: "/",
     secure: true,
     httpOnly: true,
+    sameSite: "strict",
   });
   res.json({ status: "Successfully Logged In" });
 });
 
-app.get("/auth/google", csrfProtection, bearerToken(), (req, res) => {
+app.get("/auth/google", bearerToken(), (req, res) => {
   verifyGoogleToken(req.token)
     .then((payload) => res.send(payload)) // TODO do some other stuff here, create a user etc
     .catch(() =>
