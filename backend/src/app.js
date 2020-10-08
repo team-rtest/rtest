@@ -35,6 +35,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bearerToken());
 graphqlServer.applyMiddleware({ app });
 
 app.get("/", (_, res) => {
@@ -46,6 +47,12 @@ app.get("/status", (_, res) => {
 });
 
 app.post("/signup", (req, res) => {
+  if (req.body.username === "noauth") {
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ error: "This username is forbidden." });
+  }
+
   User.register(
     new User({
       username: req.body.username,
@@ -79,6 +86,12 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", passport.authenticate("local"), (req, res) => {
+  if (req.user.username === "noauth") {
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ error: "This username is forbidden." });
+  }
+
   const token = generateToken({ username: req.user.username });
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
