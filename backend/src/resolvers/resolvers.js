@@ -30,7 +30,7 @@ export const resolvers = {
       if (id) {
         const s = await User.findOne({ _id: id }).exec();
       } else if (username) {
-        const s = await User.findOne({ username: username }).exec();
+        const s = await User.findOne({ username }).exec();
         return s;
       }
     },
