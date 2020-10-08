@@ -1,10 +1,10 @@
 import express from "express";
 
 export default {
-  isInClass: (username) => {
+  isClassStudent: (username) => {
     next();
   },
-  ownsSubmission: (username) => {
+  canEditSubmission: (username) => {
     next();
   },
   isClassInstructor: (username) => {
