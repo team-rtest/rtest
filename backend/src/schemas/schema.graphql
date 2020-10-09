@@ -25,7 +25,8 @@ type Course {
   year: Int
   semester: String
   students: [User]
-  instructors: [User]
+  instructor: User
+  assistants: [User]
   assignmentGroups: [AssignmentGroup]
 }
 
@@ -166,4 +167,8 @@ type Mutation {
   createSubmission(submission: SubmissionInput): Submission
   createAssignmentGroup(assignmentGroup: AssignmentGroupInput): AssignmentGroup
   updateGrade(grade: GradeInput): Float
+  addStudentToCourse(student: ID!, course: ID!, section: Int): ID!
+  addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
+  removeStudentFromCourse(student:ID!, course: ID!, section: Int): ID!
+  removeUser(user: ID!): ID!
 }
