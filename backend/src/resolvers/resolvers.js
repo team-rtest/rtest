@@ -10,6 +10,14 @@ import {
 } from "../routes/fileHandler.js";
 
 export const resolvers = {
+  /*
+  Resolvers are structured as follows
+  resolver: async(root, args, context, info) => {
+    // do something
+  }
+
+  info is probably useless for most of your needs
+  */
   Query: {
     hello: () => "hi",
     course: async (_, { id }) => {
@@ -18,10 +26,15 @@ export const resolvers = {
       );
       return course;
     },
-    user: async (_, { id }) => {
-      const s = await User.findOne({ _id: id }).exec();
-      return s;
+    user: async (_, { id, username }) => {
+      if (id) {
+        const s = await User.findOne({ _id: id }).exec();
+      } else if (username) {
+        const s = await User.findOne({ username }).exec();
+        return s;
+      }
     },
+
     assignment: async (_, { id }) => {
       const a = await Assignment.findOne({ _id: id }).exec();
       return a;
@@ -35,8 +48,11 @@ export const resolvers = {
       return su;
     },
 
-    courses: async () => Course.find().exec(),
-    users: async () => User.find().exec(),
+    courses: async (_, __, context) => {
+      console.log(await context.user);
+      Course.find().exec();
+    },
+
     assignments: async () => Assignment.find().exec(),
     assignmentGroups: async () => AssignmentGroup.find().exec(),
     submissions: async () => Submission.find().exec(),
@@ -55,21 +71,37 @@ export const resolvers = {
       return c;
     },
 
-    createUser: async (_, { user }) => {
-      const s = new User(user);
-      await s.save();
-      return s;
-    },
-
-    // TODO the schema is currently not passing the stuff you actually need, make sure to
-    // update the input types as needed for your resolvers
-    // (This is my fault, I updated the resolvers; I'm not flaming you) - Simon
+    // createUser: async (_, { user }) => {
+    //   User.register(
+    //     new User({
+    //       username: user.username,
+    //       email: user.email,
+    //       firstName: user.firstName,
+    //       lastName: user.lastName,
+    //     }),
+    //     user.password,
+    //     (err, user) => {
+    //       if (err) {
+    //         return { status: "Authentication failed" };
+    //       } else {
+    //         passport.authenticate("local")(req, res, () => {
+    //           const token = generateToken({ username: req.user.username });
+    //           res.cookie("token", token, {
+    //             path: "/",
+    //             secure: true,
+    //             httpOnly: true,
+    //             sameSite: "strict",
+    //           });
+    //           return { status: "Successfully Logged In" };
+    //         });
+    //       }
+    //     }
+    //   );
+    // },
 
     createAssignmentGroup: async (_, { assignmentGroup }) => {
       const ag = new AssignmentGroup(assignmentGroup);
       await ag.save();
-      // TODO I'm not sure this is correct, read up on how updateOne works and if it needs
-      // to be waited on with async, or if it needs exec()
       Course.updateOne(
         { _id: mongoose.Types.ObjectId(assignmentGroup.courseId) },
         { $push: { assignmentGroups: ag._id } },

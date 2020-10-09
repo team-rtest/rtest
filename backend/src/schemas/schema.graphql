@@ -143,7 +143,7 @@ type Query {
   # Query. Leave id empty if you'd like to view the currently logged in
   # user.
   hello: String!
-  user(id: ID): User
+  user(id: ID, username: String): User
   assignment(id: ID): Assignment
   submission(id: ID): Submission
   course(id: ID): Course
@@ -153,7 +153,6 @@ type Query {
   getPresignedUpload(bucket: String, key: String): String!
   getPresignedDownload(bucket: String, key: String): String!
   
-  users: [User]
   assignments: [Assignment]
   submissions: [Submission]
   courses: [Course]
@@ -161,7 +160,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(user: UserInput): User
+  # createUser(user: UserInput): User
   createAssignment(assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
   createSubmission(submission: SubmissionInput): Submission

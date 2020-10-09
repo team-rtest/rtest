@@ -6,7 +6,7 @@ import pkg from "passport-jwt";
 const { Strategy: JwtStrategy, ExtractJwt } = pkg;
 
 import jwt from "jsonwebtoken";
-import User from "./models/User.js";
+import User from "../models/User.js";
 import googleAuth from "google-auth-library";
 const { OAuth2Client } = googleAuth;
 
@@ -48,3 +48,6 @@ export async function verifyGoogleToken(token) {
 }
 
 export const verifyUser = User.authenticate("jwt", { session: false });
+
+export const getUsernameFromToken = (token) =>
+  jwt.verify(token, process.env.SECRET_KEY)["username"];
