@@ -9,6 +9,8 @@ services:
     image: mongo:4.4.1
 
   object_storage:
+    networks:
+      - backend
     ports:
       - "9000:9000"
     image: minio/minio
@@ -33,6 +35,9 @@ services:
       - MONGO_URI=mongodb://mongo:27017/rtest
       # TODO change the JWT secret to a docker secret instead?
       - JWT_SECRET=aeufaskfhasuekfhasefukasehukf
+      - STORAGE_ENDPOINT=http://object_storage:9000/minio
+      - STORAGE_ACCESS_KEY=changethisaccesskey
+      - STORAGE_SECRET_KEY=changethissecretkey
     ports:
       - "4000:4000"
     build:
