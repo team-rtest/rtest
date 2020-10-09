@@ -10,6 +10,7 @@ import bearerToken from "express-bearer-token";
 import User from "./models/User.js";
 import { generateToken, verifyGoogleToken } from "./auth/auth.js";
 import graphqlServer from "./routes/graphql.js";
+import { initObjectStorage } from "./routes/fileHandler.js";
 
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
@@ -23,6 +24,8 @@ if (!process.env.JEST_WORKER_ID) {
       }
     }
   );
+
+  initObjectStorage();
 }
 
 const app = express();
