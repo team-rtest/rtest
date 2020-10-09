@@ -35,7 +35,10 @@ export async function uploadSubmission(
   // getSubmissionUpload("f321f12ff21f", "f12r32314124", "f21321f23f2f" ) => presigned url
 
   // TODO if one of these parameters are missing throw error
-  return getPresignedUpload("rtest", [course, assignment, submission, filename].join("/"));
+  return getPresignedUpload(
+    "rtest",
+    [course, assignment, submission, filename].join("/")
+  );
 }
 
 export async function getPresignedUpload(bucket, key) {
@@ -43,6 +46,7 @@ export async function getPresignedUpload(bucket, key) {
     Bucket: bucket,
     Key: key,
     Expires: 1000,
+    Conditions: [["content-length-range", 0, 1000000]],
   });
   return url;
 }
