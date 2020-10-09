@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Submission from "../models/Submission.js";
+import Assignment from "../models/Assignment.js";
 
 export default {
   Query: {

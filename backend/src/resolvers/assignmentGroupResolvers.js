@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import AssignmentGroup from "../models/AssignmentGroup.js";
+import Course from "../models/Course.js";
 
 export default {
   Query: {

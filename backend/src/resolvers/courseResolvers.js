@@ -23,7 +23,9 @@ export default {
     },
 
     addStudentToCourse: async (_, { student, course, section }) => {
-      if (!section) section = 0;
+      if (!section) {
+        section = 0;
+      }
 
       await Course.updateOne(
         { _id: mongoose.Types.ObjectId(course), "sections.number": section },
@@ -33,7 +35,9 @@ export default {
     },
 
     addInstructorToCourse: async (_, { instructor, course, section }) => {
-      if (!section) section = 0;
+      if (!section) {
+        section = 0;
+      }
 
       await Course.updateOne(
         { _id: mongoose.Types.ObjectId(course), "sections.number": section },
@@ -43,7 +47,9 @@ export default {
     },
 
     removeStudentFromCourse: async (_, { student, course, section }) => {
-      if (!section) section = 0;
+      if (!section) {
+        section = 0;
+      }
 
       await Course.updateOne(
         { _id: mongoose.Types.ObjectId(course), "sections.number": section },
