@@ -1,7 +1,5 @@
-import express from "express";
-
 export default {
-  isClassStudent: (username) => {
+  isInCourse: (username) => {
     next();
   },
   canEditSubmission: (username) => {

@@ -28,10 +28,10 @@
     "google-auth-library": "^6.1.1",
     "graphql": "^15.3.0",
     "http-errors": "~1.8.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.8",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "regenerator-runtime": "^0.13.7"
