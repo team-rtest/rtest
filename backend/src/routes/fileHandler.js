@@ -46,7 +46,7 @@ export async function getPresignedUpload(bucket, key) {
     Bucket: bucket,
     Key: key,
     Expires: 1000,
-    Conditions: [["content-length-range", 0, 1000000]],
+    // Conditions: [["content-length-range", 0, 1000000]],
   });
   return url;
 }
