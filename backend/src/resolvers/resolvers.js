@@ -67,6 +67,7 @@ export const resolvers = {
   Mutation: {
     createCourse: async (_, { course }) => {
       const c = new Course(course);
+      c.sections.push({ number: 0 });
       await c.save();
       return c;
     },
@@ -104,7 +105,7 @@ export const resolvers = {
       await ag.save();
       Course.updateOne(
         { _id: mongoose.Types.ObjectId(assignmentGroup.courseId) },
-        { $push: { assignmentGroups: ag._id } },
+        { $addToSet: { assignmentGroups: ag._id } },
         (err, docs) => {
           if (err) {
             console.log(err);
@@ -121,7 +122,7 @@ export const resolvers = {
       await a.save();
       AssignmentGroup.updateOne(
         { _id: mongoose.Types.ObjectId(assignment.assignmentGroupId) },
-        { $push: { assignments: a._id } }
+        { $addToSet: { assignments: a._id } }
       );
       return a;
     },
@@ -131,7 +132,7 @@ export const resolvers = {
       await s.save();
       Assignment.updateOne(
         { _id: mongoose.Types.ObjectId(submission.assignmentId) },
-        { $push: { submissions: s._id } }
+        { $addToSet: { submissions: s._id } }
       );
     },
 
@@ -141,6 +142,44 @@ export const resolvers = {
         { $set: { grade: gradeInput.grade } }
       );
       return gradeInput.grade;
+    },
+
+    addStudentToCourse: async (_, { student, course, section }) => {
+      if (!section) section = 0;
+
+      await Course.updateOne(
+        { _id: mongoose.Types.ObjectId(course), "sections.number": section },
+        { $addToSet: { "sections.$.students": student } }
+      );
+      return student;
+    },
+
+    addInstructorToCourse: async (_, { instructor, course, section }) => {
+      if (!section) section = 0;
+
+      await Course.updateOne(
+        { _id: mongoose.Types.ObjectId(course), 'sections.number': section },
+        { $set: { 'sections.$.instructor': instructor } }
+      );
+      return instructor;
+    },
+
+    removeStudentFromCourse: async (_, { student, course, section }) => {
+      if (!section) section = 0;
+
+      await Course.updateOne(
+        { _id: mongoose.Types.ObjectId(course), "sections.number": section },
+        { $pull: { "sections.$.students": student } }
+      );
+      return student;
+    },
+
+    removeUser: async(_, { user }) => {
+      await User.deleteOne(
+        { _id: mongoose.Types.ObjectId(user) }
+      );
+
+      return user;
     },
 
     // peerGradeSubmission: async (_, { peerGradeInput }) => {
