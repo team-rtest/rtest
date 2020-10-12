@@ -171,4 +171,5 @@ type Mutation {
   addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
   removeStudentFromCourse(student:ID!, course: ID!, section: Int): ID!
   removeUser(user: ID!): ID!
+  addSubmissionFile(course: ID!, assignment: ID!, submission: ID!, filename: String!): String!
 }
