@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Upload from "views/Upload";
+import { Upload } from "components";
 
 function AssignmentPage({ selected, assignments, setSelected }) {
   return (

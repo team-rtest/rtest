@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-function Header({ ...rest }) {
+function Header() {
   return (
-    <Navigation {...rest}>
+    <Navigation>
       <Logo to="/"> RTest </Logo>
       <NavLink to="/"> Home </NavLink>
       <NavLink to="/signup"> Signup </NavLink>
-      <NavLink className="btn btn-upload" to="/login">
+      <NavLink className="btn btn-upload text-white" to="/login">
         Login
       </NavLink>
     </Navigation>

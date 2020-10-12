@@ -1,26 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import Sidebar from "views/Sidebar";
-import Topbar from "views/Topbar";
-import Error404 from "views/Error404";
+import Sidebar from "views/Internal/Navigation/Sidebar";
+import Topbar from "views/Internal/Navigation/Topbar";
+import Bottombar from "views/Internal/Navigation/Bottombar";
 
-import Bottombar from "views/Bottombar";
-
-import { routes } from "routes";
-import { Switch, Route } from "react-router-dom";
-
-function getWindowWidth() {
-  const { innerWidth: width } = window;
-  return width;
-}
-
-function Internal() {
-  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+function Internal({ children }) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     function handleResize() {
-      setWindowWidth(getWindowWidth());
+      setWindowWidth(window.innerWidth);
     }
 
     window.addEventListener("resize", handleResize);
@@ -33,14 +23,7 @@ function Internal() {
         <Sidebar />
         <Right>
           <Topbar />
-          <Switch>
-            {routes.map((route, index) => (
-              <Route key={index} exact path={route.path}>
-                {route.page}
-              </Route>
-            ))}
-            <Route path="*" component={Error404} />
-          </Switch>
+          {children}
         </Right>
       </Desktop>
     </Box>
@@ -48,14 +31,7 @@ function Internal() {
     <Box>
       <Mobile>
         <Topbar />
-        <Switch>
-          {routes.map((route, index) => (
-            <Route key={index} exact path={route.path}>
-              {route.page}
-            </Route>
-          ))}
-          <Route path="*" component={Error404} />
-        </Switch>
+        {children}
         <Bottombar />
       </Mobile>
     </Box>

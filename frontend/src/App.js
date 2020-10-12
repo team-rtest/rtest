@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import External from "./External";
-import Internal from "./Internal";
-
-import { BrowserRouter as Router } from "react-router-dom";
+import { external, internal } from "routes";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import External from "views/External/External";
+import Internal from "views/Internal/Internal";
+import Error404 from "views/Error404";
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(true);
-
   return (
     <Router>
       <Screen>
-        {isLoggedIn ? <Internal /> : <External />}
+        <Switch>
+          {external.map(({ path, page }) => (
+            <Route key={path} exact path={path}>
+              <External>{page}</External>
+            </Route>
+          ))}
+
+          {internal.map(({ path, page }) => (
+            <Route key={path} exact path={path}>
+              <Internal>{page}</Internal>
+            </Route>
+          ))}
+
+          <Route exact path="*">
+            <Error404 />
+          </Route>
+        </Switch>
         <Test>Hello World</Test>
       </Screen>
     </Router>
