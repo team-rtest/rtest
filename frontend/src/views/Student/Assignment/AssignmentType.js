@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
-
 function AssignmentType({ type, selected, setSelected }) {
   const [hidden, setHidden] = useState(false);
 
@@ -167,6 +165,9 @@ const Tag = styled.div`
           color: hsl(150, 52.9%, 52%);
           background: hsla(150, 52.9%, 52%, 0.2);
         `;
+
+      default:
+        return ``;
     }
   }}
 `;

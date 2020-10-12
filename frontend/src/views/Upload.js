@@ -34,7 +34,7 @@ function Upload({ label, ...rest }) {
       submission: "test3",
       file: "test4",
     });
-  }
+  };
 
   return (
     //Code modified from https://bootsnipp.com/snippets/DOXy4

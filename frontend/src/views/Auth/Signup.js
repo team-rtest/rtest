@@ -56,8 +56,7 @@ function Signup() {
             onChange={handleChange}
           />
           <button className="btn btn-primary btn-upload" onClick={handleSubmit}>
-            {" "}
-            Sign up{" "}
+            Sign up
           </button>
           <GoogleLogin
             clientId={GOOGLE_CLIENT_ID}

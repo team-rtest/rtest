@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
-import { Card, Form } from 'components';
+import { Link } from "react-router-dom";
+import { Card, Form } from "components";
 
 const AuthBox = styled.div`
   height: 100%;
@@ -41,4 +41,4 @@ const AuthLink = styled(Link)`
   }
 `;
 
-export { AuthBox, AuthCard, AuthForm, Heading, AuthLink }
+export { AuthBox, AuthCard, AuthForm, Heading, AuthLink };

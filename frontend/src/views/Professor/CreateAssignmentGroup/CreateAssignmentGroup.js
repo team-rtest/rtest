@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { Card, Input, FileInput } from 'components';
-import Upload from 'views/Upload'
+import { Card, Input } from "components";
 
 function CreateAssignmentGroup({ closeModal }) {
-  const [inputs, setInputs] = useState({ group_name: '', group_type: '', grading_policy: '', grading_weight: '' });
-  const [errors, setErrors] = useState({ group_name: null, group_type: null, grading_policy: null, grading_weight: null });
+  const [inputs, setInputs] = useState({
+    group_name: "",
+    group_type: "",
+    grading_policy: "",
+    grading_weight: "",
+  });
+  const [errors, setErrors] = useState({
+    group_name: null,
+    group_type: null,
+    grading_policy: null,
+    grading_weight: null,
+  });
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
     setErrors({ ...errors, [name]: !value });
-  }
+  };
 
   return (
     <Overlay>
@@ -50,12 +59,16 @@ function CreateAssignmentGroup({ closeModal }) {
           </Inputs>
         </Body>
         <Foot>
-          <Button className="btn text-white btn-secondary" onClick={closeModal}>Close</Button>
-          <Button className="btn text-white btn-upload" onClick={closeModal}>Create</Button>
+          <Button className="btn text-white btn-secondary" onClick={closeModal}>
+            Close
+          </Button>
+          <Button className="btn text-white btn-upload" onClick={closeModal}>
+            Create
+          </Button>
         </Foot>
       </CreateAssignmentCard>
     </Overlay>
-  )
+  );
 }
 
 const Overlay = styled.div`

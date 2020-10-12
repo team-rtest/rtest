@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 function Card({ children, className, ...rest }) {
   return (
     <StyledCard className={`card ${className}`} {...rest}>
-      { children }
+      {children}
     </StyledCard>
   );
 }
@@ -12,6 +12,5 @@ function Card({ children, className, ...rest }) {
 const StyledCard = styled.div`
   background: #f8f9fa;
 `;
-
 
 export default Card;

@@ -1,16 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Upload from 'views/Upload';
-import Graph from './Graph';
-import Table from './Table';
-
-import { Link } from 'react-router-dom';
+import Upload from "views/Upload";
 
 function AssignmentPage({ selected, assignments, setSelected }) {
   return (
     <Box>
-      <Heading>{ selected.name }</Heading>
+      <Heading>{selected.name}</Heading>
       <Date> Due: September 18th 2020 </Date>
       <File>
         <FileName>CS334_HW1.pdf</FileName>
@@ -18,25 +14,43 @@ function AssignmentPage({ selected, assignments, setSelected }) {
       </File>
       <Subheading> Submission instructions </Subheading>
       <Text>
-        Submit your assignment through the QTest system, using course ID: CS470 and exam ID: hw2. Upload a single ZIP archive file named hw2.zip, containing all the files of your solution:
+        Submit your assignment through the QTest system, using course ID: CS470
+        and exam ID: hw2. Upload a single ZIP archive file named hw2.zip,
+        containing all the files of your solution:
       </Text>
       <List>
         <li> The program’s source files. </li>
-        <li> A README.txt file explaining how to compile and run your program. </li>
-        <li> A file named result500.txt which is your solution for the dataset T10I4D100K.txt with minimum support count 500. </li>
+        <li>
+          {" "}
+          A README.txt file explaining how to compile and run your program.{" "}
+        </li>
+        <li>
+          {" "}
+          A file named result500.txt which is your solution for the dataset
+          T10I4D100K.txt with minimum support count 500.{" "}
+        </li>
         <li> The report in PDF format. </li>
         <li> The LaTeX source files used to typeset the report. </li>
       </List>
       <Text>
-        No email submissions are accepted. No late submissions are accepted.
-        At the top of your solution, include a section named “Collaboration statement” in which you acknowledge any collaboration, help, or resource you used or consulted to complete this assignment.
+        No email submissions are accepted. No late submissions are accepted. At
+        the top of your solution, include a section named “Collaboration
+        statement” in which you acknowledge any collaboration, help, or resource
+        you used or consulted to complete this assignment.
       </Text>
       <FileUpload>
         <Upload />
-        <button className="btn btn-upload text-white" onClick={() => {}}> Submit File </button>
+        <button className="btn btn-upload text-white" onClick={() => {}}>
+          {" "}
+          Submit File{" "}
+        </button>
       </FileUpload>
-      <Success><Tick className="fa fa-check-circle" /> Submitted on August 28th 2020</Success>
-      <Failure><Cross className="fa fa-times-circle" /> Closed on August 28th 2020</Failure>
+      <Success>
+        <Tick className="fa fa-check-circle" /> Submitted on August 28th 2020
+      </Success>
+      <Failure>
+        <Cross className="fa fa-times-circle" /> Closed on August 28th 2020
+      </Failure>
     </Box>
   );
 }
@@ -66,16 +80,16 @@ const File = styled.div`
   margin-top: 20px;
   border-radius: 0.25rem;
 
-  color: #6173DB !important;
-  border-color: #6173DB;
+  color: #6173db !important;
+  border-color: #6173db;
   background: rgba(97, 115, 219, 0.2);
 
   & ${FileIcon} {
-    color: #6173DB;
+    color: #6173db;
   }
 
   & ${FileName} {
-    color: #6173DB;
+    color: #6173db;
   }
 `;
 
@@ -118,8 +132,8 @@ const Success = styled.div`
   border-radius: 0.25rem;
   font-weight: 500;
 
-  color: #6173DB !important;
-  border-color: #6173DB;
+  color: #6173db !important;
+  border-color: #6173db;
   // background: rgba(97, 115, 219, 0.2);
 `;
 
@@ -142,9 +156,7 @@ const Failure = styled.div`
   border-color: hsl(350, 62.9%, 62%);
 `;
 
-const Tick = styled.span`
-
-`;
+const Tick = styled.span``;
 
 const Cross = styled.span``;
 

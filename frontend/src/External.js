@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Header from 'views/Header';
-import Error404 from 'views/Error404';
+import Header from "views/Header";
+import Error404 from "views/Error404";
 
-import { routes } from 'routes';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { routes } from "routes";
+import { Switch, Route } from "react-router-dom";
 
 function External() {
   return (
@@ -13,7 +13,11 @@ function External() {
       <Header />
       <Screen>
         <Switch>
-          { routes.map(route => <Route exact path={route.path}>{ route.page }</Route>) }
+          {routes.map((route, index) => (
+            <Route key={index} exact path={route.path}>
+              {route.page}
+            </Route>
+          ))}
           <Route path="*" component={Error404} />
         </Switch>
       </Screen>
@@ -21,9 +25,6 @@ function External() {
   );
 }
 
-
-const Screen = styled.div`
-  
-`;
+const Screen = styled.div``;
 
 export default External;

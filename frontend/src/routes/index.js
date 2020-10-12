@@ -5,7 +5,7 @@ import StudentCourses from "views/Student/Courses/Courses";
 
 import ProfessorCourses from "views/Professor/Courses/Courses";
 
-import AssignmentReview from 'views/Review/AssignmentReview';
+import AssignmentReview from "views/Review/AssignmentReview";
 import CreateCourse from "views/Professor/CreateCourse/CreateCourse";
 import EditCourse from "views/Professor/EditCourse/EditCourse";
 import CreateAssignment from "views/Professor/CreateAssignment/CreateAssignment";
@@ -33,8 +33,8 @@ const routes = [
     page: <ProfessorCourses />,
   },
   {
-    path: '/assignment-review',
-    page: <AssignmentReview />
+    path: "/assignment-review",
+    page: <AssignmentReview />,
   },
   {
     path: "/professor/create-course",

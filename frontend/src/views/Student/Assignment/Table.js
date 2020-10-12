@@ -1,9 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 function Table({ assignments }) {
-
-  const assignementList = assignments[0].list
+  const assignementList = assignments[0].list;
 
   return (
     <Box>
@@ -17,20 +16,20 @@ function Table({ assignments }) {
         </tr>
       </Head>
       <Body>
-        {
-          assignementList.map((assignment, index) => (
-            <tr>
-              <Complete>{ index }</Complete>
-              <Name>{ assignment.name.split(':')[1] }</Name>
-              <Date>September 18th 2020</Date>
-              <Date>September 18th 2020</Date>
-              <Grade><Score> 98 / 100 </Score></Grade>
-            </tr>
-          ))
-        }
+        {assignementList.map((assignment, index) => (
+          <tr>
+            <Complete>{index}</Complete>
+            <Name>{assignment.name.split(":")[1]}</Name>
+            <Date>September 18th 2020</Date>
+            <Date>September 18th 2020</Date>
+            <Grade>
+              <Score> 98 / 100 </Score>
+            </Grade>
+          </tr>
+        ))}
       </Body>
     </Box>
-  )
+  );
 }
 
 const Box = styled.table`
@@ -47,9 +46,7 @@ const Heading = styled.th`
   padding: 15px;
 `;
 
-const Body = styled.tbody`
-
-`;
+const Body = styled.tbody``;
 
 const Complete = styled.td`
   text-align: center;
@@ -69,7 +66,6 @@ const Grade = styled.td`
   padding: 15px;
 `;
 
-
 const Score = styled.div`
   // width: auto;
   // text-align: center;
@@ -81,9 +77,4 @@ const Score = styled.div`
   // background: rgba(97, 115, 219, 0.2);
 `;
 
-const Tick = styled.div`
-  font-size: 20px;
-  color: rgb(97, 115, 219);
-`;
-
-export default Table
+export default Table;

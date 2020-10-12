@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { Card, Input, FileInput } from 'components';
-import Upload from 'views/Upload'
+import { Card, Input, FileInput } from "components";
 
 function CreateAssignment({ closeModal }) {
-  const [inputs, setInputs] = useState({ assignment_name: '', assignment_group: '', max_grade: '', due_date: '', assignment_instructions: '' });
-  const [errors, setErrors] = useState({ assignment_name: null, assignment_group: null, max_grade: null, due_date: null, assignment_instructions: null });
+  const [inputs, setInputs] = useState({
+    assignment_name: "",
+    assignment_group: "",
+    max_grade: "",
+    due_date: "",
+    assignment_instructions: "",
+  });
+  const [errors, setErrors] = useState({
+    assignment_name: null,
+    assignment_group: null,
+    max_grade: null,
+    due_date: null,
+    assignment_instructions: null,
+  });
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
     setErrors({ ...errors, [name]: !value });
-  }
+  };
 
   return (
     <Overlay>
@@ -57,12 +68,16 @@ function CreateAssignment({ closeModal }) {
           </Inputs>
         </Body>
         <Foot>
-          <Button className="btn text-white btn-secondary" onClick={closeModal}>Close</Button>
-          <Button className="btn text-white btn-upload" onClick={closeModal}>Create</Button>
+          <Button className="btn btn-secondary" onClick={closeModal}>
+            Close
+          </Button>
+          <Button className="btn btn-upload" onClick={closeModal}>
+            Create
+          </Button>
         </Foot>
       </CreateAssignmentCard>
     </Overlay>
-  )
+  );
 }
 
 const Overlay = styled.div`

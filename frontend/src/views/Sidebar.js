@@ -9,16 +9,16 @@ function Header({ ...rest }) {
       <Logo to="/"> RTest </Logo>
       <NavLinks>
         <NavLink to="" selected>
-          <Icon className="fa fa-chart-pie" /> Dashboard{" "}
+          <Icon className="fa fa-chart-pie" /> Dashboard
         </NavLink>
         <NavLink to="">
-          <Icon className="fa fa-bell" /> Notifications{" "}
+          <Icon className="fa fa-bell" /> Notifications
         </NavLink>
         <NavLink to="">
-          <Icon className="fa fa-user" /> Account{" "}
+          <Icon className="fa fa-user" /> Account
         </NavLink>
         <NavLink to="">
-          <Icon className="fa fa-cog" /> Settings{" "}
+          <Icon className="fa fa-cog" /> Settings
         </NavLink>
       </NavLinks>
     </Navigation>

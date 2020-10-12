@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 function Graph() {
   return (
@@ -47,7 +47,7 @@ function Graph() {
         </Item>
       </Bars>
     </Box>
-  )
+  );
 }
 
 const Box = styled.div`
@@ -60,7 +60,10 @@ const Bars = styled.div`
   height: 300px;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(${props => props.n}, ${props => ((800 / props.n) > 80) ? 80 : (800 / props.n)}px);
+  grid-template-columns: repeat(
+    ${(props) => props.n},
+    ${(props) => (800 / props.n > 80 ? 80 : 800 / props.n)}px
+  );
   align-items: flex-end;
   border-bottom: 1px solid lightgrey;
 `;
@@ -71,7 +74,6 @@ const Axis = styled.div`
   justify-content: space-between;
   padding-right: 10px;
   border-right: 1px solid lightgrey;
-
 `;
 
 const Tick = styled.div`
@@ -96,7 +98,7 @@ const Label = styled.h6`
 
 const Item = styled.div`
   padding: 10px;
-  height: ${props => props.score}%;
+  height: ${(props) => props.score}%;
   // height: 100%;
 `;
 
@@ -107,4 +109,4 @@ const Bar = styled.div`
   height: 100%;
 `;
 
-export default Graph
+export default Graph;

@@ -1,48 +1,88 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { Card } from 'components';
+import { Card } from "components";
 
-import CreateAssignmentModal from './../CreateAssignment/CreateAssignment'
-import CreateAssignmentGroupModal from './../CreateAssignmentGroup/CreateAssignmentGroup'
+import CreateAssignmentModal from "./../CreateAssignment/CreateAssignment";
+import CreateAssignmentGroupModal from "./../CreateAssignmentGroup/CreateAssignmentGroup";
 
 function EditCourse() {
   const [createAssignmentModal, setCreateAssignmentModal] = useState(false);
-  const [createAssignmentGroupModal, setCreateAssignmentGroupModal] = useState(false);
+  const [createAssignmentGroupModal, setCreateAssignmentGroupModal] = useState(
+    false
+  );
 
   const openCreateAssignmentModal = () => {
     setCreateAssignmentModal(true);
-  }
+  };
 
   const openCreateAssignmentGroupModal = () => {
     setCreateAssignmentGroupModal(true);
-  }
+  };
 
   return (
     <Box>
-      { createAssignmentModal && <CreateAssignmentModal closeModal={() => setCreateAssignmentModal(false)} />}
-      { createAssignmentGroupModal && <CreateAssignmentGroupModal closeModal={() => setCreateAssignmentGroupModal(false)} />}
+      {createAssignmentModal && (
+        <CreateAssignmentModal
+          closeModal={() => setCreateAssignmentModal(false)}
+        />
+      )}
+      {createAssignmentGroupModal && (
+        <CreateAssignmentGroupModal
+          closeModal={() => setCreateAssignmentGroupModal(false)}
+        />
+      )}
       <Scroll>
         <Group>
-          <GroupHeading> Labs <Edit><i className="fa fa-edit"></i></Edit> </GroupHeading>
+          <GroupHeading>
+            Labs
+            <Edit>
+              <i className="fa fa-edit"></i>
+            </Edit>
+          </GroupHeading>
           <hr />
           <Assignments>
-            <Assignment><i className="fa fa-file-alt"></i> K Nearest Neighbors </Assignment>
-            <Assignment><i className="fa fa-file-alt"></i> Decision Tree </Assignment>
-            <Assignment><i className="fa fa-file-alt"></i> Apriori Algorithm </Assignment>
-            <Assignment><i className="fa fa-file-alt"></i> Naive Bayes </Assignment>
-            <Assignment><i className="fa fa-file-alt"></i> Random Forests </Assignment>
-            <CreateAssignment onClick={openCreateAssignmentModal}><i className="fa fa-plus-circle"></i> Create Assignment </CreateAssignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> K Nearest Neighbors
+            </Assignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> Decision Tree
+            </Assignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> Apriori Algorithm
+            </Assignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> Naive Bayes
+            </Assignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> Random Forests
+            </Assignment>
+            <CreateAssignment onClick={openCreateAssignmentModal}>
+              <i className="fa fa-plus-circle"></i> Create Assignment
+            </CreateAssignment>
           </Assignments>
         </Group>
         <Group>
-          <GroupHeading> Exams <Edit><i className="fa fa-edit"></i></Edit> </GroupHeading>
+          <GroupHeading>
+            Exams
+            <Edit>
+              <i className="fa fa-edit"></i>
+            </Edit>
+          </GroupHeading>
           <hr />
           <Assignments>
-            <Assignment> <i className="fa fa-file-alt"></i> Exam 1 </Assignment>
-            <Assignment> <i className="fa fa-file-alt"></i> Exam 2 </Assignment>
-            <Assignment> <i className="fa fa-file-alt"></i> Exam 3 </Assignment>
-            <CreateAssignment><i className="fa fa-plus-circle"></i> Create Assignment </CreateAssignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> Exam 1
+            </Assignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> Exam 2
+            </Assignment>
+            <Assignment>
+              <i className="fa fa-file-alt"></i> Exam 3
+            </Assignment>
+            <CreateAssignment>
+              <i className="fa fa-plus-circle"></i> Create Assignment
+            </CreateAssignment>
           </Assignments>
         </Group>
         <CreateGroup onClick={openCreateAssignmentGroupModal}>
@@ -54,7 +94,7 @@ function EditCourse() {
         </CreateGroup>
       </Scroll>
     </Box>
-  )
+  );
 }
 
 const Box = styled.div`
@@ -101,7 +141,7 @@ const Assignment = styled.button`
 
   font-weight: 500;
 
-  color: #6173DB !important;
+  color: #6173db !important;
   // border: 1px solid #6173DB;
   border: none;
   background: rgba(97, 115, 219, 0.2);
@@ -112,32 +152,12 @@ const Assignment = styled.button`
   width: 240px;
 
   & ${FileIcon} {
-    color: #6173DB;
+    color: #6173db;
   }
 
   & ${FileName} {
-    color: #6173DB;
+    color: #6173db;
   }
-`;
-
-const Heading = styled.h2`
-  margin: 20px;
-  display: flex;
-  grid-gap: 10px;
-  align-items: center;
-  font-weight: 600;
-  margin-bottom: 0;
-`;
-
-const Number = styled.span`
-  color: #6173DB !important;
-  border-radius: 100px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  padding: 10px 15px;
-
-  border: none;
-  background: rgba(97, 115, 219, 0.2);
 `;
 
 const GroupHeading = styled.h5`

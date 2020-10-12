@@ -1,33 +1,41 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
 
-import { Input } from 'components'
-import { AuthBox, AuthCard, AuthForm, Heading } from './styles'
+import { Input } from "components";
+import { AuthBox, AuthCard, AuthForm, Heading } from "./styles";
 
 function ResetPassword() {
-  const [inputs, setInputs] = useState({ new_password: '', confirm_password: '' });
-  const [errors, setErrors] = useState({ new_password: null, confirm_password: null });
+  const [inputs, setInputs] = useState({
+    new_password: "",
+    confirm_password: "",
+  });
+  const [errors, setErrors] = useState({
+    new_password: null,
+    confirm_password: null,
+  });
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
     setErrors({ ...errors, [name]: validate(name, value) });
-  }
+  };
 
   const validate = (name, value) => {
-    switch(name) {
-      case 'new_password':      return validateNewPassword(value);
-      case 'confirm_password':  return validateConfirmPassword(value);
-      default:                  return !value;
+    switch (name) {
+      case "new_password":
+        return validateNewPassword(value);
+      case "confirm_password":
+        return validateConfirmPassword(value);
+      default:
+        return !value;
     }
-  }
+  };
 
-  const validateNewPassword = value => {
-    if(value.length < 8) return 'Password must have at least 8 characters';
-  }
+  const validateNewPassword = (value) => {
+    if (value.length < 8) return "Password must have at least 8 characters";
+  };
 
-  const validateConfirmPassword = value => {
-    if(value !== inputs.new_password) return 'Password does not match';
-  }
+  const validateConfirmPassword = (value) => {
+    if (value !== inputs.new_password) return "Password does not match";
+  };
 
   const handleSubmit = () => {
     setErrors({
@@ -35,13 +43,13 @@ function ResetPassword() {
       confirm_password: validateConfirmPassword(inputs.confirm_password),
     });
 
-    const noneEmpty = inputs.new_password && inputs.confirm_password
-    const noneError = !errors.new_password && !errors.confirm_password
+    const noneEmpty = inputs.new_password && inputs.confirm_password;
+    const noneError = !errors.new_password && !errors.confirm_password;
 
-    if(noneEmpty && noneError) {
-      alert('form submitted successfully!');
+    if (noneEmpty && noneError) {
+      alert("form submitted successfully!");
     }
-  }
+  };
 
   return (
     <AuthBox>
@@ -62,7 +70,9 @@ function ResetPassword() {
             error={errors.confirm_password}
             onChange={handleChange}
           />
-          <button className="btn btn-primary btn-upload" onClick={handleSubmit}> Confirm Reset </button>
+          <button className="btn btn-primary btn-upload" onClick={handleSubmit}>
+            Confirm Reset
+          </button>
         </AuthForm>
       </AuthCard>
     </AuthBox>
