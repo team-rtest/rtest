@@ -20,8 +20,8 @@ function EditCourse() {
 
   return (
     <Box>
-      { createAssignmentModal && <CreateAssignmentModal closeModal={() => setCreateAssignmentModal(false)} /> }
-      { createAssignmentGroupModal && <CreateAssignmentGroupModal closeModal={() => setCreateAssignmentGroupModal(false)} /> }
+      { createAssignmentModal && <CreateAssignmentModal closeModal={() => setCreateAssignmentModal(false)} />}
+      { createAssignmentGroupModal && <CreateAssignmentGroupModal closeModal={() => setCreateAssignmentGroupModal(false)} />}
       <Scroll>
         <Group>
           <GroupHeading> Labs <Edit><i className="fa fa-edit"></i></Edit> </GroupHeading>
@@ -59,6 +59,10 @@ function EditCourse() {
 
 const Box = styled.div`
   width: calc(100vw - 250px);
+
+  @media only screen and (max-width: 600px) {
+    width: 100vw;
+  }
 `;
 
 const Scroll = styled.div`

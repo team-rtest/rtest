@@ -52,6 +52,11 @@ function CreateCourse() {
           </Header>
           { current[index] === 'Details'   && <Details  inputs={inputs} errors={errors} handleChange={handleChange} /> }
           { current[index] === 'Members'   && <Members  inputs={inputs} errors={errors} handleChange={handleChange} /> }
+          <MobileButtons>
+            {index !== 0 && <Button onClick={handleBack} className="btn btn-secondary">Back</Button>}
+            {index !== n && <Button onClick={handleNext} className="btn btn-upload text-white">Next</Button>}
+            {index === n && <Button onClick={handleSubmit} className="btn btn-upload text-white">Submit</Button>}
+          </MobileButtons>
         </CourseForm>
       </CourseCard>
     </Box>
@@ -68,8 +73,11 @@ const Box = styled.div`
 
 const CourseCard = styled(Card)`
   padding: 25px;
-  width: auto;
   width: 500px;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const Header = styled.div`
@@ -82,6 +90,21 @@ const Header = styled.div`
 const Buttons = styled.div`
   display: flex;
   grid-gap: 10px;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
+
+const MobileButtons = styled.div`
+  display: none;
+  grid-gap: 10px;
+  margin-top: 20px;
+
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    float: right;
+  }
 `;
 
 const Heading = styled.h2`

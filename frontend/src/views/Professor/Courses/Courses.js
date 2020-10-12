@@ -68,6 +68,11 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
   flex-wrap: wrap;
+
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export default Courses;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Form } from 'components';
 
 const AuthBox = styled.div`
-  height: calc(100vh - 80px);
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;

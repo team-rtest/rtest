@@ -80,6 +80,10 @@ const Overlay = styled.div`
 
 const CreateAssignmentCard = styled(Card)`
   width: 500px;
+
+  @media only screen and (max-width: 600px) {
+    width: 90vw;
+  }
 `;
 
 const Head = styled.div`
@@ -119,7 +123,7 @@ const Foot = styled.div`
   grid-gap: 10px;
 `;
 
-const Button =  styled.button`
+const Button = styled.button`
   width: inherit;
 `;
 
