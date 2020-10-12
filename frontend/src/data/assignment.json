@@ -91,6 +91,66 @@
         "submittedAt": 1602262891,
         "grade": 82,
         "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "John",
+            "lastName": "Doe"
+        },
+        "files": [],
+        "submittedAt": 1602262800,
+        "grade": 76,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Amy",
+            "lastName": "Test"
+        },
+        "files": [],
+        "submittedAt": 1602262755,
+        "grade": 89,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Taylor",
+            "lastName": "Swift"
+        },
+        "files": [],
+        "submittedAt": 1602262799,
+        "grade": 95,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Beyonce",
+            "lastName": "Knowles"
+        },
+        "files": [],
+        "submittedAt": 1602262799,
+        "grade": 97,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Bad",
+            "lastName": "Student"
+        },
+        "files": [],
+        "submittedAt": 1602262759,
+        "grade": 5,
+        "peerGrades": []
+      },
+      {
+        "student": {
+            "firstName": "Cameron",
+            "lastName": "Katz"
+        },
+        "files": [],
+        "submittedAt": 1602262677,
+        "grade": 25,
+        "peerGrades": []
       }
     ],
     "dateCreated": 1601543045
