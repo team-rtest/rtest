@@ -21,13 +21,14 @@ const Box = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: calc(100vw - 250px);
   position: fixed;
   top: 0;
   left: 250px;
 
   @media only screen and (max-width: 600px) {
-    left: 0px;
+    width: 100vw;
+    left: 0;
   }
 `;
 

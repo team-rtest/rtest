@@ -1,7 +1,7 @@
 export const validate = (name, value) => {
   switch (name) {
     case "password":
-      return this.validatePassword(value);
+      return validatePassword(value);
     default:
       return !value;
   }

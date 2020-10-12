@@ -9,6 +9,11 @@ body,
   box-sizing: border-box;
 }
 
+/* #root {
+  color: white;
+  background-color: #212529;
+} */
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -104,4 +109,11 @@ code {
   color: #fff;
   background-color: #7e8ddf !important;
   border-color: #6876c0 !important;
+}
+
+.btn-upload:focus,
+.btn-upload:not(:disabled):not(.disabled).active:focus,
+.btn-upload:not(:disabled):not(.disabled):active:focus,
+.show > .btn-upload.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(126, 141, 223, 0.5);
 }

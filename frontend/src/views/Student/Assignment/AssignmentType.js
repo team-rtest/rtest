@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function AssignmentType({ type, selected, setSelected }) {
   const [hidden, setHidden] = useState(false);
@@ -10,26 +10,32 @@ function AssignmentType({ type, selected, setSelected }) {
     <TypeList>
       <Type>
         <Head>
-          <Arrow className={`fa fa-caret-${hidden ? 'right' : 'down'}`} onClick={() => setHidden(!hidden)} />
-          <TypeName>{ type.name }</TypeName>
-          <Count>{ type.list.length }</Count>
+          <Arrow
+            className={`fa fa-caret-${hidden ? "right" : "down"}`}
+            onClick={() => setHidden(!hidden)}
+          />
+          <TypeName>{type.name}</TypeName>
+          <Count>{type.list.length}</Count>
         </Head>
-        {
-          !hidden && (
-            <List>
-              { type.list.map(({ id, name, status, description }) => (
-                <AssignmentItem disabled={status === 'locked'} key={id} selected={name === selected.name} onClick={() => setSelected(type.list[id])}>
-                  <Heading>
-                    <Name>{ name }</Name>
-                    <Tag status={status}>{ status }</Tag>
-                  </Heading>
-                  <Date> September 18th 2020 </Date>
-                  <Description>{ description }</Description>
-                </AssignmentItem>
-              )) }
-            </List>
-          )
-        }
+        {!hidden && (
+          <List>
+            {type.list.map(({ id, name, status, description }) => (
+              <AssignmentItem
+                disabled={status === "locked"}
+                key={id}
+                selected={name === selected.name}
+                onClick={() => setSelected(type.list[id])}
+              >
+                <Heading>
+                  <Name>{name}</Name>
+                  <Tag status={status}>{status}</Tag>
+                </Heading>
+                <Date> September 18th 2020 </Date>
+                <Description>{description}</Description>
+              </AssignmentItem>
+            ))}
+          </List>
+        )}
       </Type>
     </TypeList>
   );
@@ -45,9 +51,7 @@ const Head = styled.div`
   background: #f8f9fa;
 `;
 
-const Type = styled.div`
-
-`;
+const Type = styled.div``;
 
 const TypeName = styled.div`
   color: rgb(97, 115, 219);
@@ -72,16 +76,6 @@ const TypeList = styled.div`
   overflow-y: auto;
 `;
 
-const Score = styled.div`
-  color: rgb(97, 115, 219);
-  background: rgba(97, 115, 219, 0.2);
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 1rem;
-  padding: 0 10px;
-  margin-left: auto;
-`;
-
 const Count = styled.div`
   color: rgb(108, 117, 125);
   background: rgb(108, 117, 125, 0.2);
@@ -101,8 +95,8 @@ const AssignmentItem = styled.div`
   padding: 25px;
   margin-top: -1px;
   border: 1px solid #eee;
-  background: ${props => props.selected && 'rgba(97, 115, 219, 0.1)'};
-  opacity: ${props => props.disabled && '0.5'};
+  background: ${(props) => props.selected && "rgba(97, 115, 219, 0.1)"};
+  opacity: ${(props) => props.disabled && "0.5"};
 `;
 
 const Heading = styled.h5`
@@ -116,20 +110,20 @@ const Heading = styled.h5`
 
 const Name = styled.span`
   overflow: hidden;
- text-overflow: ellipsis;
- display: -webkit-box;
- -webkit-line-clamp: 1;
- -webkit-box-orient: vertical;
-`
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+`;
 
 const Description = styled.p`
   color: grey;
   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 2;
-   -webkit-box-orient: vertical;
-   margin-bottom: 0;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 0;
 `;
 
 const Tag = styled.div`
@@ -139,36 +133,36 @@ const Tag = styled.div`
   padding: 6px 8px;
   text-transform: uppercase;
   border-radius: 0.25rem;
-  color: #6173DB;
+  color: #6173db;
   background: rgba(97, 115, 219, 0.2);
 
-  ${props => {
-    switch(props.status) {
-      case 'submitted':
+  ${(props) => {
+    switch (props.status) {
+      case "submitted":
         return `
           color: #6173DB;
           background: rgba(97, 115, 219, 0.2);
         `;
 
-      case 'late':
+      case "late":
         return `
           color: hsl(350, 62.9%, 62%);
           background: hsla(350, 62.9%, 62%, 0.2);
         `;
 
-      case 'locked':
+      case "locked":
         return `
           color: rgb(108, 117, 125);
           background: rgb(108, 117, 125, 0.2);
         `;
 
-      case 'next':
+      case "next":
         return `
           color: rgb(108, 117, 125);
           background: rgb(108, 117, 125, 0.2);
         `;
 
-      case 'graded':
+      case "graded":
         return `
           color: hsl(150, 52.9%, 52%);
           background: hsla(150, 52.9%, 52%, 0.2);
@@ -179,7 +173,7 @@ const Tag = styled.div`
 
 const Date = styled.div`
   color: grey;
-  color: #6173DB;
+  color: #6173db;
   font-size: 0.8rem;
   font-weight: 500;
   margin-bottom: 10px;

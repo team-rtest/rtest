@@ -1,28 +1,41 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
-import { Card } from 'components';
+import { Link } from "react-router-dom";
+import { Card } from "components";
 
-function Course({ id, number, name, grade, professor, numAssignments, numLate, pinned }) {
-
+function Course({
+  id,
+  number,
+  name,
+  grade,
+  professor,
+  numAssignments,
+  numLate,
+  pinned,
+}) {
   // getNumAssignments
   // getNumAssignmentsLate
   // getOverallGrade
   // getNextAssignment
 
-  const STAR = <Star className={`fa${pinned ? 's' : 'r'} fa-star`} />;
+  const STAR = <Star className={`fa${pinned ? "s" : "r"} fa-star`} />;
   const PATH = `/course/${id.toLowerCase()}/summary`;
 
   return (
-    <Box>
+    <Box className="card" to="/student/course/cs470">
       <Head>
-        <Info>{ STAR } { id.split('-')[0] }</Info>
-        <Score>{ grade }%</Score>
+        <Info>
+          {STAR} {id.split("-")[0]}
+        </Info>
+        <Score>{grade}%</Score>
       </Head>
-      <Name>{ name }</Name>
-      <Professor>{ professor }</Professor>
-      <Button className="btn btn-upload text-white" to="/student/course/cs470"> Explore </Button>
+      <Name>{name}</Name>
+      <Professor>{professor}</Professor>
+      <Next>
+        <Value>Lab 2: Apriori Algorithm</Value>
+        <Date>September 18th 2020</Date>
+      </Next>
     </Box>
   );
 }
@@ -35,6 +48,7 @@ const Head = styled.h5`
   display: flex;
   justify-content: space-between;
   font-weight: 600;
+  margin-bottom: 10px;
 `;
 
 const Star = styled.div`
@@ -51,7 +65,7 @@ const Info = styled.div`
 `;
 
 const Name = styled.h4`
-  color: #6173DB;
+  color: #6173db;
   font-weight: 600;
   margin-bottom: 0;
 `;
@@ -62,7 +76,7 @@ const Score = styled.div`
   font-weight: 600;
   padding: 6px 8px;
   border-radius: 0.25rem;
-  color: #6173DB;
+  color: #6173db;
   background: rgba(97, 115, 219, 0.2);
 `;
 
@@ -82,19 +96,22 @@ const Tag = styled.div`
   font-weight: 500;
   padding: 5px 10px;
   border-radius: 5rem;
-  ${props => {
-    switch(props.type) {
-      case 'primary':
+  ${(props) => {
+    switch (props.type) {
+      case "primary":
         return `
           color: #6173DB;
           background: rgba(97, 115, 219, 0.2);
         `;
 
-      case 'danger':
+      case "danger":
         return `
           color: hsl(350, 62.9%, 62%);
           background: hsla(350, 62.9%, 62%, 0.2);
         `;
+
+      default:
+        return ``;
     }
   }}
 `;
@@ -121,7 +138,7 @@ const Value = styled.h5`
 `;
 
 const Date = styled.div`
-  color: #6173DB;
+  color: #6173db;
   font-size: 0.8rem;
   font-weight: 500;
 `;
@@ -130,15 +147,11 @@ const Button = styled(Link)`
   margin-top: 20px;
 `;
 
-// <Next>
-//   <Value>Lab 2: Apriori Algorithm</Value>
-//   <Date>September 18th 2020</Date>
-// </Next>
-
-// <Tags>
-//   <Tag type="primary"> {numAssignments} Assignments Due </Tag>
-//   {!numLate || <Tag type="danger"> {numLate} Assignments Late </Tag>}
-// </Tags>
-
+{
+  /* <Tags>
+  <Tag type="primary"> {numAssignments} Assignments Due </Tag>
+  {!numLate || <Tag type="danger"> {numLate} Assignments Late </Tag>}
+</Tags>; */
+}
 
 export default Course;

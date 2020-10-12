@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-
-import { Link } from "react-router-dom";
 import { Card } from "components";
 
 function Course({ id, name, color, pinned }) {
   const STAR = <Star filled={pinned} className={"fas fa-star"} />;
-  const ID = id.split("-")[0];
-  const PATH = `/classcard/${id.toLowerCase()}`;
+
   return (
     <Box color={color}>
       <Head>
@@ -28,14 +25,6 @@ const Box = styled(Card)`
   border-width: 2px;
 `;
 
-const Top = styled.div`
-  display: flex;
-  grid-gap: 5px;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1.3rem;
-`;
-
 const Head = styled.div`
   display: flex;
   justify-content: space-between;
@@ -53,17 +42,16 @@ const Name = styled.h4`
   opacity: 0.75;
   font-weight: 600;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 
 const Students = styled.div`
   color: rgba(0, 0, 0, 0.5);
   font-weight: 500;
-`;
-
-const Label = styled.div`
-  color: black;
-  font-weight: 600;
-  margin-top: 15px;
 `;
 
 export default Course;

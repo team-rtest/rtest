@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import Sidebar from "views/Sidebar";
@@ -17,22 +17,6 @@ function Internal() {
         <Sidebar />
         <Right>
           <Topbar />
-          <Content>
-            <Switch>
-              {routes.map((route) => (
-                <Route exact path={route.path}>
-                  {route.page}
-                </Route>
-              ))}
-              <Route path="*" component={Error404} />
-            </Switch>
-          </Content>
-        </Right>
-      </Desktop>
-
-      <Mobile>
-        <Content>
-          <Topbar />
           <Switch>
             {routes.map((route) => (
               <Route exact path={route.path}>
@@ -41,7 +25,19 @@ function Internal() {
             ))}
             <Route path="*" component={Error404} />
           </Switch>
-        </Content>
+        </Right>
+      </Desktop>
+
+      <Mobile>
+        <Topbar />
+        <Switch>
+          {routes.map((route) => (
+            <Route exact path={route.path}>
+              {route.page}
+            </Route>
+          ))}
+          <Route path="*" component={Error404} />
+        </Switch>
         <Bottombar />
       </Mobile>
     </Box>
@@ -49,28 +45,19 @@ function Internal() {
 }
 
 const Box = styled.div`
-
+  height: 100vh;
+  width: 100vw;
 `;
 
 const Right = styled.div`
-  height: 100vh;
-  width: 100%;
-`;
-
-const Content = styled.div`
-  height: calc(100vh - 69px);
-  width: 100%;
-  margin-top: 69px;
-
+  padding-top: 69px;
   @media only screen and (max-width: 600px) {
-    min-height: calc(100vh - 125px);
-    margin-bottom: 56px;
+    display: none;
   }
 `;
 
 const Desktop = styled.div`
-  display: flex;
-  width: 100%;
+  padding-left: 250px;
   @media only screen and (max-width: 600px) {
     display: none;
   }
@@ -78,9 +65,10 @@ const Desktop = styled.div`
 
 const Mobile = styled.div`
   display: none;
-  width: 100%;
   @media only screen and (max-width: 600px) {
-    display: flex;
+    display: block;
+    padding-top: 69px;
+    padding-bottom: 56px;
   }
 `;
 

@@ -19,8 +19,11 @@ function Header({ ...rest }) {
 
 const Navigation = styled.nav`
   height: 100vh;
-  min-width: 250px;
+  width: 250px;
   background: #6173db;
+  position: fixed;
+  left: 0;
+  top: 0;
 `;
 
 const Logo = styled(Link)`
@@ -37,10 +40,6 @@ const Logo = styled(Link)`
     text-decoration: none;
     color: white;
   }
-`;
-
-const Button = styled.button`
-  width: auto;
 `;
 
 const NavLinks = styled.div`

@@ -15,7 +15,7 @@ function Courses({ selected, setSelected, assignments }) {
   return (
     <Dashboard>
       <Heading>Your Courses</Heading>
-      <Grid>{ courses.map(course => <Course {...course} />) }</Grid>
+      <Grid>{courses.map(course => <Course {...course} />)}</Grid>
     </Dashboard>
   );
 }
@@ -35,6 +35,11 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
+
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export default Courses;

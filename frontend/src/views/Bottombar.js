@@ -1,16 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Bottombar({ ...rest }) {
   return (
     <Navigation {...rest}>
       <NavLinks>
-        <NavLink selected><Icon className="fa fa-chart-pie" /></NavLink>
-        <NavLink><Icon className="fa fa-bell" /></NavLink>
-        <NavLink><Icon className="fa fa-user" /></NavLink>
-        <NavLink><Icon className="fa fa-cog" /></NavLink>
+        <NavLink selected>
+          <Icon className="fa fa-chart-pie" />
+        </NavLink>
+        <NavLink>
+          <Icon className="fa fa-bell" />
+        </NavLink>
+        <NavLink>
+          <Icon className="fa fa-user" />
+        </NavLink>
+        <NavLink>
+          <Icon className="fa fa-cog" />
+        </NavLink>
       </NavLinks>
     </Navigation>
   );
@@ -37,15 +45,15 @@ const NavLink = styled(Link)`
   justify-content: center;
   align-items: center;
   color: rgb(255, 255, 255, 0.5);
-  color: ${props => props.selected && 'white'};
-  background: ${props => props.selected && '#5163cb'};
-  font-weight: ${props => props.selected && '500'};
+  color: ${(props) => props.selected && "white"};
+  background: ${(props) => props.selected && "#5163cb"};
+  font-weight: ${(props) => props.selected && "500"};
   cursor: pointer;
 
   &:hover {
     text-decoration: none;
     color: rgb(255, 255, 255, 0.5);
-    color: ${props => props.selected && 'white'};
+    color: ${(props) => props.selected && "white"};
   }
 `;
 
