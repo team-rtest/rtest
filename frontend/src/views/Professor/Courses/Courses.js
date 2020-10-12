@@ -17,8 +17,8 @@ function Courses({ selected, setSelected, assignments }) {
   return (
     <Dashboard>
       <Grid>
-        {courses.map((course) => (
-          <Course {...course} />
+        {courses.map((course, index) => (
+          <Course key={index} {...course} />
         ))}
         <AddClass to="/professor/create-course">
           <h4>{PLUS} Add Class</h4>

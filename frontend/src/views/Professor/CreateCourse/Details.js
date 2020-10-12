@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
 import { Input, FileInput } from "components";
 
 function Details({ inputs, errors, handleChange }) {
@@ -37,7 +38,9 @@ function Details({ inputs, errors, handleChange }) {
         error={errors.syllabus}
         onChange={handleChange}
       />
-      <button className="btn btn-upload"> Submit </button>
+      <Button className="btn btn-upload" to="/professor/edit-course">
+        Submit
+      </Button>
     </Inputs>
   );
 }
@@ -47,5 +50,7 @@ const Inputs = styled.div`
   grid-gap: 20px;
   width: 300px;
 `;
+
+const Button = styled(Link)``;
 
 export default Details;

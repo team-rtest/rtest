@@ -1,17 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Header({ ...rest }) {
   return (
     <Navigation {...rest}>
       <Logo to="/"> RTest </Logo>
       <NavLinks>
-        <NavLink selected><Icon className="fa fa-chart-pie" /> Dashboard </NavLink>
-        <NavLink><Icon className="fa fa-bell" /> Notifications </NavLink>
-        <NavLink><Icon className="fa fa-user" /> Account </NavLink>
-        <NavLink><Icon className="fa fa-cog" /> Settings </NavLink>
+        <NavLink to="" selected>
+          <Icon className="fa fa-chart-pie" /> Dashboard{" "}
+        </NavLink>
+        <NavLink to="">
+          <Icon className="fa fa-bell" /> Notifications{" "}
+        </NavLink>
+        <NavLink to="">
+          <Icon className="fa fa-user" /> Account{" "}
+        </NavLink>
+        <NavLink to="">
+          <Icon className="fa fa-cog" /> Settings{" "}
+        </NavLink>
       </NavLinks>
     </Navigation>
   );
@@ -54,15 +62,15 @@ const NavLink = styled(Link)`
   width: auto;
   padding: 20px;
   color: rgb(255, 255, 255, 0.5);
-  color: ${props => props.selected && 'white'};
-  background: ${props => props.selected && '#5163cb'};
-  font-weight: ${props => props.selected && '500'};
+  color: ${(props) => props.selected && "white"};
+  background: ${(props) => props.selected && "#5163cb"};
+  font-weight: ${(props) => props.selected && "500"};
   cursor: pointer;
 
   &:hover {
     text-decoration: none;
     color: rgb(255, 255, 255, 0.5);
-    color: ${props => props.selected && 'white'};
+    color: ${(props) => props.selected && "white"};
   }
 `;
 

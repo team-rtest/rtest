@@ -9,7 +9,7 @@ function Header({ ...rest }) {
       <Logo to="/"> RTest </Logo>
       <NavLink to="/"> Home </NavLink>
       <NavLink to="/signup"> Signup </NavLink>
-      <NavLink className="btn btn-primary btn-upload text-white" to="/login">
+      <NavLink className="btn btn-upload" to="/login">
         Login
       </NavLink>
     </Navigation>
