@@ -6,6 +6,6 @@ import Courses from "views/Professor/Courses/Courses";
 
 test("renders your courses", () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Machine Learning/i);
+  const linkElement = getByText(/Your Courses/i);
   expect(linkElement).toBeInTheDocument();
 });
