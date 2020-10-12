@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
@@ -34,12 +34,11 @@ const Indigo = styled.h4`
 const NavLink = styled(Link)`
   color: #6173db;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: #6173db;
     text-decoration: underline;
   }
 `;
-
-
 
 export default Error404;

@@ -3,22 +3,21 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-function Header({ ...rest }) {
+function Bottombar({ ...rest }) {
   return (
     <Navigation {...rest}>
-      <Logo to="/"> RTest </Logo>
       <NavLinks>
-        <NavLink to="" selected>
-          <Icon className="fa fa-chart-pie" /> Dashboard{" "}
+        <NavLink selected>
+          <Icon className="fa fa-chart-pie" />
         </NavLink>
-        <NavLink to="">
-          <Icon className="fa fa-bell" /> Notifications{" "}
+        <NavLink>
+          <Icon className="fa fa-bell" />
         </NavLink>
-        <NavLink to="">
-          <Icon className="fa fa-user" /> Account{" "}
+        <NavLink>
+          <Icon className="fa fa-user" />
         </NavLink>
-        <NavLink to="">
-          <Icon className="fa fa-cog" /> Settings{" "}
+        <NavLink>
+          <Icon className="fa fa-cog" />
         </NavLink>
       </NavLinks>
     </Navigation>
@@ -26,41 +25,25 @@ function Header({ ...rest }) {
 }
 
 const Navigation = styled.nav`
-  height: 100vh;
-  width: 250px;
+  z-index: 10;
+  width: 100vw;
   background: #6173db;
+  height: 56px;
   position: fixed;
   left: 0;
-  top: 0;
-`;
-
-const Logo = styled(Link)`
-  display: block;
-  color: white;
-  font-weight: 800;
-  padding: 20px;
-  margin-right: auto;
-  line-height: 1.2;
-  font-size: 2rem;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: none;
-    color: white;
-  }
+  bottom: 0;
 `;
 
 const NavLinks = styled.div`
-  display: grid;
-  grid-gap: 10px;
+  display: flex;
+  height: 100%;
 `;
 
 const NavLink = styled(Link)`
+  flex: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
-  grid-gap: 10px;
-  width: auto;
-  padding: 20px;
   color: rgb(255, 255, 255, 0.5);
   color: ${(props) => props.selected && "white"};
   background: ${(props) => props.selected && "#5163cb"};
@@ -79,4 +62,4 @@ const Icon = styled.i`
   text-align: center;
 `;
 
-export default Header;
+export default Bottombar;

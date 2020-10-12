@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Assignment from "views/Student/Assignment/Assignment";
 import StudentCourses from "views/Student/Courses/Courses";

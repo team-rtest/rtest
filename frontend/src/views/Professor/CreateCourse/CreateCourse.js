@@ -1,106 +1,42 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { useHistory } from 'react-router-dom';
-
-import { Card } from 'components';
-
-import Details from './Details';
-import Members from './Members';
+import Details from "./Details";
 
 function CreateCourse() {
-  const history = useHistory();
-  const [index, setIndex] = useState(0);
-  const [inputs, setInputs] = useState({ subject: 'Computer Science', name: 'Data Mining', number: 'CS470', semester: 'Fall 2020', syllabus: '', professor: 'Davide Fossati', assistants: '', students: '' });
-  const [errors, setErrors] = useState({ subject: null, name: null, number: null, semester: null, syllabus: null, professor: null, assistants: null, students: null });
+  const [inputs, setInputs] = useState({
+    course_name: "",
+    course_number: "",
+    semester: "",
+    syllabus: "",
+    assistants: "",
+  });
+
+  const [errors, setErrors] = useState({
+    course_name: null,
+    course_number: null,
+    semester: null,
+    syllabus: null,
+    assistants: null,
+  });
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
     setErrors({ ...errors, [name]: !value });
-  }
+  };
 
-  const current = ['Details', 'Members'];
-  const n = current.length - 1;
-
-  const handleBack = () => {
-    if(index > 0) {
-      setIndex(index - 1);
-    }
-  }
-
-  const handleNext = () => {
-    if(index < n) {
-      setIndex(index + 1);
-    }
-  }
-
-  const handleSubmit = () => {
-    history.push('/professor/edit-course');
-  }
-
-  return(
+  return (
     <Box>
-      <CourseCard>
-        <CourseForm>
-          <Header>
-            <Heading> Course {current[index]} </Heading>
-            <Buttons>
-              {index !== 0 && <Button onClick={handleBack} className="btn btn-secondary">Back</Button>}
-              {index !== n && <Button onClick={handleNext} className="btn btn-upload text-white">Next</Button>}
-              {index === n && <Button onClick={handleSubmit} className="btn btn-upload text-white">Submit</Button>}
-            </Buttons>
-          </Header>
-          { current[index] === 'Details'   && <Details  inputs={inputs} errors={errors} handleChange={handleChange} /> }
-          { current[index] === 'Members'   && <Members  inputs={inputs} errors={errors} handleChange={handleChange} /> }
-        </CourseForm>
-      </CourseCard>
+      <Details inputs={inputs} errors={errors} handleChange={handleChange} />
     </Box>
   );
 }
 
 const Box = styled.div`
-  width: 100%;
-  margin-bottom: auto;
   padding: 30px;
-  // background: #f8f9fa;
-  min-height: calc(100vh - 80px);
-`;
-
-const CourseCard = styled(Card)`
-  padding: 25px;
-  width: auto;
-  width: 500px;
-`;
-
-const Header = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  grid-gap: 10px;
-`;
-
-const Heading = styled.h2`
-  font-weight: 600;
-`;
-
-const CourseForm = styled.div`
-
-`;
-
-const Button = styled.button`
-  width: inherit;
-`;
-
-const Label = styled.label`
-  text-transform: capitalize;
-  margin-bottom: 2px;
-  font-size: 0.9rem;
-  color: grey;
+  grid-gap: 50px;
+  background: #f8f9fa;
 `;
 
 export default CreateCourse;
