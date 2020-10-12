@@ -25,7 +25,8 @@ type Course {
   year: Int
   semester: String
   students: [User]
-  instructors: [User]
+  instructor: User
+  assistants: [User]
   assignmentGroups: [AssignmentGroup]
 }
 
@@ -143,7 +144,7 @@ type Query {
   # Query. Leave id empty if you'd like to view the currently logged in
   # user.
   hello: String!
-  user(id: ID): User
+  user(id: ID, username: String): User
   assignment(id: ID): Assignment
   submission(id: ID): Submission
   course(id: ID): Course
@@ -153,7 +154,6 @@ type Query {
   getPresignedUpload(bucket: String, key: String): String!
   getPresignedDownload(bucket: String, key: String): String!
   
-  users: [User]
   assignments: [Assignment]
   submissions: [Submission]
   courses: [Course]
@@ -161,10 +161,14 @@ type Query {
 }
 
 type Mutation {
-  createUser(user: UserInput): User
+  # createUser(user: UserInput): User
   createAssignment(assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
   createSubmission(submission: SubmissionInput): Submission
   createAssignmentGroup(assignmentGroup: AssignmentGroupInput): AssignmentGroup
   updateGrade(grade: GradeInput): Float
+  addStudentToCourse(student: ID!, course: ID!, section: Int): ID!
+  addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
+  removeStudentFromCourse(student:ID!, course: ID!, section: Int): ID!
+  removeUser(user: ID!): ID!
 }

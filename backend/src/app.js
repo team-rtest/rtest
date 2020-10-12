@@ -1,15 +1,15 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import User from "./models/User.js";
-import { generateToken, verifyGoogleToken } from "./auth.js";
 import compression from "compression";
 import passport from "passport";
 import mongoose from "mongoose";
 import cors from "cors";
-import graphqlServer from "./routes/graphql";
-import csrf from "csurf";
 import bearerToken from "express-bearer-token";
+
+import User from "./models/User.js";
+import { generateToken, verifyGoogleToken } from "./auth/auth.js";
+import graphqlServer from "./routes/graphql.js";
 
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
@@ -25,9 +25,9 @@ if (!process.env.JEST_WORKER_ID) {
   );
 }
 
-const csrfProtection = csrf({ cookie: true, secure: true });
-
 const app = express();
+app.set("trust proxy", true);
+app.set("trust proxy", "loopback");
 app.use(cors());
 app.use(passport.initialize());
 app.use(compression());
@@ -35,17 +35,24 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bearerToken());
 graphqlServer.applyMiddleware({ app });
 
-app.get("/status", csrfProtection, (req, res) => {
+app.get("/", (_, res) => {
+  res.redirect("/status");
+});
+
+app.get("/status", (_, res) => {
   res.json({ status: "available" });
 });
 
-app.use("/csrf-test", csrfProtection, (req, res) => {
-  res.json({ status: "Your CSRF token was validated correctly" });
-});
-
 app.post("/signup", (req, res) => {
+  if (req.body.username === "noauth") {
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ error: "This username is forbidden." });
+  }
+
   User.register(
     new User({
       username: req.body.username,
@@ -69,6 +76,7 @@ app.post("/signup", (req, res) => {
             path: "/",
             secure: true,
             httpOnly: true,
+            sameSite: "strict",
           });
           res.json({ status: "Successfully Logged In" });
         });
@@ -78,6 +86,12 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", passport.authenticate("local"), (req, res) => {
+  if (req.user.username === "noauth") {
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
+    res.json({ error: "This username is forbidden." });
+  }
+
   const token = generateToken({ username: req.user.username });
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
@@ -85,11 +99,12 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
     path: "/",
     secure: true,
     httpOnly: true,
+    sameSite: "strict",
   });
   res.json({ status: "Successfully Logged In" });
 });
 
-app.get("/auth/google", csrfProtection, bearerToken(), (req, res) => {
+app.get("/auth/google", bearerToken(), (req, res) => {
   verifyGoogleToken(req.token)
     .then((payload) => res.send(payload)) // TODO do some other stuff here, create a user etc
     .catch(() =>

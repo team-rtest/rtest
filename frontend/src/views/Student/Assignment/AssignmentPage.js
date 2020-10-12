@@ -33,6 +33,7 @@ function AssignmentPage({ selected, assignments, setSelected }) {
       </Text>
       <FileUpload>
         <Upload />
+        <button className="btn btn-upload text-white" onClick={() => {}}> Submit File </button>
       </FileUpload>
       <Success><Tick className="fa fa-check-circle" /> Submitted on August 28th 2020</Success>
       <Failure><Cross className="fa fa-times-circle" /> Closed on August 28th 2020</Failure>
@@ -156,4 +157,3 @@ export default AssignmentPage;
 //   <Subheading> Assignments </Subheading>
 //   <Table assignments={assignments} />
 // </Box>
-
