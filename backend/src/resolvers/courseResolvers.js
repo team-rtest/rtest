@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Course from "../models/Course.js";
+import User from "../models/User.js";
 
 export default {
   Query: {
@@ -10,8 +11,13 @@ export default {
       return course;
     },
     courses: async (_, __, context) => {
-      console.log(await context.user);
-      Course.find().exec();
+      if (!context.user) {
+        return;
+      }
+      const user = await User.findOne({ username: context.user });
+      return await Course.find({
+        "sections.students": user,
+      });
     },
   },
   Mutation: {
