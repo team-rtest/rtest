@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-function Input({ name, type, value, tip, error, onChange, className, ...rest }) {
+function Input({
+  name,
+  type,
+  value,
+  tip,
+  error,
+  onChange,
+  className,
+  ...rest
+}) {
   const [focus, setFocus] = useState(false);
-  const label = name.split('_').join(' ');
-
+  const label = name.split("_").join(" ");
 
   return (
     <div>
       <Above>
-        <Label>{ label }</Label>
-        {
-          tip && (
-            <Tip>
-              <Icon className="fa fa-question-circle" />
-              <Message>{ tip }</Message>
-            </Tip>
-          )
-        }
+        <Label>{label}</Label>
+        {tip && (
+          <Tip>
+            <Icon className="fa fa-question-circle" />
+            <Message>{tip}</Message>
+          </Tip>
+        )}
       </Above>
       <StyledInput
         type={type}
@@ -25,13 +31,13 @@ function Input({ name, type, value, tip, error, onChange, className, ...rest }) 
         value={value}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={event => onChange(name, event.target.value)}
-        className={`form-control ${className} ${!focus && error !== null && (error ? "is-invalid" : "is-valid") }`}
+        onChange={(event) => onChange(name, event.target.value)}
+        className={`form-control ${className} ${
+          !focus && error !== null && (error ? "is-invalid" : "is-valid")
+        }`}
         {...rest}
       />
-      <div className="invalid-feedback">
-        { !focus && error }
-      </div>
+      <div className="invalid-feedback">{!focus && error}</div>
     </div>
   );
 }

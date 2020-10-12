@@ -21,8 +21,9 @@ function Input({
         id={name}
         value={value}
         onChange={(event) => onChange(name, event.target.value)}
-        className={`form-control ${className} ${error !== null && (error ? "is-invalid" : "is-valid")
-          }`}
+        className={`form-control ${className} ${
+          error !== null && (error ? "is-invalid" : "is-valid")
+        }`}
         {...rest}
       />
       <div className="invalid-feedback">{error}</div>
@@ -31,7 +32,6 @@ function Input({
 }
 
 const StyledInput = styled.input`
-  // all: unset;
   display: block;
   padding: 3px;
 `;

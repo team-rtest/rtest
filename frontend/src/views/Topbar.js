@@ -1,14 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-function Topbar({ ...rest }) {
+function Topbar() {
   return (
     <Box>
-      <Breadcrumb> <NavLink>Courses</NavLink> / <NavLink>Data Mining</NavLink> / <Current>Apriori Algorithm</Current> </Breadcrumb>
+      <PageName> Your Courses </PageName>
       <Logo to="/"> RTest </Logo>
-      <NavLink className="btn btn-primary btn-upload text-white" to="/login"> Sign out </NavLink>
+      <NavLink className="btn btn-primary btn-upload text-white" to="/login">
+        Sign out
+      </NavLink>
     </Box>
   );
 }
@@ -17,7 +19,7 @@ const Box = styled.div`
   background: white;
   z-index: 10;
   border-bottom: 1px solid #eee;
-  padding: 15px;
+  padding: 15px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,9 +34,10 @@ const Box = styled.div`
   }
 `;
 
-const Breadcrumb = styled.div`
-  font-size: 1.1rem;
-  color: grey;
+const PageName = styled.div`
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: black;
 
   @media only screen and (max-width: 600px) {
     display: none;
@@ -51,10 +54,6 @@ const NavLink = styled(Link)`
     color: #6173db;
     cursor: pointer;
   }
-`;
-
-const Current = styled.span`
-  color: black;
 `;
 
 const Logo = styled(Link)`

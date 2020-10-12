@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Header({ ...rest }) {
   return (
@@ -9,7 +9,9 @@ function Header({ ...rest }) {
       <Logo to="/"> RTest </Logo>
       <NavLink to="/"> Home </NavLink>
       <NavLink to="/signup"> Signup </NavLink>
-      <NavLink className="btn btn-primary btn-upload text-white" to="/login"> Login </NavLink>
+      <NavLink className="btn btn-primary btn-upload text-white" to="/login">
+        Login
+      </NavLink>
     </Navigation>
   );
 }
@@ -24,11 +26,11 @@ const Navigation = styled.nav`
   border-bottom: 1px solid #eee;
 
   -webkit-touch-callout: none;
-    -webkit-user-select: none;
-     -khtml-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const Logo = styled(Link)`
@@ -51,10 +53,6 @@ const Logo = styled(Link)`
     font-size: 2rem;
     cursor: pointer;
   }
-`;
-
-const Button = styled.button`
-  width: auto;
 `;
 
 const NavLink = styled(Link)`

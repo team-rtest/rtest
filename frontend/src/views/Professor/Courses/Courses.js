@@ -16,7 +16,6 @@ function Courses({ selected, setSelected, assignments }) {
 
   return (
     <Dashboard>
-      <Heading>Your Courses</Heading>
       <Grid>
         {courses.map((course) => (
           <Course {...course} />
