@@ -1,11 +1,11 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render } from "@testing-library/react";
+import App from "./App";
 
-import Courses from 'views/Professor/Courses/Courses';
+import Courses from "views/Professor/Courses/Courses";
 
-test('renders your courses', () => {
+test("renders your courses", () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Your Courses/i);
+  const linkElement = getByText(/Machine Learning/i);
   expect(linkElement).toBeInTheDocument();
 });
