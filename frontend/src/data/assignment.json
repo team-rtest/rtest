@@ -6,7 +6,7 @@
     "optional": false,
     "locked": false,
     "files": {
-      "originalName":"decisionTree.pdf",
+      "originalName": "decisionTree.pdf",
       "encoding": "utf8",
       "mimetype": "application/pdf",
       "path": "#",
@@ -16,8 +16,8 @@
     "submissions": [
       {
         "student": {
-            "firstName": "Jack",
-            "lastName": "Frumkes"
+          "firstName": "Jack",
+          "lastName": "Frumkes"
         },
         "files": [],
         "submittedAt": 1601484990,
@@ -26,8 +26,8 @@
       },
       {
         "student": {
-            "firstName": "Simon",
-            "lastName": "Marty"
+          "firstName": "Simon",
+          "lastName": "Marty"
         },
         "files": [],
         "submittedAt": 1601484990,
@@ -36,8 +36,8 @@
       },
       {
         "student": {
-            "firstName": "Luis",
-            "lastName": "Flores"
+          "firstName": "Luis",
+          "lastName": "Flores"
         },
         "files": [],
         "submittedAt": 1601484981,
@@ -54,7 +54,7 @@
     "optional": false,
     "locked": false,
     "files": {
-      "originalName":"aprioriAlg.pdf",
+      "originalName": "aprioriAlg.pdf",
       "encoding": "utf8",
       "mimetype": "application/pdf",
       "path": "#",
@@ -64,8 +64,8 @@
     "submissions": [
       {
         "student": {
-            "firstName": "Jack",
-            "lastName": "Frumkes"
+          "firstName": "Jack",
+          "lastName": "Frumkes"
         },
         "files": [],
         "submittedAt": 1602262800,
@@ -74,8 +74,8 @@
       },
       {
         "student": {
-            "firstName": "Simon",
-            "lastName": "Marty"
+          "firstName": "Simon",
+          "lastName": "Marty"
         },
         "files": [],
         "submittedAt": 1602183600,
@@ -84,8 +84,8 @@
       },
       {
         "student": {
-            "firstName": "Luis",
-            "lastName": "Flores"
+          "firstName": "Luis",
+          "lastName": "Flores"
         },
         "files": [],
         "submittedAt": 1602262891,
@@ -94,8 +94,8 @@
       },
       {
         "student": {
-            "firstName": "John",
-            "lastName": "Doe"
+          "firstName": "John",
+          "lastName": "Doe"
         },
         "files": [],
         "submittedAt": 1602262800,
@@ -104,8 +104,8 @@
       },
       {
         "student": {
-            "firstName": "Amy",
-            "lastName": "Test"
+          "firstName": "Amy",
+          "lastName": "Test"
         },
         "files": [],
         "submittedAt": 1602262755,
@@ -114,8 +114,8 @@
       },
       {
         "student": {
-            "firstName": "Taylor",
-            "lastName": "Swift"
+          "firstName": "Taylor",
+          "lastName": "Swift"
         },
         "files": [],
         "submittedAt": 1602262799,
@@ -124,8 +124,8 @@
       },
       {
         "student": {
-            "firstName": "Beyonce",
-            "lastName": "Knowles"
+          "firstName": "Beyonce",
+          "lastName": "Knowles"
         },
         "files": [],
         "submittedAt": 1602262799,
@@ -134,8 +134,8 @@
       },
       {
         "student": {
-            "firstName": "Bad",
-            "lastName": "Student"
+          "firstName": "Bad",
+          "lastName": "Student"
         },
         "files": [],
         "submittedAt": 1602262759,
@@ -144,8 +144,8 @@
       },
       {
         "student": {
-            "firstName": "Cameron",
-            "lastName": "Katz"
+          "firstName": "Cameron",
+          "lastName": "Katz"
         },
         "files": [],
         "submittedAt": 1602262677,
@@ -162,7 +162,7 @@
     "optional": false,
     "locked": false,
     "files": {
-      "originalName":"linearReg.pdf",
+      "originalName": "linearReg.pdf",
       "encoding": "utf8",
       "mimetype": "application/pdf",
       "path": "#",
@@ -172,8 +172,8 @@
     "submissions": [
       {
         "student": {
-            "firstName": "Jack",
-            "lastName": "Frumkes"
+          "firstName": "Jack",
+          "lastName": "Frumkes"
         },
         "files": [],
         "submittedAt": 1600077600,
@@ -182,8 +182,8 @@
       },
       {
         "student": {
-            "firstName": "Simon",
-            "lastName": "Marty"
+          "firstName": "Simon",
+          "lastName": "Marty"
         },
         "files": [],
         "submittedAt": 1599695940,
@@ -192,8 +192,8 @@
       },
       {
         "student": {
-            "firstName": "Luis",
-            "lastName": "Flores"
+          "firstName": "Luis",
+          "lastName": "Flores"
         },
         "files": [],
         "submittedAt": 1599523200,
