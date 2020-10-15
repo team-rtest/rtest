@@ -13,7 +13,7 @@
     "chartjs-chart-box-and-violin-plot": "^2.3.0",
     "mathjs": "^7.5.1",
     "qs": "^6.9.4",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.21",
     "react-router-dom": "^5.2.0",
