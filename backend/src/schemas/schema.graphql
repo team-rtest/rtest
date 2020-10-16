@@ -74,6 +74,7 @@ enum AssignmentTag {
 type Submission {
   _id: ID!
   student: User!
+  grade: Float
   files: [File!]!
   dateSubmitted: Timestamp!
   attemptNumber: Int!
@@ -85,15 +86,8 @@ input SubmissionInput {
   files: [FileInput]
 }
 
-type Grade {
-  id: ID!
-  submissionId: ID!
-  grade: Float!
-}
-
 input GradeInput {
-  student: String!
-  assignmentId: ID!
+  submission: ID!
   grade: Float!
 }
 
@@ -166,7 +160,7 @@ type Mutation {
   createCourse(course: CourseInput): Course
   createSubmission(submission: SubmissionInput): Submission
   createAssignmentGroup(assignmentGroup: AssignmentGroupInput): AssignmentGroup
-  updateGrade(grade: GradeInput): Float
+  updateGrade(submission: ID!, grade: Float): Float
   addStudentToCourse(student: ID!, course: ID!, section: Int): ID!
   addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
   removeStudentFromCourse(student:ID!, course: ID!, section: Int): ID!
