@@ -19,14 +19,16 @@ export default {
         { _id: mongoose.Types.ObjectId(submission.assignmentId) },
         { $addToSet: { submissions: s._id } }
       );
+
+      return s;
     },
 
-    updateGrade: async (_, { gradeInput }) => {
-      Submission.updateOne(
-        { _id: mongoose.Types.ObjectId(gradeInput.submission) },
-        { $set: { grade: gradeInput.grade } }
+    updateGrade: async (_, { submission, grade }) => {
+      const s = await Submission.updateOne(
+        { _id: mongoose.Types.ObjectId(submission) },
+        { $set: { grade: grade } }
       );
-      return gradeInput.grade;
+      return grade;
     },
     // peerGradeSubmission: async (_, { peerGradeInput }) => {
     //   creates a new peer grade if the grader hasn't graded the assignment yet
