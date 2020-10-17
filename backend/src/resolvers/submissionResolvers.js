@@ -24,7 +24,7 @@ export default {
     },
 
     updateGrade: async (_, { submission, grade }) => {
-      Submission.updateOne(
+      await Submission.updateOne(
         { _id: mongoose.Types.ObjectId(submission) },
         { $set: { grade: grade } }
       );
