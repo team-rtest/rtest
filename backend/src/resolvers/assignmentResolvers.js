@@ -9,14 +9,14 @@ export default {
       return a;
     },
 
-    assignments: async () => Assignment.find().exec(),
+    assignments: async () => Assignment.find().populate("submissions").exec(),
   },
 
   Mutation: {
     createAssignment: async (_, { assignment }) => {
       const a = new Assignment(assignment);
       await a.save();
-      AssignmentGroup.updateOne(
+      await AssignmentGroup.updateOne(
         { _id: mongoose.Types.ObjectId(assignment.assignmentGroupId) },
         { $addToSet: { assignments: a._id } }
       );

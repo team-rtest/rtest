@@ -15,7 +15,7 @@ export default {
     createSubmission: async (_, { submission }) => {
       const s = new Submission(submission);
       await s.save();
-      Assignment.updateOne(
+      await Assignment.updateOne(
         { _id: mongoose.Types.ObjectId(submission.assignmentId) },
         { $addToSet: { submissions: s._id } }
       );
@@ -24,7 +24,7 @@ export default {
     },
 
     updateGrade: async (_, { submission, grade }) => {
-      Submission.updateOne(
+      await Submission.updateOne(
         { _id: mongoose.Types.ObjectId(submission) },
         { $set: { grade: grade } }
       );
