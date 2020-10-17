@@ -8,7 +8,7 @@ import {
   getMin,
 } from "./AssignmentReviewHelper";
 import GraphSpace from "./GraphSpace";
-
+import {getAssignments} from "../../../../api/getAssignment";
 function AssignmentReview() {
   return (
     <div class="container">
@@ -48,6 +48,7 @@ function AssignmentReview() {
           labels={assignment.map((a) => a.name)}
         />
       </GraphStyle>
+      <button onClick ={getAssignments}>Test</button>
     </div>
   );
 }
