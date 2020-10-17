@@ -11,12 +11,23 @@ export default {
       return course;
     },
     courses: async (_, __, context) => {
-      if (!context.user) {
-        return;
-      }
-      const user = await User.findOne({ username: context.user });
-      return await Course.find({
-        "sections.students": user,
+      // if (!context.user) {
+      //   return;
+      // }
+      // const user = await User.findOne({ username: context.user });
+      // return await Course.find({
+      //   "sections.students": user,
+      // });
+      return await Course.find().populate({
+        path: "assignmentGroups",
+        populate: {
+          path: "assignments",
+          model: "assignment",
+          populate: {
+            path: "submissions",
+            model: "submission",
+          },
+        },
       });
     },
   },

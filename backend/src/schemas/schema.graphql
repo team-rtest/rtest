@@ -43,6 +43,7 @@ type Assignment {
   name: String!
   body: String
   maxGrade: Int
+  submissions: [Submission]
   dateCreated: Timestamp!
   datePosted: Timestamp
   dateDue: Timestamp
