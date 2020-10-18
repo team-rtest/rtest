@@ -1,17 +1,12 @@
-import { client } from "./graphql";
 import { gql } from "@apollo/client";
 
-export const getAssignments = (
-  ) => {
-    client
-      .query({
-        query: gql` query{
-          assignments{
-            _id
+export const getAssignments = gql`
+        query {
+          assignments {
             name
+            submissions {
+              grade
+            }
           }
-        }
-        `,
-      })
-      .then((result) => console.log(result));
-  };
+    }
+      `;
