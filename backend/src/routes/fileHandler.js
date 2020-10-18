@@ -15,13 +15,12 @@ export function initObjectStorage() {
     {
       Bucket: "rtest",
     },
-    (err, data) => {
-      if (err) {
-        //console.log(err);
+    (err, _) => {
+      if (err && err.code != "BucketAlreadyOwnedByYou") {
+        console.log(err.code);
       } else {
         console.log("Successfully Initialized S3");
       }
-      console.log(data);
     }
   );
 }
