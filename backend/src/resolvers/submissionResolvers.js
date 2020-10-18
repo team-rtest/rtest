@@ -5,10 +5,9 @@ import Assignment from "../models/Assignment.js";
 export default {
   Query: {
     submission: async (_, { id }) => {
-      const su = await Submission.findOne({ _id: id }).exec();
-      return su;
+      return await Submission.findById(id);
     },
-    submissions: async () => Submission.find().exec(),
+    submissions: async () => await Submission.find(),
   },
 
   Mutation: {

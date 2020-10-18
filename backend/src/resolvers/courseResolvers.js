@@ -1,36 +1,27 @@
 import mongoose from "mongoose";
 import Course from "../models/Course.js";
-import User from "../models/User.js";
+import AssignmentGroup from "../models/AssignmentGroup.js";
 
 export default {
   Query: {
-    course: async (_, { id }) => {
-      const course = await Course.findOne({ _id: id }).populate(
-        "assignmentGroups"
-      );
-      return course;
-    },
-    courses: async (_, __, context) => {
-      // if (!context.user) {
-      //   return;
-      // }
-      // const user = await User.findOne({ username: context.user });
-      // return await Course.find({
-      //   "sections.students": user,
-      // });
-      return await Course.find().populate({
-        path: "assignmentGroups",
-        populate: {
-          path: "assignments",
-          model: "assignment",
-          populate: {
-            path: "submissions",
-            model: "submission",
-          },
-        },
+    course: async (_, { id }, context) => {
+      return await Course.findOne({
+        _id: id,
+        "sections.students": context.user,
       });
     },
+
+    courses: async (_, __, context) => {
+      return await Course.find({ "sections.students": context.user });
+    },
   },
+
+  Course: {
+    assignmentGroups: async (course) => {
+      return await AssignmentGroup.findById(course.assigmentGroups);
+    },
+  },
+
   Mutation: {
     createCourse: async (_, { course }) => {
       const c = new Course(course);

@@ -139,6 +139,8 @@ type Query {
   # Query. Leave id empty if you'd like to view the currently logged in
   # user.
   hello: String!
+  me: User
+  
   user(id: ID, username: String): User
   assignment(id: ID): Assignment
   submission(id: ID): Submission
