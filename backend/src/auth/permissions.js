@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 
 export const getUser = async (username) => {
-  return await User.findOne({ username: username });
+  return await User.findOne({ username });
 };
 
 export const generateUserModel = ({ user }) => ({
