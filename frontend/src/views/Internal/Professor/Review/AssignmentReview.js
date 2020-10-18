@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import assignment from "data/assignment.json";
 import {
   getGradeList,
   getMedian,
@@ -9,7 +8,16 @@ import {
 } from "./AssignmentReviewHelper";
 import GraphSpace from "./GraphSpace";
 import {getAssignments} from "../../../../api/getAssignment";
+import { useQuery } from '@apollo/client';
+
+
 function AssignmentReview() {
+  const {loading, error, data} = useQuery(getAssignments);
+
+  if (loading) return 'Loading...';
+
+  if (error) return `Error! ${error.message}`;
+
   return (
     <div class="container">
       <h1>Assignment Review</h1>
@@ -23,7 +31,7 @@ function AssignmentReview() {
           </Rtr>
         </ReviewThead>
         <ReviewTbody>
-          {assignment.map((d) => {
+          {data.assignments.map((d) => {
             return (
               <Rtr>
                 <Rtd data-label="Name">{d.name}</Rtd>
@@ -44,11 +52,10 @@ function AssignmentReview() {
       <h1>Distribution</h1>
       <GraphStyle>
         <GraphSpace
-          data={assignment.map((a) => getGradeList(a.submissions))}
-          labels={assignment.map((a) => a.name)}
+          data={data.assignments.map((a) => getGradeList(a.submissions))}
+          labels={data.assignments.map((a) => a.name)}
         />
       </GraphStyle>
-      <button onClick ={getAssignments}>Test</button>
     </div>
   );
 }
