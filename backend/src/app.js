@@ -15,7 +15,12 @@ import { initObjectStorage } from "./routes/fileHandler.js";
 if (!process.env.JEST_WORKER_ID) {
   mongoose.connect(
     process.env.MONGO_URI,
-    { useUnifiedTopology: true, useNewUrlParser: true },
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    },
     (err) => {
       if (err) {
         console.log(err.message);
