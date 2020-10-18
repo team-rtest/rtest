@@ -16,7 +16,7 @@ export function initObjectStorage() {
       Bucket: "rtest",
     },
     (err, _) => {
-      if (err && err.code != "BucketAlreadyOwnedByYou") {
+      if (err && err.code !== "BucketAlreadyOwnedByYou") {
         console.log(err.code);
       } else {
         console.log("Successfully Initialized S3");
