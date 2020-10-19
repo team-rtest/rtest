@@ -12,11 +12,14 @@ export default {
     assignments: async () => {
       return await Assignment.find();
     },
-  },  
+  },
 
   Assignment: {
     submissions: async (assignment) => {
-      return await Submission.findById(assignment.submissions);
+      return await Submission.find({
+        _id: assignment.submissions,
+        student: context.user,
+      });
     },
   },
 
