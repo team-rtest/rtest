@@ -17,6 +17,9 @@ const Box = styled.div`
   width: 100vw;
 `;
 
-const Screen = styled.div``;
+const Screen = styled.div`
+  min-height: calc(100vh - 80px);
+  width: 100vw;
+`;
 
 export default External;
