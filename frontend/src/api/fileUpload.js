@@ -13,3 +13,20 @@ export const uploadSubmissionFile = (
     })
     .then((result) => console.log(result));
 };
+
+export const getUploadPath = gql`
+        query {
+          course{
+            id
+            assignments {
+              name
+              submissions {
+                user {
+                  firstName
+                  lastName
+                }
+              }
+            }
+          }
+    }
+      `;
