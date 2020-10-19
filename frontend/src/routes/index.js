@@ -1,6 +1,6 @@
 import React from "react";
 
-import Assignment from "views/Internal/Student/Assignment/Assignment";
+import StudentAssignment from "views/Internal/Student/Assignment/Assignment";
 import StudentCourses from "views/Internal/Student/Courses/Courses";
 
 import ProfessorCourses from "views/Internal/Professor/Courses/Courses";
@@ -10,6 +10,7 @@ import Signup from "views/External/Auth/Signup";
 import ResetPassword from "views/External/Auth/ResetPassword";
 import ForgotPassword from "views/External/Auth/ForgotPassword";
 
+import ProfessorAssignment from "views/Internal/Professor/Assignment/Assignment";
 import AssignmentReview from "views/Internal/Professor/Review/AssignmentReview";
 import CreateCourse from "views/Internal/Professor/CreateCourse/CreateCourse";
 import EditCourse from "views/Internal/Professor/EditCourse/EditCourse";
@@ -65,12 +66,16 @@ const internal = [
     page: <CreateAssignmentGroup />,
   },
   {
+    path: "/professor/assignment",
+    page: <ProfessorAssignment />,
+  },
+  {
     path: "/student/courses",
     page: <StudentCourses />,
   },
   {
     path: "/student/course/:id",
-    page: <Assignment />,
+    page: <StudentAssignment />,
   },
 ];
 

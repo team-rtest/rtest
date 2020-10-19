@@ -8,7 +8,7 @@ function Error404({ ...rest }) {
     <ErrorPage>
       <Indigo> 404 ERROR </Indigo>
       <Heading> Page not found </Heading>
-      <NavLink> Return Home </NavLink>
+      <NavLink to="/"> Return Home </NavLink>
     </ErrorPage>
   );
 }

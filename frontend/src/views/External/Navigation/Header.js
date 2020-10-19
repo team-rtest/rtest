@@ -7,7 +7,6 @@ function Header() {
   return (
     <Navigation>
       <Logo to="/"> RTest </Logo>
-      <NavLink to="/"> Home </NavLink>
       <NavLink to="/signup"> Signup </NavLink>
       <NavLink className="btn btn-upload text-white" to="/login">
         Login
@@ -21,8 +20,8 @@ const Navigation = styled.nav`
   justify-content: flex-end;
   align-items: center;
   height: 80px;
-  padding: 30px;
-  grid-gap: 50px;
+  padding: 0 30px;
+  grid-gap: 30px;
   border-bottom: 1px solid #eee;
 
   -webkit-touch-callout: none;
