@@ -76,9 +76,9 @@ type Submission {
   _id: ID!
   student: User!
   grade: Float
-  files: [File!]!
+  files: [File]
   dateSubmitted: Timestamp!
-  attemptNumber: Int!
+  attemptNumber: Int
 }
 
 input SubmissionInput {
