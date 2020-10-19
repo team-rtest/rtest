@@ -58,3 +58,7 @@ export async function getPresignedDownload(bucket, key) {
   });
   return url;
 }
+
+export const getFileMetadata = async (bucket, key) => {
+  return await s3.headObject({ Bucket: bucket, Key: key }).promise();
+};
