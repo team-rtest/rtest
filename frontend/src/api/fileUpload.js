@@ -14,6 +14,11 @@ export const uploadSubmissionFile = (
     .then((result) => console.log(result));
 };
 
+export const geturl = (key, bucket) => {
+  gql`
+        query { getPresignedUpload(key, bucket)}`,
+}
+
 export const getUploadPath = gql`
         query {
           course{
