@@ -79,7 +79,7 @@ const Date = styled.div`
   align-items: center;
   grid-gap: 8px;
 
-  ${(props) => props.late && `color: hsl(350, 62.9%, 62%)`};
+  ${(props) => props.late && "color: hsl(350, 62.9%, 62%)"};
 `;
 
 const Late = styled.div`
