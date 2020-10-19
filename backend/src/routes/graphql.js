@@ -1,12 +1,13 @@
 import { readFileSync } from "fs";
 
-import resolvers from "../resolvers/resolvers.js";
 import assignmentGroupResolvers from "../resolvers/assignmentGroupResolvers.js";
 import assignmentResolvers from "../resolvers/assignmentResolvers.js";
 import courseResolvers from "../resolvers/courseResolvers.js";
 import fileResolvers from "../resolvers/fileResolvers.js";
 import submissionResolvers from "../resolvers/submissionResolvers.js";
 import userResolvers from "../resolvers/userResolvers.js";
+
+import { getUser, generateUserModel } from "../auth/permissions.js";
 
 import pkg from "apollo-server-express";
 import { getUsernameFromToken } from "../auth/auth.js";
@@ -19,7 +20,6 @@ const typeDefs = readFileSync("./src/schemas/schema.graphql", "utf8");
 const server = new ApolloServer({
   typeDefs,
   resolvers: [
-    resolvers,
     assignmentGroupResolvers,
     assignmentResolvers,
     courseResolvers,
@@ -27,13 +27,15 @@ const server = new ApolloServer({
     submissionResolvers,
     userResolvers,
   ],
-  context: ({ req }) => {
+  context: async ({ req }) => {
     const token = req.token || "";
-    var user = "noauth";
+    console.log(token);
     if (token) {
-      user = getUsernameFromToken(token);
+      const username = await getUsernameFromToken(token);
+      var user = await getUser(username);
+      return { user, permissions: generateUserModel(user) };
     }
-    return { user };
+    return;
   },
 });
 export default server;

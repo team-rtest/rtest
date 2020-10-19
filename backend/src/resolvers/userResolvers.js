@@ -3,12 +3,17 @@ import User from "../models/User.js";
 
 export default {
   Query: {
+    hello: () => "hi",
     user: async (_, { id, username }) => {
       if (id) {
-        return await User.findOne({ _id: id }).exec();
+        return await User.findById(id);
       } else if (username) {
-        return await User.findOne({ username }).exec();
+        return await User.findOne({ username });
       }
+    },
+
+    me: async (_, __, { user }) => {
+      return user;
     },
   },
   Mutation: {
