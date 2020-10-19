@@ -1,20 +1,27 @@
 import mongoose from "mongoose";
 import AssignmentGroup from "../models/AssignmentGroup.js";
+import Assignment from "../models/Assignment.js";
 import Course from "../models/Course.js";
 
 export default {
   Query: {
     assignmentGroup: async (_, { id }) => {
-      const a = await AssignmentGroup.findOne({ _id: id }).exec();
-      return a;
+      return await AssignmentGroup.findById(id);
     },
-    assignmentGroups: async () => AssignmentGroup.find().exec(),
+    assignmentGroups: async () => await AssignmentGroup.find(),
   },
+
+  AssignmentGroup: {
+    assignments: async (assignmentGroup) => {
+      return await Assignment.findById(assignmentGroup.assignments);
+    },
+  },
+
   Mutation: {
     createAssignmentGroup: async (_, { assignmentGroup }) => {
       const ag = new AssignmentGroup(assignmentGroup);
       await ag.save();
-      Course.updateOne(
+      await Course.updateOne(
         { _id: mongoose.Types.ObjectId(assignmentGroup.courseId) },
         { $addToSet: { assignmentGroups: ag._id } },
         (err, docs) => {
