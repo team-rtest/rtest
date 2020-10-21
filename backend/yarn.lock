@@ -2467,7 +2467,7 @@ gaxios@^3.0.0:
     is-stream "^2.0.0"
     node-fetch "^2.3.0"
 
-gcp-metadata@^4.1.0:
+gcp-metadata@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-4.2.0.tgz#3b424355ccdc240ee07c5791e2fd6a60a283d89a"
   integrity sha512-vQZD57cQkqIA6YPGXM/zc+PIZfNRFdukWGsGZ5+LcJzesi5xp6Gn7a02wRJi4eXPyArNMIYpPET4QMxGqtlk6Q==
@@ -2552,17 +2552,17 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
-google-auth-library@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-6.1.1.tgz#e1882ac22e8a073dd7a7296e500d5c0c6dc21933"
-  integrity sha512-0WfExOx3FrLYnY88RICQxvpaNzdwjz44OsHqHkIoAJfjY6Jck6CZRl1ASWadk+wbJ0LhkQ8rNY4zZebKml4Ghg==
+google-auth-library@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-6.1.2.tgz#96a7b873068e2167d2d232a864c10f8f83aac216"
+  integrity sha512-X9EUX8R+kIpsf55KdSPhFWF0RNyBGuBc1zeYc/5Sjuk65eIYqq91rINJVBD22pp+w/PuM2fasHiA6H2xYjxTIQ==
   dependencies:
     arrify "^2.0.0"
     base64-js "^1.3.0"
     ecdsa-sig-formatter "^1.0.11"
     fast-text-encoding "^1.0.0"
     gaxios "^3.0.0"
-    gcp-metadata "^4.1.0"
+    gcp-metadata "^4.2.0"
     gtoken "^5.0.4"
     jws "^4.0.0"
     lru-cache "^6.0.0"
