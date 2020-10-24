@@ -17,6 +17,7 @@ input UserInput {
   firstName: String
   lastName: String
   email: String
+  password: String
 }
 
 type Course {
@@ -154,7 +155,6 @@ type Query {
 }
 
 type Mutation {
-  # createUser(user: UserInput): User
   createAssignment(assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
   createSubmission(submission: SubmissionInput): Submission
@@ -172,4 +172,5 @@ type Mutation {
   ): String!
   registerSubmissionFile(submission: ID!, file: FileInput!): File
   updateUser(id: ID!, userData: UserInput!): User!
+  signup(userInput: UserInput!): String
 }
