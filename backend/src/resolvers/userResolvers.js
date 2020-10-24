@@ -22,13 +22,10 @@ export default {
   },
   Mutation: {
     removeUser: async (_, { user }) => {
-      await User.deleteOne({ _id: mongoose.Types.ObjectId(user) });
-      return user;
+      return await User.findByIdAndDelete(user);
     },
     updateUser: async (_, { id, userData }) => {
-      const u = await User.findById(id);
-      await u.update(userData);
-      return u;
+      return await User.findByIdAndUpdate(id, userData);
     },
 
     // createUser: async (_, { user }) => {
