@@ -80,7 +80,7 @@ app.post("/signup", (req, res) => {
           res.setHeader("Content-Type", "application/json");
           res.cookie("token", token, {
             path: "/",
-            secure: true,
+            //secure: true,
             httpOnly: true,
             sameSite: "strict",
           });
@@ -103,7 +103,7 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.cookie("token", token, {
     path: "/",
-    secure: true,
+    //secure: true,
     httpOnly: true,
     sameSite: "strict",
   });
