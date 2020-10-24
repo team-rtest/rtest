@@ -12,6 +12,10 @@ export default {
       }
     },
 
+    users: async () => {
+      return await User.find();
+    },
+
     me: async (_, __, { user }) => {
       return user;
     },
@@ -20,6 +24,11 @@ export default {
     removeUser: async (_, { user }) => {
       await User.deleteOne({ _id: mongoose.Types.ObjectId(user) });
       return user;
+    },
+    updateUser: async (_, { id, userData }) => {
+      const u = await User.findById(id);
+      await u.update(userData);
+      return u;
     },
 
     // createUser: async (_, { user }) => {
