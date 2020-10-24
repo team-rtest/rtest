@@ -28,8 +28,7 @@ const server = new ApolloServer({
     userResolvers,
   ],
   context: async ({ req }) => {
-    const token = req.token || "";
-    console.log(token);
+    const token = req.token || req.cookies["token"] || "";
     if (token) {
       const username = await getUsernameFromToken(token);
       var user = await getUser(username);
