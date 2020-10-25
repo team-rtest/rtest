@@ -2,13 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 import ProfileInfo from "./ProfileInfo";
+import {retrieveUserInfo} from "../../../api/profileRetrieval";
+import { useQuery } from '@apollo/client';
 
 function Profile() {
+    const {loading, error, data} = useQuery(retrieveUserInfo);
+
+    if (loading) return 'Loading...';
+  
+    if (error) return `Error! ${error.message}`;
+
     const userInfo = {
-        fname: "Jack",
-        lname: "Frumkes",
-        email: "Jafrumkes@gmail.com",
-        createdOn: "10/20/20",
+        fname: data.me.firstName,
+        lname: data.me.lastName,
+        email: data.me.email,
+        createdOn: data.me.createdAt,
     }
     return(
         <div class = "container">
