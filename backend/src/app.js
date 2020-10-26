@@ -42,7 +42,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bearerToken());
-graphqlServer.applyMiddleware({ app, cors: { origin: "http://localhost:3000"} });
+graphqlServer.applyMiddleware({
+  app,
+  cors: { origin: "http://localhost:3000" },
+});
 
 app.get("/", (_, res) => {
   res.redirect("/status");
@@ -83,6 +86,7 @@ app.post("/signup", (req, res) => {
             //secure: true,
             httpOnly: true,
             sameSite: "strict",
+            expires: "604800",
           });
           res.json({ status: "Successfully Logged In" });
         });
@@ -106,6 +110,7 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
     //secure: true,
     httpOnly: true,
     sameSite: "strict",
+    expires: "604800",
   });
   res.json({ status: "Successfully Logged In" });
 });

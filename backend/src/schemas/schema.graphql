@@ -22,8 +22,10 @@ input UserInput {
 
 type Course {
   _id: ID!
-  courseNumber: String!
+  courseNumber: String
   name: String
+  files: [File]
+  year: Int
   semester: String
   students: [User]
   instructor: User
@@ -32,44 +34,42 @@ type Course {
 }
 
 input CourseInput {
-  courseNumber: String!
+  subject: String
+  courseNumber: String
   name: String
+  year: Int
   semester: String
 }
 
 type Assignment {
   _id: ID!
-  tags: [AssignmentTag]
   name: String!
   body: String
   maxGrade: Int
+  dateDue: Timestamp!
+  optional: Boolean!
+  locked: Boolean!
+  files: [File]
   submissions: [Submission]
-  dateCreated: Timestamp!
-  datePosted: Timestamp
+  createdAt: Timestamp!
+}
+
+input AssignmentInput {
+  name: String
+  body: String
+  maxGrade: Int
   dateDue: Timestamp
+  optional: Boolean
+  locked: Boolean
+  assignmentGroupId: ID!
 }
 
 type AssignmentGroup {
   _id: ID!
   name: String!
   tag: String!
-  grading: Int!
-  policy: String!
+  grading: GradingRules!
   assignments: [Assignment]
-}
-
-input AssignmentInput {
-  name: String!
-  body: String
-  assignmentGroupId: ID!
-  maxGrade: Int
-  dateDue: Timestamp
-  tags: [AssignmentTag]
-}
-
-enum AssignmentTag {
-  PEERGRADED
-  CODING
 }
 
 type Submission {
@@ -85,6 +85,11 @@ input SubmissionInput {
   student: ID!
   assignmentId: ID!
   files: [FileInput]
+}
+
+type GradingRules {
+  weight: Int!
+  policy: String!
 }
 
 input GradeInput {
@@ -116,10 +121,10 @@ input AssignmentGroupInput {
   name: String!
   courseId: ID!
   tag: String!
-  grading: GradingRules!
+  grading: GradingRulesInput!
 }
 
-input GradingRules {
+input GradingRulesInput {
   policy: String!
   weight: Int!
 }
@@ -155,6 +160,8 @@ type Query {
 type Mutation {
   createAssignment(assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
+  updateCourse(courseId: ID!, courseData: CourseInput!): Course
+  deleteCourse(course: ID!): Course
   createSubmission(submission: SubmissionInput): Submission
   createAssignmentGroup(assignmentGroup: AssignmentGroupInput): AssignmentGroup
   updateGrade(submission: ID!, grade: Float): Float
@@ -166,4 +173,14 @@ type Mutation {
   registerSubmissionFile(submission: ID!, file: FileInput!): File
   updateUser(id: ID!, userData: UserInput!): User!
   signup(userInput: UserInput!): String
+  updateAssignment(
+    assignmentId: ID!
+    assignmentData: AssignmentInput!
+  ): Assignment
+  deleteAssignment(assignment: ID!): Assignment
+  updateAssignmentGroup(
+    assignmentGroupId: ID!
+    assignmentGroupData: AssignmentGroupInput!
+  ): AssignmentGroup
+  deleteAssignmentGroup(assignment: ID!): Assignment
 }

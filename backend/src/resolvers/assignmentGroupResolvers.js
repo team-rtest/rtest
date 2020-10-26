@@ -34,5 +34,19 @@ export default {
       );
       return ag;
     },
+
+    updateAssignmentGroup: async (
+      _,
+      { assignmentGroupId, assignmentGroupData }
+    ) => {
+      return await AssignmentGroup.findByIdAndUpdate(
+        assignmentGroupId,
+        assignmentGroupData
+      );
+    },
+
+    deleteAssignmentGroup: async (_, { assignment }) => {
+      return await AssignmentGroup.findByIdAndDelete(assignment);
+    },
   },
 };

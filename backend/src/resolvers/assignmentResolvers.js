@@ -32,5 +32,13 @@ export default {
       );
       return a;
     },
+
+    updateAssignment: async (_, { assignmentId, assignmentData }) => {
+      return await Assignment.findByIdAndUpdate(assignmentId, assignmentData);
+    },
+
+    deleteAssignment: async (_, { assignment }) => {
+      return await Assignment.findByIdAndDelete(assignment);
+    },
   },
 };
