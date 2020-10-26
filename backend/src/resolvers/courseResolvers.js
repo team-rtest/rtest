@@ -65,5 +65,13 @@ export default {
       );
       return student;
     },
+
+    updateCourse: async (_, { courseId, courseData }) => {
+      return await Course.findByIdAndUpdate(courseId, courseData);
+    },
+
+    deleteCourse: async (_, { course }) => {
+      return await Course.findByIdAndDelete(course);
+    },
   },
 };
