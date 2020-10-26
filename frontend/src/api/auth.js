@@ -12,6 +12,7 @@ const login = (username, password) => {
   axios({
     method: "post",
     url: `${API}/login`,
+    withCredentials: true,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -34,6 +35,7 @@ const signup = (username, password) => {
   axios({
     method: "post",
     url: `${API}/signup`,
+    withCredentials: true,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },

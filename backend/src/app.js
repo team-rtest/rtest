@@ -34,9 +34,7 @@ if (!process.env.JEST_WORKER_ID) {
 }
 
 const app = express();
-app.set("trust proxy", true);
-app.set("trust proxy", "loopback");
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(passport.initialize());
 app.use(compression());
 app.use(logger("dev"));
@@ -44,7 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bearerToken());
-graphqlServer.applyMiddleware({ app });
+graphqlServer.applyMiddleware({ app, cors: { origin: "http://localhost:3000"} });
 
 app.get("/", (_, res) => {
   res.redirect("/status");
@@ -82,7 +80,7 @@ app.post("/signup", (req, res) => {
           res.setHeader("Content-Type", "application/json");
           res.cookie("token", token, {
             path: "/",
-            secure: true,
+            //secure: true,
             httpOnly: true,
             sameSite: "strict",
           });
@@ -105,7 +103,7 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.cookie("token", token, {
     path: "/",
-    secure: true,
+    //secure: true,
     httpOnly: true,
     sameSite: "strict",
   });
