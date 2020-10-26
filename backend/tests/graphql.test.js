@@ -1,7 +1,7 @@
-import request from "supertest";
-import app from "../src/app";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import request from "supertest";
+import app from "../src/app";
 
 describe("GraphQL endpoint", () => {
   it("should get graphql endpoint and return 200", async () => {
@@ -9,7 +9,8 @@ describe("GraphQL endpoint", () => {
       query: "{ hello }",
     });
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual({ data: { hello: "hi" } });
+    expect(res.body.data).toBeDefined();
+    expect(res.body.data).toEqual({ hello: "hi" });
   });
 
   it("should return a presigned URL", async () => {

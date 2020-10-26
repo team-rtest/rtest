@@ -4,18 +4,20 @@ schema {
 }
 
 type User {
+  _id: ID!
   username: String!
-  firstName: String!
-  email: String!
-  lastName: String!
+  firstName: String
+  email: String
+  lastName: String
   createdAt: Timestamp!
 }
 
 input UserInput {
-  username: String!
-  firstName: String!
-  lastName: String!
-  email: String!
+  username: String
+  firstName: String
+  lastName: String
+  email: String
+  password: String
 }
 
 type Course {
@@ -134,6 +136,7 @@ type Query {
   me: User
 
   user(id: ID, username: String): User
+  users: [User]!
   assignment(id: ID): Assignment
   submission(id: ID): Submission
   course(id: ID): Course
@@ -150,7 +153,6 @@ type Query {
 }
 
 type Mutation {
-  # createUser(user: UserInput): User
   createAssignment(assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
   createSubmission(submission: SubmissionInput): Submission
@@ -162,4 +164,6 @@ type Mutation {
   removeUser(user: ID!): ID!
   addSubmissionFile(course: ID!, assignment: ID!, submission: ID!, filename: String!): String!
   registerSubmissionFile(submission: ID!, file: FileInput!): File
+  updateUser(id: ID!, userData: UserInput!): User!
+  signup(userInput: UserInput!): String
 }

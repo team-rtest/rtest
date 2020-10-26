@@ -4,6 +4,7 @@ import Login from "views/External/Auth/Login";
 import Signup from "views/External/Auth/Signup";
 import ResetPassword from "views/External/Auth/ResetPassword";
 import ForgotPassword from "views/External/Auth/ForgotPassword";
+import Profile from "views/Internal/Profile/Profile";
 
 import ProfessorDashboard from "views/Internal/Professor/Dashboard/Dashboard";
 import ProfessorCourse from "views/Internal/Professor/Course/Course";
@@ -19,6 +20,10 @@ const external = [
   {
     path: "/signup",
     page: <Signup />,
+  },
+  {
+    path: "/profile",
+    page: <Profile />,
   },
   {
     path: "/login",

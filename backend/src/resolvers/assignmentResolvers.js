@@ -18,7 +18,6 @@ export default {
     submissions: async (assignment) => {
       return await Submission.find({
         _id: assignment.submissions,
-        student: context.user,
       });
     },
   },

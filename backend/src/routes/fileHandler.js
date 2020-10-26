@@ -10,6 +10,19 @@ const s3 = new AWS.S3({
   s3ForcePathStyle: true,
 });
 
+const publicBucketPolicy = {
+  Version: "2012-10-17",
+  Statement: [
+    {
+      Sid: "PublicRead",
+      Effect: "Allow",
+      Principal: "*",
+      Action: ["s3:GetObject", "s3:GetObjectVersion"],
+      Resource: ["arn:aws:s3:::public/*"],
+    },
+  ],
+};
+
 export function initObjectStorage() {
   s3.createBucket(
     {
@@ -19,7 +32,33 @@ export function initObjectStorage() {
       if (err && err.code !== "BucketAlreadyOwnedByYou") {
         console.log(err.code);
       } else {
-        console.log("Successfully Initialized S3");
+        console.log("Successfully Initialized S3 bucket 'rtest'");
+      }
+    }
+  );
+
+  s3.createBucket(
+    {
+      Bucket: "public",
+    },
+    (err, _) => {
+      if (err && err.code !== "BucketAlreadyOwnedByYou") {
+        console.log(err.code);
+      } else {
+        s3.putBucketPolicy(
+          {
+            Bucket: "public",
+            Policy: JSON.stringify(publicBucketPolicy),
+          },
+          (err, _) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Successfully set bucket policy for bucket 'public'");
+            }
+          }
+        );
+        console.log("Successfully Initialized S3 bucket 'public'");
       }
     }
   );
