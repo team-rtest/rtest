@@ -1,33 +1,98 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
 
-import EditAssignment from "./EditAssignment";
 import Details from "./Details";
-import Submissions from "./Submissions";
+import Assignments from "./Assignments";
+import Students from "./Students";
 
-function AssignmentPage() {
-  const [editModal, setEditModal] = useState(false);
+function Course() {
   const [selected, setSelected] = useState("Details");
-  const tabs = ["Details", "Submissions", "Review"];
+  const tabs = ["Details", "Assignments", "Students", "Review"];
+
+  const course = {
+    courseNumber: "CS470",
+    semester: "Fall 2020",
+    name: "Data Mining",
+    students: [
+      { firstName: "Mark", lastName: "Adams" },
+      { firstName: "Jacob", lastName: "Well" },
+      { firstName: "Larry", lastName: "Bird" },
+    ],
+
+    assignmentGroups: [
+      {
+        name: "Labs",
+        grading: {
+          policy: "Best of 5",
+          weight: "40%",
+        },
+        assignments: [
+          {
+            _id: "2343",
+            name: "K Nearest Neighbors",
+          },
+        ],
+      },
+    ],
+  };
+
+  const query = gql`
+    query Course($id: String!) {
+      course(id: $id) {
+        name
+        courseNumber
+        semester
+        students {
+          firstName
+          lastName
+        }
+        assignmentGroups {
+          name
+          tag
+          grading {
+            policy
+            weight
+          }
+          assignments {
+            _id
+            name
+          }
+        }
+      }
+    }
+  `;
+
+  const { id } = useParams();
+
+  const { data, loading, error } = useQuery(query, {
+    variables: { id },
+  });
+
+  // const { course } = data;
 
   const content = {
-    Details: <Details />,
-    Submissions: <Submissions />,
+    Details: <Details {...course} />,
+    Assignments: <Assignments {...course} />,
+    Students: <Students {...course} />,
   };
+
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error :(</p>;
 
   return (
     <Box>
-      {editModal && <EditAssignment closeModal={() => setEditModal(false)} />}
       <Header>
-        <Heading>K Nearest Neighbors</Heading>
+        <Heading>{course.name}</Heading>
         <Buttons>
-          <EditButton onClick={() => setEditModal(true)}>
+          <EditButton>
             <i className="fa fa-pencil" />
-            Edit Assignment
+            Edit Course
           </EditButton>
           <DeleteButton>
             <i className="fa fa-trash" />
-            Delete Assignment
+            Delete Course
           </DeleteButton>
         </Buttons>
       </Header>
@@ -44,19 +109,21 @@ function AssignmentPage() {
 }
 
 const Box = styled.div`
-  width: calc(100vw - 250px);
+  width: 100%;
   padding: 30px;
-  overflow-y: auto;
-
-  @media (max-width: 600px) {
-    width: 100vw;
-  }
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
 `;
 
 const Heading = styled.h1`
@@ -98,7 +165,6 @@ const DeleteButton = styled.button`
 
 const Tabs = styled.div`
   display: flex;
-  margin-top: 20px;
   flex-direction: row;
   grid-gap: 5px;
 `;
@@ -126,4 +192,4 @@ const Content = styled.div`
   padding: 20px 0;
 `;
 
-export default AssignmentPage;
+export default Course;

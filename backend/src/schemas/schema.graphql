@@ -20,9 +20,8 @@ input UserInput {
 
 type Course {
   _id: ID!
-  subject: String!
   courseNumber: String!
-  year: Int
+  name: String
   semester: String
   students: [User]
   instructor: User
@@ -31,9 +30,8 @@ type Course {
 }
 
 input CourseInput {
-  subject: String!
   courseNumber: String!
-  year: Int
+  name: String
   semester: String
 }
 
@@ -162,11 +160,6 @@ type Mutation {
   addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
   removeStudentFromCourse(student: ID!, course: ID!, section: Int): ID!
   removeUser(user: ID!): ID!
-  addSubmissionFile(
-    course: ID!
-    assignment: ID!
-    submission: ID!
-    filename: String!
-  ): String!
+  addSubmissionFile(course: ID!, assignment: ID!, submission: ID!, filename: String!): String!
   registerSubmissionFile(submission: ID!, file: FileInput!): File
 }
