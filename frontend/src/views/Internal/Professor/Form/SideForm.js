@@ -9,8 +9,6 @@ function SideForm({ title, children, button, onSubmit, closeModal }) {
     return () => (document.body.style.overflow = "");
   }, []);
 
-  console.log(closeModal);
-
   return (
     <Overlay>
       <SidebarForm handleSubmit={onSubmit}>

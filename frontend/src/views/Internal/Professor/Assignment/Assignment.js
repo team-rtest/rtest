@@ -57,6 +57,13 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
 `;
 
 const Heading = styled.h1`

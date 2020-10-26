@@ -11,35 +11,8 @@ function Course() {
   const [selected, setSelected] = useState("Details");
   const tabs = ["Details", "Assignments", "Students", "Review"];
 
-  const course = {
-    courseNumber: "CS470",
-    semester: "Fall 2020",
-    name: "Data Mining",
-    students: [
-      { firstName: "Mark", lastName: "Adams" },
-      { firstName: "Jacob", lastName: "Well" },
-      { firstName: "Larry", lastName: "Bird" },
-    ],
-
-    assignmentGroups: [
-      {
-        name: "Labs",
-        grading: {
-          policy: "Best of 5",
-          weight: "40%",
-        },
-        assignments: [
-          {
-            _id: "2343",
-            name: "K Nearest Neighbors",
-          },
-        ],
-      },
-    ],
-  };
-
   const query = gql`
-    query Course($id: String!) {
+    query {
       course(id: $id) {
         name
         courseNumber
@@ -70,16 +43,16 @@ function Course() {
     variables: { id },
   });
 
-  // const { course } = data;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const { course } = data;
 
   const content = {
     Details: <Details {...course} />,
     Assignments: <Assignments {...course} />,
     Students: <Students {...course} />,
   };
-
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error :(</p>;
 
   return (
     <Box>

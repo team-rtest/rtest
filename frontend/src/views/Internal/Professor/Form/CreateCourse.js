@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { createCourse } from "api/create";
+import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
-import { gql, useMutation } from "@apollo/client";
 
 import SideForm from "./SideForm";
 import { Input, FileInput } from "components";
@@ -22,15 +23,7 @@ function CreateCourse({ closeModal }) {
     syllabus: null,
   });
 
-  const mutation = gql`
-    mutation CreateCourse($course: Course) {
-      createCourse(course: $course) {
-        _id
-      }
-    }
-  `;
-
-  const [createCourse, { data }] = useMutation(mutation);
+  const [setCourse, { data }] = useMutation(createCourse);
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
@@ -44,11 +37,7 @@ function CreateCourse({ closeModal }) {
       semester: inputs.semester,
     };
 
-    createCourse({
-      variables: {
-        course,
-      },
-    });
+    setCourse({ variables: { course } });
   };
 
   useEffect(() => {

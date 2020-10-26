@@ -1,57 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { gql, useQuery } from "@apollo/client";
+import { fetchCourses } from "api/fetch";
+import { useQuery } from "@apollo/client";
 
 import CreateCard from "./CreateCard";
 import CourseCard from "./CourseCard";
 
 function Dashboard() {
-  const query = gql`
-    query {
-      courses {
-        name
-        courseNumber
-        semester
-      }
-    }
-  `;
-
-  const { data, loading, error } = useQuery(query);
+  const { data, loading, error } = useQuery(fetchCourses);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
-  // const courses = [
-  //   {
-  //     _id: "1",
-  //     courseNumber: "CS470",
-  //     semester: "Fall 2019",
-  //     name: "Data Mining",
-  //     color: "#ff695e",
-  //     pinned: true,
-  //   },
-  //   {
-  //     _id: "2",
-  //     courseNumber: "CS325",
-  //     semester: "Fall 2019",
-  //     name: "Artificial Intelligence",
-  //     color: "#ff851b",
-  //   },
-  //   {
-  //     _id: "3",
-  //     courseNumber: "CS334",
-  //     semester: "Fall 2019",
-  //     name: "Machine Learning",
-  //     color: "#2ecc40",
-  //   },
-  //   {
-  //     _id: "4",
-  //     courseNumber: "CS377",
-  //     semester: "Fall 2019",
-  //     name: "Database Systems",
-  //     color: "#54c8ff",
-  //   },
-  // ];
 
   return (
     <Box>
