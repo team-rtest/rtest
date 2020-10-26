@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Card } from "components";
+import { Link } from "react-router-dom";
 
 import CreateAssignmentModal from "./../CreateAssignment/CreateAssignment";
 import CreateAssignmentGroupModal from "./../CreateAssignmentGroup/CreateAssignmentGroup";
 
 function EditCourse() {
   const [createAssignmentModal, setCreateAssignmentModal] = useState(false);
-  const [createAssignmentGroupModal, setCreateAssignmentGroupModal] = useState(
-    false
-  );
+  const [createAssignmentGroupModal, setCreateAssignmentGroupModal] = useState(false);
 
   const openCreateAssignmentModal = () => {
     setCreateAssignmentModal(true);
@@ -23,14 +22,10 @@ function EditCourse() {
   return (
     <Box>
       {createAssignmentModal && (
-        <CreateAssignmentModal
-          closeModal={() => setCreateAssignmentModal(false)}
-        />
+        <CreateAssignmentModal closeModal={() => setCreateAssignmentModal(false)} />
       )}
       {createAssignmentGroupModal && (
-        <CreateAssignmentGroupModal
-          closeModal={() => setCreateAssignmentGroupModal(false)}
-        />
+        <CreateAssignmentGroupModal closeModal={() => setCreateAssignmentGroupModal(false)} />
       )}
       <Scroll>
         <Group>
@@ -42,19 +37,19 @@ function EditCourse() {
           </GroupHeading>
           <hr />
           <Assignments>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> K Nearest Neighbors
             </Assignment>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> Decision Tree
             </Assignment>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> Apriori Algorithm
             </Assignment>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> Naive Bayes
             </Assignment>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> Random Forests
             </Assignment>
             <CreateAssignment onClick={openCreateAssignmentModal}>
@@ -71,16 +66,16 @@ function EditCourse() {
           </GroupHeading>
           <hr />
           <Assignments>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> Exam 1
             </Assignment>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> Exam 2
             </Assignment>
-            <Assignment>
+            <Assignment to="/professor/assignment">
               <i className="fa fa-file-alt"></i> Exam 3
             </Assignment>
-            <CreateAssignment>
+            <CreateAssignment onClick={openCreateAssignmentModal}>
               <i className="fa fa-plus-circle"></i> Create Assignment
             </CreateAssignment>
           </Assignments>
@@ -131,7 +126,7 @@ const Assignments = styled.div`
   grid-gap: 10px;
 `;
 
-const Assignment = styled.button`
+const Assignment = styled(Link)`
   cursor: pointer;
   display: flex;
   align-items: center;
