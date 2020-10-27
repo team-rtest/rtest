@@ -86,7 +86,7 @@ app.post("/signup", (req, res) => {
             //secure: true,
             httpOnly: true,
             sameSite: "strict",
-            expires: "604800",
+            maxAge: 604800,
           });
           res.json({ status: "Successfully Logged In" });
         });
@@ -110,7 +110,7 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
     //secure: true,
     httpOnly: true,
     sameSite: "strict",
-    expires: "604800",
+    maxAge: 604800,
   });
   res.json({ status: "Successfully Logged In" });
 });
