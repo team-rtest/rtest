@@ -2,11 +2,13 @@ version: 2
 updates:
 - package-ecosystem: npm
   directory: "/frontend"
+  rebase-strategy: "auto"
   schedule:
     interval: daily
   open-pull-requests-limit: 10
 - package-ecosystem: npm
   directory: "/backend"
+  rebase-strategy: "auto"
   schedule:
     interval: daily
   open-pull-requests-limit: 10
