@@ -34,7 +34,7 @@ if (!process.env.JEST_WORKER_ID) {
 }
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(passport.initialize());
 app.use(compression());
 app.use(logger("dev"));
@@ -44,7 +44,7 @@ app.use(cookieParser());
 app.use(bearerToken());
 graphqlServer.applyMiddleware({
   app,
-  cors: { origin: "http://localhost:3000" },
+  cors: { origin: process.env.FRONTEND_URL },
 });
 
 app.get("/", (_, res) => {
