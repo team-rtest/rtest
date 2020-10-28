@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { generateToken } from "../auth/auth.js";
 import User from "../models/User.js";
 
 export default {
@@ -29,35 +29,43 @@ export default {
     },
 
     signup: async (_, { userInput }) => {
-      User.register(
+      const user = await User.register(
         new User({
           username: userInput.username,
           email: userInput.email,
           firstName: userInput.firstName,
           lastName: userInput.lastName,
         }),
-        userInput.password,
-        (err, user) => {
-          if (err) {
-            return "Authentication failed";
-          } else {
-            passport.authenticate("local", (_, user, __) => {
-              const token = generateToken({ username: user.username });
-              res.cookie("token", token, {
-                path: "/",
-                secure: true,
-                httpOnly: true,
-                sameSite: "strict", 
-              });
-              return "Successfully Logged In";
-            });
-          }
-        }
-      );  
+        userInput.password
+      );
+
+      const token = generateToken({ username: user.username });
+      res.cookie("token", token, {
+        path: "/",
+        //secure: true,
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 604800,
+      });
+      return "Account successfully created and authenticated";
     },
 
-    // login: async(_, {userInput}) => {
-    //   passport.authenticate("local")
-    // }
-  }, 
+    login: async (_, { username, password }, { res }) => {
+      const { user } = await User.authenticate()(username, password);
+
+      if (!user) {
+        return "Auth failed";
+      }
+
+      const token = generateToken({ username: user.username });
+      res.cookie("token", token, {
+        path: "/",
+        //secure: true,
+        httpOnly: true,
+        sameSite: "strict",
+        maxAge: 604800,
+      });
+      return "Successfully authenticated";
+    },
+  },
 };

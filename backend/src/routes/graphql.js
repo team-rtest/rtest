@@ -27,14 +27,14 @@ const server = new ApolloServer({
     submissionResolvers,
     userResolvers,
   ],
-  context: async ({ req }) => {
+  context: async ({ req, res }) => {
     const token = req.token || req.cookies["token"] || "";
     if (token) {
       const username = await getUsernameFromToken(token);
       var user = await getUser(username);
-      return { user, permissions: generateUserModel(user) };
+      return { user, permissions: generateUserModel(user), res };
     }
-    return;
+    return { res };
   },
   tracing: true,
 });
