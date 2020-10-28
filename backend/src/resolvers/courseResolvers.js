@@ -7,12 +7,15 @@ export default {
     course: async (_, { id }, context) => {
       return await Course.findOne({
         _id: id,
-        "sections.students": context.user,
+        // "sections.students": context.user,
       });
     },
 
     courses: async (_, __, context) => {
-      return await Course.find({ "sections.students": context.user });
+      return await Course
+        .find
+        // {"sections.students": context.user }
+        ();
     },
   },
 
