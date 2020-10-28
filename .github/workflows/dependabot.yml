@@ -1,4 +1,4 @@
-name: "Dependabot Automerge - Action"
+name: "Dependabot Autoreview + Automerge"
 
 on:
   pull_request:
@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]'
     steps:
-      - name: automerge
-        uses: actions/github-script@0.2.0
+      - name: autoreview
+        uses: actions/github-script@v3.0.0
         with:
           script: |
             github.pullRequests.createReview({
@@ -17,5 +17,19 @@ jobs:
               repo: context.payload.repository.name,
               pull_number: context.payload.pull_request.number,
               event: 'APPROVE'
+            })
+          github-token: ${{github.token}}
+      - name: Wait / Sleep
+        uses: jakejarvis/wait-action@v0.1.0
+        with:
+          time: '3m' 
+      - name: automerge
+        uses: actions/github-script@v3.0.0
+        with:
+          script: |
+            github.pullRequests.merge({
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
+              pull_number: context.payload.pull_request.number
             })
           github-token: ${{github.token}}
