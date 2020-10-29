@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Course from "../models/Course.js";
 import AssignmentGroup from "../models/AssignmentGroup.js";
+import User from "../models/User.js";
 
 export default {
   Query: {
@@ -19,6 +20,12 @@ export default {
   Course: {
     assignmentGroups: async (course) => {
       return await AssignmentGroup.findById(course.assigmentGroups);
+    },
+    
+    students: async (course) => {
+      return await User.find({
+        _id : course.sections.students
+      });
     },
   },
 
