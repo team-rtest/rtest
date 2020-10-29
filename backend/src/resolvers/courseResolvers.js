@@ -5,28 +5,33 @@ import User from "../models/User.js";
 
 export default {
   Query: {
-    course: async (_, { id }, context) => {
-      return await Course.findOne({
+    course: async (_, { id }, context) =>
+      await Course.findOne({
         _id: id,
         "sections.students": context.user,
-      });
-    },
+      }),
 
-    courses: async (_, __, context) => {
-      return await Course.find({ "sections.students": context.user });
-    },
+    courseTeaching: async (_, { id }, context) =>
+      await Course.findOne({
+        _id: id,
+        "sections.instructor": context.user,
+      }),
+
+    coursesTeaching: async (_, __, context) =>
+      await Course.find({ "sections.instructor": context.user }),
+
+    courses: async (_, __, context) =>
+      await Course.find({ "sections.students": context.user }),
   },
 
   Course: {
-    assignmentGroups: async (course) => {
-      return await AssignmentGroup.findById(course.assigmentGroups);
-    },
-    
-    students: async (course) => {
-      return await User.find({
-        _id : course.sections.students
-      });
-    },
+    assignmentGroups: async (course) =>
+      await AssignmentGroup.find({ _id: { $in: course.assignmentGroups } }),
+  },
+
+  Section: {
+    instructor: async (section) => await User.findById(section.instructor),
+    students: async (section) => await User.find({ _id: section.students }),
   },
 
   Mutation: {
@@ -73,12 +78,10 @@ export default {
       return student;
     },
 
-    updateCourse: async (_, { courseId, courseData }) => {
-      return await Course.findByIdAndUpdate(courseId, courseData);
-    },
+    updateCourse: async (_, { courseId, courseData }) =>
+      await Course.findByIdAndUpdate(courseId, courseData),
 
-    deleteCourse: async (_, { course }) => {
-      return await Course.findByIdAndDelete(course);
-    },
+    deleteCourse: async (_, { course }) =>
+      await Course.findByIdAndDelete(course),
   },
 };
