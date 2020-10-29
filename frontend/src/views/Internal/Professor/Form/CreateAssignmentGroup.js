@@ -1,44 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+
+import { createAssignmentGroup } from "api/create";
+import { useCreate } from "api/hooks";
 
 import SideForm from "./SideForm";
 import { Input } from "components";
 
 function CreateAssignmentGroup({ closeModal }) {
-  const [inputs, setInputs] = useState({
-    group_name: "",
-    group_type: "",
-    grading_policy: "",
-    grading_weight: "",
-  });
-  const [errors, setErrors] = useState({
-    group_name: null,
-    group_type: null,
-    grading_policy: null,
-    grading_weight: null,
-  });
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => (document.body.style.overflow = "");
-  }, []);
+  const { id: courseId } = useParams();
+  const [setAssignmentGroup] = useCreate(createAssignmentGroup);
+  const [inputs, setInputs] = useState({});
+  const [errors, setErrors] = useState({});
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
     setErrors({ ...errors, [name]: !value });
   };
 
-  const createAssignmentGroup = () => {
-    // TODO: Create an assignment group using GraphQL
-    //
-    // input AssignmentGroupInput {
-    //   name: String!
-    //   courseId: ID!
-    //   tag: String!
-    //   grading: GradingRules!
-    // }
-    //
-    // "courseId" is not included in AssignmentGroup schema
+  const handleSubmit = () => {
+    const assignmentGroup = {
+      name: inputs.group_name,
+      tag: inputs.group_type,
+      courseId: courseId,
+      grading: {
+        weight: inputs.grading_weight,
+        policy: inputs.grading_policy,
+      },
+    };
+
+    setAssignmentGroup({ variables: { assignmentGroup } });
   };
 
   return (
@@ -46,7 +38,7 @@ function CreateAssignmentGroup({ closeModal }) {
       title="Create Assignment Group"
       button="Create"
       closeModal={closeModal}
-      onSubmit={createAssignmentGroup}
+      onSubmit={handleSubmit}
     >
       <Input
         name="group_name"

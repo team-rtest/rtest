@@ -11,7 +11,7 @@ function SideForm({ title, children, button, onSubmit, closeModal }) {
 
   return (
     <Overlay>
-      <SidebarForm handleSubmit={onSubmit}>
+      <Box handleSubmit={onSubmit}>
         <Heading>{title}</Heading>
         <Body>{children}</Body>
         <Foot>
@@ -22,7 +22,7 @@ function SideForm({ title, children, button, onSubmit, closeModal }) {
             {button}
           </Button>
         </Foot>
-      </SidebarForm>
+      </Box>
     </Overlay>
   );
 }
@@ -44,7 +44,7 @@ const Overlay = styled.div`
   }
 `;
 
-const SidebarForm = styled(Form)`
+const Box = styled(Form)`
   background: #f8f9fa;
   width: 500px;
   height: 100vh;

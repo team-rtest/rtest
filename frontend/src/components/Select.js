@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function Input({ name, type, value, tip, error, onChange, className, ...rest }) {
+function Input({ name, type, value, tip, error, options, onChange, className, ...rest }) {
   const [focus, setFocus] = useState(false);
   const label = name.split("_").join(" ");
 
@@ -25,13 +25,17 @@ function Input({ name, type, value, tip, error, onChange, className, ...rest }) 
         onChange={(event) => onChange(name, event.target.value)}
         className={`form-control ${className} ${!focus && error !== null && error && "is-invalid"}`}
         {...rest}
-      />
+      >
+        {options.map((option) => (
+          <option value={option}>{option}</option>
+        ))}
+      </StyledInput>
       <div className="invalid-feedback">{!focus && error}</div>
     </div>
   );
 }
 
-const StyledInput = styled.input`
+const StyledInput = styled.select`
   ::placeholder {
     color: darkgrey;
   }

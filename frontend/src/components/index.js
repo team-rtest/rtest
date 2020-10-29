@@ -1,7 +1,8 @@
 import Form from "./Form";
-import Input from "./Input";
 import Card from "./Card";
+import Input from "./Input";
+import Select from "./Select";
 import FileInput from "./FileInput";
 import Upload from "./Upload";
 
-export { Form, Input, Card, FileInput, Upload };
+export { Form, Card, Input, Select, FileInput, Upload };

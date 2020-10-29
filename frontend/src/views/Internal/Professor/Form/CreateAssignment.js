@@ -1,52 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-import SideForm from "./SideForm";
-import { Input, FileInput } from "components";
+import { createAssignment } from "api/create";
+import { useCreate } from "api/hooks";
 
-function CreateAssignment({ closeModal }) {
-  const [inputs, setInputs] = useState({
-    assignment_name: "",
-    assignment_group: "",
-    max_grade: "",
-    due_date: "",
-    assignment_instructions: "",
-  });
-  const [errors, setErrors] = useState({
-    assignment_name: null,
-    assignment_group: null,
-    max_grade: null,
-    due_date: null,
-    assignment_instructions: null,
-  });
+import SideForm from "./SideForm";
+import { Select, Input, FileInput } from "components";
+
+function CreateAssignment({ selected, assignmentGroups, closeModal }) {
+  const [setAssignment, data] = useCreate(createAssignment);
+  const [inputs, setInputs] = useState({});
+  const [errors, setErrors] = useState({});
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
     setErrors({ ...errors, [name]: !value });
   };
 
-  const createAssignment = () => {
-    // TODO: Create an assignment group using GraphQL
-    //
-    // input AssignmentInput {
-    //   name: String!
-    //   body: String
-    //   assignmentGroupId: ID!
-    //   maxGrade: Int
-    //   dateDue: Timestamp
-    //   tags: [AssignmentTag]
-    // }
-    //
-    // "assignmentGroupId" is not included in Assignment schema
-    // "body" is no longer used as an instructions file is uploaded instead
+  const handleSubmit = () => {
+    const assignment = {
+      name: inputs.assignment_name,
+      maxGrade: parseInt(inputs.max_grade),
+      dateDue: new Date(inputs.due_date),
+      optional: inputs.optional,
+      locked: inputs.locked,
+      assignmentGroupId: inputs.assignmentGroup && inputs.assignmentGroup.id,
+    };
+
+    setAssignment({ variables: { assignment } });
   };
+
+  // input AssignmentInput {
+  //   name: String
+  //   body: String
+  //   maxGrade: Int
+  //   dateDue: Timestamp
+  //   optional: Boolean
+  //   locked: Boolean
+  //   assignmentGroupId: ID!
+  // }
 
   return (
     <SideForm
       title="Create Assignment"
       button="Create"
       closeModal={closeModal}
-      onSubmit={createAssignment}
+      onSubmit={handleSubmit}
     >
       <Input
         name="assignment_name"
@@ -54,10 +53,11 @@ function CreateAssignment({ closeModal }) {
         error={errors.assignment_name}
         onChange={handleChange}
       />
-      <Input
+      <Select
         name="assignment_group"
         value={inputs.assignment_group}
         error={errors.assignment_group}
+        options={assignmentGroups}
         onChange={handleChange}
       />
       <InputRow>
@@ -69,6 +69,7 @@ function CreateAssignment({ closeModal }) {
         />
         <Input
           name="due_date"
+          type="time"
           value={inputs.due_date}
           error={errors.due_date}
           onChange={handleChange}

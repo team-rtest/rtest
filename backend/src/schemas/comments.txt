@@ -45,11 +45,14 @@ input GradingRules {
 
 =====================================
 
+GRADE
+----------------
+
+1) Add "comment" attribute to GradeInput
+
 =====================================
 
 ASSIGNMENT
 ----------------
-
-1) Assignment Tag is redundant since the Assignment Group specifies the type of assignment
 
 =====================================

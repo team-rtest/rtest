@@ -1,3 +1,5 @@
 import createCourse from "./createCourse";
+import createAssignment from "./createAssignment";
+import createAssignmentGroup from "./createAssignmentGroup";
 
-export { createCourse };
+export { createCourse, createAssignment, createAssignmentGroup };

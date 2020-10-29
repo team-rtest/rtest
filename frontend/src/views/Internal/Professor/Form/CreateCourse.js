@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { createCourse } from "api/create";
-import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+
+import { createCourse } from "api/create";
+import { useCreate } from "api/hooks";
 
 import SideForm from "./SideForm";
 import { Input, FileInput } from "components";
 
 function CreateCourse({ closeModal }) {
   const history = useHistory();
-
-  const [inputs, setInputs] = useState({
-    course_name: "",
-    course_number: "",
-    semester: "",
-    syllabus: "",
-  });
-
-  const [errors, setErrors] = useState({
-    course_name: null,
-    course_number: null,
-    semester: null,
-    syllabus: null,
-  });
-
-  const [setCourse, { data }] = useMutation(createCourse);
+  const [setCourse, data] = useCreate(createCourse);
+  const [inputs, setInputs] = useState({});
+  const [errors, setErrors] = useState({});
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
@@ -42,7 +30,7 @@ function CreateCourse({ closeModal }) {
 
   useEffect(() => {
     data && history.push("course/" + data._id);
-  }, [data]);
+  }, [data, history]);
 
   return (
     <SideForm title="Create Course" button="Create" closeModal={closeModal} onSubmit={handleSubmit}>
