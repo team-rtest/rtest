@@ -28,10 +28,15 @@ type Course {
   files: [File]
   year: Int
   semester: String
-  students: [User]
-  instructor: User
-  assistants: [User]
+  sections: [Section]
   assignmentGroups: [AssignmentGroup]
+}
+
+type Section {
+  number: Int
+  instructor: User
+  students: [User]
+  assistants: [User]
 }
 
 input CourseInput {
@@ -59,10 +64,9 @@ input AssignmentInput {
   name: String
   body: String
   maxGrade: Int
-  dateDue: Timestamp
+  dateDue: Timestamp!
   optional: Boolean
   locked: Boolean
-  assignmentGroupId: ID!
 }
 
 type AssignmentGroup {
@@ -120,7 +124,6 @@ input FileInput {
 
 input AssignmentGroupInput {
   name: String!
-  courseId: ID!
   tag: String!
   grading: GradingRulesInput!
 }
@@ -135,9 +138,6 @@ scalar Timestamp
 # ----------------------------------
 
 type Query {
-  # Retrieve user through a user ID or through the token passed to
-  # Query. Leave id empty if you'd like to view the currently logged in
-  # user.
   hello: String!
   me: User
 
@@ -146,6 +146,10 @@ type Query {
   assignment(id: ID): Assignment
   submission(id: ID): Submission
   course(id: ID): Course
+  courseUNSAFE(id: ID): Course
+  coursesUNSAFE: [Course]
+  courseTeaching(id: ID!): Course
+  coursesTeaching: [Course]
   assignmentGroup(id: ID): AssignmentGroup
 
   # TODO make these dependent on assignment instead of bucket
@@ -159,12 +163,12 @@ type Query {
 }
 
 type Mutation {
-  createAssignment(assignment: AssignmentInput): Assignment
+  createAssignment(assignmentGroup: ID!, assignment: AssignmentInput): Assignment
   createCourse(course: CourseInput): Course
   updateCourse(courseId: ID!, courseData: CourseInput!): Course
   deleteCourse(course: ID!): Course
   createSubmission(submission: SubmissionInput): Submission
-  createAssignmentGroup(assignmentGroup: AssignmentGroupInput): AssignmentGroup
+  createAssignmentGroup(course: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
   updateGrade(submission: ID!, grade: Float): Float
   addStudentToCourse(student: ID!, course: ID!, section: Int): ID!
   addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
