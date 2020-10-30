@@ -31,7 +31,6 @@ const Box = styled(Link)`
   grid-gap: 10px;
   font-size: 1.5rem;
   border-radius: 4px;
-  // border: 2px solid rgb(217, 218, 219);
 
   &:hover,
   &focus {

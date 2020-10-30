@@ -1,35 +1,32 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function Input({ name, type, value, tip, error, options, onChange, className, ...rest }) {
+function Input({ name, type, label, value, tip, error, options, onChange, className, ...rest }) {
   const [focus, setFocus] = useState(false);
-  const label = name.split("_").join(" ");
+
+  options = [""].concat(options);
 
   return (
     <div>
-      <Above>
-        <Label>{label}</Label>
-        {tip && (
-          <Tip>
-            <Icon className="fa fa-question-circle" />
-            <Message>{tip}</Message>
-          </Tip>
-        )}
-      </Above>
-      <StyledInput
-        type={type}
-        id={name}
-        value={value}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-        onChange={(event) => onChange(name, event.target.value)}
-        className={`form-control ${className} ${!focus && error !== null && error && "is-invalid"}`}
-        {...rest}
-      >
-        {options.map((option) => (
-          <option value={option}>{option}</option>
-        ))}
-      </StyledInput>
+      <Label>{label}</Label>
+      <Box>
+        <StyledInput
+          type={type}
+          id={name}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          onChange={(event) => onChange(name, event.target.value)}
+          className={`form-control ${className} ${!focus && error && "is-invalid"}`}
+          {...rest}
+        >
+          {options.map((option) => (
+            <option value={option} selected={value === option}>
+              {option}
+            </option>
+          ))}
+        </StyledInput>
+        <Icon className="fa fa-caret-down" />
+      </Box>
       <div className="invalid-feedback">{!focus && error}</div>
     </div>
   );
@@ -39,46 +36,28 @@ const StyledInput = styled.select`
   ::placeholder {
     color: darkgrey;
   }
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
 `;
 
-const Above = styled.div`
-  display: flex;
-  align-items: center;
-  grid-gap: 5px;
-`;
-
-const Tip = styled.div`
+const Box = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
-`;
-
-const Message = styled.div`
-  position: absolute;
-  top: -5px;
-  left: 15px;
-  display: none;
-  white-space: nowrap;
-  font-size: 0.8rem;
-  color: white;
-  background: grey;
-  padding: 2px 4px;
-  border-radius: 4px;
-`;
-
-const Icon = styled.div`
-  &:hover + ${Message} {
-    display: block;
-  }
-
-  color: grey;
-  font-size: 0.75rem;
 `;
 
 const Label = styled.label`
-  text-transform: capitalize;
   margin-bottom: 2px;
   font-size: 0.9rem;
+  color: grey;
+`;
+
+const Icon = styled.i`
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  font-size: 15px;
   color: grey;
 `;
 

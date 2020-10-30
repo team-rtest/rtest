@@ -1,21 +1,24 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+
 import { gql, useMutation } from "@apollo/client";
 
 import SideForm from "./SideForm";
 import { Input, FileInput, Select } from "components";
 
-const create = gql`
-  mutation CreateAssignment($assignment: AssignmentInput) {
-    createAssignment(assignment: $assignment) {
+const update = gql`
+  mutation UpdateAssignment($assignmentId: ID!, $assignmentData: AssignmentInput!) {
+    updateAssignment(assignmentId: $assignmentId, assignmentData: $assignmentData) {
       _id
     }
   }
 `;
 
-function CreateAssignment({ selectedAssignmentGroup, assignmentGroups, closeModal }) {
-  const [createAssignment] = useMutation(create);
-  const [inputs, setInputs] = useState({ group: selectedAssignmentGroup });
+function EditAssignment({ assignmentData, closeModal }) {
+  const { id } = useParams();
+  const [updateAssignment] = useMutation(update);
+  const [inputs, setInputs] = useState(assignmentData);
   const [errors, setErrors] = useState({});
 
   const handleChange = (name, value) => {
@@ -26,8 +29,8 @@ function CreateAssignment({ selectedAssignmentGroup, assignmentGroups, closeModa
     // minio s3 syllabus upload here
   };
 
-  const handleCreate = (assignment) => {
-    createAssignment({ variables: { assignment } });
+  const handleUpdate = (assignment) => {
+    updateAssignment({ variables: { assignmentId: id, assignmentData: assignment } });
   };
 
   const handleSubmit = () => {
@@ -53,19 +56,14 @@ function CreateAssignment({ selectedAssignmentGroup, assignmentGroups, closeModa
 
     if (valid) {
       handleUpload();
-      handleCreate();
+      handleUpdate();
     } else {
       setErrors(errors);
     }
   };
 
   return (
-    <SideForm
-      title="Create Assignment"
-      button="Create"
-      closeModal={closeModal}
-      onSubmit={handleSubmit}
-    >
+    <SideForm title="Edit Assignment" button="Save" closeModal={closeModal} onSubmit={handleSubmit}>
       <Input
         name="name"
         label="Assignment Name"
@@ -120,4 +118,4 @@ const InputRow = styled.div`
   }
 `;
 
-export default CreateAssignment;
+export default EditAssignment;

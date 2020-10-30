@@ -4,20 +4,26 @@ import { useParams } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
 import SideForm from "./SideForm";
-import { Input, Select } from "components";
+import { Input } from "components";
 
-const create = gql`
-  mutation CreateAssignmentGroup($assignmentGroup: AssignmentGroupInput) {
-    createAssignmentGroup(assignmentGroup: $assignmentGroup) {
+const update = gql`
+  mutation UpdateAssignmentGroup(
+    $assignmentGroupId: ID!
+    $assignmentGroupData: AssignmentGroupInput!
+  ) {
+    updateAssignmentGroup(
+      assignmentGroupId: $assignmentGroupId
+      assignmentGroupData: $assignmentGroupData
+    ) {
       _id
     }
   }
 `;
 
-function CreateAssignmentGroup({ closeModal }) {
+function UpdateAssignmentGroup({ assignmentGroupData, closeModal }) {
   const { id: courseId } = useParams();
-  const [createAssignmentGroup] = useMutation(create);
-  const [inputs, setInputs] = useState({});
+  const [updateAssignmentGroup] = useMutation(update);
+  const [inputs, setInputs] = useState(assignmentGroupData);
   const [errors, setErrors] = useState({});
 
   const handleChange = (name, value) => {
@@ -45,7 +51,12 @@ function CreateAssignmentGroup({ closeModal }) {
     const valid = inputs.name && inputs.tag && inputs.weight && inputs.policy;
 
     if (valid) {
-      createAssignmentGroup({ variables: { assignmentGroup } });
+      updateAssignmentGroup({
+        variables: {
+          assignmentGroupId: assignmentGroupData._id,
+          assignmentGroupData: assignmentGroup,
+        },
+      });
     } else {
       setErrors(errors);
     }
@@ -53,8 +64,8 @@ function CreateAssignmentGroup({ closeModal }) {
 
   return (
     <SideForm
-      title="Create Assignment Group"
-      button="Create"
+      title="Edit Assignment Group"
+      button="Save"
       closeModal={closeModal}
       onSubmit={handleSubmit}
     >
@@ -65,29 +76,26 @@ function CreateAssignmentGroup({ closeModal }) {
         error={errors.name}
         onChange={handleChange}
       />
-      <Select
-        name="tag"
+      <Input
+        name="group_type"
         label="Group Type"
-        value={inputs.tag}
-        error={errors.tag}
-        options={["Homework", "Classwork", "Lab", "Quiz", "Test", "Exam"]}
+        value={inputs.group_type}
+        error={errors.group_type}
         onChange={handleChange}
       />
       <InputRow>
         <Input
-          name="policy"
+          name="grading_policy"
           label="Grading Policy"
-          value={inputs.policy}
-          error={errors.policy}
-          options
+          value={inputs.grading_policy}
+          error={errors.grading_policy}
           onChange={handleChange}
         />
         <Input
-          name="weight"
-          label="Grading Weight (in percent)"
-          type="number"
-          value={inputs.weight}
-          error={errors.weight}
+          name="grading_weight"
+          label="Grading Weight"
+          value={inputs.grading_weight}
+          error={errors.grading_weight}
           onChange={handleChange}
         />
       </InputRow>
@@ -104,4 +112,4 @@ const InputRow = styled.div`
   }
 `;
 
-export default CreateAssignmentGroup;
+export default UpdateAssignmentGroup;

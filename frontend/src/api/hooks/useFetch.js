@@ -1,9 +1,8 @@
-import { useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
-function useCreate(mutation, variables) {
-  const [create, { data }] = useMutation(mutation);
-  create({ variables });
-  return [data];
+function useCreate(query, variables) {
+  const { data, loading, error } = useQuery(query, { variables });
+  return [data, loading, error];
 }
 
 export default useCreate;

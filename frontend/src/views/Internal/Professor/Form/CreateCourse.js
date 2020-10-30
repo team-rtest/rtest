@@ -1,59 +1,68 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-
 import { createCourse } from "api/create";
-import { useCreate } from "api/hooks";
 
 import SideForm from "./SideForm";
-import { Input, FileInput } from "components";
+import { Input, FileInput, Select } from "components";
+
+import { gql, useMutation } from "@apollo/client";
+
+const mutation = gql`
+  mutation CreateCourse($course: CourseInput) {
+    createCourse(course: $course) {
+      _id
+    }
+  }
+`;
 
 function CreateCourse({ closeModal }) {
   const history = useHistory();
-  const [setCourse, data] = useCreate(createCourse);
+  const [create, { data }] = useMutation(mutation);
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState({});
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
-    setErrors({ ...errors, [name]: !value });
   };
 
   const handleSubmit = () => {
-    const course = {
-      name: inputs.course_name,
-      courseNumber: inputs.course_number,
-      semester: inputs.semester,
-    };
-
-    setCourse({ variables: { course } });
+    createCourse(inputs, create)
+      .then((data) => {
+        data && data._id && history.push("/professor/course/" + data.createCourse._id);
+      })
+      .catch((err) => {
+        console.log(err);
+        setErrors(err);
+      });
   };
-
-  useEffect(() => {
-    data && history.push("course/" + data._id);
-  }, [data, history]);
 
   return (
     <SideForm title="Create Course" button="Create" closeModal={closeModal} onSubmit={handleSubmit}>
       <Input
-        name="course_number"
-        value={inputs.course_number}
-        error={errors.course_number}
+        name="name"
+        label="Name"
+        value={inputs.name}
+        error={errors.name}
         onChange={handleChange}
       />
       <Input
-        name="course_name"
-        value={inputs.course_name}
-        error={errors.course_name}
+        name="courseNumber"
+        label="Number"
+        value={inputs.courseNumber}
+        error={errors.courseNumber}
         onChange={handleChange}
       />
-      <Input
+      <Select
         name="semester"
+        label="Semester"
         value={inputs.semester}
         error={errors.semester}
+        options={["Spring 2020", "Fall 2020", "Spring 2021"]}
         onChange={handleChange}
       />
       <FileInput
         name="syllabus"
+        label="Syllabus"
         value={inputs.syllabus}
         error={errors.syllabus}
         onChange={handleChange}

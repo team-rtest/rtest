@@ -4,5 +4,6 @@ import Input from "./Input";
 import Select from "./Select";
 import FileInput from "./FileInput";
 import Upload from "./Upload";
+import Loader from "./Loader";
 
-export { Form, Card, Input, Select, FileInput, Upload };
+export { Form, Card, Input, Select, FileInput, Upload, Loader };

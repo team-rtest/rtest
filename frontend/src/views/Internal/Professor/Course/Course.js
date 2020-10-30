@@ -3,47 +3,52 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
+import EditCourse from "views/Internal/Professor/Form/EditCourse";
+import DeleteCourse from "views/Internal/Professor/Form/DeleteCourse";
+
 import Details from "./Details";
 import Assignments from "./Assignments";
 import Students from "./Students";
 
-function Course() {
-  const [selected, setSelected] = useState("Details");
-  const tabs = ["Details", "Assignments", "Students", "Review"];
+import { Loader } from "components";
 
-  const query = gql`
-    query {
-      course(id: $id) {
+const fetch = gql`
+  query FetchCourse($id: ID!) {
+    course(id: $id) {
+      name
+      courseNumber
+      semester
+      students {
+        firstName
+        lastName
+      }
+      assignmentGroups {
         name
-        courseNumber
-        semester
-        students {
-          firstName
-          lastName
+        tag
+        grading {
+          policy
+          weight
         }
-        assignmentGroups {
+        assignments {
+          _id
           name
-          tag
-          grading {
-            policy
-            weight
-          }
-          assignments {
-            _id
-            name
-          }
         }
       }
     }
-  `;
+  }
+`;
 
+function Course() {
   const { id } = useParams();
+  const { data, loading, error } = useQuery(fetch, { variables: { id } });
 
-  const { data, loading, error } = useQuery(query, {
-    variables: { id },
-  });
+  const tabs = ["Details", "Assignments", "Students", "Review"];
+  const [selected, setSelected] = useState("Details");
 
-  if (loading) return <p>Loading...</p>;
+  const [editCourseModal, setEditCourseModal] = useState(false);
+  const [deleteCourseModal, setDeleteCourseModal] = useState(false);
+
+  if (loading) return <PageLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
   const { course } = data;
@@ -54,16 +59,24 @@ function Course() {
     Students: <Students {...course} />,
   };
 
+  if (!course) return <div>Course does not exist</div>;
+
   return (
     <Box>
+      {editCourseModal && (
+        <EditCourse courseData={course} closeModal={() => setEditCourseModal(false)} />
+      )}
+      {deleteCourseModal && (
+        <DeleteCourse courseData={course} closeModal={() => setDeleteCourseModal(false)} />
+      )}
       <Header>
         <Heading>{course.name}</Heading>
         <Buttons>
-          <EditButton>
+          <EditButton onClick={() => setEditCourseModal(true)}>
             <i className="fa fa-pencil" />
             Edit Course
           </EditButton>
-          <DeleteButton>
+          <DeleteButton onClick={() => setDeleteCourseModal(true)}>
             <i className="fa fa-trash" />
             Delete Course
           </DeleteButton>
@@ -159,6 +172,14 @@ const Tab = styled.button`
     color: #6173db;
     background: rgba(97, 115, 219, 0.2);
   `}
+`;
+
+const PageLoader = styled(Loader)`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Content = styled.div`

@@ -2,25 +2,28 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import CreateAssignmentModal from "views/Internal/Professor/Form/CreateAssignment";
+import EditAssignmentGroupModal from "views/Internal/Professor/Form/EditAssignmentGroup";
 
 import { Card } from "components";
 import { Link } from "react-router-dom";
 
 function AssignmentGroup({ name, tag, grading, assignments }) {
   const [createAssignmentModal, setCreateAssignmentModal] = useState(false);
-
-  const openCreateAssignmentModal = () => {
-    setCreateAssignmentModal(true);
-  };
+  const [editAssignmentGroupModal, setEditAssignmentGroupModal] = useState(false);
 
   return (
     <Group>
       {createAssignmentModal && (
         <CreateAssignmentModal closeModal={() => setCreateAssignmentModal(false)} />
       )}
+      {editAssignmentGroupModal && (
+        <EditAssignmentGroupModal closeModal={() => setEditAssignmentGroupModal(false)} />
+      )}
       <GroupHeading>
         {name}
-        <Weight>{grading.weight}</Weight>
+        <button className="btn btn-upload" onClick={() => setEditAssignmentGroupModal(true)}>
+          Edit
+        </button>
       </GroupHeading>
       <hr />
       <AssignmentList>
@@ -30,7 +33,7 @@ function AssignmentGroup({ name, tag, grading, assignments }) {
               <i className="fa fa-file-alt"></i> {assignment.name}
             </Assignment>
           ))}
-        <CreateAssignment onClick={openCreateAssignmentModal}>
+        <CreateAssignment onClick={() => setCreateAssignmentModal(true)}>
           <i className="fa fa-plus-circle"></i> Create Assignment
         </CreateAssignment>
       </AssignmentList>

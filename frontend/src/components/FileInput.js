@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Input({ name, type, value, tip, error, onChange, className, ...rest }) {
-  const label = name.split("_").join(" ");
-
+function FileInput({ name, type, label, value, tip, error, onChange, className, ...rest }) {
   return (
     <div>
       <Label>{label}</Label>
@@ -12,7 +10,7 @@ function Input({ name, type, value, tip, error, onChange, className, ...rest }) 
         id={name}
         value={value}
         onChange={(event) => onChange(name, event.target.value)}
-        className={`form-control ${className} ${error !== null && error && "is-invalid"}`}
+        className={`form-control ${className} ${error && "is-invalid"}`}
         {...rest}
       />
       <div className="invalid-feedback">{error}</div>
@@ -26,10 +24,9 @@ const StyledInput = styled.input`
 `;
 
 const Label = styled.label`
-  text-transform: capitalize;
   margin-bottom: 4px;
   font-size: 0.9rem;
   color: grey;
 `;
 
-export default Input;
+export default FileInput;

@@ -6,10 +6,11 @@ import { useQuery } from "@apollo/client";
 import CreateCard from "./CreateCard";
 import CourseCard from "./CourseCard";
 
+import { Loader } from "components";
+
 function Dashboard() {
   const { data, loading, error } = useQuery(fetchCourses);
-
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>Error :(</p>;
 
   return (
