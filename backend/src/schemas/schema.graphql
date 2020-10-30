@@ -99,7 +99,7 @@ type Submission {
 }
 
 input SubmissionInput {
-  student: User!
+  student: UserInput!
   files: [FileInput]
 }
 
