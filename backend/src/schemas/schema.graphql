@@ -6,28 +6,26 @@ schema {
 type User {
   _id: ID!
   username: String!
-  firstName: String
   email: String
+  firstName: String
   lastName: String
   createdAt: Timestamp!
 }
 
 input UserInput {
-  username: String
+  username: String!
+  email: String
   firstName: String
   lastName: String
-  email: String
   password: String
 }
 
 type Course {
   _id: ID!
-  subject: String!
-  courseNumber: String!
   name: String
-  files: [File]
-  year: Int
+  code: String
   semester: String
+  files: [File]
   sections: [Section]
   assignmentGroups: [AssignmentGroup]
 }
@@ -40,11 +38,34 @@ type Section {
 }
 
 input CourseInput {
-  subject: String
-  courseNumber: String
   name: String
-  year: Int
+  code: String
   semester: String
+  files: [FileInput]
+}
+
+type AssignmentGroup {
+  _id: ID!
+  name: String!
+  tag: String!
+  grading: GradingRules!
+  assignments: [Assignment]
+}
+
+input AssignmentGroupInput {
+  name: String!
+  tag: String!
+  grading: GradingRulesInput!
+}
+
+type GradingRules {
+  weight: Int!
+  policy: String!
+}
+
+input GradingRulesInput {
+  weight: Int!
+  policy: String!
 }
 
 type Assignment {
@@ -55,7 +76,7 @@ type Assignment {
   dateDue: Timestamp!
   optional: Boolean!
   locked: Boolean!
-  files: [File]
+  files: File
   submissions: [Submission]
   createdAt: Timestamp!
 }
@@ -69,32 +90,17 @@ input AssignmentInput {
   locked: Boolean
 }
 
-type AssignmentGroup {
-  _id: ID!
-  name: String!
-  tag: String!
-  grading: GradingRules!
-  assignments: [Assignment]
-}
-
 type Submission {
   _id: ID!
   student: User!
-  grade: Float
   files: [File]
-  dateSubmitted: Timestamp!
-  attemptNumber: Int
+  grade: Float
+  submittedAt: Timestamp!
 }
 
 input SubmissionInput {
-  student: ID!
-  assignmentId: ID!
+  student: UserInput!
   files: [FileInput]
-}
-
-type GradingRules {
-  weight: Int!
-  policy: String!
 }
 
 input GradeInput {
@@ -120,17 +126,6 @@ input FileInput {
   # The path to the file in S3
   bucket: String!
   key: String!
-}
-
-input AssignmentGroupInput {
-  name: String!
-  tag: String!
-  grading: GradingRulesInput!
-}
-
-input GradingRulesInput {
-  policy: String!
-  weight: Int!
 }
 
 scalar Timestamp
@@ -163,35 +158,35 @@ type Query {
 }
 
 type Mutation {
-  createAssignment(assignmentGroup: ID!, assignment: AssignmentInput): Assignment
+  # COURSES
   createCourse(course: CourseInput): Course
-  updateCourse(courseId: ID!, courseData: CourseInput!): Course
-  deleteCourse(course: ID!): Course
-  createSubmission(submission: SubmissionInput): Submission
-  createAssignmentGroup(course: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
-  updateGrade(submission: ID!, grade: Float): Float
-  addStudentToCourse(student: ID!, course: ID!, section: Int): ID!
-  addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
+  updateCourse(id: ID!, course: CourseInput!): Course
+  deleteCourse(id: ID!): Course
+  addInstructorToCourse(instructorId: ID!, courseId: ID!, section: Int): ID!
+  addStudentToCourse(studentId: ID!, courseId: ID!, section: Int): ID!
   removeStudentFromCourse(student: ID!, course: ID!, section: Int): ID!
-  removeUser(user: ID!): ID!
-  addSubmissionFile(
-    course: ID!
-    assignment: ID!
-    submission: ID!
-    filename: String!
-  ): String!
-  registerSubmissionFile(submission: ID!, file: FileInput!): File
-  updateUser(id: ID!, userData: UserInput!): User!
-  signup(userInput: UserInput!): String
+
+  # ASSIGNMENT GROUP
+  createAssignmentGroup(courseId: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
+  updateAssignmentGroup(id: ID!, assignmentGroup: AssignmentGroupInput!): AssignmentGroup
+  deleteAssignmentGroup(id: ID!): Assignment
+
+  # ASSIGNMENT
+  createAssignment(assignmentGroupId: ID!, assignment: AssignmentInput): Assignment
+  updateAssignment(id: ID!, assignment: AssignmentInput!): Assignment
+  deleteAssignment(id: ID!): Assignment
+
+  # SUBMISSION
+  createSubmission(submission: SubmissionInput): Submission
+  gradeSubmission(submission: ID!, grade: Float): Float
+
+  # USER
+  signup(user: UserInput!): String
   login(username: String!, password: String!): String
-  updateAssignment(
-    assignmentId: ID!
-    assignmentData: AssignmentInput!
-  ): Assignment
-  deleteAssignment(assignment: ID!): Assignment
-  updateAssignmentGroup(
-    assignmentGroupId: ID!
-    assignmentGroupData: AssignmentGroupInput!
-  ): AssignmentGroup
-  deleteAssignmentGroup(assignment: ID!): Assignment
+  updateUser(id: ID!, user: UserInput!): User!
+  deleteUser(id: ID!): ID!
+
+  # FILE
+  addSubmissionFile(course: ID!, assignment: ID!, submission: ID!, filename: String!): String!
+  registerSubmissionFile(submission: ID!, file: FileInput!): File
 }

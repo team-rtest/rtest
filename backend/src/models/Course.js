@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
-  subject: String,  // Computer Science
-  courseNumber: String,   // CS470
+  name: String, // Data Mining
+  code: String, // CS470
   semester: String, // Fall 2020
-  name: String,     // Data Mining
-  files: [  // Syllabus etc
+  files: [
+    // Syllabus etc
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "file",

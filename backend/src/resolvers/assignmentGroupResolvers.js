@@ -15,28 +15,22 @@ export default {
   },
 
   Mutation: {
-    createAssignmentGroup: async (_, { course, assignmentGroup }) => {
+    createAssignmentGroup: async (_, { courseId, assignmentGroup }) => {
       const ag = new AssignmentGroup(assignmentGroup);
       await ag.save();
       await Course.updateOne(
-        { _id: mongoose.Types.ObjectId(course) },
+        { _id: mongoose.Types.ObjectId(courseId) },
         { $addToSet: { assignmentGroups: ag } }
       );
       return ag;
     },
 
-    updateAssignmentGroup: async (
-      _,
-      { assignmentGroupId, assignmentGroupData }
-    ) => {
-      return await AssignmentGroup.findByIdAndUpdate(
-        assignmentGroupId,
-        assignmentGroupData
-      );
+    updateAssignmentGroup: async (_, { id, assignmentGroup }) => {
+      return await AssignmentGroup.findByIdAndUpdate(id, assignmentGroup);
     },
 
-    deleteAssignmentGroup: async (_, { assignment }) => {
-      return await AssignmentGroup.findByIdAndDelete(assignment);
+    deleteAssignmentGroup: async (_, { id }) => {
+      return await AssignmentGroup.findByIdAndDelete(id);
     },
   },
 };
