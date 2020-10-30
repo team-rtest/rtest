@@ -21,25 +21,19 @@ export default {
     },
   },
   Mutation: {
-    removeUser: async (_, { user }) => {
-      return await User.findByIdAndDelete(user);
-    },
-    updateUser: async (_, { id, userData }) => {
-      return await User.findByIdAndUpdate(id, userData);
-    },
-
-    signup: async (_, { userInput }) => {
-      const user = await User.register(
+    signup: async (_, { user }) => {
+      const u = await User.register(
         new User({
-          username: userInput.username,
-          email: userInput.email,
-          firstName: userInput.firstName,
-          lastName: userInput.lastName,
+          username: user.username,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
         }),
-        userInput.password
+        u.password
       );
 
-      const token = generateToken({ username: user.username });
+      const token = generateToken({ username: u.username });
+      // res does not exist here
       res.cookie("token", token, {
         path: "/",
         //secure: true,
@@ -66,6 +60,14 @@ export default {
         maxAge: 604800,
       });
       return "Successfully authenticated";
+    },
+
+    updateUser: async (_, { id, user }) => {
+      return await User.findByIdAndUpdate(id, user);
+    },
+
+    deleteUser: async (_, { id }) => {
+      return await User.findByIdAndDelete(id);
     },
   },
 };

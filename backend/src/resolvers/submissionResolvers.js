@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Assignment from "../models/Assignment.js";
+import Submission from "../models/Submission.js";
 
 export default {
   Mutation: {
@@ -14,11 +15,8 @@ export default {
       return s;
     },
 
-    updateGrade: async (_, { submission, grade }) => {
-      await Submission.updateOne(
-        { _id: mongoose.Types.ObjectId(submission) },
-        { $set: { grade: grade } }
-      );
+    gradeSubmission: async (_, { id, grade }) => {
+      await Submission.updateOne({ _id: mongoose.Types.ObjectId(id) }, { $set: { grade: grade } });
       return grade;
     },
     // peerGradeSubmission: async (_, { peerGradeInput }) => {

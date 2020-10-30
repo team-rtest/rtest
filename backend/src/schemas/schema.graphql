@@ -158,27 +158,35 @@ type Query {
 }
 
 type Mutation {
-  createAssignment(assignmentGroup: ID!, assignment: AssignmentInput): Assignment
+  # COURSES
   createCourse(course: CourseInput): Course
-  updateCourse(courseId: ID!, courseData: CourseInput!): Course
-  deleteCourse(course: ID!): Course
-  createSubmission(submission: SubmissionInput): Submission
-  createAssignmentGroup(course: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
-  updateGrade(submission: ID!, grade: Float): Float
-  addStudentToCourse(student: ID!, course: ID!, section: Int): ID!
-  addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
+  updateCourse(id: ID!, course: CourseInput!): Course
+  deleteCourse(id: ID!): Course
+  addInstructorToCourse(instructorId: ID!, courseId: ID!, section: Int): ID!
+  addStudentToCourse(studentId: ID!, courseId: ID!, section: Int): ID!
   removeStudentFromCourse(student: ID!, course: ID!, section: Int): ID!
-  removeUser(user: ID!): ID!
+
+  # ASSIGNMENT GROUP
+  createAssignmentGroup(courseId: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
+  updateAssignmentGroup(id: ID!, assignmentGroup: AssignmentGroupInput!): AssignmentGroup
+  deleteAssignmentGroup(id: ID!): Assignment
+
+  # ASSIGNMENT
+  createAssignment(assignmentGroupId: ID!, assignment: AssignmentInput): Assignment
+  updateAssignment(id: ID!, assignment: AssignmentInput!): Assignment
+  deleteAssignment(id: ID!): Assignment
+
+  # SUBMISSION
+  createSubmission(submission: SubmissionInput): Submission
+  gradeSubmission(submission: ID!, grade: Float): Float
+
+  # USER
+  signup(user: UserInput!): String
+  login(username: String!, password: String!): String
+  updateUser(id: ID!, user: UserInput!): User!
+  deleteUser(id: ID!): ID!
+
+  # FILE
   addSubmissionFile(course: ID!, assignment: ID!, submission: ID!, filename: String!): String!
   registerSubmissionFile(submission: ID!, file: FileInput!): File
-  updateUser(id: ID!, userData: UserInput!): User!
-  signup(userInput: UserInput!): String
-  login(username: String!, password: String!): String
-  updateAssignment(assignmentId: ID!, assignmentData: AssignmentInput!): Assignment
-  deleteAssignment(assignment: ID!): Assignment
-  updateAssignmentGroup(
-    assignmentGroupId: ID!
-    assignmentGroupData: AssignmentGroupInput!
-  ): AssignmentGroup
-  deleteAssignmentGroup(assignment: ID!): Assignment
 }
