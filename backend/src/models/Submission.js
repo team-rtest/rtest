@@ -4,7 +4,7 @@ const submissionSchema = new mongoose.Schema({
   student: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
-    required: true
+    required: true,
   },
   files: [
     {
@@ -18,15 +18,15 @@ const submissionSchema = new mongoose.Schema({
       grader: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
-        required: true
+        required: true,
       },
       grade: Number,
       comment: String,
       gradedAt: {
         type: Date,
-        default: Date.now
-      }
-    }
+        default: Date.now,
+      },
+    },
   ],
   submittedAt: {
     type: Date,
