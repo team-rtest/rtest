@@ -15,7 +15,7 @@ const update = gql`
   }
 `;
 
-function EditAssignment({ assignmentData, closeModal }) {
+function EditAssignment({ assignmentData, assignmentGroups, closeModal }) {
   const { id } = useParams();
   const [updateAssignment] = useMutation(update);
   const [inputs, setInputs] = useState(assignmentData);

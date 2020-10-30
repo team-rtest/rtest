@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createCourse } from "api/create";
 
+import { createCourse } from "api/create";
 import SideForm from "./SideForm";
 import { Input, FileInput, Select } from "components";
 
@@ -20,24 +20,29 @@ function CreateCourse({ closeModal }) {
   const [create, { data }] = useMutation(mutation);
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
   };
 
   const handleSubmit = () => {
-    createCourse(inputs, create)
-      .then((data) => {
-        data && data._id && history.push("/professor/course/" + data.createCourse._id);
-      })
-      .catch((err) => {
-        console.log(err);
-        setErrors(err);
-      });
+    setLoading(true);
+    createCourse(inputs)
+      .then((course) => create({ variables: { course } }))
+      .then(() => data && history.push(`/professor/course/${data.createCourse._id}`))
+      .catch((errors) => setErrors(errors))
+      .finally(() => setLoading(false));
   };
 
   return (
-    <SideForm title="Create Course" button="Create" closeModal={closeModal} onSubmit={handleSubmit}>
+    <SideForm
+      title="Create Course"
+      button="Create"
+      loading={loading}
+      closeModal={closeModal}
+      onSubmit={handleSubmit}
+    >
       <Input
         name="name"
         label="Name"
@@ -46,10 +51,10 @@ function CreateCourse({ closeModal }) {
         onChange={handleChange}
       />
       <Input
-        name="courseNumber"
+        name="code"
         label="Number"
-        value={inputs.courseNumber}
-        error={errors.courseNumber}
+        value={inputs.code}
+        error={errors.code}
         onChange={handleChange}
       />
       <Select

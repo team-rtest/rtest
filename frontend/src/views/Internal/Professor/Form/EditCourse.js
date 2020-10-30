@@ -5,9 +5,9 @@ import { gql, useMutation } from "@apollo/client";
 import SideForm from "./SideForm";
 import { Input, FileInput, Select } from "components";
 
-const update = gql`
-  mutation UpdateCourse($courseId: ID!, $courseData: CourseInput!) {
-    updateCourse(courseId: $courseId, courseData: $courseData) {
+const mutation = gql`
+  mutation UpdateCourse($id: ID!, $course: CourseInput!) {
+    updateCourse(id: $id, course: $course) {
       _id
     }
   }
@@ -15,49 +15,32 @@ const update = gql`
 
 function EditCourse({ courseData, closeModal }) {
   const { id } = useParams();
-  const [updateCourse] = useMutation(update);
+  const [update] = useMutation(mutation);
   const [inputs, setInputs] = useState(courseData);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (name, value) => {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const handleUpload = (file) => {
-    // minio s3 syllabus upload here
-  };
-
-  const handleUpdate = (course) => {
-    console.log(id, course);
-    updateCourse({ variables: { courseId: id, courseData: course } });
-  };
-
   const handleSubmit = () => {
-    const course = {
-      name: inputs.name,
-      courseNumber: inputs.courseNumber,
-      semester: inputs.semester,
-    };
-
-    const errors = {
-      name: !inputs.name,
-      courseNumber: !inputs.courseNumber,
-      semester: !inputs.semester,
-    };
-
-    const valid = course.name && course.courseNumber && course.semester;
-
-    if (valid) {
-      handleUpload();
-      handleUpdate(course);
-      closeModal();
-    } else {
-      setErrors(errors);
-    }
+    setLoading(true);
+    createCourse(inputs)
+      .then((course) => update({ variables: { id, course } }))
+      .then(() => data && history.push(`/professor/course/${data.updateCourse._id}`))
+      .catch((errors) => setErrors(errors))
+      .finally(() => setLoading(false));
   };
 
   return (
-    <SideForm title="Edit Course" button="Save" closeModal={closeModal} onSubmit={handleSubmit}>
+    <SideForm
+      title="Edit Course"
+      button="Save"
+      loading={loading}
+      closeModal={closeModal}
+      onSubmit={handleSubmit}
+    >
       <Input
         name="name"
         label="Name"
@@ -66,10 +49,10 @@ function EditCourse({ courseData, closeModal }) {
         onChange={handleChange}
       />
       <Input
-        name="courseNumber"
+        name="code"
         label="Number"
-        value={inputs.courseNumber}
-        error={errors.courseNumber}
+        value={inputs.code}
+        error={errors.code}
         onChange={handleChange}
       />
       <Select

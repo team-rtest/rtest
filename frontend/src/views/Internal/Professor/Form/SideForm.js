@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Form } from "components";
 
-function SideForm({ title, children, button, onSubmit, closeModal }) {
+function SideForm({ title, children, loading, button, onSubmit, closeModal }) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "");
@@ -15,10 +15,10 @@ function SideForm({ title, children, button, onSubmit, closeModal }) {
         <Heading>{title}</Heading>
         <Body>{children}</Body>
         <Foot>
-          <Button className="btn btn-secondary" onClick={closeModal}>
+          <Button disabled={loading} className="btn btn-secondary" onClick={closeModal}>
             Close
           </Button>
-          <Button className="btn btn-upload" onClick={onSubmit}>
+          <Button disabled={loading} className="btn btn-upload" onClick={onSubmit}>
             {button}
           </Button>
         </Foot>

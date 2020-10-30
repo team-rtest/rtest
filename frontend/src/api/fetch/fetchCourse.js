@@ -4,7 +4,7 @@ export default gql`
   query Course {
     course(id: $id) {
       name
-      courseNumber
+      code
       semester
       students {
         firstName

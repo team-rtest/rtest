@@ -5,7 +5,7 @@ export default gql`
     courses {
       _id
       name
-      courseNumber
+      code
       semester
     }
   }

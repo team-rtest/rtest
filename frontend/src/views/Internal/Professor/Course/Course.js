@@ -16,7 +16,7 @@ const fetch = gql`
   query FetchCourse($id: ID!) {
     course(id: $id) {
       name
-      courseNumber
+      code
       semester
       students {
         firstName
