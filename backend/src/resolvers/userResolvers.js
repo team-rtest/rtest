@@ -29,7 +29,7 @@ export default {
           firstName: user.firstName,
           lastName: user.lastName,
         }),
-        u.password
+        user.password
       );
 
       const token = generateToken({ username: u.username });
