@@ -91,28 +91,26 @@ input AssignmentInput {
 }
 
 type Submission {
-  _id: ID!
   student: User!
-  peerGrades: [peerGrade]
+  peerGrades: [PeerGrade]
   files: [File]
   grade: Float
   submittedAt: Timestamp!
 }
 
-type peerGrade{
+type PeerGrade {
   grader: User!
   grade: Float
   comment: String
   gradedAt: Timestamp!
 }
 
-input peerGradeInput{
+input PeerGradeInput {
   grade: Float
   comment: String
 }
 
 input SubmissionInput {
-  student: UserInput!
   files: [FileInput]
 }
 
@@ -168,34 +166,56 @@ type Query {
   submissions: [Submission]
   courses: [Course]
   assignmentGroups: [AssignmentGroup]
+
+  test(assignmentId: ID!): Submission
 }
 
 type Mutation {
   # COURSES
   createCourse(course: CourseInput): Course
-  createSubmission(submission: SubmissionInput): Submission
-  createAssignmentGroup(course: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
-  updateGrade(submission: ID!, grade: Float): Float
-  peerGradeSubmission(submission: ID!, grader: ID!, peergrade: peerGradeInput): peerGrade
   updateCourse(id: ID!, course: CourseInput!): Course
   deleteCourse(id: ID!): Course
-  addInstructorToCourse(instructorId: ID!, courseId: ID!, section: Int): ID!
-  addStudentToCourse(studentId: ID!, courseId: ID!, section: Int): ID!
-  removeStudentFromCourse(student: ID!, course: ID!, section: Int): ID!
+  addInstructorToCourse(
+    instructorId: ID!
+    courseId: ID!
+    section: Int = 0
+  ): Course!
+  addStudentToCourse(studentId: ID!, courseId: ID!, section: Int = 0): Course!
+  removeStudentFromCourse(student: ID!, course: ID!, section: Int = 0): Course!
 
   # ASSIGNMENT GROUP
-  createAssignmentGroup(courseId: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
-  updateAssignmentGroup(id: ID!, assignmentGroup: AssignmentGroupInput!): AssignmentGroup
+  createAssignmentGroup(
+    courseId: ID!
+    assignmentGroup: AssignmentGroupInput
+  ): AssignmentGroup
+  updateAssignmentGroup(
+    id: ID!
+    assignmentGroup: AssignmentGroupInput!
+  ): AssignmentGroup
   deleteAssignmentGroup(id: ID!): Assignment
 
   # ASSIGNMENT
-  createAssignment(assignmentGroupId: ID!, assignment: AssignmentInput): Assignment
+  createAssignment(
+    assignmentGroupId: ID!
+    assignment: AssignmentInput
+  ): Assignment
   updateAssignment(id: ID!, assignment: AssignmentInput!): Assignment
   deleteAssignment(id: ID!): Assignment
 
   # SUBMISSION
-  createSubmission(submission: SubmissionInput): Submission
-  gradeSubmission(submission: ID!, grade: Float): Float
+  createSubmission(assignmentId: ID!, submission: SubmissionInput): Submission
+  updateGrade(assignmentId: ID!, studentId: ID!, grade: Float): Submission
+  peerGradeSubmission(
+    assignmentId: ID!
+    studentId: ID!
+    peergrade: PeerGradeInput
+  ): PeerGrade
+  updatePeerGrade(
+    assignmentId: ID!
+    studentId: ID!
+    peergrade: PeerGradeInput
+  ): PeerGrade
+  deleteSubmission(assignmentId: ID!): Submission
 
   # USER
   signup(user: UserInput!): String
@@ -204,6 +224,11 @@ type Mutation {
   deleteUser(id: ID!): ID!
 
   # FILE
-  addSubmissionFile(course: ID!, assignment: ID!, submission: ID!, filename: String!): String!
+  addSubmissionFile(
+    course: ID!
+    assignment: ID!
+    submission: ID!
+    filename: String!
+  ): String!
   registerSubmissionFile(submission: ID!, file: FileInput!): File
 }

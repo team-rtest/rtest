@@ -28,9 +28,37 @@ const assignmentSchema = new mongoose.Schema({
   },
   submissions: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "submission",
-    },
+      student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+      files: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "file",
+        },
+      ],
+      grade: Number,
+      peerGrades: [
+        {
+          grader: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+            required: true,
+          },
+          grade: Number,
+          comment: String,
+          gradedAt: {
+            type: Date,
+            default: Date.now,
+          },
+        },
+      ],
+      submittedAt: {
+        type: Date,
+        default: Date.now,
+      },
+    }
   ],
   createdAt: {
     type: Date,
