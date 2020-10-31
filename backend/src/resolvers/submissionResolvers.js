@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import Assignment from "../models/Assignment.js";
+import Submission from "../models/Submission.js";
+import User from "../models/User.js";
 
 export default {
   Mutation: {
@@ -21,10 +23,19 @@ export default {
       );
       return grade;
     },
-    // peerGradeSubmission: async (_, { peerGradeInput }) => {
-    //   creates a new peer grade if the grader hasn't graded the assignment yet
-    //   otherwise updates the student's grade
-    //   return peerGradeInput; // TODO
-    //}
+    peerGradeSubmission: async (_, {submission, grader, peergrade }) => {
+      const p = new peerGrade(
+        {grader: grader, grade: peergrade.grade, comment: peergrade.comment}
+      );
+      await Submission.updateOne(
+        { _id: mongoose.Types.ObjectId(submission)},
+        { $addToSet: { peerGrades: p}}
+       );
+       return p; // TODO
+    }
+  },
+
+  peerGrade:{
+    grader: async (peerG) => await User.find({ _id: peerG.grader }),
   },
 };

@@ -81,9 +81,22 @@ type Submission {
   _id: ID!
   student: User!
   grade: Float
+  peerGrades: [peerGrade]
   files: [File]
   dateSubmitted: Timestamp!
   attemptNumber: Int
+}
+
+type peerGrade{
+  grader: User!
+  grade: Float
+  comment: String
+  gradedAt: Timestamp!
+}
+
+input peerGradeInput{
+  grade: Float
+  comment: String
 }
 
 input SubmissionInput {
@@ -170,6 +183,7 @@ type Mutation {
   createSubmission(submission: SubmissionInput): Submission
   createAssignmentGroup(course: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
   updateGrade(submission: ID!, grade: Float): Float
+  peerGradeSubmission(submission: ID!, grader: ID!, peergrade: peerGradeInput): peerGrade
   addStudentToCourse(student: ID!, course: ID!, section: Int): ID!
   addInstructorToCourse(instructor: ID!, course: ID!, section: Int): ID!
   removeStudentFromCourse(student: ID!, course: ID!, section: Int): ID!
