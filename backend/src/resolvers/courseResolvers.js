@@ -20,8 +20,7 @@ export default {
     coursesTeaching: async (_, __, context) =>
       await Course.find({ "sections.instructor": context.user }),
 
-    courses: async (_, __, context) =>
-      await Course.find({ "sections.students": context.user }),
+    courses: async (_, __, context) => await Course.find({ "sections.students": context.user }),
   },
 
   Course: {
@@ -42,46 +41,44 @@ export default {
       return c;
     },
 
-    addStudentToCourse: async (_, { student, course, section }) => {
+    updateCourse: async (_, { id, course }) => await Course.findByIdAndUpdate(id, course),
+
+    deleteCourse: async (_, { id }) => await Course.findByIdAndDelete(id),
+
+    addInstructorToCourse: async (_, { instructorId, courseId, section }) => {
       if (!section) {
         section = 0;
       }
 
       await Course.updateOne(
-        { _id: mongoose.Types.ObjectId(course), "sections.number": section },
-        { $addToSet: { "sections.$.students": student } }
+        { _id: mongoose.Types.ObjectId(courseId), "sections.number": section },
+        { $set: { "sections.$.instructor": instructorId } }
       );
-      return student;
+      return instructorId;
     },
 
-    addInstructorToCourse: async (_, { instructor, course, section }) => {
+    addStudentToCourse: async (_, { studentId, courseId, section }) => {
       if (!section) {
         section = 0;
       }
 
       await Course.updateOne(
-        { _id: mongoose.Types.ObjectId(course), "sections.number": section },
-        { $set: { "sections.$.instructor": instructor } }
+        { _id: mongoose.Types.ObjectId(courseId), "sections.number": section },
+        { $addToSet: { "sections.$.students": studentId } }
       );
-      return instructor;
+      return studentId;
     },
 
-    removeStudentFromCourse: async (_, { student, course, section }) => {
+    removeStudentFromCourse: async (_, { studentId, courseId, section }) => {
       if (!section) {
         section = 0;
       }
 
       await Course.updateOne(
-        { _id: mongoose.Types.ObjectId(course), "sections.number": section },
-        { $pull: { "sections.$.students": student } }
+        { _id: mongoose.Types.ObjectId(courseId), "sections.number": section },
+        { $pull: { "sections.$.students": studentId } }
       );
-      return student;
+      return studentId;
     },
-
-    updateCourse: async (_, { courseId, courseData }) =>
-      await Course.findByIdAndUpdate(courseId, courseData),
-
-    deleteCourse: async (_, { course }) =>
-      await Course.findByIdAndDelete(course),
   },
 };

@@ -16,11 +16,8 @@ export default {
       return s;
     },
 
-    updateGrade: async (_, { submission, grade }) => {
-      await Submission.updateOne(
-        { _id: mongoose.Types.ObjectId(submission) },
-        { $set: { grade: grade } }
-      );
+    gradeSubmission: async (_, { id, grade }) => {
+      await Submission.updateOne({ _id: mongoose.Types.ObjectId(id) }, { $set: { grade } });
       return grade;
     },
     peerGradeSubmission: async (_, {submission, grader, peergrade }) => {

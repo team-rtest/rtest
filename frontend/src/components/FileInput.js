@@ -1,16 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Input({
-  name,
-  type,
-  value,
-  tip,
-  error,
-  onChange,
-  className,
-  ...rest
-}) {
+function Input({ name, type, value, tip, error, onChange, className, ...rest }) {
   const label = name.split("_").join(" ");
 
   return (

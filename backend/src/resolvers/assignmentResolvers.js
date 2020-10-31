@@ -13,22 +13,22 @@ export default {
   },
 
   Mutation: {
-    createAssignment: async (_, { assignmentGroup, assignment }) => {
+    createAssignment: async (_, { assignmentGroupId, assignment }) => {
       const a = new Assignment(assignment);
       await a.save();
       await AssignmentGroup.updateOne(
-        { _id: mongoose.Types.ObjectId(assignmentGroup) },
+        { _id: mongoose.Types.ObjectId(assignmentGroupId) },
         { $addToSet: { assignments: a._id } }
       );
       return a;
     },
 
-    updateAssignment: async (_, { assignmentId, assignmentData }) => {
-      return await Assignment.findByIdAndUpdate(assignmentId, assignmentData);
+    updateAssignment: async (_, { id, assignment }) => {
+      return await Assignment.findByIdAndUpdate(id, assignment);
     },
 
-    deleteAssignment: async (_, { assignment }) => {
-      return await Assignment.findByIdAndDelete(assignment);
+    deleteAssignment: async (_, { id }) => {
+      return await Assignment.findByIdAndDelete(id);
     },
   },
 };
