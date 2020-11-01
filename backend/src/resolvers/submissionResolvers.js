@@ -34,7 +34,7 @@ export default {
       { assignmentId, studentId, peergrade },
       { user }
     ) => {
-      p.grader = user._id;
+      peergrade.grader = user._id;
       return await Assignment.updateOne(
         { _id: assignmentId, "submissions.student": studentId },
         {
