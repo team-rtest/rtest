@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import updateCourse from "api/update";
 import { gql, useMutation } from "@apollo/client";
 
 import SideForm from "./SideForm";
@@ -26,9 +27,8 @@ function EditCourse({ courseData, closeModal }) {
 
   const handleSubmit = () => {
     setLoading(true);
-    createCourse(inputs)
+    updateCourse(inputs)
       .then((course) => update({ variables: { id, course } }))
-      .then(() => data && history.push(`/professor/course/${data.updateCourse._id}`))
       .catch((errors) => setErrors(errors))
       .finally(() => setLoading(false));
   };
