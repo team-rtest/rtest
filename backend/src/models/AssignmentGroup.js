@@ -8,7 +8,7 @@ const assignmentGroupSchema = new mongoose.Schema({
   tag: {
     type: String,
     required: true,
-    enum: ["HW", "TEST", "PEER"],
+    enum: ["Homework", "Classwork", "Lab", "Quiz", "Test", "Exam", "Peer Review"],
   },
   grading: {
     weight: {
@@ -25,7 +25,7 @@ const assignmentGroupSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "assignment",
     },
-  ]
+  ],
 });
 
 const assignmentGroup = mongoose.model("assignmentGroup", assignmentGroupSchema);

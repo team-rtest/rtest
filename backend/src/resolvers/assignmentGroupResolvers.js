@@ -1,52 +1,36 @@
 import mongoose from "mongoose";
-import AssignmentGroup from "../models/AssignmentGroup.js";
 import Assignment from "../models/Assignment.js";
+import AssignmentGroup from "../models/AssignmentGroup.js";
 import Course from "../models/Course.js";
 
 export default {
-  Query: {
-    assignmentGroup: async (_, { id }) => {
-      return await AssignmentGroup.findById(id);
-    },
-    assignmentGroups: async () => await AssignmentGroup.find(),
-  },
+  // Query: {
+
+  // },
 
   AssignmentGroup: {
     assignments: async (assignmentGroup) => {
-      return await Assignment.findById(assignmentGroup.assignments);
+      return await Assignment.find({ _id: assignmentGroup.assignments });
     },
   },
 
   Mutation: {
-    createAssignmentGroup: async (_, { assignmentGroup }) => {
+    createAssignmentGroup: async (_, { courseId, assignmentGroup }) => {
       const ag = new AssignmentGroup(assignmentGroup);
       await ag.save();
       await Course.updateOne(
-        { _id: mongoose.Types.ObjectId(assignmentGroup.courseId) },
-        { $addToSet: { assignmentGroups: ag._id } },
-        (err, docs) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("Triggered updating course subroutine");
-          }
-        }
+        { _id: mongoose.Types.ObjectId(courseId) },
+        { $addToSet: { assignmentGroups: ag } }
       );
       return ag;
     },
 
-    updateAssignmentGroup: async (
-      _,
-      { assignmentGroupId, assignmentGroupData }
-    ) => {
-      return await AssignmentGroup.findByIdAndUpdate(
-        assignmentGroupId,
-        assignmentGroupData
-      );
+    updateAssignmentGroup: async (_, { id, assignmentGroup }) => {
+      return await AssignmentGroup.findByIdAndUpdate(id, assignmentGroup);
     },
 
-    deleteAssignmentGroup: async (_, { assignment }) => {
-      return await AssignmentGroup.findByIdAndDelete(assignment);
+    deleteAssignmentGroup: async (_, { id }) => {
+      return await AssignmentGroup.findByIdAndDelete(id);
     },
   },
 };
