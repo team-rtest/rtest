@@ -25,8 +25,8 @@ function EditCourse({ courseData, closeModal }) {
   });
 
   async function onSubmit() {
-    const { name, code, semester, syllabus } = inputs;
-    const course = { name, code, semester, syllabus };
+    const { name, code, semester } = inputs;
+    const course = { name, code, semester };
     const variables = { id, course };
     return update({ variables }).then(() => closeModal());
   }
@@ -48,7 +48,7 @@ function EditCourse({ courseData, closeModal }) {
       />
       <Input
         name="code"
-        label="Number"
+        label="Code"
         value={inputs.code}
         error={errors.code}
         onChange={handleChange}

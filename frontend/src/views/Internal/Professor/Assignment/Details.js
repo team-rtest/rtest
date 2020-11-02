@@ -17,18 +17,8 @@ function Details({ maxGrade, dueDate, optional, locked }) {
       </Info>
 
       <Info>
-        <Label>Optional</Label>
-        <Value>{optional}</Value>
-      </Info>
-
-      <Info>
-        <Label>Locked</Label>
-        <Value>{locked}</Value>
-      </Info>
-
-      <Info>
         <Label>Instructions File</Label>
-        <Value>CS334_HW1.pdf</Value>
+        <File>CS334_HW1.pdf</File>
       </Info>
     </Box>
   );

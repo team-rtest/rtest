@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
-import EditAssignment from "views/Internal/Professor/Form/EditAssignment";
+import EditAssignmentModal from "views/Internal/Professor/Form/EditAssignment";
+import DeleteAssignmentModal from "views/Internal/Professor/Form/DeleteAssignment";
+
 import Details from "./Details";
 import Submissions from "./Submissions";
 
@@ -37,8 +39,8 @@ function AssignmentPage() {
 
   const tabs = ["Details", "Submissions", "Review"];
   const [selected, setSelected] = useState("Details");
-
-  const [editModal, setEditModal] = useState(false);
+  const [editAssignmentModal, setEditAssignmentModal] = useState(false);
+  const [deleteAssignmentModal, setDeleteAssignmentModal] = useState(false);
 
   if (loading) return <PageLoader />;
   if (error) return <p>Error: {error.message}</p>;
@@ -54,15 +56,26 @@ function AssignmentPage() {
 
   return (
     <Box>
-      {editModal && <EditAssignment closeModal={() => setEditModal(false)} />}
+      {editAssignmentModal && (
+        <EditAssignmentModal
+          assignmentData={assignment}
+          closeModal={() => setEditAssignmentModal(false)}
+        />
+      )}
+      {deleteAssignmentModal && (
+        <DeleteAssignmentModal
+          id={assignment._id}
+          closeModal={() => setDeleteAssignmentModal(false)}
+        />
+      )}
       <Header>
-        <Heading>K Nearest Neighbors</Heading>
+        <Heading>{assignment.name}</Heading>
         <Buttons>
-          <EditButton onClick={() => setEditModal(true)}>
+          <EditButton onClick={() => setEditAssignmentModal(true)}>
             <i className="fa fa-pencil" />
             Edit Assignment
           </EditButton>
-          <DeleteButton>
+          <DeleteButton onClick={() => setDeleteAssignmentModal(true)}>
             <i className="fa fa-trash" />
             Delete Assignment
           </DeleteButton>

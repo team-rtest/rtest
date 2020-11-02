@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import SideForm from "./SideForm";
-import { Input, FileInput } from "components";
+import { Input, FileInput, Checkbox } from "components";
 import useForm from "./utils/useForm";
 
 import { gql, useMutation } from "@apollo/client";
@@ -18,8 +18,8 @@ const mutation = gql`
 function CreateAssignment({ assignmentGroupId, closeModal }) {
   const [create] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
-    names: ["name", "maxGrade", "optional", "locked", "instructions"],
-    check: ["name", "maxGrade", "optional", "locked"],
+    names: ["name", "maxGrade", "instructions"],
+    check: ["name", "maxGrade"],
     onSubmit,
   });
 
@@ -64,7 +64,6 @@ function CreateAssignment({ assignmentGroupId, closeModal }) {
           onChange={handleChange}
         />
       </InputRow>
-      <input type="checkbox" />
       <FileInput
         name="instructions"
         label="Instructions"

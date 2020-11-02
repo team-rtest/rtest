@@ -29,8 +29,8 @@ function CreateCourse({ closeModal }) {
   }, [data, history]);
 
   async function onSubmit() {
-    const { name, code, semester, syllabus } = inputs;
-    const course = { name, code, semester, syllabus };
+    const { name, code, semester } = inputs;
+    const course = { name, code, semester };
     const variables = { course };
     return create({ variables }).then(() => closeModal());
   }

@@ -4,7 +4,7 @@ import { gql, useMutation } from "@apollo/client";
 import useForm from "./utils/useForm";
 
 import SideForm from "./SideForm";
-import { Input, FileInput, Select } from "components";
+import { Input, FileInput } from "components";
 
 const mutation = gql`
   mutation UpdateAssignment($id: ID!, $assignment: AssignmentInput!) {
@@ -14,19 +14,19 @@ const mutation = gql`
   }
 `;
 
-function EditAssignment({ assignmentData, assignmentGroups, closeModal }) {
+function EditAssignment({ assignmentData, closeModal }) {
   const id = assignmentData._id;
   const [update] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
     data: assignmentData,
-    names: ["name", "maxGrade", "dateDue", "instructions"],
-    check: ["name", "maxGrade", "dateDue"],
+    names: ["name", "maxGrade", "instructions"],
+    check: ["name", "maxGrade"],
     onSubmit,
   });
 
   async function onSubmit() {
-    const { name, maxGrade, dateDue, instructions } = inputs;
-    const assignment = { name, maxGrade, dateDue, instructions };
+    const { name, maxGrade } = inputs;
+    const assignment = { name, maxGrade };
     const variables = { id, assignment };
     return update({ variables }).then(() => closeModal());
   }

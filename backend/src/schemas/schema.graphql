@@ -74,8 +74,8 @@ type Assignment {
   body: String
   maxGrade: Int
   dateDue: Timestamp
-  optional: Boolean!
-  locked: Boolean!
+  optional: Boolean
+  locked: Boolean
   files: File
   submissions: [Submission]
   createdAt: Timestamp!

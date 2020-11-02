@@ -18,7 +18,7 @@ function Details({ semester, code, syllabus }) {
 
       <Info>
         <Label>Syllabus</Label>
-        <Value>{code}</Value>
+        <File>syllabus.pdf</File>
       </Info>
     </Box>
   );
