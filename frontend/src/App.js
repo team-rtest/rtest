@@ -2,12 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 import { external, internal } from "routes";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useHistory, BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import External from "views/External/External";
 import Internal from "views/Internal/Internal";
 import Error404 from "views/Error404";
+import { useQuery } from '@apollo/client';
+import {retrieveUserInfo} from "../src/api/profileRetrieval";
 
 function App() {
+  
+  const history = useHistory();
+  const {data} = useQuery(retrieveUserInfo);
+  if(data ===null ){
+    history.push("/login");
+  }
+
   return (
     <Router>
       <Screen>
