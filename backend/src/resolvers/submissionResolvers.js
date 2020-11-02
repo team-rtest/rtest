@@ -24,5 +24,18 @@ export default {
     //   otherwise updates the student's grade
     //   return peerGradeInput; // TODO
     //}
+    peerGradeSubmission: async (_, { id, grader, grade }) => {
+      await Submission.updateOne({ _id: mongoose.Types.ObjectId(id), "peerGrades.grader": grader },
+      { $set: { grade } });
+      return grade;
+    },
+
+    updateSubmission: async (_, { id, submission }) => {
+      return await Submission.findByIdAndUpdate(id, submission);
+    },
+
+    deleteSubmission: async (_, { id }) => {
+      return await Submission.findByIdAndDelete(id);
+    },
   },
 };

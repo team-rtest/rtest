@@ -179,6 +179,8 @@ type Mutation {
   # SUBMISSION
   createSubmission(submission: SubmissionInput): Submission
   gradeSubmission(submission: ID!, grade: Float): Float
+  updateSubmission(id: ID!, submission: SubmissionInput!): Submission
+  deleteSubmission(submission: ID!): Submission
 
   # USER
   signup(user: UserInput!): String
