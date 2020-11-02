@@ -6,7 +6,7 @@ import { useHistory, BrowserRouter as Router, Switch, Route } from "react-router
 import External from "views/External/External";
 import Internal from "views/Internal/Internal";
 import Error404 from "views/Error404";
-import { useQuery } from '@apollo/client';
+import { useQuery } from "@apollo/client";
 import {retrieveUserInfo} from "../src/api/profileRetrieval";
 
 function App() {
