@@ -73,9 +73,9 @@ type Assignment {
   name: String!
   body: String
   maxGrade: Int
-  dateDue: Timestamp!
-  optional: Boolean!
-  locked: Boolean!
+  dateDue: Timestamp
+  optional: Boolean
+  locked: Boolean
   files: File
   submissions: [Submission]
   createdAt: Timestamp!
@@ -85,7 +85,7 @@ input AssignmentInput {
   name: String
   body: String
   maxGrade: Int
-  dateDue: Timestamp!
+  dateDue: Timestamp
   optional: Boolean
   locked: Boolean
 }
@@ -169,7 +169,7 @@ type Mutation {
   # ASSIGNMENT GROUP
   createAssignmentGroup(courseId: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
   updateAssignmentGroup(id: ID!, assignmentGroup: AssignmentGroupInput!): AssignmentGroup
-  deleteAssignmentGroup(id: ID!): Assignment
+  deleteAssignmentGroup(id: ID!): AssignmentGroup
 
   # ASSIGNMENT
   createAssignment(assignmentGroupId: ID!, assignment: AssignmentInput): Assignment

@@ -1,28 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import { Card } from "components";
+import { Link } from "react-router-dom";
 
-function Course({ id, name, color, pinned }) {
-  const STAR = <Star filled={pinned} className={"fas fa-star"} />;
-
+function CourseCard({ _id, name, semester, color, pinned }) {
   return (
-    <Box color={color}>
-      <Head>
-        <Name>{name}</Name>
-        {STAR}
-      </Head>
-      <Students>65 Students</Students>
-    </Box>
+    <NavLink to={`/professor/course/${_id}`}>
+      <Box color={color}>
+        <Head>
+          <Name>{name}</Name>
+          <Star filled={pinned} className="fas fa-star" />
+        </Head>
+        <Semester>{semester}</Semester>
+      </Box>
+    </NavLink>
   );
 }
 
+const NavLink = styled(Link)`
+  all: unset;
+  &:hover {
+    all: unset;
+    cursor: pointer;
+  }
+`;
+
 const Box = styled(Card)`
   display: block;
-  background: ${(props) => props.color};
+  background: ${(props) => props.color || "#f8f9fa"};
   padding: 20px;
   align-items: center;
   height: 10rem;
-  border-width: 2px;
+  border: none;
 `;
 
 const Head = styled.div`
@@ -49,9 +58,10 @@ const Name = styled.h4`
   -webkit-box-orient: vertical;
 `;
 
-const Students = styled.div`
+const Semester = styled.div`
   color: rgba(0, 0, 0, 0.5);
+  font-size: 1.1rem;
   font-weight: 500;
 `;
 
-export default Course;
+export default CourseCard;

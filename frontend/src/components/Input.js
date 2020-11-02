@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function Input({
-  name,
-  type,
-  value,
-  tip,
-  error,
-  onChange,
-  className,
-  ...rest
-}) {
+function Input({ name, type, label, value, tip, error, onChange, className, ...rest }) {
   const [focus, setFocus] = useState(false);
-  const label = name.split("_").join(" ");
+
+  const handleChange = (event) => {
+    let value = event.target.value;
+
+    if (type === "number") {
+      value = parseInt(value);
+    }
+
+    onChange(name, value);
+  };
 
   return (
     <div>
@@ -31,10 +31,8 @@ function Input({
         value={value}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={(event) => onChange(name, event.target.value)}
-        className={`form-control ${className} ${
-          !focus && error !== null && (error ? "is-invalid" : "is-valid")
-        }`}
+        onChange={handleChange}
+        className={`form-control ${className} ${!focus && error && "is-invalid"}`}
         {...rest}
       />
       <div className="invalid-feedback">{!focus && error}</div>
@@ -83,7 +81,6 @@ const Icon = styled.div`
 `;
 
 const Label = styled.label`
-  text-transform: capitalize;
   margin-bottom: 2px;
   font-size: 0.9rem;
   color: grey;
