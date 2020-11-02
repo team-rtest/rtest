@@ -13,6 +13,7 @@ import Profile from "views/Internal/Profile/Profile";
 
 import ProfessorAssignment from "views/Internal/Professor/Assignment/Assignment";
 import AssignmentReview from "views/Internal/Professor/Review/AssignmentReview";
+import AssignmentReviewDetails from "views/Internal/Professor/Review/AssignmentReviewDetails";
 import CreateCourse from "views/Internal/Professor/CreateCourse/CreateCourse";
 import EditCourse from "views/Internal/Professor/EditCourse/EditCourse";
 import CreateAssignment from "views/Internal/Professor/CreateAssignment/CreateAssignment";
@@ -53,6 +54,10 @@ const internal = [
   {
     path: "/professor/assignment/review",
     page: <AssignmentReview />,
+  },
+  {
+    path: "/professor/assignment/review/:assignmentId",
+    page: <AssignmentReviewDetails />,
   },
   {
     path: "/professor/create-course",
