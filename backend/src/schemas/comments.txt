@@ -1,0 +1,58 @@
+=====================================
+
+USER
+----
+1) _id missing in "type User"
+
+=====================================
+
+COURSE
+------
+1) Add "name" attribute in "type course"
+2) Course doesn't have a "syllabus/files" attribute
+3) No place to store user-specific course information like "pinned" and "color"
+4) Mongoose schema has sections but graphql schema doesn't
+
+=====================================
+
+ASSIGNMENT GROUP
+----------------
+
+type AssignmentGroup {
+  _id: ID!
+  name: String!
+  tag: String!
+  grading: Int!
+  policy: String!
+  assignments: [Assignment]
+}
+
+input AssignmentGroupInput {
+  name: String!
+  courseId: ID!
+  tag: String!
+  grading: GradingRules!
+}
+
+input GradingRules {
+  policy: String!
+  weight: Int!
+}
+
+1) "grading" should be an object of type GradingRules in "type AssignmentGroup"
+2) "policy" should not be a separate attribute in "type AssignmentGroup"
+3) "courseId" does not exist in mongoose schema
+
+=====================================
+
+GRADE
+----------------
+
+1) Add "comment" attribute to GradeInput
+
+=====================================
+
+ASSIGNMENT
+----------------
+
+=====================================

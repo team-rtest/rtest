@@ -1,12 +1,12 @@
 import { gql } from "@apollo/client";
 
 export const getAssignments = gql`
-        query {
-          assignments {
-            name
-            submissions {
-              grade
-            }
-          }
+  query {
+    assignments {
+      name
+      submissions {
+        grade
+      }
     }
-      `;
+  }
+`;

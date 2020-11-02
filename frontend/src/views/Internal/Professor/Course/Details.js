@@ -3,22 +3,22 @@ import styled from "styled-components";
 
 import { Card } from "components";
 
-function Details({ maxGrade, dueDate, optional, locked }) {
+function Details({ semester, code, syllabus }) {
   return (
     <Box>
       <Info>
-        <Label>Due Date</Label>
-        <Value>{dueDate}</Value>
+        <Label>Semester</Label>
+        <Value>{semester}</Value>
       </Info>
 
       <Info>
-        <Label>Max Grade</Label>
-        <Value>{maxGrade}</Value>
+        <Label>Course Code</Label>
+        <Value>{code}</Value>
       </Info>
 
       <Info>
-        <Label>Instructions File</Label>
-        <File>CS334_HW1.pdf</File>
+        <Label>Syllabus</Label>
+        <File>syllabus.pdf</File>
       </Info>
     </Box>
   );

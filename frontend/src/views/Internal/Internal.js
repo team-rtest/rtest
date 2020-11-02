@@ -21,10 +21,7 @@ function Internal({ children }) {
     <Box>
       <Desktop>
         <Sidebar />
-        <Right>
-          <Topbar />
-          {children}
-        </Right>
+        {children}
       </Desktop>
     </Box>
   ) : (

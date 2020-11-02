@@ -3,81 +3,80 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
-import EditAssignmentModal from "views/Internal/Professor/Form/EditAssignment";
-import DeleteAssignmentModal from "views/Internal/Professor/Form/DeleteAssignment";
+import EditCourse from "views/Internal/Professor/Form/EditCourse";
+import DeleteCourse from "views/Internal/Professor/Form/DeleteCourse";
 
 import Details from "./Details";
-import Submissions from "./Submissions";
+import Assignments from "./Assignments";
+import Students from "./Students";
 
 import { Loader } from "components";
 
 const query = gql`
-  query FetchAssignment($id: ID!) {
-    assignment(id: $id) {
+  query FetchCourse($id: ID!) {
+    course(id: $id) {
       _id
       name
-      maxGrade
-      optional
-      locked
-      submissions {
+      code
+      semester
+      assignmentGroups {
         _id
-        grade
-        submittedAt
-        student {
-          firstName
-          lastName
-          email
+        name
+        tag
+        grading {
+          policy
+          weight
+        }
+        assignments {
+          _id
+          name
         }
       }
     }
   }
 `;
 
-function AssignmentPage() {
+function Course() {
   const { id } = useParams();
   const { data, loading, error } = useQuery(query, { variables: { id } });
 
-  const tabs = ["Details", "Submissions", "Review"];
+  const tabs = ["Details", "Assignments", "Students", "Review"];
   const [selected, setSelected] = useState("Details");
-  const [editAssignmentModal, setEditAssignmentModal] = useState(false);
-  const [deleteAssignmentModal, setDeleteAssignmentModal] = useState(false);
+
+  const [editCourseModal, setEditCourseModal] = useState(false);
+  const [deleteCourseModal, setDeleteCourseModal] = useState(false);
 
   if (loading) return <PageLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
-  const { assignment } = data;
+  const { course } = data;
 
   const content = {
-    Details: <Details {...assignment} />,
-    Submissions: <Submissions {...assignment} />,
+    Details: <Details {...course} />,
+    Assignments: <Assignments {...course} />,
+    Students: <Students {...course} />,
   };
 
-  if (!assignment) return <div>Assignment does not exist</div>;
+  if (!course) return <div>Course does not exist</div>;
 
   return (
     <Box>
-      {editAssignmentModal && (
-        <EditAssignmentModal
-          assignmentData={assignment}
-          closeModal={() => setEditAssignmentModal(false)}
-        />
+      {editCourseModal && (
+        <EditCourse courseData={course} closeModal={() => setEditCourseModal(false)} />
       )}
-      {deleteAssignmentModal && (
-        <DeleteAssignmentModal
-          id={assignment._id}
-          closeModal={() => setDeleteAssignmentModal(false)}
-        />
+      {deleteCourseModal && (
+        <DeleteCourse id={course._id} closeModal={() => setDeleteCourseModal(false)} />
       )}
       <Header>
-        <Heading>{assignment.name}</Heading>
+        <Heading>{course.name}</Heading>
         <Buttons>
-          <EditButton onClick={() => setEditAssignmentModal(true)}>
+          <EditButton onClick={() => setEditCourseModal(true)}>
             <i className="fa fa-pencil" />
-            Edit Assignment
+            Edit Course
           </EditButton>
-          <DeleteButton onClick={() => setDeleteAssignmentModal(true)}>
+          <DeleteButton onClick={() => setDeleteCourseModal(true)}>
             <i className="fa fa-trash" />
-            Delete Assignment
+            Delete Course
           </DeleteButton>
         </Buttons>
       </Header>
@@ -94,13 +93,8 @@ function AssignmentPage() {
 }
 
 const Box = styled.div`
-  width: calc(100vw - 250px);
+  width: 100%;
   padding: 30px;
-  overflow-y: auto;
-
-  @media (max-width: 600px) {
-    width: 100vw;
-  }
 `;
 
 const Header = styled.div`
@@ -155,17 +149,8 @@ const DeleteButton = styled.button`
 
 const Tabs = styled.div`
   display: flex;
-  margin-top: 20px;
   flex-direction: row;
   grid-gap: 5px;
-`;
-
-const PageLoader = styled(Loader)`
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Tab = styled.button`
@@ -187,8 +172,16 @@ const Tab = styled.button`
   `}
 `;
 
+const PageLoader = styled(Loader)`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Content = styled.div`
   padding: 20px 0;
 `;
 
-export default AssignmentPage;
+export default Course;
