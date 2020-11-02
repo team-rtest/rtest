@@ -23,9 +23,7 @@ export default {
       }),
 
     courses: async (_, __, context) =>
-      await Course.find({
-        "sections.students": context.user
-      }),
+      await Course.find({ "sections.students": context.user }),
   },
 
   Course: {
@@ -35,6 +33,7 @@ export default {
 
   Section: {
     instructor: async (section) => await User.findById(section.instructor),
+    assistants: async (section) => await User.find({ _id: section.assistants }),
     students: async (section) => await User.find({ _id: section.students }),
   },
 
@@ -46,44 +45,30 @@ export default {
       return c;
     },
 
-    updateCourse: async (_, { id, course }) => await Course.findByIdAndUpdate(id, course),
+    updateCourse: async (_, { id, course }) =>
+      await Course.findByIdAndUpdate(id, course),
 
     deleteCourse: async (_, { id }) => await Course.findByIdAndDelete(id),
 
     addInstructorToCourse: async (_, { instructorId, courseId, section }) => {
-      if (!section) {
-        section = 0;
-      }
-
-      await Course.updateOne(
+      return await Course.updateOne(
         { _id: mongoose.Types.ObjectId(courseId), "sections.number": section },
         { $set: { "sections.$.instructor": instructorId } }
       );
-      return instructorId;
     },
 
     addStudentToCourse: async (_, { studentId, courseId, section }) => {
-      if (!section) {
-        section = 0;
-      }
-
-      await Course.updateOne(
+      return await Course.updateOne(
         { _id: mongoose.Types.ObjectId(courseId), "sections.number": section },
         { $addToSet: { "sections.$.students": studentId } }
       );
-      return studentId;
     },
 
     removeStudentFromCourse: async (_, { studentId, courseId, section }) => {
-      if (!section) {
-        section = 0;
-      }
-
-      await Course.updateOne(
+      return await Course.updateOne(
         { _id: mongoose.Types.ObjectId(courseId), "sections.number": section },
         { $pull: { "sections.$.students": studentId } }
       );
-      return studentId;
     },
   },
 };

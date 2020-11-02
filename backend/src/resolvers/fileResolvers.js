@@ -1,11 +1,8 @@
 import {
-  getPresignedUpload,
   getPresignedDownload,
+  getPresignedUpload,
   uploadSubmission,
-  getFileMetadata,
 } from "../routes/fileHandler.js";
-import File from "../models/File.js";
-import Submission from "../models/Submission.js";
 
 export default {
   Query: {
@@ -23,21 +20,22 @@ export default {
     ) => {
       return await uploadSubmission(course, assignment, submission, filename);
     },
-    registerSubmissionFile: async (_, { submission, file }) => {
-      const metadata = await getFileMetadata(file.bucket, file.key);
-      if (!metadata) {
-        return;
-      }
+    // TODO
+    // registerSubmissionFile: async (_, { submission, file }) => {
+    //   const metadata = await getFileMetadata(file.bucket, file.key);
+    //   if (!metadata) {
+    //     return;
+    //   }
 
-      const f = new File({
-        ...file,
-        size: metadata.ContentLength,
-        mimetype: metadata.ContentType,
-      });
+    //   const f = new File({
+    //     ...file,
+    //     size: metadata.ContentLength,
+    //     mimetype: metadata.ContentType,
+    //   });
 
-      await f.save();
-      await Submission.findByIdAndUpdate(submission, { $push: { files: f } });
-      return f;
-    },
+    //   await f.save();
+    //   await Submission.findByIdAndUpdate(submission, { $push: { files: f } });
+    //   return f;
+    // },
   },
 };
