@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Card } from "components";
 
-function Details({ semester, code }) {
+function Details({ semester, code, syllabus }) {
   return (
     <Box>
       <Info>
@@ -12,7 +12,12 @@ function Details({ semester, code }) {
       </Info>
 
       <Info>
-        <Label>Course Number</Label>
+        <Label>Course Code</Label>
+        <Value>{code}</Value>
+      </Info>
+
+      <Info>
+        <Label>Syllabus</Label>
         <Value>{code}</Value>
       </Info>
     </Box>

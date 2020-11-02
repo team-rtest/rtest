@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { createCourse } from "api/create";
 import SideForm from "./SideForm";
 import { Input, FileInput, Select } from "components";
+import useForm from "./utils/useForm";
 
 import { gql, useMutation } from "@apollo/client";
 
@@ -18,22 +18,22 @@ const mutation = gql`
 function CreateCourse({ closeModal }) {
   const history = useHistory();
   const [create, { data }] = useMutation(mutation);
-  const [inputs, setInputs] = useState({});
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
+    names: ["name", "code", "semester", "syllabus"],
+    check: ["name", "code", "semester"],
+    onSubmit,
+  });
 
-  const handleChange = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-  };
+  useState(() => {
+    data && history.push(`/professor/course/${data.createCourse._id}`);
+  }, [data, history]);
 
-  const handleSubmit = () => {
-    setLoading(true);
-    createCourse(inputs)
-      .then((course) => create({ variables: { course } }))
-      .then(() => data && history.push(`/professor/course/${data.createCourse._id}`))
-      .catch((errors) => setErrors(errors))
-      .finally(() => setLoading(false));
-  };
+  async function onSubmit() {
+    const { name, code, semester, syllabus } = inputs;
+    const course = { name, code, semester, syllabus };
+    const variables = { course };
+    return create({ variables }).then(() => closeModal());
+  }
 
   return (
     <SideForm
@@ -52,7 +52,7 @@ function CreateCourse({ closeModal }) {
       />
       <Input
         name="code"
-        label="Number"
+        label="Code"
         value={inputs.code}
         error={errors.code}
         onChange={handleChange}

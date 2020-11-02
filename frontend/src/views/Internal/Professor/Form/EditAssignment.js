@@ -1,69 +1,44 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
-
 import { gql, useMutation } from "@apollo/client";
+import useForm from "./utils/useForm";
 
 import SideForm from "./SideForm";
 import { Input, FileInput, Select } from "components";
 
-const update = gql`
-  mutation UpdateAssignment($assignmentId: ID!, $assignmentData: AssignmentInput!) {
-    updateAssignment(assignmentId: $assignmentId, assignmentData: $assignmentData) {
+const mutation = gql`
+  mutation UpdateAssignment($id: ID!, $assignment: AssignmentInput!) {
+    updateAssignment(id: $id, assignment: $assignment) {
       _id
     }
   }
 `;
 
 function EditAssignment({ assignmentData, assignmentGroups, closeModal }) {
-  const { id } = useParams();
-  const [updateAssignment] = useMutation(update);
-  const [inputs, setInputs] = useState(assignmentData);
-  const [errors, setErrors] = useState({});
+  const id = assignmentData._id;
+  const [update] = useMutation(mutation);
+  const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
+    data: assignmentData,
+    names: ["name", "maxGrade", "dateDue", "instructions"],
+    check: ["name", "maxGrade", "dateDue"],
+    onSubmit,
+  });
 
-  const handleChange = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-  };
-
-  const handleUpload = (file) => {
-    // minio s3 syllabus upload here
-  };
-
-  const handleUpdate = (assignment) => {
-    updateAssignment({ variables: { assignmentId: id, assignmentData: assignment } });
-  };
-
-  const handleSubmit = () => {
-    const assignmentGroup = assignmentGroups.find((group) => inputs.group === group.name);
-    const assignmentGroupId = assignmentGroup && assignmentGroup._id;
-
-    const assignment = {
-      name: inputs.name,
-      maxGrade: inputs.maxGrade,
-      dateDue: inputs.dateDue,
-      optional: inputs.optional,
-      locked: inputs.locked,
-      assignmentGroupId,
-    };
-
-    const errors = {
-      name: !inputs.name,
-      maxGrade: !inputs.maxGrade,
-      dateDue: !inputs.dateDue,
-    };
-
-    const valid = assignment.name && assignment.maxGrade && assignment.dateDue;
-
-    if (valid) {
-      handleUpload();
-      handleUpdate();
-    } else {
-      setErrors(errors);
-    }
-  };
+  async function onSubmit() {
+    const { name, maxGrade, dateDue, instructions } = inputs;
+    const assignment = { name, maxGrade, dateDue, instructions };
+    const variables = { id, assignment };
+    return update({ variables }).then(() => closeModal());
+  }
 
   return (
-    <SideForm title="Edit Assignment" button="Save" closeModal={closeModal} onSubmit={handleSubmit}>
+    <SideForm
+      title="Edit Assignment"
+      button="Save"
+      loading={loading}
+      closeModal={closeModal}
+      onSubmit={handleSubmit}
+    >
       <Input
         name="name"
         label="Assignment Name"

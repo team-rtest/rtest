@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import updateCourse from "api/update";
 import { gql, useMutation } from "@apollo/client";
+import useForm from "./utils/useForm";
 
 import SideForm from "./SideForm";
 import { Input, FileInput, Select } from "components";
@@ -17,21 +17,19 @@ const mutation = gql`
 function EditCourse({ courseData, closeModal }) {
   const { id } = useParams();
   const [update] = useMutation(mutation);
-  const [inputs, setInputs] = useState(courseData);
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
+    data: courseData,
+    names: ["name", "code", "semester", "syllabus"],
+    check: ["name", "code", "semester"],
+    onSubmit,
+  });
 
-  const handleChange = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-  };
-
-  const handleSubmit = () => {
-    setLoading(true);
-    updateCourse(inputs)
-      .then((course) => update({ variables: { id, course } }))
-      .catch((errors) => setErrors(errors))
-      .finally(() => setLoading(false));
-  };
+  async function onSubmit() {
+    const { name, code, semester, syllabus } = inputs;
+    const course = { name, code, semester, syllabus };
+    const variables = { id, course };
+    return update({ variables }).then(() => closeModal());
+  }
 
   return (
     <SideForm

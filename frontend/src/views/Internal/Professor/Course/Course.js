@@ -12,9 +12,10 @@ import Students from "./Students";
 
 import { Loader } from "components";
 
-const fetch = gql`
+const query = gql`
   query FetchCourse($id: ID!) {
     course(id: $id) {
+      _id
       name
       code
       semester
@@ -23,6 +24,7 @@ const fetch = gql`
         lastName
       }
       assignmentGroups {
+        _id
         name
         tag
         grading {
@@ -40,7 +42,7 @@ const fetch = gql`
 
 function Course() {
   const { id } = useParams();
-  const { data, loading, error } = useQuery(fetch, { variables: { id } });
+  const { data, loading, error } = useQuery(query, { variables: { id } });
 
   const tabs = ["Details", "Assignments", "Students", "Review"];
   const [selected, setSelected] = useState("Details");
@@ -67,7 +69,7 @@ function Course() {
         <EditCourse courseData={course} closeModal={() => setEditCourseModal(false)} />
       )}
       {deleteCourseModal && (
-        <DeleteCourse courseData={course} closeModal={() => setDeleteCourseModal(false)} />
+        <DeleteCourse id={course._id} closeModal={() => setDeleteCourseModal(false)} />
       )}
       <Header>
         <Heading>{course.name}</Heading>

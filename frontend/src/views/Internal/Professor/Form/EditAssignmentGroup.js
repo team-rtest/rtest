@@ -1,71 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
+import useForm from "./utils/useForm";
 
 import SideForm from "./SideForm";
-import { Input } from "components";
+import { Input, Select } from "components";
 
-const update = gql`
-  mutation UpdateAssignmentGroup(
-    $assignmentGroupId: ID!
-    $assignmentGroupData: AssignmentGroupInput!
-  ) {
-    updateAssignmentGroup(
-      assignmentGroupId: $assignmentGroupId
-      assignmentGroupData: $assignmentGroupData
-    ) {
+const mutation = gql`
+  mutation UpdateAssignmentGroup($id: ID!, $assignmentGroup: AssignmentGroupInput!) {
+    updateAssignmentGroup(id: $id, assignmentGroup: $assignmentGroup) {
       _id
     }
   }
 `;
 
 function UpdateAssignmentGroup({ assignmentGroupData, closeModal }) {
-  const { id: courseId } = useParams();
-  const [updateAssignmentGroup] = useMutation(update);
-  const [inputs, setInputs] = useState(assignmentGroupData);
-  const [errors, setErrors] = useState({});
+  const id = assignmentGroupData._id;
+  const [update] = useMutation(mutation);
+  const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
+    data: assignmentGroupData,
+    names: ["name", "tag", "policy", "weight"],
+    check: ["name", "tag", "policy", "weight"],
+    onSubmit,
+  });
 
-  const handleChange = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-  };
-
-  const handleSubmit = () => {
+  async function onSubmit() {
     const assignmentGroup = {
       name: inputs.name,
-      tag: "TEST",
-      courseId: courseId,
+      tag: inputs.tag,
       grading: {
-        weight: inputs.weight,
         policy: inputs.policy,
+        weight: inputs.weight,
       },
     };
-
-    const errors = {
-      name: !inputs.name,
-      tag: !inputs.tag,
-      weight: !inputs.weight,
-      policy: !inputs.policy,
-    };
-
-    const valid = inputs.name && inputs.tag && inputs.weight && inputs.policy;
-
-    if (valid) {
-      updateAssignmentGroup({
-        variables: {
-          assignmentGroupId: assignmentGroupData._id,
-          assignmentGroupData: assignmentGroup,
-        },
-      });
-    } else {
-      setErrors(errors);
-    }
-  };
+    const variables = { id, assignmentGroup };
+    return update({ variables }).then(() => closeModal());
+  }
 
   return (
     <SideForm
       title="Edit Assignment Group"
       button="Save"
+      loading={loading}
       closeModal={closeModal}
       onSubmit={handleSubmit}
     >
@@ -76,26 +52,29 @@ function UpdateAssignmentGroup({ assignmentGroupData, closeModal }) {
         error={errors.name}
         onChange={handleChange}
       />
-      <Input
-        name="group_type"
+      <Select
+        name="tag"
         label="Group Type"
-        value={inputs.group_type}
-        error={errors.group_type}
+        value={inputs.tag}
+        error={errors.tag}
+        options={["Homework", "Classwork", "Lab", "Quiz", "Test", "Exam"]}
         onChange={handleChange}
       />
       <InputRow>
         <Input
-          name="grading_policy"
+          name="policy"
           label="Grading Policy"
-          value={inputs.grading_policy}
-          error={errors.grading_policy}
+          value={inputs.policy}
+          error={errors.policy}
+          options
           onChange={handleChange}
         />
         <Input
-          name="grading_weight"
-          label="Grading Weight"
-          value={inputs.grading_weight}
-          error={errors.grading_weight}
+          name="weight"
+          label="Grading Weight (in percent)"
+          type="number"
+          value={inputs.weight}
+          error={errors.weight}
           onChange={handleChange}
         />
       </InputRow>

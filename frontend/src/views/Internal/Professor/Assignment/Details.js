@@ -3,27 +3,32 @@ import styled from "styled-components";
 
 import { Card } from "components";
 
-function Details() {
+function Details({ maxGrade, dueDate, optional, locked }) {
   return (
     <Box>
       <Info>
         <Label>Due Date</Label>
-        <Value>October 13th 2020</Value>
+        <Value>{dueDate}</Value>
       </Info>
 
       <Info>
         <Label>Max Grade</Label>
-        <Value>100</Value>
+        <Value>{maxGrade}</Value>
       </Info>
 
       <Info>
-        <Label>Assignment Group</Label>
-        <Value>Labs</Value>
+        <Label>Optional</Label>
+        <File>{optional}</File>
+      </Info>
+
+      <Info>
+        <Label>Locked</Label>
+        <Value>{locked}</Value>
       </Info>
 
       <Info>
         <Label>Instructions File</Label>
-        <File>CS334_HW1.pdf</File>
+        <Value>CS334_HW1.pdf</Value>
       </Info>
     </Box>
   );

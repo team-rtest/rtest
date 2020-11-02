@@ -103,11 +103,6 @@ input SubmissionInput {
   files: [FileInput]
 }
 
-type GradingRules {
-  weight: Int!
-  policy: String!
-}
-
 input GradeInput {
   submission: ID!
   grade: Float!
@@ -174,7 +169,7 @@ type Mutation {
   # ASSIGNMENT GROUP
   createAssignmentGroup(courseId: ID!, assignmentGroup: AssignmentGroupInput): AssignmentGroup
   updateAssignmentGroup(id: ID!, assignmentGroup: AssignmentGroupInput!): AssignmentGroup
-  deleteAssignmentGroup(id: ID!): Assignment
+  deleteAssignmentGroup(id: ID!): AssignmentGroup
 
   # ASSIGNMENT
   createAssignment(assignmentGroupId: ID!, assignment: AssignmentInput): Assignment
@@ -194,14 +189,4 @@ type Mutation {
   # FILE
   addSubmissionFile(course: ID!, assignment: ID!, submission: ID!, filename: String!): String!
   registerSubmissionFile(submission: ID!, file: FileInput!): File
-  updateUser(id: ID!, userData: UserInput!): User!
-  signup(userInput: UserInput!): String
-  login(username: String!, password: String!): String
-  updateAssignment(assignmentId: ID!, assignmentData: AssignmentInput!): Assignment
-  deleteAssignment(assignment: ID!): Assignment
-  updateAssignmentGroup(
-    assignmentGroupId: ID!
-    assignmentGroupData: AssignmentGroupInput!
-  ): AssignmentGroup
-  deleteAssignmentGroup(assignment: ID!): Assignment
 }

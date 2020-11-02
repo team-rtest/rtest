@@ -1,16 +1,26 @@
 import React from "react";
 import styled from "styled-components";
-import { fetchCourses } from "api/fetch";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 import CreateCard from "./CreateCard";
 import CourseCard from "./CourseCard";
 
 import { Loader } from "components";
 
+const query = gql`
+  query {
+    courses {
+      _id
+      name
+      code
+      semester
+    }
+  }
+`;
+
 function Dashboard() {
-  const { data, loading, error } = useQuery(fetchCourses);
-  if (loading) return <Loader />;
+  const { data, loading, error } = useQuery(query);
+  if (loading) return <PageLoader />;
   if (error) return <p>Error :(</p>;
 
   return (
@@ -27,6 +37,14 @@ function Dashboard() {
 const Box = styled.div`
   width: 100%;
   padding: 30px;
+`;
+
+const PageLoader = styled(Loader)`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Heading = styled.h1`

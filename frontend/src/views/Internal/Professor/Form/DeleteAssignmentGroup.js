@@ -1,26 +1,24 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { gql, useMutation } from "@apollo/client";
 import { Card } from "components";
 
 const del = gql`
-  mutation DeleteCourse($id: ID!) {
-    deleteCourse(id: $id) {
+  mutation DeleteAssignmentGroup($id: ID!) {
+    deleteAssignmentGroup(id: $id) {
       _id
     }
   }
 `;
 
-function DeleteCourse({ id, closeModal }) {
-  const history = useHistory();
-  const [deleteCourse] = useMutation(del);
+function DeleteAssignmentGroup({ id, closeModal }) {
+  const [deleteAssignmentGroup] = useMutation(del);
 
   const handleSubmit = () => {
-    deleteCourse({ variables: { id } })
-      .then(() => history.push("/professor/courses"))
-      .catch(() => alert("Could not delete course"));
+    deleteAssignmentGroup({ variables: { id } }).catch(() =>
+      alert("Could not delete assignment group")
+    );
     closeModal();
   };
 
@@ -28,10 +26,10 @@ function DeleteCourse({ id, closeModal }) {
     <Overlay>
       <SubmissionCard>
         <Head>
-          <Heading>Delete Course</Heading>
+          <Heading>Delete Assignment Group</Heading>
         </Head>
         <Body>
-          <Label>Are you sure you want to delete this course?</Label>
+          <Label>Are you sure you want to delete this assignment group?</Label>
         </Body>
         <Foot>
           <Button className="btn btn-secondary" onClick={closeModal}>
@@ -112,4 +110,4 @@ const Label = styled.label`
   color: grey;
 `;
 
-export default DeleteCourse;
+export default DeleteAssignmentGroup;

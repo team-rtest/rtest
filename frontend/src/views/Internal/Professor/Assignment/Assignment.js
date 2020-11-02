@@ -1,19 +1,57 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
 
-import EditAssignment from "./EditAssignment";
+import EditAssignment from "views/Internal/Professor/Form/EditAssignment";
 import Details from "./Details";
 import Submissions from "./Submissions";
 
+import { Loader } from "components";
+
+const query = gql`
+  query FetchAssignment {
+    assignment(id: $id) {
+      _id
+      name
+      maxGrade
+      dueDate
+      optional
+      locked
+      submissions {
+        _id
+        grade
+        submittedAt
+        student {
+          firstName
+          lastName
+          email
+        }
+      }
+    }
+  }
+`;
+
 function AssignmentPage() {
-  const [editModal, setEditModal] = useState(false);
-  const [selected, setSelected] = useState("Details");
+  const { id } = useParams();
+  const { data, loading, error } = useQuery(query, { variables: { id } });
+
   const tabs = ["Details", "Submissions", "Review"];
+  const [selected, setSelected] = useState("Details");
+
+  const [editModal, setEditModal] = useState(false);
+
+  if (loading) return <PageLoader />;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const { assignment } = data;
 
   const content = {
-    Details: <Details />,
-    Submissions: <Submissions />,
+    Details: <Details {...assignment} />,
+    Submissions: <Submissions {...assignment} />,
   };
+
+  if (!assignment) return <div>Assignment does not exist</div>;
 
   return (
     <Box>
@@ -108,6 +146,14 @@ const Tabs = styled.div`
   margin-top: 20px;
   flex-direction: row;
   grid-gap: 5px;
+`;
+
+const PageLoader = styled(Loader)`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Tab = styled.button`

@@ -1,60 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { gql, useMutation } from "@apollo/client";
 
 import SideForm from "./SideForm";
 import { Input, Select } from "components";
+import useForm from "./utils/useForm";
 
-const create = gql`
-  mutation CreateAssignmentGroup($assignmentGroup: AssignmentGroupInput) {
-    createAssignmentGroup(assignmentGroup: $assignmentGroup) {
+import { gql, useMutation } from "@apollo/client";
+
+const mutation = gql`
+  mutation CreateAssignmentGroup($courseId: ID!, $assignmentGroup: AssignmentGroupInput) {
+    createAssignmentGroup(courseId: $courseId, assignmentGroup: $assignmentGroup) {
       _id
     }
   }
 `;
 
-function CreateAssignmentGroup({ closeModal }) {
-  const { id: courseId } = useParams();
-  const [createAssignmentGroup] = useMutation(create);
-  const [inputs, setInputs] = useState({});
-  const [errors, setErrors] = useState({});
+function CreateAssignmentGroup({ courseId, closeModal }) {
+  const [create] = useMutation(mutation);
+  const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
+    names: ["name", "tag", "policy", "weight"],
+    check: ["name", "tag", "policy", "weight"],
+    onSubmit,
+  });
 
-  const handleChange = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-  };
-
-  const handleSubmit = () => {
+  async function onSubmit() {
     const assignmentGroup = {
       name: inputs.name,
-      tag: "TEST",
-      courseId: courseId,
+      tag: inputs.tag,
       grading: {
-        weight: inputs.weight,
         policy: inputs.policy,
+        weight: inputs.weight,
       },
     };
-
-    const errors = {
-      name: !inputs.name,
-      tag: !inputs.tag,
-      weight: !inputs.weight,
-      policy: !inputs.policy,
-    };
-
-    const valid = inputs.name && inputs.tag && inputs.weight && inputs.policy;
-
-    if (valid) {
-      createAssignmentGroup({ variables: { assignmentGroup } });
-    } else {
-      setErrors(errors);
-    }
-  };
+    const variables = { courseId, assignmentGroup };
+    return create({ variables }).then(() => closeModal());
+  }
 
   return (
     <SideForm
       title="Create Assignment Group"
       button="Create"
+      loading={loading}
       closeModal={closeModal}
       onSubmit={handleSubmit}
     >
