@@ -6,7 +6,7 @@ import AssignmentGroup from "./AssignmentGroup";
 
 import CreateAssignmentGroupModal from "views/Internal/Professor/Form/CreateAssignmentGroup";
 
-function Assignments({ assignmentGroups }) {
+function Assignments({ _id, assignmentGroups }) {
   const [createAssignmentGroupModal, setCreateAssignmentGroupModal] = useState(false);
 
   const openCreateAssignmentGroupModal = () => {
@@ -16,7 +16,10 @@ function Assignments({ assignmentGroups }) {
   return (
     <Box>
       {createAssignmentGroupModal && (
-        <CreateAssignmentGroupModal closeModal={() => setCreateAssignmentGroupModal(false)} />
+        <CreateAssignmentGroupModal
+          courseId={_id}
+          closeModal={() => setCreateAssignmentGroupModal(false)}
+        />
       )}
       <Scroll>
         {assignmentGroups && assignmentGroups.map((group) => <AssignmentGroup {...group} />)}

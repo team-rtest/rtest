@@ -10,12 +10,11 @@ import Submissions from "./Submissions";
 import { Loader } from "components";
 
 const query = gql`
-  query FetchAssignment {
+  query FetchAssignment($id: ID!) {
     assignment(id: $id) {
       _id
       name
       maxGrade
-      dueDate
       optional
       locked
       submissions {

@@ -14,11 +14,17 @@ const mutation = gql`
   }
 `;
 
-function UpdateAssignmentGroup({ assignmentGroupData, closeModal }) {
+function EditAssignmentGroup({ assignmentGroupData, closeModal }) {
+  console.log(assignmentGroupData);
   const id = assignmentGroupData._id;
   const [update] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
-    data: assignmentGroupData,
+    data: {
+      name: assignmentGroupData.name,
+      tag: assignmentGroupData.tag,
+      policy: assignmentGroupData.grading.policy,
+      weight: assignmentGroupData.grading.weight,
+    },
     names: ["name", "tag", "policy", "weight"],
     check: ["name", "tag", "policy", "weight"],
     onSubmit,
@@ -91,4 +97,4 @@ const InputRow = styled.div`
   }
 `;
 
-export default UpdateAssignmentGroup;
+export default EditAssignmentGroup;

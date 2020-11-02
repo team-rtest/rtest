@@ -18,7 +18,7 @@ function Details({ maxGrade, dueDate, optional, locked }) {
 
       <Info>
         <Label>Optional</Label>
-        <File>{optional}</File>
+        <Value>{optional}</Value>
       </Info>
 
       <Info>

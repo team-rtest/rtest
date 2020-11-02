@@ -7,16 +7,8 @@ function Input({ name, type, label, value, tip, error, onChange, className, ...r
   const handleChange = (event) => {
     let value = event.target.value;
 
-    switch (type) {
-      case "number":
-        value = parseInt(value);
-        break;
-      case "date":
-        value = new Date(value);
-        break;
-      case "time":
-        value = new Date(value);
-        break;
+    if (type === "number") {
+      value = parseInt(value);
     }
 
     onChange(name, value);

@@ -19,10 +19,6 @@ const query = gql`
       name
       code
       semester
-      students {
-        firstName
-        lastName
-      }
       assignmentGroups {
         _id
         name

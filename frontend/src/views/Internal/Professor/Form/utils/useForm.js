@@ -1,16 +1,16 @@
 import { useState } from "react";
 
-function initializer(keys) {
+function initializer(data, keys) {
   const object = {};
-  for (const key in keys) {
-    object[key] = "";
+  for (const key of keys) {
+    object[key] = data[key] || "";
   }
   return object;
 }
 
 function useForm({ data = {}, names, check, onSubmit }) {
   const initialInputs = initializer(data, names);
-  const initialErrors = initializer(data, check);
+  const initialErrors = initializer({}, check);
 
   const [inputs, setInputs] = useState(initialInputs);
   const [errors, setErrors] = useState(initialErrors);

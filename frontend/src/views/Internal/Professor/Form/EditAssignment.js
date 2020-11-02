@@ -46,14 +46,6 @@ function EditAssignment({ assignmentData, assignmentGroups, closeModal }) {
         error={errors.name}
         onChange={handleChange}
       />
-      <Select
-        name="group"
-        label="Assignment Group"
-        value={inputs.group}
-        error={errors.group}
-        options={assignmentGroups}
-        onChange={handleChange}
-      />
       <InputRow>
         <Input
           name="maxGrade"
@@ -66,7 +58,7 @@ function EditAssignment({ assignmentData, assignmentGroups, closeModal }) {
         <Input
           name="dateDue"
           label="Due Date"
-          type="time"
+          type="date"
           value={inputs.dateDue}
           error={errors.dateDue}
           onChange={handleChange}

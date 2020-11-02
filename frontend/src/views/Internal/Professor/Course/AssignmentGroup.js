@@ -3,27 +3,42 @@ import styled from "styled-components";
 
 import CreateAssignmentModal from "views/Internal/Professor/Form/CreateAssignment";
 import EditAssignmentGroupModal from "views/Internal/Professor/Form/EditAssignmentGroup";
+import DeleteAssignmentGroupModal from "views/Internal/Professor/Form/DeleteAssignmentGroup";
 
 import { Card } from "components";
 import { Link } from "react-router-dom";
 
-function AssignmentGroup({ name, tag, grading, assignments }) {
+function AssignmentGroup({ _id, name, tag, grading, assignments }) {
   const [createAssignmentModal, setCreateAssignmentModal] = useState(false);
   const [editAssignmentGroupModal, setEditAssignmentGroupModal] = useState(false);
+  const [deleteAssignmentGroupModal, setDeleteAssignmentGroupModal] = useState(false);
 
   return (
     <Group>
       {createAssignmentModal && (
-        <CreateAssignmentModal closeModal={() => setCreateAssignmentModal(false)} />
+        <CreateAssignmentModal
+          assignmentGroupId={_id}
+          closeModal={() => setCreateAssignmentModal(false)}
+        />
       )}
       {editAssignmentGroupModal && (
-        <EditAssignmentGroupModal closeModal={() => setEditAssignmentGroupModal(false)} />
+        <EditAssignmentGroupModal
+          assignmentGroupData={{ _id, name, tag, grading }}
+          closeModal={() => setEditAssignmentGroupModal(false)}
+        />
+      )}
+      {deleteAssignmentGroupModal && (
+        <DeleteAssignmentGroupModal
+          id={_id}
+          closeModal={() => setDeleteAssignmentGroupModal(false)}
+        />
       )}
       <GroupHeading>
         {name}
-        <button className="btn btn-upload" onClick={() => setEditAssignmentGroupModal(true)}>
-          Edit
-        </button>
+        <Buttons>
+          <IconButton className="fa fa-pencil" onClick={() => setEditAssignmentGroupModal(true)} />
+          <IconButton className="fa fa-trash" onClick={() => setDeleteAssignmentGroupModal(true)} />
+        </Buttons>
       </GroupHeading>
       <hr />
       <AssignmentList>
@@ -52,6 +67,10 @@ const FileIcon = styled.span`
 
 const FileName = styled.span`
   font-weight: 500;
+`;
+
+const Buttons = styled.div`
+  display: flex;
 `;
 
 const AssignmentList = styled.div`
@@ -98,10 +117,11 @@ const GroupHeading = styled.h5`
   font-size: 1.4rem;
 `;
 
-const Weight = styled.span`
-  all: unset;
+const IconButton = styled.button`
+  font-size: 16px;
+  border: none;
+  background: none;
   color: darkgray;
-  font-size: 1.2rem;
 `;
 
 const CreateAssignment = styled.button`

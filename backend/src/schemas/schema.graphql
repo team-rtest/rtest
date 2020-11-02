@@ -73,7 +73,7 @@ type Assignment {
   name: String!
   body: String
   maxGrade: Int
-  dateDue: Timestamp!
+  dateDue: Timestamp
   optional: Boolean!
   locked: Boolean!
   files: File
@@ -85,7 +85,7 @@ input AssignmentInput {
   name: String
   body: String
   maxGrade: Int
-  dateDue: Timestamp!
+  dateDue: Timestamp
   optional: Boolean
   locked: Boolean
 }

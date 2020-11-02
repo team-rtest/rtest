@@ -18,15 +18,16 @@ const mutation = gql`
 function CreateAssignment({ assignmentGroupId, closeModal }) {
   const [create] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
-    names: ["name", "maxGrade", "dateDue", "instructions"],
-    check: ["name", "maxGrade", "dateDue"],
+    names: ["name", "maxGrade", "optional", "locked", "instructions"],
+    check: ["name", "maxGrade", "optional", "locked"],
     onSubmit,
   });
 
   async function onSubmit() {
-    const { name, maxGrade, dateDue, instructions } = inputs;
-    const assignment = { name, maxGrade, dateDue, instructions };
+    const { name, maxGrade } = inputs;
+    const assignment = { name, maxGrade };
     const variables = { assignmentGroupId, assignment };
+    console.log(variables);
     return create({ variables }).then(() => closeModal());
   }
 
@@ -57,12 +58,13 @@ function CreateAssignment({ assignmentGroupId, closeModal }) {
         <Input
           name="dateDue"
           label="Due Date"
-          type="time"
+          type="date"
           value={inputs.dateDue}
           error={errors.dateDue}
           onChange={handleChange}
         />
       </InputRow>
+      <input type="checkbox" />
       <FileInput
         name="instructions"
         label="Instructions"
