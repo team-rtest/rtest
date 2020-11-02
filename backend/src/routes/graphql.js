@@ -38,6 +38,5 @@ const server = new ApolloServer({
     }
     return { res };
   },
-  tracing: true,
 });
 export default server;

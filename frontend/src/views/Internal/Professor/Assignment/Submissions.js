@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Submission from "views/Internal/Professor/Submission/Submission";
 
-function Submissions() {
+function Submissions({ dueDate, submissions }) {
   const [submissionModal, setSubmissionModal] = useState(false);
 
   const LATE = <Late>Late</Late>;
@@ -20,6 +20,22 @@ function Submissions() {
         </Row>
       </thead>
       <tbody>
+        {submissions.map((submission) => {
+          <Row onClick={() => setSubmissionModal(true)}>
+            <BodyCell>
+              {submission.student.firstName} {submission.student.lastName}
+            </BodyCell>
+            <BodyCell>
+              <Date>
+                {submission.submittedAt} {submission.submittedAt > dueDate && LATE}
+              </Date>
+            </BodyCell>
+            <BodyCell>
+              <File>hw1.zip</File>
+            </BodyCell>
+            <BodyCell>{submission.grade}</BodyCell>
+          </Row>;
+        })}
         <Row onClick={() => setSubmissionModal(true)}>
           <BodyCell>Mark Adams</BodyCell>
           <BodyCell>

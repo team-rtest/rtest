@@ -18,7 +18,9 @@ export default {
       }),
 
     coursesTeaching: async (_, __, context) =>
-      await Course.find({ "sections.instructor": context.user }),
+      await Course.find({
+        "sections.instructor": context.user
+      }),
 
     courses: async (_, __, context) =>
       await Course.find({ "sections.students": context.user }),
