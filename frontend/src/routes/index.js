@@ -16,10 +16,6 @@ import StudentCourses from "views/Internal/Student/Courses/Courses";
 
 import AssignmentReview from "views/Internal/Professor/Review/AssignmentReview";
 import AssignmentReviewDetails from "views/Internal/Professor/Review/AssignmentReviewDetails";
-import CreateCourse from "views/Internal/Professor/CreateCourse/CreateCourse";
-import EditCourse from "views/Internal/Professor/EditCourse/EditCourse";
-import CreateAssignment from "views/Internal/Professor/CreateAssignment/CreateAssignment";
-import CreateAssignmentGroup from "views/Internal/Professor/CreateAssignmentGroup/CreateAssignmentGroup";
 
 const external = [
   {
@@ -62,12 +58,6 @@ const internal = [
     page: <AssignmentReviewDetails />,
   },
   {
-    path: "/professor/create-course",
-    page: <CreateCourse />,
-  },
-  {
-    path: "/professor/edit-course",
-    page: <EditCourse />,
     path: "/professor/course/:id",
     page: <ProfessorCourse />,
   },
