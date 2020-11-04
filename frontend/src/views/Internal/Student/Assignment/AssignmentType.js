@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 function AssignmentType({ type, selected, setSelected }) {
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   return (
     <TypeList>

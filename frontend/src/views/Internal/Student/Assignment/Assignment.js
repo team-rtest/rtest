@@ -1,9 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import { gql, useQuery } from "@apollo/client";
 import AssignmentList from "./AssignmentList";
 import AssignmentPage from "./AssignmentPage";
 
+import { Loader } from "components";
+
+const getAssignments = gql `
+query {
+  course(id: "5f9dd8838a6e0e08b427f0e1"){
+    assignmentGroups{
+      name
+      tag
+      assignments {
+        name
+        _id
+        dateDue
+        mySubmission {
+          student {
+            _id
+            username
+          }
+          submittedAt
+          grade
+        }
+        submissions {
+          grade
+        }
+      }
+    }
+  }
+}
+`;
 function Assignment({ ...rest }) {
   const [selected, setSelected] = useState({
     id: 0,
@@ -13,6 +41,10 @@ function Assignment({ ...rest }) {
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
   });
+  const { data, loading, error } = useQuery(getAssignments);
+
+  if (loading) return <PageLoader />;
+  if (error) return <p>Error: {error.message}</p>;
 
   const assignments = [
     {
@@ -127,6 +159,14 @@ function Assignment({ ...rest }) {
     </Box>
   );
 }
+
+const PageLoader = styled(Loader)`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Box = styled.div`
   display: flex;
