@@ -1,7 +1,52 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-function AssignmentType({ type, selected, setSelected }) {
+function formatDate(value) {
+  const date = new Date(value);
+  const year = parseInt(date.getYear()) + 1900;
+  const month = parseInt(date.getMonth());
+  const day = date.getDate();
+
+  const MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return `${MONTHS[month]} ${day}, ${year}`;
+}
+
+function getStatus(dueDate, mySubmission){
+  if(mySubmission == null){
+    if(Date.now() > new Date(dueDate)){
+      return "late"
+    }
+    else{
+      return "next"
+    }
+  }
+  else if((dueDate<mySubmission.submittedAt & mySubmission.grade ==null)){
+    return "late"
+  }
+  else if(mySubmission.grade!=null && (dueDate<mySubmission.submittedAt)){
+    return "graded&late"
+  }
+  else if(mySubmission.grade!=null){
+    return "graded"
+  }
+}
+
+function AssignmentType({ type }) {
   const [hidden, setHidden] = useState(true);
 
   return (
@@ -12,25 +57,27 @@ function AssignmentType({ type, selected, setSelected }) {
             className={`fa fa-caret-${hidden ? "right" : "down"}`}
             onClick={() => setHidden(!hidden)}
           />
-          <TypeName>{type.name}</TypeName>
-          <Count>{type.list.length}</Count>
+          <TypeName>{type.tag}</TypeName>
+          <Count>{type.assignments.length}</Count>
         </Head>
         {!hidden && (
           <List>
-            {type.list.map(({ id, name, status, description }) => (
-              <AssignmentItem
-                disabled={status === "locked"}
-                key={id}
-                selected={name === selected.name}
-                onClick={() => setSelected(type.list[id])}
-              >
-                <Heading>
-                  <Name>{name}</Name>
-                  <Tag status={status}>{status}</Tag>
-                </Heading>
-                <Date> September 18th 2020 </Date>
-                <Description>{description}</Description>
-              </AssignmentItem>
+            {type.assignments.map(({name, body, dateDue, mySubmission, locked, _id}) => (
+              <Link
+              key={_id}
+              to = {"/student/assignment/" + _id }
+              style = {{textDecoration: 'none'}}>
+                <AssignmentItem
+                  disabled={locked}
+                >
+                  <Heading>
+                    <Name>{name}</Name>
+                    <Tag status={getStatus(dateDue, mySubmission)}>{getStatus(dateDue, mySubmission)}</Tag>
+                  </Heading>
+                  <DateFormat> {formatDate(dateDue)} </DateFormat>
+                  <Description>{body}</Description>
+                </AssignmentItem>
+              </Link>
             ))}
           </List>
         )}
@@ -93,6 +140,7 @@ const AssignmentItem = styled.div`
   padding: 25px;
   margin-top: -1px;
   border: 1px solid #eee;
+  color: black;
   background: ${(props) => props.selected && "rgba(97, 115, 219, 0.1)"};
   opacity: ${(props) => props.disabled && "0.5"};
 `;
@@ -153,7 +201,6 @@ const Tag = styled.div`
           color: rgb(108, 117, 125);
           background: rgb(108, 117, 125, 0.2);
         `;
-
       case "next":
         return `
           color: rgb(108, 117, 125);
@@ -166,13 +213,19 @@ const Tag = styled.div`
           background: hsla(150, 52.9%, 52%, 0.2);
         `;
 
+      case "graded&late":
+      return `
+          color: rgb(245, 185, 118);
+          background: rgb(245, 185, 118, 0.2);
+      `;
+
       default:
         return ``;
     }
   }}
 `;
 
-const Date = styled.div`
+const DateFormat = styled.div`
   color: grey;
   color: #6173db;
   font-size: 0.8rem;

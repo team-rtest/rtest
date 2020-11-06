@@ -1,49 +1,85 @@
 import React from "react";
 import styled from "styled-components";
-
+import { gql, useQuery } from "@apollo/client";
 import { Upload } from "components";
+import { useParams } from "react-router-dom";
 
-function AssignmentPage({ selected, assignments, setSelected }) {
+function formatDate(value) {
+  const date = new Date(value);
+  const year = parseInt(date.getYear()) + 1900;
+  const month = parseInt(date.getMonth());
+  const day = date.getDate();
+
+  const MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return `${MONTHS[month]} ${day}, ${year}`;
+}
+
+const assignmentDetails = gql`
+  query assignmentDetails($id: ID!) {
+    assignment(id: $id) {
+      name
+      maxGrade
+      dateDue
+      locked
+      mySubmission {
+        grade
+        submittedAt
+      }
+    }
+  }
+`;
+
+function AssignmentPage() {
+  const { id } = useParams();
+
+  const { loading, error, data } = useQuery(assignmentDetails, {
+    variables: { id: id },
+  });
+
+  if (loading) return "Loading...";
+
+  if (error) return `Error! ${error.message}`;
+
   return (
     <Box>
-      <Heading>{selected.name}</Heading>
-      <Date> Due: September 18th 2020 </Date>
+      <Heading>{data.assignment.name}</Heading>
+      <DateFormat>{formatDate(data.assignment.dateDue)}</DateFormat>
       <File>
         <FileName>CS334_HW1.pdf</FileName>
         <FileIcon className="fa fa-download"></FileIcon>
       </File>
-      <Subheading> Submission instructions </Subheading>
-      <Text>
-        Submit your assignment through the QTest system, using course ID: CS470 and exam ID: hw2.
-        Upload a single ZIP archive file named hw2.zip, containing all the files of your solution:
-      </Text>
-      <List>
-        <li> The program’s source files. </li>
-        <li>A README.txt file explaining how to compile and run your program.</li>
-        <li>
-          A file named result500.txt which is your solution for the dataset T10I4D100K.txt with
-          minimum support count 500.
-        </li>
-        <li> The report in PDF format. </li>
-        <li> The LaTeX source files used to typeset the report. </li>
-      </List>
-      <Text>
-        No email submissions are accepted. No late submissions are accepted. At the top of your
-        solution, include a section named “Collaboration statement” in which you acknowledge any
-        collaboration, help, or resource you used or consulted to complete this assignment.
-      </Text>
+      <Subheading> </Subheading>
+      <Text></Text>
+      <List></List>
+      <Text></Text>
       <FileUpload>
         <Upload />
         <button className="btn btn-upload text-white" onClick={() => {}}>
           Submit File
         </button>
       </FileUpload>
+      {data.assignment.mySubmission &&
       <Success>
-        <Tick className="fa fa-check-circle" /> Submitted on August 28th 2020
-      </Success>
+        <Tick className="fa fa-check-circle" /> Submitted on {formatDate(data.assignment.mySubmission.submittedAt)}
+      </Success>}
+      {!data.assignment.mySubmission && !data.assignment.locked &&
       <Failure>
-        <Cross className="fa fa-times-circle" /> Closed on August 28th 2020
-      </Failure>
+        <Cross className="fa fa-times-circle" /> Closed on {formatDate(data.assignment.dateDue)}
+      </Failure>}
     </Box>
   );
 }
@@ -90,7 +126,7 @@ const Heading = styled.h1`
   font-weight: 700;
 `;
 
-const Date = styled.div`
+const DateFormat = styled.div`
   color: grey;
   font-size: 1.1rem;
 `;
