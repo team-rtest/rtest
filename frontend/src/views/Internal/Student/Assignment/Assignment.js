@@ -32,8 +32,8 @@ query FetchCourse($id: ID!) {
 `;
 function Assignment({ ...rest }) {
   const { data, loading, error } = useQuery(getAssignments,{ variables: { id: "5f9dd8838a6e0e08b427f0e1" } });
-  if (loading) return <PageLoader />;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) {return <PageLoader />;}
+  if (error) {return <p>Error: {error.message}</p>;}
 
   return (
     <Box>

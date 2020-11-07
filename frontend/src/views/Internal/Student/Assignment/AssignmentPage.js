@@ -47,7 +47,7 @@ function AssignmentPage() {
   const { id } = useParams();
 
   const { loading, error, data } = useQuery(assignmentDetails, {
-    variables: { id: id },
+    variables: { id },
   });
 
   if (loading) return "Loading...";

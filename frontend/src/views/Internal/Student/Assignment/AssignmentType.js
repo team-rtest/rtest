@@ -29,20 +29,20 @@ function formatDate(value) {
 function getStatus(dueDate, mySubmission){
   if(mySubmission == null){
     if(Date.now() > new Date(dueDate)){
-      return "late"
+      return "late";
     }
     else{
-      return "next"
+      return "next";
     }
   }
   else if((dueDate<mySubmission.submittedAt & mySubmission.grade ==null)){
-    return "late"
+    return "late";
   }
   else if(mySubmission.grade!=null && (dueDate<mySubmission.submittedAt)){
-    return "graded&late"
+    return "graded&late";
   }
   else if(mySubmission.grade!=null){
-    return "graded"
+    return "graded";
   }
 }
 
@@ -66,7 +66,7 @@ function AssignmentType({ type }) {
               <Link
               key={_id}
               to = {"/student/assignment/" + _id }
-              style = {{textDecoration: 'none'}}>
+              style = {{textDecoration: "none"}}>
                 <AssignmentItem
                   disabled={locked}
                 >
