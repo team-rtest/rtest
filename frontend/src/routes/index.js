@@ -78,7 +78,7 @@ const internal = [
     page: <StudentCourses />,
   },
   {
-    path: "/student/assignment/:id",
+    path: "/student/assignment/:id?",
     page: <StudentAssignment />,
   },
 ];
