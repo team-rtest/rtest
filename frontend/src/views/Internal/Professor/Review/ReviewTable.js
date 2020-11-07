@@ -1,20 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 
-function ReviewTable({labels, data}){
-    console.log(data);
-    return(
-        <ReviewT>
-        <ReviewThead>
+function ReviewTable({ labels, data }) {
+  console.log(data);
+  return (
+    <ReviewT>
+      <ReviewThead>
         <Rtr>
-            {labels.map((l)=>{return(<Rth>{l}</Rth>);})}
+          {labels.map((l) => {
+            return <Rth>{l}</Rth>;
+          })}
         </Rtr>
-        </ReviewThead>
-            <ReviewTbody>
-            {data[0].map((a, i) => <Rtr>{data.map((d) => <Rtd>{d[i]}</Rtd>)}</Rtr>)}
-            </ReviewTbody>
-        </ReviewT>
-    );
+      </ReviewThead>
+      <ReviewTbody>
+        {data[0].map((a, i) => (
+          <Rtr>
+            {data.map((d) => (
+              <Rtd>{d[i]}</Rtd>
+            ))}
+          </Rtr>
+        ))}
+      </ReviewTbody>
+    </ReviewT>
+  );
 }
 
 const ReviewT = styled.table`

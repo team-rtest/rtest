@@ -72,14 +72,18 @@ function AssignmentPage() {
           Submit File
         </button>
       </FileUpload>
-      {data.assignment.mySubmission &&
-      <Success>
-        <Tick className="fa fa-check-circle" /> Submitted on {formatDate(data.assignment.mySubmission.submittedAt)}
-      </Success>}
-      {!data.assignment.mySubmission && !data.assignment.locked &&
-      <Failure>
-        <Cross className="fa fa-times-circle" /> Closed on {formatDate(data.assignment.dateDue)}
-      </Failure>}
+      {data.assignment.mySubmission && (
+        <Success>
+          <Tick className="fa fa-check-circle" /> Submitted on{" "}
+          {formatDate(data.assignment.mySubmission.submittedAt)}
+        </Success>
+      )}
+      {!data.assignment.mySubmission && !data.assignment.locked && (
+        <Failure>
+          <Cross className="fa fa-times-circle" /> Closed on{" "}
+          {formatDate(data.assignment.dateDue)}
+        </Failure>
+      )}
     </Box>
   );
 }
