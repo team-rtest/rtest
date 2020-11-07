@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 function ReviewTable({labels, data}){
+    console.log(data);
     return(
         <ReviewT>
         <ReviewThead>
         <Rtr>
-            {labels && labels.length && labels.map((l)=>{return(<Rth>{l}</Rth>);})}
+            {labels.map((l)=>{return(<Rth>{l}</Rth>);})}
         </Rtr>
         </ReviewThead>
             <ReviewTbody>
-            {data && data.length && data[0].map((a, i) => <Rtr>{data.map((d) => <Rtd>{d[i]}</Rtd>)}</Rtr>)}
+            {data[0].map((a, i) => <Rtr>{data.map((d) => <Rtd>{d[i]}</Rtd>)}</Rtr>)}
             </ReviewTbody>
         </ReviewT>
     );
