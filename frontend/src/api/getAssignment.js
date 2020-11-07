@@ -1,22 +1,24 @@
 import { gql } from "@apollo/client";
 
 export const getAssignments = gql`
-  query {
-    assignments {
-      name
-      _id
-      mySubmission {
-        student {
-          _id
-          username
-        }
-        grade
+query {
+  assignments {
+    name
+    _id
+    dateDue
+    mySubmission {
+      student {
+        _id
+        username
       }
-      submissions {
-        grade
-      }
+      submittedAt
+      grade
+    }
+    submissions {
+      grade
     }
   }
+}
 `;
 
 export const getAssignment = gql `

@@ -34,19 +34,39 @@ function AssignmentReview() {
           data.assignments.map((d) => (
             <Link
               to={{
-                pathname:
-                  "/professor/assignment/review/" +
-                  d._id +
-                  "/",
+                pathname: "/professor/assignment/review/" + d._id + "/",
               }}
             >
-              {d.name}
+             {d.name}
             </Link>
           )),
-          data.assignments.map((d) => d.mySubmission.grade),
-          data.assignments.map((d) => getMedian(getGradeList(d.submissions))),
-          data.assignments.map((d) => getMax(getGradeList(d.submissions))),
-          data.assignments.map((d) => getMin(getGradeList(d.submissions))),
+          data.assignments.map((d) => {
+            if (d.mySubmission == null) {
+              return null;
+            } else {
+              return d.mySubmission.grade;
+            }}),
+          data.assignments.map((d) => {
+            if (!d.submissions.length || !d.submissions) {
+              return null;
+            } else {
+              return [getMedian(getGradeList(d.submissions))];
+            }
+          }),
+          data.assignments.map((d) => {
+            if (!d.submissions.length || !d.submissions) {
+              return null;
+            } else {
+              return [getMax(getGradeList(d.submissions))];
+            }
+          }),
+          data.assignments.map((d) => {
+            if (!d.submissions.length || !d.submissions) {
+              return null;
+            } else {
+              return [getMin(getGradeList(d.submissions))];
+            }
+          }),
         ]}
       />
       <h1>Distribution</h1>
