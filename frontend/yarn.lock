@@ -3508,11 +3508,6 @@ cookie@0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
-cookie@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
-  integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
-
 copy-concurrently@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/copy-concurrently/-/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
@@ -6125,11 +6120,6 @@ is-negative-zero@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-negative-zero/-/is-negative-zero-2.0.0.tgz#9553b121b0fac28869da9ed459e20c7543788461"
   integrity sha1-lVOxIbD6wohp2p7UWeIMdUN4hGE=
 
-is-node@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/is-node/-/is-node-1.0.2.tgz#d7d002745ef7debbb7477e988956ab0a4fccb653"
-  integrity sha1-19ACdF733ru3R36YiVarCk/MtlM=
-
 is-number@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-3.0.0.tgz#24fd6201a4782cf50561c810276afc7d12d71195"
@@ -7220,17 +7210,17 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mathjs@^7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-7.5.1.tgz#eb125295310a99ddcaf6145c47b09aab36e48274"
-  integrity sha512-H2q/Dq0qxBLMw+G84SSXmGqo/znihuxviGgAQwAcyeFLwK2HksvSGNx4f3dllZF51bWOnu2op60VZxH2Sb51Pw==
+mathjs@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-8.0.0.tgz#b202398e84f392c1709dc744203284b6ff637fd8"
+  integrity sha512-vbuVLQWLwhD7D/BV479uS7csVu7ABLFt4MozWdCXyE0k9cNxFEmurkxU+y9e+ovwY0obhbWS7eVVASq1w2A/kg==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.1"
     escape-latex "^1.2.0"
     fraction.js "^4.0.12"
     javascript-natural-sort "^0.7.1"
-    seed-random "^2.2.0"
+    seedrandom "^3.0.5"
     tiny-emitter "^2.1.0"
     typed-function "^2.0.0"
 
@@ -9255,15 +9245,6 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
-react-cookie@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-1.0.5.tgz#234190bd55ddfea361444a89c873077ab6abf651"
-  integrity sha1-I0GQvVXd/qNhREqJyHMHerar9lE=
-  dependencies:
-    cookie "^0.3.1"
-    is-node "^1.0.2"
-    object-assign "^4.1.0"
-
 react-dev-utils@^11.0.0:
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.0.tgz#9fdb1b173f4ffc1f23fcf98465d93b16a860b73e"
@@ -9993,10 +9974,10 @@ schema-utils@^3.0.0:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-seed-random@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/seed-random/-/seed-random-2.2.0.tgz#2a9b19e250a817099231a5b99a4daf80b7fbed54"
-  integrity sha1-KpsZ4lCoFwmSMaW5mk2vgLf77VQ=
+seedrandom@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/seedrandom/-/seedrandom-3.0.5.tgz#54edc85c95222525b0c7a6f6b3543d8e0b3aa0a7"
+  integrity sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==
 
 select-hose@^2.0.0:
   version "2.0.0"
