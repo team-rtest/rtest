@@ -3,7 +3,7 @@ export function getMean(assignments) {
     let num = 0;
     let total = 0;
     assignments.map((assignment) => {
-        if (assignment.mySubmission != null) {
+        if (assignment.mySubmission != null && assignment.mySubmission.grade != null) {
             total += assignment.mySubmission.grade / assignment.maxGrade;
             num += 1;
         }
