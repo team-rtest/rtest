@@ -1,51 +1,52 @@
 import React from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
 
 import Course from "./Course";
+import { Loader } from "components";
+
+const query = gql`
+  query {
+    courses {
+      _id
+      name
+      code
+      semester
+      mySection {
+        number
+        instructor {
+          firstname
+          lastname
+        }
+      }
+      assignmentGroups{
+        name
+        tag
+        _id
+        grading {
+          policy
+          weight
+        }
+        assignments {
+          name
+          _id
+          dateDue
+          maxGrade
+          mySubmission {
+            submittedAt
+            grade
+          }
+        }
+      }
+    }
+  }
+`;
 
 function Courses({ selected, setSelected, assignments }) {
-  const courses = [
-    {
-      id: "CS470-001",
-      name: "Data Mining",
-      professor: "Davide Fossati",
-      numAssignments: 6,
-      numLate: 3,
-      grade: 58,
-      pinned: true,
-      theme: "primary",
-    },
-    {
-      id: "CS325-002",
-      name: "Artificial Intelligence",
-      professor: "Steven La Fleur",
-      numAssignments: 5,
-      numLate: 0,
-      grade: 83,
-      pinned: false,
-      theme: "succes",
-    },
-    {
-      id: "CS334-001",
-      name: "Machine Learning",
-      professor: "Joyce Ho",
-      numAssignments: 8,
-      numLate: 0,
-      grade: 97,
-      pinned: false,
-      theme: "danger",
-    },
-    {
-      id: "CS377-001",
-      name: "Database Systems",
-      professor: "Shun Yan Cheung",
-      numAssignments: 10,
-      numLate: 0,
-      grade: 77,
-      pinned: false,
-      theme: "warning",
-    },
-  ];
+  const { data, loading, error } = useQuery(query);
+  if (loading) {return <PageLoader />;}
+  if (error) {return <p>Error: {error.message}</p>;}
 
   return (
     <Dashboard>
@@ -58,6 +59,14 @@ function Courses({ selected, setSelected, assignments }) {
     </Dashboard>
   );
 }
+
+const PageLoader = styled(Loader)`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Dashboard = styled.div`
   min-height: calc(100vh - 69px);

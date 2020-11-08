@@ -29,6 +29,11 @@ export default {
   Course: {
     assignmentGroups: async (course) =>
       await AssignmentGroup.find({ _id: { $in: course.assignmentGroups } }),
+
+    mySection: async (course, __, { user }) =>
+      course.sections.find((element) =>
+        element.students.equals(user._id)
+      ),
   },
 
   Section: {
