@@ -4,7 +4,7 @@ import { gql, useMutation } from "@apollo/client";
 import useForm from "./utils/useForm";
 
 import SideForm from "./SideForm";
-import { Input, FileInput } from "components";
+import { Input, FileInput, Checkbox } from "components";
 
 const mutation = gql`
   mutation UpdateAssignment($id: ID!, $assignment: AssignmentInput!) {
@@ -14,19 +14,55 @@ const mutation = gql`
   }
 `;
 
+function formatDate(value) {
+  const padLeft = (value, digit, length) => {
+    value = value + ""; // convert to string
+    while (value.length < length) {
+      // keep padding until required length is met
+      value = digit + value; // pad with digit to the left
+    }
+    return value;
+  };
+
+  const epoch = new Date(value).getTime();
+  const date = new Date(substractDay(epoch));
+  const year = parseInt(date.getYear()) + 1900;
+  const month = padLeft(parseInt(date.getMonth()) + 1, "0", 2);
+  const day = padLeft(date.getDate(), "0", 2);
+
+  return `${year}-${month}-${day}`;
+}
+
+function addDay(epoch) {
+  const ONE_DAY = 86400000;
+  return epoch + ONE_DAY - 1;
+}
+
+function substractDay(epoch) {
+  const ONE_DAY = 86400000;
+  return epoch - ONE_DAY + 1;
+}
+
 function EditAssignment({ assignmentData, closeModal }) {
+  console.log(assignmentData);
   const id = assignmentData._id;
   const [update] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
-    data: assignmentData,
-    names: ["name", "maxGrade", "instructions"],
-    check: ["name", "maxGrade"],
+    data: { ...assignmentData, dateDue: formatDate(assignmentData.dateDue) },
+    names: ["name", "maxGrade", "dateDue", "optional", "locked", "instructions"],
+    check: ["name", "maxGrade", "dateDue"],
     onSubmit,
   });
 
   async function onSubmit() {
-    const { name, maxGrade } = inputs;
-    const assignment = { name, maxGrade };
+    const { name, maxGrade, dateDue, optional, locked } = inputs;
+    const assignment = {
+      name,
+      maxGrade,
+      dateDue: addDay(new Date(dateDue).getTime()),
+      optional,
+      locked,
+    };
     const variables = { id, assignment };
     return update({ variables }).then(() => closeModal());
   }
@@ -39,6 +75,22 @@ function EditAssignment({ assignmentData, closeModal }) {
       closeModal={closeModal}
       onSubmit={handleSubmit}
     >
+      <div>
+        <Checkbox
+          name="optional"
+          label="Optional (does not count for grade)"
+          value={inputs.optional}
+          error={errors.optional}
+          onChange={handleChange}
+        />
+        <Checkbox
+          name="locked"
+          label="Locked (student cannot view instructions)"
+          value={inputs.locked}
+          error={errors.locked}
+          onChange={handleChange}
+        />
+      </div>
       <Input
         name="name"
         label="Assignment Name"

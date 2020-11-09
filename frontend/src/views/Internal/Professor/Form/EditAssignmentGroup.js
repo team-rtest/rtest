@@ -67,12 +67,12 @@ function EditAssignmentGroup({ assignmentGroupData, closeModal }) {
         onChange={handleChange}
       />
       <InputRow>
-        <Input
+        <Select
           name="policy"
           label="Grading Policy"
           value={inputs.policy}
           error={errors.policy}
-          options
+          options={["Normal", "Drop 1", "Drop 2", "Drop 3", "Drop 4", "Drop 5"]}
           onChange={handleChange}
         />
         <Input

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { Input } from "components";
 import { AuthBox, AuthCard, AuthForm, Heading, AuthLink } from "./styles";
@@ -10,6 +11,7 @@ import { auth } from "api";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function Signup() {
+  const history = useHistory();
   const [inputs, setInputs] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({ username: null, password: null });
 
@@ -27,8 +29,10 @@ function Signup() {
     const noneError = !errors.username && !errors.password;
 
     if (noneEmpty && noneError) {
-      alert("form submitted successfully!");
-      auth.signup(inputs.username, inputs.password);
+      auth
+        .signup(inputs.username, inputs.password)
+        .then(() => history.push("/"))
+        .catch((error) => alert(error));
     }
   };
 
@@ -44,6 +48,7 @@ function Signup() {
           <Input
             name="username"
             type="username"
+            label="Username"
             value={inputs.username}
             error={errors.username}
             onChange={handleChange}
@@ -51,6 +56,7 @@ function Signup() {
           <Input
             name="password"
             type="password"
+            label="Password"
             value={inputs.password}
             error={errors.password}
             onChange={handleChange}

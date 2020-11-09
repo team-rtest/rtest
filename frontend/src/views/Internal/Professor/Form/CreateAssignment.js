@@ -15,17 +15,28 @@ const mutation = gql`
   }
 `;
 
+function addDay(epoch) {
+  const ONE_DAY = 86400000;
+  return epoch + ONE_DAY - 1;
+}
+
 function CreateAssignment({ assignmentGroupId, closeModal }) {
   const [create] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
-    names: ["name", "maxGrade", "instructions"],
-    check: ["name", "maxGrade"],
+    names: ["name", "maxGrade", "dateDue", "optional", "locked", "instructions"],
+    check: ["name", "maxGrade", "dateDue"],
     onSubmit,
   });
 
   async function onSubmit() {
-    const { name, maxGrade } = inputs;
-    const assignment = { name, maxGrade };
+    const { name, maxGrade, dateDue, optional, locked } = inputs;
+    const assignment = {
+      name,
+      maxGrade,
+      dateDue: addDay(new Date(dateDue).getTime()),
+      optional,
+      locked,
+    };
     const variables = { assignmentGroupId, assignment };
     console.log(variables);
     return create({ variables }).then(() => closeModal());
@@ -39,6 +50,22 @@ function CreateAssignment({ assignmentGroupId, closeModal }) {
       closeModal={closeModal}
       onSubmit={handleSubmit}
     >
+      <div>
+        <Checkbox
+          name="optional"
+          label="Optional (does not count for grade)"
+          value={inputs.optional}
+          error={errors.optional}
+          onChange={handleChange}
+        />
+        <Checkbox
+          name="locked"
+          label="Locked (student cannot view instructions)"
+          value={inputs.locked}
+          error={errors.locked}
+          onChange={handleChange}
+        />
+      </div>
       <Input
         name="name"
         label="Assignment Name"

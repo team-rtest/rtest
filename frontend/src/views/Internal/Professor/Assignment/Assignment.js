@@ -17,18 +17,9 @@ const query = gql`
       _id
       name
       maxGrade
+      dateDue
       optional
       locked
-      submissions {
-        _id
-        grade
-        submittedAt
-        student {
-          firstName
-          lastName
-          email
-        }
-      }
     }
   }
 `;

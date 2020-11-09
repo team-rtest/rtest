@@ -8,22 +8,24 @@ export default {
     course: async (_, { id }, context) =>
       await Course.findOne({
         _id: id,
-        "sections.students": context.user,
+        // "sections.students": context.user,
       }),
 
     courseTeaching: async (_, { id }, context) =>
       await Course.findOne({
         _id: id,
-        "sections.instructor": context.user,
+        // "sections.instructor": context.user,
       }),
 
     coursesTeaching: async (_, __, context) =>
       await Course.find({
-        "sections.instructor": context.user
+        // "sections.instructor": context.user,
       }),
 
     courses: async (_, __, context) =>
-      await Course.find({ "sections.students": context.user }),
+      await Course.find({
+        // "sections.students": context.user,
+      }),
   },
 
   Course: {
@@ -45,8 +47,7 @@ export default {
       return c;
     },
 
-    updateCourse: async (_, { id, course }) =>
-      await Course.findByIdAndUpdate(id, course),
+    updateCourse: async (_, { id, course }) => await Course.findByIdAndUpdate(id, course),
 
     deleteCourse: async (_, { id }) => await Course.findByIdAndDelete(id),
 

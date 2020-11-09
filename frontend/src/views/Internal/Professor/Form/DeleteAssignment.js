@@ -1,4 +1,6 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+
 import styled from "styled-components";
 
 import { gql, useMutation } from "@apollo/client";
@@ -13,10 +15,13 @@ const del = gql`
 `;
 
 function DeleteAssignment({ id, closeModal }) {
+  const history = useHistory();
   const [deleteAssignment] = useMutation(del);
 
   const handleSubmit = () => {
-    deleteAssignment({ variables: { id } }).catch(() => alert("Could not delete assignment"));
+    deleteAssignment({ variables: { id } })
+      .then(() => history.goBack())
+      .catch(() => alert("Could not delete assignment"));
     closeModal();
   };
 
