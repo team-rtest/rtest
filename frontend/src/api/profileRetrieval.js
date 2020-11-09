@@ -10,3 +10,9 @@ export const retrieveUserInfo = gql`
     }
   }
 `;
+
+export const getProfilePicUploadUrl = gql`
+  query {
+    getPropicUrl
+  }
+`;
