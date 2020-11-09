@@ -56,7 +56,7 @@ function Course({
         <Score>{getTotal(assignmentGroups)}%</Score>
       </Head>
       <Name>{name}</Name>
-      <Professor>{mySection.instructor.professor}</Professor>
+      <Professor>{mySection.instructor.firstname} {mySection.instructor.lastname}</Professor>
       <Next>
         <Value>Upcoming assignments: {getUpcoming(assignmentGroups)}</Value>
         <Value>Missing assignments: {getMissing(assignmentGroups)}</Value>

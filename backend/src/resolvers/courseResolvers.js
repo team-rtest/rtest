@@ -32,7 +32,7 @@ export default {
 
     mySection: async (course, __, { user }) =>
       course.sections.find((element) =>
-        element.students.equals(user._id)
+        element.students.includes(user._id)
       ),
   },
 
