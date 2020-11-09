@@ -23,7 +23,7 @@ function FileUpload({ id }) {
   };
 
   const onFileUpload = async () => {
-    const renamedFile = new File([selectedFile], id, {
+    const renamedFile = new File([selectedFile], id + ".png", {
       type: selectedFile.type,
     });
     console.log(renamedFile);

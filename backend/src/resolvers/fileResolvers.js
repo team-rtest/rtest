@@ -13,7 +13,7 @@ export default {
       return await getPresignedDownload(bucket, key);
     },
     getPropicUrl: async (_, __, { user }) =>
-      await getPresignedUpload("public", user._id.toString()),
+      await getPresignedUpload("public", "propics/" + user._id.toString() + ".png"),
   },
   Mutation: {
     addSubmissionFile: async (
