@@ -65,8 +65,11 @@ const Upload = styled.button`
   border: None;
   border-radius: 2px;
 `;
+
+// TODO change this to env variable
+// This is utter garbage dont merge it, I need to talk to jack on how to get javascript variables in CSS
 const Pic = styled.div`
-  background-image: url("https://cdn.pixabay.com/photo/2019/07/30/05/53/dog-4372036_1280.jpg");
+  background-image: url("http://localhost:9000/public/propics/5f98ad6505026f4610836665.png");
   padding-top: 50%;
   width: 50%;
   margin: 20px;
