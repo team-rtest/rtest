@@ -21,7 +21,7 @@ function App() {
     const isExternal = !isInternal;
 
     if (!loading) {
-      data
+      data && data.me
         ? isExternal && history.push("/professor/courses")
         : isInternal && history.push("/login");
     }
