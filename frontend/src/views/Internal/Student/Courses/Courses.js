@@ -52,7 +52,7 @@ function Courses({ selected, setSelected, assignments }) {
     <Dashboard>
       <Heading>Your Courses</Heading>
       <Grid>
-        {courses.map((course, index) => (
+        {data.map((course, index) => (
           <Course key={index} {...course} />
         ))}
       </Grid>

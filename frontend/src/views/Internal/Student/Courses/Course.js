@@ -39,13 +39,13 @@ function Course({
   name,
   code,
   semester,
-  mysection,
+  mySection,
   assignmentGroups,
 }) {
   // getNextAssignment
   const pinned = false;
   const STAR = <Star className={`fa${pinned ? "s" : "r"} fa-star`} />;
-  const PATH = `/course/${id.toLowerCase()}/summary`;
+  const PATH = `/course/${code}/summary`;
 
   return (
     <Box className="card">
