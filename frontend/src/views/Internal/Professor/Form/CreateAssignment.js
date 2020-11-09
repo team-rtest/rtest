@@ -34,11 +34,11 @@ function CreateAssignment({ assignmentGroupId, closeModal }) {
       name,
       maxGrade,
       dateDue: addDay(new Date(dateDue).getTime()),
-      optional,
-      locked,
+      optional: !!optional,
+      locked: !!locked,
     };
+    console.log(assignment);
     const variables = { assignmentGroupId, assignment };
-    console.log(variables);
     return create({ variables }).then(() => closeModal());
   }
 

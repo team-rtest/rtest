@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Card } from "components";
 
 function formatDate(value) {
-  const date = new Date(value);
+  const date = new Date(value.split("Z")[0]);
   const year = parseInt(date.getYear()) + 1900;
   const month = parseInt(date.getMonth());
   const day = date.getDate();

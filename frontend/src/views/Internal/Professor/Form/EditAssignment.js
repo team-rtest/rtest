@@ -44,7 +44,6 @@ function substractDay(epoch) {
 }
 
 function EditAssignment({ assignmentData, closeModal }) {
-  console.log(assignmentData);
   const id = assignmentData._id;
   const [update] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
@@ -60,9 +59,10 @@ function EditAssignment({ assignmentData, closeModal }) {
       name,
       maxGrade,
       dateDue: addDay(new Date(dateDue).getTime()),
-      optional,
-      locked,
+      optional: !!optional,
+      locked: !!locked,
     };
+    console.log(assignment);
     const variables = { id, assignment };
     return update({ variables }).then(() => closeModal());
   }
