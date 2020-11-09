@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ProfileInfo from "./ProfileInfo";
 import { retrieveUserInfo } from "../../../api/profileRetrieval";
 import { useQuery } from "@apollo/client";
+import FileUpload from "./FileUpload";
 
 function Profile() {
   const { loading, error, data } = useQuery(retrieveUserInfo);
@@ -13,11 +14,13 @@ function Profile() {
   if (error) return `Error! ${error.message}`;
 
   const userInfo = {
+    id: data.me._id,
     fname: data.me.firstName,
     lname: data.me.lastName,
     email: data.me.email,
     createdOn: data.me.createdAt,
   };
+
   return (
     <div class="container">
       <Box>
@@ -31,9 +34,7 @@ function Profile() {
             <div class="row justify-content-center">
               <Pic />
             </div>
-            <div class="row justify-content-center">
-              <Upload>Upload</Upload>
-            </div>
+            <FileUpload {...userInfo}/>
           </div>
           <div class="col-8">
             <ProfileInfo {...userInfo} />
