@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { Card } from "components";
 
 function Details({ maxGrade, dueDate, optional, locked }) {
+  const handleFileView = () => {
+    // TODO: Instructions File - Open in External View (Another tab)
+  };
+
   return (
     <Box>
       <Info>
@@ -18,7 +22,7 @@ function Details({ maxGrade, dueDate, optional, locked }) {
 
       <Info>
         <Label>Instructions File</Label>
-        <File>CS334_HW1.pdf</File>
+        <File onClick={handleFileView}>CS334_HW1.pdf</File>
       </Info>
     </Box>
   );

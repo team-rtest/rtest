@@ -20,15 +20,23 @@ function EditCourse({ courseData, closeModal }) {
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
     data: courseData,
     names: ["name", "code", "semester", "syllabus"],
-    check: ["name", "code", "semester"],
+    check: ["name", "code", "semester", "syllabus"],
     onSubmit,
   });
+
+  const handleFileUpload = () => {
+    const file = inputs.syllabus.files[0];
+    // TODO: Upload Syllabus File
+  };
 
   async function onSubmit() {
     const { name, code, semester } = inputs;
     const course = { name, code, semester };
     const variables = { id, course };
-    return update({ variables }).then(() => closeModal());
+    return update({ variables }).then(() => {
+      handleFileUpload();
+      closeModal();
+    });
   }
 
   return (

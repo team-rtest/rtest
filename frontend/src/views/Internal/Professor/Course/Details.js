@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { Card } from "components";
 
 function Details({ semester, code, syllabus }) {
+  const handleFileView = () => {
+    // TODO: Syllabus File - Open in External View (Another tab)
+  };
+
   return (
     <Box>
       <Info>
@@ -18,7 +22,7 @@ function Details({ semester, code, syllabus }) {
 
       <Info>
         <Label>Syllabus</Label>
-        <File>syllabus.pdf</File>
+        <File onClick={handleFileView}>syllabus.pdf</File>
       </Info>
     </Box>
   );

@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { gql, useQuery } from "@apollo/client";
-import { Upload } from "components";
 import { useParams } from "react-router-dom";
 
 function formatDate(value) {
@@ -45,6 +44,7 @@ const assignmentDetails = gql`
 
 function AssignmentPage() {
   const { id } = useParams();
+  const [submission, setSubmission] = useState();
 
   const { loading, error, data } = useQuery(assignmentDetails, {
     variables: { id },
@@ -54,11 +54,24 @@ function AssignmentPage() {
 
   if (error) return `Error! ${error.message}`;
 
+  const handleFileDownload = () => {
+    // TODO: Instructions File - Download file to system
+  };
+
+  const handleFileUpload = () => {
+    const file = submission;
+    // TODO: Submission File - Upload submission file
+  };
+
+  const handleFileChange = (file) => {
+    setSubmission(file);
+  };
+
   return (
     <Box>
       <Heading>{data.assignment.name}</Heading>
       <DateFormat>{formatDate(data.assignment.dateDue)}</DateFormat>
-      <File>
+      <File onClick={handleFileDownload}>
         <FileName>CS334_HW1.pdf</FileName>
         <FileIcon className="fa fa-download"></FileIcon>
       </File>
@@ -67,21 +80,27 @@ function AssignmentPage() {
       <List></List>
       <Text></Text>
       <FileUpload>
-        <Upload />
-        <button className="btn btn-upload text-white" onClick={() => {}}>
+        <FileInput className="files">
+          <input
+            type="file"
+            name="file"
+            className="form-control"
+            onChange={(e) => handleFileChange(e.target.files[0])}
+          />
+        </FileInput>
+        <button className="btn btn-upload text-white" onClick={handleFileUpload}>
           Submit File
         </button>
       </FileUpload>
       {data.assignment.mySubmission && (
         <Success>
-          <Tick className="fa fa-check-circle" /> Submitted on{" "}
+          <Tick className="fa fa-check-circle" /> Submitted on
           {formatDate(data.assignment.mySubmission.submittedAt)}
         </Success>
       )}
       {!data.assignment.mySubmission && !data.assignment.locked && (
         <Failure>
-          <Cross className="fa fa-times-circle" /> Closed on{" "}
-          {formatDate(data.assignment.dateDue)}
+          <Cross className="fa fa-times-circle" /> Closed on {formatDate(data.assignment.dateDue)}
         </Failure>
       )}
     </Box>
@@ -192,6 +211,10 @@ const Failure = styled.div`
 const Tick = styled.span``;
 
 const Cross = styled.span``;
+
+const FileInput = styled.div`
+  margin-bottom: 0.7rem;
+`;
 
 export default AssignmentPage;
 

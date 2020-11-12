@@ -19,16 +19,24 @@ function EditAssignment({ assignmentData, closeModal }) {
   const [update] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
     data: assignmentData,
-    names: ["name", "maxGrade", "instructions"],
-    check: ["name", "maxGrade"],
+    names: ["name", "maxGrade", "dateDue", "instructions"],
+    check: ["name", "maxGrade", "dateDue", "instructions"],
     onSubmit,
   });
+
+  const handleFileUpload = () => {
+    const file = inputs.instructions.files[0];
+    // TODO: Upload Instructions File
+  };
 
   async function onSubmit() {
     const { name, maxGrade } = inputs;
     const assignment = { name, maxGrade };
     const variables = { id, assignment };
-    return update({ variables }).then(() => closeModal());
+    return update({ variables }).then(() => {
+      handleFileUpload();
+      closeModal();
+    });
   }
 
   return (

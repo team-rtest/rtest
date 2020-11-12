@@ -20,7 +20,7 @@ function CreateCourse({ closeModal }) {
   const [create, { data }] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
     names: ["name", "code", "semester", "syllabus"],
-    check: ["name", "code", "semester"],
+    check: ["name", "code", "semester", "syllabus"],
     onSubmit,
   });
 
@@ -28,11 +28,19 @@ function CreateCourse({ closeModal }) {
     data && history.push(`/professor/course/${data.createCourse._id}`);
   }, [data, history]);
 
+  const handleFileUpload = () => {
+    const file = inputs.syllabus.files[0];
+    // TODO: Upload Syllabus File
+  };
+
   async function onSubmit() {
     const { name, code, semester } = inputs;
     const course = { name, code, semester };
     const variables = { course };
-    return create({ variables }).then(() => closeModal());
+    return create({ variables }).then(() => {
+      handleFileUpload();
+      closeModal();
+    });
   }
 
   return (

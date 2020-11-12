@@ -14,6 +14,10 @@ function Submission({ closeModal }) {
     setInputs({ ...inputs, [name]: value });
   };
 
+  const handleFileDownload = () => {
+    // TODO: Submission File - Download file to system
+  };
+
   return (
     <Overlay>
       <SubmissionCard>
@@ -23,7 +27,7 @@ function Submission({ closeModal }) {
         <Body>
           <SubmissionFile>
             <Label>Submission File</Label>
-            <File>
+            <File onClick={handleFileDownload}>
               <FileName>CS470_HW1.pdf</FileName>
               <FileIcon className="fa fa-download"></FileIcon>
             </File>

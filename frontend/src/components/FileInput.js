@@ -9,7 +9,7 @@ function FileInput({ name, type, label, value, tip, error, onChange, className, 
         type="file"
         id={name}
         value={value}
-        onChange={(event) => onChange(name, event.target.value)}
+        onChange={(event) => onChange(name, event.target)}
         className={`form-control ${className} ${error && "is-invalid"}`}
         {...rest}
       />

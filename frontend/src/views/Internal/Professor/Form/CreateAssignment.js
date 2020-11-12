@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import SideForm from "./SideForm";
-import { Input, FileInput, Checkbox } from "components";
+import { Input, FileInput } from "components";
 import useForm from "./utils/useForm";
 
 import { gql, useMutation } from "@apollo/client";
@@ -18,17 +18,24 @@ const mutation = gql`
 function CreateAssignment({ assignmentGroupId, closeModal }) {
   const [create] = useMutation(mutation);
   const { inputs, errors, loading, handleChange, handleSubmit } = useForm({
-    names: ["name", "maxGrade", "instructions"],
-    check: ["name", "maxGrade"],
+    names: ["name", "maxGrade", "dateDue", "instructions"],
+    check: ["name", "maxGrade", "dateDue", "instructions"],
     onSubmit,
   });
+
+  const handleFileUpload = () => {
+    const file = inputs.instructions.files[0];
+    // TODO: Upload Instructions File
+  };
 
   async function onSubmit() {
     const { name, maxGrade } = inputs;
     const assignment = { name, maxGrade };
     const variables = { assignmentGroupId, assignment };
-    console.log(variables);
-    return create({ variables }).then(() => closeModal());
+    return create({ variables }).then(() => {
+      handleFileUpload();
+      closeModal();
+    });
   }
 
   return (
