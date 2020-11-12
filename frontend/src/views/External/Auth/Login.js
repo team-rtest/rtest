@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
 import { Input } from "components";
 import { AuthBox, AuthCard, AuthForm, Heading, AuthLink } from "./styles";
@@ -11,7 +10,6 @@ import { auth } from "api";
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 function Login() {
-  const history = useHistory();
   const [inputs, setInputs] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({ username: null, password: null });
 
@@ -29,7 +27,7 @@ function Login() {
     if (noneEmpty && noneError) {
       auth
         .login(inputs.username, inputs.password)
-        .then(() => history.push("/"))
+        .then(() => window.location.reload())
         .catch((error) => alert(error));
     }
   };

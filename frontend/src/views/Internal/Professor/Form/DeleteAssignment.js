@@ -20,9 +20,11 @@ function DeleteAssignment({ id, closeModal }) {
 
   const handleSubmit = () => {
     deleteAssignment({ variables: { id } })
-      .then(() => history.goBack())
+      .then(() => {
+        history.goBack();
+        window.location.reload();
+      })
       .catch(() => alert("Could not delete assignment"));
-    closeModal();
   };
 
   return (

@@ -39,7 +39,7 @@ function CreateAssignment({ assignmentGroupId, closeModal }) {
     };
     console.log(assignment);
     const variables = { assignmentGroupId, assignment };
-    return create({ variables }).then(() => closeModal());
+    return create({ variables });
   }
 
   return (

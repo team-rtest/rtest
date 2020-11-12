@@ -64,7 +64,7 @@ function EditAssignment({ assignmentData, closeModal }) {
     };
     console.log(assignment);
     const variables = { id, assignment };
-    return update({ variables }).then(() => closeModal());
+    return update({ variables });
   }
 
   return (

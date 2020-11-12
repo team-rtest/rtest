@@ -40,7 +40,7 @@ function EditAssignmentGroup({ assignmentGroupData, closeModal }) {
       },
     };
     const variables = { id, assignmentGroup };
-    return update({ variables }).then(() => closeModal());
+    return update({ variables });
   }
 
   return (

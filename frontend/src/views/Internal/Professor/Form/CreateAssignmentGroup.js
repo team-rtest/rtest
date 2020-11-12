@@ -33,7 +33,7 @@ function CreateAssignmentGroup({ courseId, closeModal }) {
       },
     };
     const variables = { courseId, assignmentGroup };
-    return create({ variables }).then(() => closeModal());
+    return create({ variables });
   }
 
   return (
