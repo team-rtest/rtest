@@ -36,7 +36,7 @@ function Course({
         <Value>Lab 2: Apriori Algorithm</Value>
         <Date>September 18th 2020</Date>
       </Next>
-      <Button className="btn btn-upload" to="/student/course/cs470">
+      <Button className="btn btn-upload" to="/student/assignment/">
         Explore
       </Button>
     </Box>

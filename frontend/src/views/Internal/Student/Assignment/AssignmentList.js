@@ -6,11 +6,10 @@ import AssignmentType from "./AssignmentType";
 function AssignmentList({ assignments, selected, setSelected }) {
   return (
     <TypeList>
-      {assignments.map((type) => (
+      {assignments.assignmentGroups.map((type) => (
         <AssignmentType
+          key = {type._id}
           type={type}
-          selected={selected}
-          setSelected={setSelected}
         />
       ))}
     </TypeList>
