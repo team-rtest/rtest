@@ -14,9 +14,6 @@ import ProfessorSubmission from "views/Internal/Professor/Submission/Submission"
 import StudentAssignment from "views/Internal/Student/Assignment/Assignment";
 import StudentCourses from "views/Internal/Student/Courses/Courses";
 
-import AssignmentReview from "views/Internal/Professor/Review/AssignmentReview";
-import AssignmentReviewDetails from "views/Internal/Professor/Review/AssignmentReviewDetails";
-
 const external = [
   {
     path: "/signup",
@@ -50,14 +47,6 @@ const internal = [
     page: <ProfessorDashboard />,
   },
   {
-    path: "/professor/assignment/review",
-    page: <AssignmentReview />,
-  },
-  {
-    path: "/professor/assignment/review/:assignmentId",
-    page: <AssignmentReviewDetails />,
-  },
-  {
     path: "/professor/course/:id",
     page: <ProfessorCourse />,
   },
@@ -68,10 +57,6 @@ const internal = [
   {
     path: "/professor/submission/:id",
     page: <ProfessorSubmission />,
-  },
-  {
-    path: "/professor/review",
-    page: <AssignmentReview />,
   },
   {
     path: "/student/dashboard",

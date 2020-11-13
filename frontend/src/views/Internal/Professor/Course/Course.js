@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
+import Review from "views/Internal/Professor/Course/Review/Review";
 import EditCourse from "views/Internal/Professor/Form/EditCourse";
 import DeleteCourse from "views/Internal/Professor/Form/DeleteCourse";
 
@@ -55,6 +56,7 @@ function Course() {
     Details: <Details {...course} />,
     Assignments: <Assignments {...course} />,
     Students: <Students {...course} />,
+    Review: <Review {...course} />,
   };
 
   if (!course) return <div>Course does not exist</div>;

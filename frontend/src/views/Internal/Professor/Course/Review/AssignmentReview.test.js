@@ -1,4 +1,4 @@
-import { getGradeList, getMedian } from "./AssignmentReviewHelper";
+import { getGradeList, getMedian } from "../../Review/AssignmentReviewHelper";
 const submissions = [
   {
     student: {
@@ -38,5 +38,5 @@ test("should return the median of the list of grades", () => {
   expect(getMedian(getGradeList(submissions))).toStrictEqual(91);
 });
 test("should return the median of the given list", () => {
-  expect(getMedian([1,2,3,4,5,6,7,8,9,10,11,12])).toEqual(6.5);
+  expect(getMedian([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])).toEqual(6.5);
 });
