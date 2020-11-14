@@ -6,7 +6,7 @@ import AssignmentPage from "./AssignmentPage";
 
 import { Loader } from "components";
 
-const getAssignments = gql `
+const getCourse = gql `
 query FetchCourse($id: ID!) {
   course(id: $id){
     assignmentGroups{
@@ -31,16 +31,18 @@ query FetchCourse($id: ID!) {
 }
 `;
 function Assignment({ ...rest }) {
-  const { data, loading, error } = useQuery(getAssignments,{ variables: { id: "5f9dd8838a6e0e08b427f0e1" } });
+  const { data, loading, error } = useQuery(getCourse,{ variables: { id:"5f9dd8838a6e0e08b427f0e1"} });
+  
+  console.log(data);
   if (loading) {return <PageLoader />;}
   if (error) {return <p>Error: {error.message}</p>;}
 
   return (
     <Box>
       <AssignmentList
-        assignments={data.course}
+        data={data}
       />
-      <AssignmentPage/>
+      <AssignmentPage />
     </Box>
   );
 }
