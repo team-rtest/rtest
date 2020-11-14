@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function CourseCard({ _id, name, semester, color, pinned }) {
   return (
-    <NavLink to={`/professor/course/${_id}`}>
+    <NavLink to={`/professor/course/${_id}/details`}>
       <Box color={color}>
         <Head>
           <Name>{name}</Name>
