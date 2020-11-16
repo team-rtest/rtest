@@ -58,7 +58,7 @@ function Review() {
     <div class="container">
       <h1>Assignment Review</h1>
       <ReviewTable
-        labels={["Assignment Name", "Your Grade", "Median Grade", "Max Grade", "Min Grade"]}
+        labels={["Assignment Name","Median Grade", "Max Grade", "Min Grade"]}
         data={[
           data.assignments.map((d) => (
             <Link
@@ -69,13 +69,13 @@ function Review() {
               {d.name}
             </Link>
           )),
-          data.assignments.map((d) => {
-            if (d.mySubmission == null) {
-              return null;
-            } else {
-              return d.mySubmission.grade;
-            }
-          }),
+          // data.assignments.map((d) => {
+          //   if (d.mySubmission == null) {
+          //     return null;
+          //   } else {
+          //     return d.mySubmission.grade;
+          //   }
+          // }),
           data.assignments.map((d) => {
             if (!d.submissions.length || !d.submissions) {
               return null;
