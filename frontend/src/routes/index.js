@@ -62,7 +62,7 @@ const internal = [
     page: <ProfessorCourse />,
   },
   {
-    path: "/professor/assignment/:id",
+    path: "/professor/assignment/:id/:tab",
     page: <ProfessorAssignment />,
   },
   {

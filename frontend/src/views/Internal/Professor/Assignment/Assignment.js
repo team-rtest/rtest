@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
 import EditAssignmentModal from "views/Internal/Professor/Form/EditAssignment";
@@ -25,11 +25,11 @@ const query = gql`
 `;
 
 function AssignmentPage() {
-  const { id } = useParams();
+  const { id, tab } = useParams();
   const { data, loading, error } = useQuery(query, { variables: { id } });
 
-  const tabs = ["Details", "Submissions", "Review"];
-  const [selected, setSelected] = useState("Details");
+  const tabs = ["details", "submissions", "review"];
+
   const [editAssignmentModal, setEditAssignmentModal] = useState(false);
   const [deleteAssignmentModal, setDeleteAssignmentModal] = useState(false);
 
@@ -75,13 +75,13 @@ function AssignmentPage() {
         </Buttons>
       </Header>
       <Tabs>
-        {tabs.map((tab) => (
-          <Tab active={tab === selected} onClick={() => setSelected(tab)}>
-            {tab}
+        {tabs.map((t) => (
+          <Tab active={t === tab} to={`/professor/assignment/${id}/${t}`}>
+            {t.charAt(0).toUpperCase() + t.slice(1)}
           </Tab>
         ))}
       </Tabs>
-      <Content>{content[selected]}</Content>
+      <Content>{content[tab]}</Content>
     </Box>
   );
 }
@@ -161,7 +161,7 @@ const PageLoader = styled(Loader)`
   align-items: center;
 `;
 
-const Tab = styled.button`
+const Tab = styled(Link)`
   all: unset;
   cursor: pointer;
   padding: 10px 15px;
@@ -172,11 +172,21 @@ const Tab = styled.button`
 
   font-weight: 500;
 
+  &:hover {
+    color: grey;
+    text-decoration: none;
+  }
+
   ${(props) =>
     props.active &&
     `
     color: #6173db;
     background: rgba(97, 115, 219, 0.2);
+
+    &:hover {
+      color: #6173db;
+      text-decoration: none;
+    }
   `}
 `;
 
