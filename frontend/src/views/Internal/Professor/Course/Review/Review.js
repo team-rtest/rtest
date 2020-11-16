@@ -1,12 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-import { getGradeList, getMedian, getMax, getMin } from "./AssignmentReviewHelper";
+import { getGradeList, getMedian, getMax, getMin, getMean } from "./AssignmentReviewHelper";
 import ReviewTable from "./ReviewTable.js";
 import GraphSpace from "./GraphSpace";
 import { getAssignments } from "../../../../../api/getAssignment";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
+import  Chart  from "chart.js";
+let chart1
 
+class BarGraphSpace extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    const node = this.node;
+    const { data, labels } = this.props;
+    if (typeof chart1 !== "undefined") chart1.destroy();
+    chart1 = new Chart(node, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Average",
+            data: data,
+            backgroundColor: "rgba(97, 115, 219, 0.5)",
+            borderColor: "rgba(52, 63, 125, 0.75)",
+            borderWidth: 2,
+            barPercentage: 0.75,
+            maxBarThickness: 200,
+          },
+        ],
+      },
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <canvas
+          style={{ width: 800, height: 300 }}
+          ref={(node) => (this.node = node)}
+        />
+      </div>
+    );
+  }
+}
 function Review() {
   const { loading, error, data } = useQuery(getAssignments);
 
@@ -60,6 +100,12 @@ function Review() {
         ]}
       />
       <h1>Distribution</h1>
+      <GraphStyle>
+      <BarGraphSpace
+      data = {data.assignments.map((a) => getMean(getGradeList(a.submissions)))}
+      labels={data.assignments.map((a) => a.name)}
+      />
+      </GraphStyle>
       <GraphStyle>
         <GraphSpace
           data={data.assignments.map((a) => getGradeList(a.submissions))}
