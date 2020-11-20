@@ -170,6 +170,7 @@ type Query {
   assignmentGroups: [AssignmentGroup]
 
   test(assignmentId: ID!): Submission
+  getPropicUrl: String
 }
 
 type Mutation {
