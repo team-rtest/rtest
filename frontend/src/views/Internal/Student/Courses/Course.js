@@ -3,38 +3,63 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 import { Card } from "components";
+import { getTotal } from "./getGrade.js";
+
+function getUpcoming(assignmentGroups){
+  let num = 0;
+    assignmentGroups.map((type) => {
+      type.assignments.map((assignment) => {
+        if (assignment.mySubmission == null) {
+          if(Date.now() <= new Date(assignment.dueDate)){
+            num += 1;
+          }
+        }
+      });
+    });
+    return num;
+}
+
+function getMissing(assignmentGroups){
+  let num = 0;
+    assignmentGroups.map((type) => {
+      type.assignments.map((assignment) => {
+        if (assignment.mySubmission == null) {
+          if(Date.now() > new Date(assignment.dueDate)){
+            num += 1;
+          }
+        }
+      });
+    });
+    return num;
+}
+
 
 function Course({
-  id,
-  number,
+  _id,
   name,
-  grade,
-  professor,
-  numAssignments,
-  numLate,
-  pinned,
+  code,
+  semester,
+  mySection,
+  assignmentGroups,
 }) {
-  // getNumAssignments
-  // getNumAssignmentsLate
-  // getOverallGrade
   // getNextAssignment
-
+  const pinned = false;
   const STAR = <Star className={`fa${pinned ? "s" : "r"} fa-star`} />;
-  const PATH = `/course/${id.toLowerCase()}/summary`;
+  const PATH = `/course/${code}/summary`;
 
   return (
     <Box className="card">
       <Head>
         <Info>
-          {STAR} {id.split("-")[0]}
+          {STAR} {code}
         </Info>
-        <Score>{grade}%</Score>
+        <Score>{getTotal(assignmentGroups)}%</Score>
       </Head>
       <Name>{name}</Name>
-      <Professor>{professor}</Professor>
+      <Professor>{mySection.instructor.firstname} {mySection.instructor.lastname}</Professor>
       <Next>
-        <Value>Lab 2: Apriori Algorithm</Value>
-        <Date>September 18th 2020</Date>
+        <Value>Upcoming assignments: {getUpcoming(assignmentGroups)}</Value>
+        <Value>Missing assignments: {getMissing(assignmentGroups)}</Value>
       </Next>
       <Button className="btn btn-upload" to="/student/assignment/">
         Explore
