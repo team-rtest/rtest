@@ -14,7 +14,7 @@ function Header({ ...rest }) {
         <NavLink to="">
           <Icon className="fa fa-bell" /> Notifications
         </NavLink>
-        <NavLink to="">
+        <NavLink to="/profile">
           <Icon className="fa fa-user" /> Account
         </NavLink>
         <NavLink to="">

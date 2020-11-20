@@ -19,18 +19,23 @@ export default {
 
     coursesTeaching: async (_, __, context) =>
       await Course.find({
-        // "sections.instructor": context.user
+        "sections.instructor": context.user,
       }),
 
     courses: async (_, __, context) =>
       await Course.find({
-        // "sections.students": context.user
+        "sections.students": context.user,
       }),
   },
 
   Course: {
     assignmentGroups: async (course) =>
       await AssignmentGroup.find({ _id: { $in: course.assignmentGroups } }),
+
+    mySection: async (course, __, { user }) =>
+      course.sections.find((element) =>
+        element.students.includes(user._id)
+      ),
   },
 
   Section: {

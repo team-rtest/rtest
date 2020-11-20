@@ -47,7 +47,15 @@ const internal = [
     page: <ProfessorDashboard />,
   },
   {
-    path: "/professor/course/:id",
+    path: "/professor/assignment/review",
+    page: <AssignmentReview />,
+  },
+  {
+    path: "/professor/assignment/review/:assignmentId",
+    page: <AssignmentReviewDetails />,
+  },
+  {
+    path: "/professor/course/:id/:tab",
     page: <ProfessorCourse />,
   },
   {

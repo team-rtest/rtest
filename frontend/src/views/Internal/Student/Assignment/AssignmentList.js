@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 import AssignmentType from "./AssignmentType";
 
-function AssignmentList({ assignments, selected, setSelected }) {
+function AssignmentList({ data }) {
+  console.log(data);
   return (
     <TypeList>
-      {assignments.assignmentGroups.map((type) => (
+      {data.course.assignmentGroups.map((type) => (
         <AssignmentType
           key = {type._id}
           type={type}

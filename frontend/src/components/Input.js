@@ -29,6 +29,7 @@ function Input({ name, type, label, value, tip, error, onChange, className, ...r
         type={type}
         id={name}
         value={value}
+        autoComplete="off"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         onChange={handleChange}
