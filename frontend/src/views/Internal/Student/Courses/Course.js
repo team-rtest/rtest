@@ -56,7 +56,7 @@ function Course({
         <Score>{getTotal(assignmentGroups)}%</Score>
       </Head>
       <Name>{name}</Name>
-      <Professor>{mySection.instructor.firstname} {mySection.instructor.lastname}</Professor>
+      <Professor>{mySection.instructor && mySection.instructor.firstName} {mySection.instructor && mySection.instructor.lastName}</Professor>
       <Next>
         <Value>Upcoming assignments: {getUpcoming(assignmentGroups)}</Value>
         <Value>Missing assignments: {getMissing(assignmentGroups)}</Value>
@@ -165,7 +165,7 @@ const Value = styled.h5`
   margin-bottom: 4px;
 `;
 
-const Date = styled.div`
+const DateFormat = styled.div`
   color: #6173db;
   font-size: 0.8rem;
   font-weight: 500;
