@@ -58,7 +58,7 @@ const internal = [
     page: <AssignmentReviewDetails />,
   },
   {
-    path: "/professor/course/:id",
+    path: "/professor/course/:id/:tab",
     page: <ProfessorCourse />,
   },
   {

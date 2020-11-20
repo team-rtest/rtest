@@ -17,18 +17,9 @@ const query = gql`
       _id
       name
       maxGrade
+      dateDue
       optional
       locked
-      submissions {
-        _id
-        grade
-        submittedAt
-        student {
-          firstName
-          lastName
-          email
-        }
-      }
     }
   }
 `;
@@ -53,6 +44,8 @@ function AssignmentPage() {
   };
 
   if (!assignment) return <div>Assignment does not exist</div>;
+
+  console.log(data);
 
   return (
     <Box>

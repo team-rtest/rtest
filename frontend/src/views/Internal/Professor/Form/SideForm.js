@@ -9,16 +9,20 @@ function SideForm({ title, children, loading, button, onSubmit, closeModal }) {
     return () => (document.body.style.overflow = "");
   }, []);
 
+  const handleSubmit = () => {
+    onSubmit().then(() => window.location.reload());
+  };
+
   return (
     <Overlay>
-      <Box handleSubmit={onSubmit}>
+      <Box handleSubmit={handleSubmit}>
         <Heading>{title}</Heading>
         <Body>{children}</Body>
         <Foot>
           <Button disabled={loading} className="btn btn-secondary" onClick={closeModal}>
             Close
           </Button>
-          <Button disabled={loading} className="btn btn-upload" onClick={onSubmit}>
+          <Button disabled={loading} className="btn btn-upload" onClick={handleSubmit}>
             {button}
           </Button>
         </Foot>

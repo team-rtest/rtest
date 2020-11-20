@@ -16,10 +16,11 @@ function DeleteAssignmentGroup({ id, closeModal }) {
   const [deleteAssignmentGroup] = useMutation(del);
 
   const handleSubmit = () => {
-    deleteAssignmentGroup({ variables: { id } }).catch(() =>
-      alert("Could not delete assignment group")
-    );
-    closeModal();
+    deleteAssignmentGroup({ variables: { id } })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(() => alert("Could not delete assignment group"));
   };
 
   return (

@@ -25,8 +25,10 @@ function Login() {
     const noneError = !errors.password;
 
     if (noneEmpty && noneError) {
-      alert("form submitted successfully!");
-      auth.login(inputs.username, inputs.password);
+      auth
+        .login(inputs.username, inputs.password)
+        .then(() => window.location.reload())
+        .catch((error) => alert(error));
     }
   };
 
@@ -42,6 +44,7 @@ function Login() {
           <Input
             name="username"
             type="username"
+            label="Username"
             value={inputs.username}
             error={errors.username}
             onChange={handleChange}
@@ -49,6 +52,7 @@ function Login() {
           <Input
             name="password"
             type="password"
+            label="Password"
             value={inputs.password}
             error={errors.password}
             onChange={handleChange}
