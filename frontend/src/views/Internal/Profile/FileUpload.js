@@ -26,11 +26,9 @@ function FileUpload({ id }) {
     const renamedFile = new File([selectedFile], id + ".png", {
       type: selectedFile.type,
     });
-    console.log(renamedFile);
     await axios.put(data.getPropicUrl, renamedFile, {
       headers: { "Content-Type": "" },
     });
-    console.debug("File uploaded successfully");
   };
 
   return (
