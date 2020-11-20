@@ -10,7 +10,7 @@ function getUpcoming(assignmentGroups){
     assignmentGroups.map((type) => {
       type.assignments.map((assignment) => {
         if (assignment.mySubmission == null) {
-          if(Date.now() <= new Date(assignment.dueDate)){
+          if(Date.now() <= new Date(assignment.dateDue)){
             num += 1;
           }
         }
@@ -24,7 +24,7 @@ function getMissing(assignmentGroups){
     assignmentGroups.map((type) => {
       type.assignments.map((assignment) => {
         if (assignment.mySubmission == null) {
-          if(Date.now() > new Date(assignment.dueDate)){
+          if(Date.now() > new Date(assignment.dateDue)){
             num += 1;
           }
         }
@@ -61,7 +61,7 @@ function Course({
         <Value>Upcoming assignments: {getUpcoming(assignmentGroups)}</Value>
         <Value>Missing assignments: {getMissing(assignmentGroups)}</Value>
       </Next>
-      <Button className="btn btn-upload" to="/student/assignment/">
+      <Button className="btn btn-upload" to={"/student/"+_id+"/assignment/"}>
         Explore
       </Button>
     </Box>
