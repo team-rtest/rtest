@@ -10,7 +10,7 @@ function getUpcoming(assignmentGroups){
     assignmentGroups.map((type) => {
       type.assignments.map((assignment) => {
         if (assignment.mySubmission == null) {
-          if(Date.now() <= new Date(assignment.dueDate)){
+          if(Date.now() <= new Date(assignment.dateDue)){
             num += 1;
           }
         }
@@ -24,7 +24,7 @@ function getMissing(assignmentGroups){
     assignmentGroups.map((type) => {
       type.assignments.map((assignment) => {
         if (assignment.mySubmission == null) {
-          if(Date.now() > new Date(assignment.dueDate)){
+          if(Date.now() > new Date(assignment.dateDue)){
             num += 1;
           }
         }
@@ -56,12 +56,12 @@ function Course({
         <Score>{getTotal(assignmentGroups)}%</Score>
       </Head>
       <Name>{name}</Name>
-      <Professor>{mySection.instructor.firstname} {mySection.instructor.lastname}</Professor>
+      <Professor>{mySection.instructor && mySection.instructor.firstName} {mySection.instructor && mySection.instructor.lastName}</Professor>
       <Next>
         <Value>Upcoming assignments: {getUpcoming(assignmentGroups)}</Value>
         <Value>Missing assignments: {getMissing(assignmentGroups)}</Value>
       </Next>
-      <Button className="btn btn-upload" to="/student/assignment/">
+      <Button className="btn btn-upload" to={"/student/"+_id+"/assignment/"}>
         Explore
       </Button>
     </Box>
@@ -165,7 +165,7 @@ const Value = styled.h5`
   margin-bottom: 4px;
 `;
 
-const Date = styled.div`
+const DateFormat = styled.div`
   color: #6173db;
   font-size: 0.8rem;
   font-weight: 500;

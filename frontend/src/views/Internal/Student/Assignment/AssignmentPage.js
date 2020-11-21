@@ -7,7 +7,7 @@ import AssignmentReview from "./AssignmentReview"
 
 
 function AssignmentPage() {
-  const { id } = useParams();
+  const {courseId, id } = useParams();
   return id ? <AssignmentDetails /> : <AssignmentReview />;
 }
 

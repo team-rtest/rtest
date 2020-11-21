@@ -16,8 +16,8 @@ const query = gql`
       mySection {
         number
         instructor {
-          firstname
-          lastname
+          firstName
+          lastName
         }
       }
       assignmentGroups{
@@ -52,7 +52,7 @@ function Courses({ selected, setSelected, assignments }) {
     <Dashboard>
       <Heading>Your Courses</Heading>
       <Grid>
-        {data.map((course, index) => (
+        {data.courses.map((course, index) => (
           <Course key={index} {...course} />
         ))}
       </Grid>

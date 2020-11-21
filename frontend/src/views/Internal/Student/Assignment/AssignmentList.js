@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useParams } from "react-router-dom";
 import AssignmentType from "./AssignmentType";
 
 function AssignmentList({ data }) {
+  const {courseId} = useParams();
   console.log(data);
   return (
     <TypeList>
@@ -11,6 +12,7 @@ function AssignmentList({ data }) {
         <AssignmentType
           key = {type._id}
           type={type}
+          courseId = {courseId}
         />
       ))}
     </TypeList>
