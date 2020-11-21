@@ -1,4 +1,4 @@
-import { median, max, min, mean } from "mathjs";
+import { max, mean, median, min } from "mathjs";
 
 export function getGradeList(submissions) {
   return submissions.map((submission) => submission.grade);
