@@ -23,10 +23,6 @@ const external = [
     page: <Signup />,
   },
   {
-    path: "/profile",
-    page: <Profile />,
-  },
-  {
     path: "/login",
     page: <Login />,
   },
@@ -48,6 +44,10 @@ const internal = [
   {
     path: "/professor/courses",
     page: <ProfessorDashboard />,
+  },
+  {
+    path: "/profile",
+    page: <Profile />,
   },
   {
     path: "/professor/assignment/review",
