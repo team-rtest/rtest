@@ -27,6 +27,7 @@ type Course {
   semester: String
   files: [File]
   sections: [Section]
+  mySection: Section
   assignmentGroups: [AssignmentGroup]
 }
 

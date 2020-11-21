@@ -23,10 +23,6 @@ const external = [
     page: <Signup />,
   },
   {
-    path: "/profile",
-    page: <Profile />,
-  },
-  {
     path: "/login",
     page: <Login />,
   },
@@ -50,6 +46,10 @@ const internal = [
     page: <ProfessorDashboard />,
   },
   {
+    path: "/profile",
+    page: <Profile />,
+  },
+  {
     path: "/professor/assignment/review",
     page: <AssignmentReview />,
   },
@@ -58,7 +58,7 @@ const internal = [
     page: <AssignmentReviewDetails />,
   },
   {
-    path: "/professor/course/:id",
+    path: "/professor/course/:id/:tab",
     page: <ProfessorCourse />,
   },
   {
@@ -78,7 +78,7 @@ const internal = [
     page: <StudentCourses />,
   },
   {
-    path: "/student/assignment/:id?",
+    path: "/student/:courseId/assignment/:id?",
     page: <StudentAssignment />,
   },
 ];

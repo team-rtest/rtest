@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
 import EditCourse from "views/Internal/Professor/Form/EditCourse";
@@ -37,11 +37,10 @@ const query = gql`
 `;
 
 function Course() {
-  const { id } = useParams();
+  const { id, tab } = useParams();
   const { data, loading, error } = useQuery(query, { variables: { id } });
 
-  const tabs = ["Details", "Assignments", "Students", "Review"];
-  const [selected, setSelected] = useState("Details");
+  const tabs = ["details", "assignments", "students", "review"];
 
   const [editCourseModal, setEditCourseModal] = useState(false);
   const [deleteCourseModal, setDeleteCourseModal] = useState(false);
@@ -52,9 +51,9 @@ function Course() {
   const { course } = data;
 
   const content = {
-    Details: <Details {...course} />,
-    Assignments: <Assignments {...course} />,
-    Students: <Students {...course} />,
+    details: <Details {...course} />,
+    assignments: <Assignments {...course} />,
+    students: <Students {...course} />,
   };
 
   if (!course) return <div>Course does not exist</div>;
@@ -81,13 +80,13 @@ function Course() {
         </Buttons>
       </Header>
       <Tabs>
-        {tabs.map((tab) => (
-          <Tab active={tab === selected} onClick={() => setSelected(tab)}>
-            {tab}
+        {tabs.map((t) => (
+          <Tab active={t === tab} to={`/professor/course/${id}/${t}`}>
+            {t.charAt(0).toUpperCase() + t.slice(1)}
           </Tab>
         ))}
       </Tabs>
-      <Content>{content[selected]}</Content>
+      <Content>{content[tab]}</Content>
     </Box>
   );
 }
@@ -153,7 +152,7 @@ const Tabs = styled.div`
   grid-gap: 5px;
 `;
 
-const Tab = styled.button`
+const Tab = styled(Link)`
   all: unset;
   cursor: pointer;
   padding: 10px 15px;
@@ -164,11 +163,21 @@ const Tab = styled.button`
 
   font-weight: 500;
 
+  &:hover {
+    color: grey;
+    text-decoration: none;
+  }
+
   ${(props) =>
     props.active &&
     `
     color: #6173db;
     background: rgba(97, 115, 219, 0.2);
+
+    &:hover {
+      color: #6173db;
+      text-decoration: none;
+    }
   `}
 `;
 

@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useParams } from "react-router-dom";
 import AssignmentType from "./AssignmentType";
 
-function AssignmentList({ assignments, selected, setSelected }) {
+function AssignmentList({ data }) {
+  const {courseId} = useParams();
+  console.log(data);
   return (
     <TypeList>
-      {assignments.assignmentGroups.map((type) => (
+      {data.course.assignmentGroups.map((type) => (
         <AssignmentType
           key = {type._id}
           type={type}
+          courseId = {courseId}
         />
       ))}
     </TypeList>

@@ -3,12 +3,46 @@ import styled from "styled-components";
 
 import { Card } from "components";
 
-function Details({ maxGrade, dueDate, optional, locked }) {
+function formatDate(value) {
+  const date = new Date(value.split("Z")[0]);
+  const year = parseInt(date.getYear()) + 1900;
+  const month = parseInt(date.getMonth());
+  const day = date.getDate();
+
+  const MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return `${MONTHS[month]} ${day}, ${year}`;
+}
+
+function addDay(epoch) {
+  const ONE_DAY = 86400000;
+  return epoch + ONE_DAY - 1;
+}
+
+function substractDay(epoch) {
+  const ONE_DAY = 86400000;
+  return epoch - ONE_DAY + 1;
+}
+
+function Details({ maxGrade, dateDue, optional, locked }) {
   return (
     <Box>
       <Info>
         <Label>Due Date</Label>
-        <Value>{dueDate}</Value>
+        <Value>{formatDate(dateDue)}</Value>
       </Info>
 
       <Info>
