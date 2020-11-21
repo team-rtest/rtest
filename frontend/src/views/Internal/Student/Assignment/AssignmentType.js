@@ -46,7 +46,7 @@ function getStatus(dueDate, mySubmission){
   }
 }
 
-function AssignmentType({ type }) {
+function AssignmentType({ type,courseId }) {
   const [hidden, setHidden] = useState(true);
 
   return (
@@ -65,7 +65,7 @@ function AssignmentType({ type }) {
             {type.assignments.map(({name, body, dateDue, mySubmission, locked, _id}) => (
               <Link
               key={_id}
-              to = {"/student/assignment/" + _id }
+              to = {"/student/"+courseId+ "/assignment/" + _id }
               style = {{textDecoration: "none"}}>
                 <AssignmentItem
                   disabled={locked}

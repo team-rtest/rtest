@@ -27,8 +27,10 @@ function Signup() {
     const noneError = !errors.username && !errors.password;
 
     if (noneEmpty && noneError) {
-      alert("form submitted successfully!");
-      auth.signup(inputs.username, inputs.password);
+      auth
+        .signup(inputs.username, inputs.password)
+        .then(() => window.location.reload())
+        .catch((error) => alert(error));
     }
   };
 
@@ -44,6 +46,7 @@ function Signup() {
           <Input
             name="username"
             type="username"
+            label="Username"
             value={inputs.username}
             error={errors.username}
             onChange={handleChange}
@@ -51,6 +54,7 @@ function Signup() {
           <Input
             name="password"
             type="password"
+            label="Password"
             value={inputs.password}
             error={errors.password}
             onChange={handleChange}

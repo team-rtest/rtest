@@ -28,7 +28,7 @@ function EditCourse({ courseData, closeModal }) {
     const { name, code, semester } = inputs;
     const course = { name, code, semester };
     const variables = { id, course };
-    return update({ variables }).then(() => closeModal());
+    return update({ variables });
   }
 
   return (

@@ -31,8 +31,6 @@ function useForm({ data = {}, names, check, onSubmit }) {
       }
       const invalid = check.some((name) => errors[name]);
 
-      console.log(errors);
-
       if (invalid) {
         setErrors(errors);
         reject(errors);

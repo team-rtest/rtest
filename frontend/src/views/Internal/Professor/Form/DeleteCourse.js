@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { gql, useMutation } from "@apollo/client";
@@ -19,9 +19,11 @@ function DeleteCourse({ id, closeModal }) {
 
   const handleSubmit = () => {
     deleteCourse({ variables: { id } })
-      .then(() => history.push("/professor/courses"))
+      .then(() => {
+        history.push("/professor/courses");
+        window.location.reload();
+      })
       .catch(() => alert("Could not delete course"));
-    closeModal();
   };
 
   return (
