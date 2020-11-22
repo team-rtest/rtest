@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const path = location.pathname;
-    const isInternal = path.includes("professor") || path.includes("student");
+    const isInternal = path.includes("professor") || path.includes("student") || path.includes("profile");
     const isExternal = !isInternal;
 
     if (!loading) {
