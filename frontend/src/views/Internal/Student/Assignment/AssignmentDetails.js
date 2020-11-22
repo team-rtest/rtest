@@ -4,6 +4,20 @@ import { Upload } from "components";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
+function getDiff(dateDue){
+  var dateNow = Date.now()
+  var dueDate = new Date(dateDue);
+  var dateDiff = dateNow - dueDate;
+  var diffInDays = Math.floor(dateDiff / (1000 * 60 * 60 * 24));
+  var diffInHours = Math.floor(dateDiff / (1000 * 60 * 60));
+  var diffInMinutes = Math.floor(dateDiff / (1000 * 60));
+  var diffInSeconds = Math.floor(dateDiff / (1000));
+  if(diffInDays>=1) return diffInDays + " days";
+  if(diffInHours>=1) return diffInHours+ " hours";
+  if(diffInMinutes>=1) return diffInMinutes + " minutes";
+  return diffInSeconds + " seconds";
+}
+
 function formatDate(value) {
   const date = new Date(value);
   const year = parseInt(date.getYear()) + 1900;
@@ -66,22 +80,22 @@ function AssignmentDetails() {
       <Text></Text>
       <List></List>
       <Text></Text>
-      <FileUpload>
+      {data.assignment.mySubmission == null && <FileUpload>
         <Upload />
         <button className="btn btn-upload text-white" onClick={() => {}}>
           Submit File
         </button>
-      </FileUpload>
+      </FileUpload>}
       {data.assignment.mySubmission && (
         <Success>
           <Tick className="fa fa-check-circle" />Submitted on{" "}
           {formatDate(data.assignment.mySubmission.submittedAt)}
         </Success>
       )}
-      {!data.assignment.mySubmission && !data.assignment.locked && (
+      {!data.assignment.mySubmission && Date.now()>new Date(data.assignment.dateDue) && (
         <Failure>
-          <Cross className="fa fa-times-circle" /> Closed on{" "}
-          {formatDate(data.assignment.dateDue)}
+          <Cross className="fa fa-times-circle" /> Assignment is late by{" "}
+          {getDiff(data.assignment.dateDue)}
         </Failure>
       )}
     </Box>
