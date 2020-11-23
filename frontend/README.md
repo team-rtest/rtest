@@ -1,7 +1,7 @@
 # Front-End Documentation
 
 ## To Run From Terminal
-Make sure yarn is installed: ([intstallation](https://classic.yarnpkg.com/en/docs/install/))  
+Make sure yarn is installed: ([installation](https://classic.yarnpkg.com/en/docs/install/))  
 Run "yarn" to install dependencies  
 Run "yarn start" from the frontend folder to start the frontend  
 
