@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { gql, useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
 import Chart from "chart.js";
 import { Loader } from "components";
 const getAssignments = gql`
@@ -63,8 +64,9 @@ class BarGraph extends React.Component {
   }
 }
 function StudentAssignmentReview() {
+  const { courseId } = useParams();
   const { data, loading, error } = useQuery(getAssignments, {
-    variables: { id: "5f9dd8838a6e0e08b427f0e1" },
+    variables: { id: courseId },
   });
   if (loading) {
     return <PageLoader />;

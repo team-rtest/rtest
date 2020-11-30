@@ -33,7 +33,7 @@ const getCourse = gql`
 function Assignment({ ...rest }) {
   const { courseId } = useParams();
   const { data, loading, error } = useQuery(getCourse, {
-    variables: { id: "5f9dd8838a6e0e08b427f0e1" },
+    variables: { id: courseId },
   });
 
   console.log(data);
