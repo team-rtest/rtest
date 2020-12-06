@@ -1,7 +1,8 @@
 FROM node:lts-alpine AS build
 
-ARG REACT_APP_API
-ENV REACT_APP_API=${REACT_APP_API}
+#ARG REACT_APP_API
+#ENV REACT_APP_API=${REACT_APP_API}
+ENV REACT_APP_API=https://rtest.martyparty.xyz/api
 WORKDIR /client
 
 COPY . .
