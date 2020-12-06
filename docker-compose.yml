@@ -50,7 +50,7 @@ services:
     build:
       context: ./frontend
       args: 
-        - REACT_APP_API=https://api.rtest.emory.ml
+        - REACT_APP_API=https://rtest.martyparty.xyz/api
     environment:
       - "CI=true"
     ports:
