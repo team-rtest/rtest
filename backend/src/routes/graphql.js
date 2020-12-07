@@ -38,5 +38,6 @@ const server = new ApolloServer({
     }
     return { res };
   },
+  playground: true,
 });
 export default server;
