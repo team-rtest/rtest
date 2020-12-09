@@ -44,6 +44,7 @@ app.use(cookieParser());
 app.use(bearerToken());
 graphqlServer.applyMiddleware({
   app,
+  path: "/api/graphql",
   cors: { origin: process.env.FRONTEND_URL },
 });
 
