@@ -5,7 +5,7 @@ import app from "../src/app";
 
 describe("GraphQL endpoint", () => {
   it("should get graphql endpoint and return 200", async () => {
-    const res = await request(app).post("/graphql").send({
+    const res = await request(app).post("/api/graphql").send({
       query: "{ hello }",
     });
     expect(res.statusCode).toEqual(200);
@@ -14,7 +14,7 @@ describe("GraphQL endpoint", () => {
   });
 
   it("should return a presigned URL", async () => {
-    const res = await request(app).post("/graphql").send({
+    const res = await request(app).post("/api/graphql").send({
       query:
         'mutation {addSubmissionFile(course: "course", assignment: "garbage", submission:"test", filename: "file")}',
     });
