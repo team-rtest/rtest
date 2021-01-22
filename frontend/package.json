@@ -20,7 +20,7 @@
     "react-dom": "^16.14.0",
     "react-google-login": "^5.1.24",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.0",
+    "react-scripts": "^4.0.1",
     "styled-components": "^5.2.1"
   },
   "scripts": {
