@@ -9723,10 +9723,10 @@ pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
-primereact@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/primereact/-/primereact-5.0.1.tgz#82162091abec3d4d7d7d563040b42a32f392a8f0"
-  integrity sha512-sBEx0KiS2PaSIT10Y9+3/frKbH4VKDk8fJch/kLoKMdPH+X6smKEj4BYzjjPYDi3W3bMpWIX6ANAzOL8ibvg8w==
+primereact@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/primereact/-/primereact-6.0.2.tgz#8ec35219674431d8658990b548e4c1889773e037"
+  integrity sha512-u0uQxq26QmX13lVmc7Bz8CeJRwJG2DWf9Q4U/FRezDBKefzYXHZbPSktmLOubZY8atMmZS8z0XesPOrpRhPhVA==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
