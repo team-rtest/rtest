@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams, Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
+import Review from "views/Internal/Professor/Course/Review/Review";
 import EditCourse from "views/Internal/Professor/Form/EditCourse";
 import DeleteCourse from "views/Internal/Professor/Form/DeleteCourse";
 
@@ -61,10 +62,16 @@ function Course() {
   return (
     <Box>
       {editCourseModal && (
-        <EditCourse courseData={course} closeModal={() => setEditCourseModal(false)} />
+        <EditCourse
+          courseData={course}
+          closeModal={() => setEditCourseModal(false)}
+        />
       )}
       {deleteCourseModal && (
-        <DeleteCourse id={course._id} closeModal={() => setDeleteCourseModal(false)} />
+        <DeleteCourse
+          id={course._id}
+          closeModal={() => setDeleteCourseModal(false)}
+        />
       )}
       <Header>
         <Heading>{course.name}</Heading>

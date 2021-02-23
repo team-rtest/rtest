@@ -8,13 +8,13 @@ export default {
     course: async (_, { id }, context) =>
       await Course.findOne({
         _id: id,
-        "sections.students": context.user,
+        // "sections.students": context.user,
       }),
 
     courseTeaching: async (_, { id }, context) =>
       await Course.findOne({
         _id: id,
-        "sections.instructor": context.user,
+        // "sections.instructor": context.user,
       }),
 
     coursesTeaching: async (_, __, context) =>
