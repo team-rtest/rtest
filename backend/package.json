@@ -19,7 +19,7 @@
     "aws-sdk": "^2.846.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
-    "core-js": "^3.9.0",
+    "core-js": "^3.15.2",
     "cors": "^2.8.5",
     "debug": "~4.3.1",
     "dotenv": "^8.2.0",
